@@ -3,6 +3,11 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+WarehouseManagementSystem\WarehouseManagementSystem\obj
+WarehouseManagementSystem\WarehouseManagementSystem\bin
+WarehouseManagementSystem\.vs
+WarehouseManagementSystem\.idea
+
 # User-specific files
 *.rsuser
 *.suo
