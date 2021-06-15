@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WarehouseManagemnetSystem.DataAccess.Entities;
+using DataAccess.Entities;
 
-namespace WarehouseManagementSystem.DataAccess
+namespace DataAccess
 {
     public class WMSDatabaseContext : DbContext
     {
@@ -10,6 +10,9 @@ namespace WarehouseManagementSystem.DataAccess
 
         }
 
-        public DbSet<Product> Products { get; set;  }
+        public DbSet<Employee> Employees { get; set;  }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Seniority> Seniorities { get; set; }
+
     }
 }

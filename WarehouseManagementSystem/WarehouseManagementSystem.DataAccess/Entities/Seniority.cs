@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Entities
 {
-    public abstract class EntityBase
+    public class Seniority : EntityBase
     {
-        [Key]
-        public int Id { get; set; }
+        [Required]
+        public DateTime EmploymentDate { get; set; }
+        public int EmployeeId { get; set; }
+        public Employee Employee { get; set; }
     }
 }
