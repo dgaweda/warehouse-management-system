@@ -4,14 +4,16 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(WMSDatabaseContext))]
-    partial class WMSDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210616181958_AddOrderOrderLineProductLocationEntities")]
+    partial class AddOrderOrderLineProductLocationEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,7 +68,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("PalletId");
 
-                    b.ToTable("DeliveryProducts");
+                    b.ToTable("DeliveryProduct");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Departure", b =>
@@ -134,16 +136,13 @@ namespace DataAccess.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Special")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DeliveryProductId");
 
                     b.HasIndex("MagazineProductId");
 
-                    b.ToTable("Locations");
+                    b.ToTable("Location");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.MagazineProduct", b =>
@@ -170,7 +169,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MagazineProducts");
+                    b.ToTable("MagazineProduct");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Order", b =>
@@ -194,7 +193,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.OrderLine", b =>
@@ -225,7 +224,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderLines");
+                    b.ToTable("OrderLine");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Pallet", b =>
