@@ -21,6 +21,5 @@ namespace DataAccess
         public DbSet<DeliveryProduct> DeliveryProducts { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
         public DbSet<Order> Orders { get; set; }
-
     }
 }

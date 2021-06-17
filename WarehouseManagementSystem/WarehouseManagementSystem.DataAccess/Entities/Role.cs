@@ -11,10 +11,12 @@ namespace DataAccess.Entities
     {
         [Required]
         [MaxLength(50)]
-        public int Name { get; set; }
+        public string Name { get; set; }
+
         [Required]
         [MaxLength(250)]
         public string Description { get; set; }
+
         [Required]
         public decimal Salary { get; set; }
 
