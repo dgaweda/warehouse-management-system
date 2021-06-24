@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess
+namespace DataAccess.Repository
 {
     public interface IRepository<T> where T : EntityBase
     {
@@ -14,5 +14,6 @@ namespace DataAccess
         void Insert(T entity);
         void Update(T entity);
         void Delete(int id);
+        void checkIfEntityIsNull(T entity);
     }
 }

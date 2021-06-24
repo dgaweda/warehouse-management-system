@@ -10,6 +10,7 @@ namespace DataAccess.Entities
     public class Seniority : EntityBase
     {
         [Required]
+        [DataType(DataType.Date)]
         public DateTime EmploymentDate { get; set; }
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess;
+using DataAccess.Repository;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using WarehouseManagementSystem.ApplicationServices.API.Domain;
 
 namespace warehouse_management_system
 {
@@ -28,11 +31,12 @@ namespace warehouse_management_system
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddMediatR(typeof(ResponseBase<>));
+
             services.AddDbContext<WMSDatabaseContext>(
                 option =>
                 option.UseSqlServer(this.Configuration.GetConnectionString("WMSDatabaseContext")));
-
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

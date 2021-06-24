@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess
+namespace DataAccess.Repository
 {
     public class Repository<T> : IRepository<T> where T : EntityBase
     {
@@ -32,10 +32,7 @@ namespace DataAccess
 
         public void Insert(T entity)
         {
-            if(entity == null)
-            {
-                throw new ArgumentNullException("Insert: Entity is Null");
-            }
+            checkIfEntityIsNull(entity);
 
             entities.Add(entity);
             context.SaveChanges();
@@ -43,13 +40,16 @@ namespace DataAccess
 
         public void Update(T entity)
         {
-            if(entity == null)
-            {
-                throw new ArgumentNullException($"Update: Entity is Null");
-            }
+            checkIfEntityIsNull(entity);
 
             entities.Update(entity);
             context.SaveChanges();
+        }
+
+        public void checkIfEntityIsNull(T entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException("Entity is Null");
         }
     }
 }

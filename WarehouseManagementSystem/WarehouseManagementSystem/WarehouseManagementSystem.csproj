@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\WarehouseManagementSystem.ApplicationServices\WarehouseManagementSystem.ApplicationServices.csproj" />
       <ProjectReference Include="..\WarehouseManagementSystem.DataAccess\WarehouseManagementSystem.DataAccess.csproj" />
     </ItemGroup>
 
