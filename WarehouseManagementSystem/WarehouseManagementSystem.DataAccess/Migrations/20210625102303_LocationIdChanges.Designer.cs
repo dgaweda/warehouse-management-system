@@ -4,14 +4,16 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(WMSDatabaseContext))]
-    partial class WMSDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210625102303_LocationIdChanges")]
+    partial class LocationIdChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,8 +139,12 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("Special")
                         .HasColumnType("bit");
@@ -148,9 +154,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DeliveryProductId");
-
-                    b.HasIndex("MagazineProductId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Locations");
                 });
@@ -198,11 +202,11 @@ namespace DataAccess.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime?>("Completion")
-                        .HasColumnType("smalldatetime");
+                    b.Property<DateTime>("Completion")
+                        .HasColumnType("datetime");
 
-                    b.Property<DateTime?>("Start")
-                        .HasColumnType("smalldatetime");
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("datetime");
 
                     b.Property<int>("State")
                         .HasColumnType("int");
@@ -222,10 +226,16 @@ namespace DataAccess.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int>("MagazineProductId")
+                    b.Property<int?>("MagazineProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -344,11 +354,11 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("DataAccess.Entities.DeliveryProduct", "DeliveryProduct")
                         .WithMany("Locations")
-                        .HasForeignKey("DeliveryProductId");
+                        .HasForeignKey("ProductId");
 
                     b.HasOne("DataAccess.Entities.MagazineProduct", "MagazineProduct")
                         .WithMany("Locations")
-                        .HasForeignKey("MagazineProductId");
+                        .HasForeignKey("ProductId");
 
                     b.Navigation("DeliveryProduct");
 
@@ -359,9 +369,7 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("DataAccess.Entities.MagazineProduct", "MagazineProduct")
                         .WithMany("OrderLines")
-                        .HasForeignKey("MagazineProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MagazineProductId");
 
                     b.HasOne("DataAccess.Entities.Order", "Order")
                         .WithMany("OrderLines")

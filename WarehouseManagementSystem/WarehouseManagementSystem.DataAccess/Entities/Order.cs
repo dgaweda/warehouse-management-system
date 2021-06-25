@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccess.Entities.EntityBases;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,25 +12,26 @@ namespace DataAccess.Entities
     public class Order : EntityBase
     {
         public State State { get; set; }
-        
+
         [Required]
-        public int Barcode { get; set; }
+        [MaxLength(10)]
+        public string Barcode { get; set; }
 
-        [Column(TypeName = "datetime")]
-        public DateTime Start { get; set; }
+        [Column(TypeName = "smalldatetime")]
+        public DateTime? Start { get; set; }
 
-        [Column(TypeName = "datetime")]
-        public DateTime Completion { get; set; }
+        [Column(TypeName = "smalldatetime")]
+        public DateTime? Completion { get; set; }
         public List<OrderLine> OrderLines { get; set; }
         public List<Pallet> Pallets { get; set; }
     }
     
     public enum State
     {
-        Received,
-        InProgress,
-        ReadyForDeparture,
-        Sent,
-        Delivered
+        RECEIVED = 1,
+        IN_PROGRESS = 2,
+        READY_FOR_DEPARTURE = 3,
+        SENT = 4,
+        DELIVERED = 5
     }
 }

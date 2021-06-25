@@ -17,8 +17,8 @@ namespace DataAccess
         public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<Departure> Departures { get; set; }
         public DbSet<Location> Locations { get; set; }
-        public DbSet<MagazineProduct> MagazineProducts { get; set; }
         public DbSet<DeliveryProduct> DeliveryProducts { get; set; }
+        public DbSet<MagazineProduct> MagazineProducts { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
         public DbSet<Order> Orders { get; set; }
     }

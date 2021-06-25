@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccess.Entities.EntityBases;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,7 +11,8 @@ namespace DataAccess.Entities
     public class Pallet : EntityBase
     {
         [Required]
-        public int Barcode { get; set; }
+        [MaxLength(10)]
+        public string Barcode { get; set; }
         public int? OrderId { get; set; }
         public int? DepartureId { get; set; }
         public int? DeliveryId { get; set; }
@@ -18,7 +20,7 @@ namespace DataAccess.Entities
 
         public Departure Departure { get; set; }
         public Delivery Delivery { get; set; }
-        public List<DeliveryProduct> DeliveryProducts { get; set; }
+        public List<DeliveryProduct> Products { get; set; }
 
     }
 }

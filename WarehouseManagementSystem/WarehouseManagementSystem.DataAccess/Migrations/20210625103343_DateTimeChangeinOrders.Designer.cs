@@ -4,14 +4,16 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(WMSDatabaseContext))]
-    partial class WMSDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210625103343_DateTimeChangeinOrders")]
+    partial class DateTimeChangeinOrders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -199,10 +201,10 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<DateTime?>("Completion")
-                        .HasColumnType("smalldatetime");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime?>("Start")
-                        .HasColumnType("smalldatetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("State")
                         .HasColumnType("int");
@@ -222,10 +224,16 @@ namespace DataAccess.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int>("MagazineProductId")
+                    b.Property<int?>("MagazineProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -359,9 +367,7 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("DataAccess.Entities.MagazineProduct", "MagazineProduct")
                         .WithMany("OrderLines")
-                        .HasForeignKey("MagazineProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MagazineProductId");
 
                     b.HasOne("DataAccess.Entities.Order", "Order")
                         .WithMany("OrderLines")

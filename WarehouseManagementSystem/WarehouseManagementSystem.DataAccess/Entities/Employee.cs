@@ -1,4 +1,4 @@
-﻿using DataAccess.Entities;
+﻿using DataAccess.Entities.EntityBases;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

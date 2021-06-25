@@ -1,4 +1,5 @@
 ﻿using DataAccess.Entities;
+using DataAccess.Entities.EntityBases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
