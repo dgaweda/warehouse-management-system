@@ -4,14 +4,16 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(WMSDatabaseContext))]
-    partial class WMSDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210625092418_RemoveMagazineAndDeliveryProduct")]
+    partial class RemoveMagazineAndDeliveryProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,42 +38,6 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Deliveries");
-                });
-
-            modelBuilder.Entity("DataAccess.Entities.DeliveryProduct", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Barcode")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<DateTime>("Expiration")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("PalletId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Special")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PalletId");
-
-                    b.ToTable("DeliveryProducts");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Departure", b =>
@@ -127,63 +93,20 @@ namespace DataAccess.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DeliveryProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MagazineProductId")
-                        .HasColumnType("int");
-
                     b.Property<int>("MaxAmount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<bool>("Special")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Type")
+                    b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("DeliveryProductId");
-
-                    b.HasIndex("MagazineProductId");
-
-                    b.ToTable("Locations");
-                });
-
-            modelBuilder.Entity("DataAccess.Entities.MagazineProduct", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Barcode")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<DateTime>("Expiration")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<bool>("Special")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(5,2)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("MagazineProducts");
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Order", b =>
@@ -198,11 +121,11 @@ namespace DataAccess.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime?>("Completion")
-                        .HasColumnType("smalldatetime");
+                    b.Property<DateTime>("Completion")
+                        .HasColumnType("datetime");
 
-                    b.Property<DateTime?>("Start")
-                        .HasColumnType("smalldatetime");
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("datetime");
 
                     b.Property<int>("State")
                         .HasColumnType("int");
@@ -222,17 +145,20 @@ namespace DataAccess.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int>("MagazineProductId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderId")
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MagazineProductId");
-
                     b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("OrderLines");
                 });
@@ -246,8 +172,7 @@ namespace DataAccess.Migrations
 
                     b.Property<string>("Barcode")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("DeliveryId")
                         .HasColumnType("int");
@@ -270,6 +195,42 @@ namespace DataAccess.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("Pallets");
+                });
+
+            modelBuilder.Entity("DataAccess.Entities.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Barcode")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("PalletId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Special")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(5,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PalletId");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Role", b =>
@@ -318,17 +279,6 @@ namespace DataAccess.Migrations
                     b.ToTable("Seniorities");
                 });
 
-            modelBuilder.Entity("DataAccess.Entities.DeliveryProduct", b =>
-                {
-                    b.HasOne("DataAccess.Entities.Pallet", "Pallet")
-                        .WithMany("Products")
-                        .HasForeignKey("PalletId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pallet");
-                });
-
             modelBuilder.Entity("DataAccess.Entities.Employee", b =>
                 {
                     b.HasOne("DataAccess.Entities.Role", "Role")
@@ -342,30 +292,24 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.Location", b =>
                 {
-                    b.HasOne("DataAccess.Entities.DeliveryProduct", "DeliveryProduct")
+                    b.HasOne("DataAccess.Entities.Product", "Product")
                         .WithMany("Locations")
-                        .HasForeignKey("DeliveryProductId");
+                        .HasForeignKey("ProductId");
 
-                    b.HasOne("DataAccess.Entities.MagazineProduct", "MagazineProduct")
-                        .WithMany("Locations")
-                        .HasForeignKey("MagazineProductId");
-
-                    b.Navigation("DeliveryProduct");
-
-                    b.Navigation("MagazineProduct");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.OrderLine", b =>
                 {
-                    b.HasOne("DataAccess.Entities.MagazineProduct", "MagazineProduct")
-                        .WithMany("OrderLines")
-                        .HasForeignKey("MagazineProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DataAccess.Entities.Order", "Order")
                         .WithMany("OrderLines")
                         .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DataAccess.Entities.Product", "MagazineProduct")
+                        .WithMany("OrderLines")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -393,6 +337,15 @@ namespace DataAccess.Migrations
                     b.Navigation("Departure");
                 });
 
+            modelBuilder.Entity("DataAccess.Entities.Product", b =>
+                {
+                    b.HasOne("DataAccess.Entities.Pallet", "Pallet")
+                        .WithMany("Products")
+                        .HasForeignKey("PalletId");
+
+                    b.Navigation("Pallet");
+                });
+
             modelBuilder.Entity("DataAccess.Entities.Seniority", b =>
                 {
                     b.HasOne("DataAccess.Entities.Employee", "Employee")
@@ -409,11 +362,6 @@ namespace DataAccess.Migrations
                     b.Navigation("Pallets");
                 });
 
-            modelBuilder.Entity("DataAccess.Entities.DeliveryProduct", b =>
-                {
-                    b.Navigation("Locations");
-                });
-
             modelBuilder.Entity("DataAccess.Entities.Departure", b =>
                 {
                     b.Navigation("Pallets");
@@ -422,13 +370,6 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Entities.Employee", b =>
                 {
                     b.Navigation("Seniority");
-                });
-
-            modelBuilder.Entity("DataAccess.Entities.MagazineProduct", b =>
-                {
-                    b.Navigation("Locations");
-
-                    b.Navigation("OrderLines");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Order", b =>
@@ -441,6 +382,13 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Entities.Pallet", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("DataAccess.Entities.Product", b =>
+                {
+                    b.Navigation("Locations");
+
+                    b.Navigation("OrderLines");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Role", b =>

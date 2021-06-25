@@ -9,15 +9,13 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Entities
 {
-    public class Seniority : EntityBase
+    public class MagazineProduct : ProductBase
     {
-        [Required]
-        [Column(TypeName = "date")]
-        public DateTime EmploymentDate { get; set; }
-        
-        [Required]
-        public int EmployeeId { get; set; }
-        
-        public Employee Employee { get; set; }
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "decimal(5, 2)")]
+        public decimal UnitPrice { get; set; }
+
+        public List<OrderLine> OrderLines { get; set; }
+        public List<Location> Locations { get; set; }
     }
 }

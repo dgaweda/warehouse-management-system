@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Entities
+namespace DataAccess.Entities.EntityBases
 {
     public abstract class EntityBase
     {

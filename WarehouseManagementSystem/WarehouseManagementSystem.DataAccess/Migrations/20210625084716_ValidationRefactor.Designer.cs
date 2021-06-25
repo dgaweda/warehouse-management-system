@@ -4,14 +4,16 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(WMSDatabaseContext))]
-    partial class WMSDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210625084716_ValidationRefactor")]
+    partial class ValidationRefactor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,7 +29,7 @@ namespace DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Arrival")
-                        .HasColumnType("smalldatetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CompanyName")
                         .HasMaxLength(50)
@@ -48,20 +50,18 @@ namespace DataAccess.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Barcode")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<int>("Barcode")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("Expiration")
+                    b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("date");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("PalletId")
+                    b.Property<int?>("PalletId")
                         .HasColumnType("int");
 
                     b.Property<bool>("Special")
@@ -136,15 +136,11 @@ namespace DataAccess.Migrations
                     b.Property<int>("MaxAmount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("Special")
                         .HasColumnType("bit");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -162,24 +158,22 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Barcode")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<int>("Barcode")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("Expiration")
+                    b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("date");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("Special")
                         .HasColumnType("bit");
 
                     b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -193,16 +187,14 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Barcode")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<int>("Barcode")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime?>("Completion")
-                        .HasColumnType("smalldatetime");
+                    b.Property<DateTime>("Completion")
+                        .HasColumnType("datetime");
 
-                    b.Property<DateTime?>("Start")
-                        .HasColumnType("smalldatetime");
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("datetime");
 
                     b.Property<int>("State")
                         .HasColumnType("int");
@@ -222,10 +214,16 @@ namespace DataAccess.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int>("MagazineProductId")
+                    b.Property<int?>("MagazineProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -244,10 +242,8 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Barcode")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<int>("Barcode")
+                        .HasColumnType("int");
 
                     b.Property<int?>("DeliveryId")
                         .HasColumnType("int");
@@ -321,10 +317,8 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Entities.DeliveryProduct", b =>
                 {
                     b.HasOne("DataAccess.Entities.Pallet", "Pallet")
-                        .WithMany("Products")
-                        .HasForeignKey("PalletId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("DeliveryProducts")
+                        .HasForeignKey("PalletId");
 
                     b.Navigation("Pallet");
                 });
@@ -359,9 +353,7 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("DataAccess.Entities.MagazineProduct", "MagazineProduct")
                         .WithMany("OrderLines")
-                        .HasForeignKey("MagazineProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MagazineProductId");
 
                     b.HasOne("DataAccess.Entities.Order", "Order")
                         .WithMany("OrderLines")
@@ -440,7 +432,7 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.Pallet", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("DeliveryProducts");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Role", b =>

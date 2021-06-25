@@ -9,15 +9,14 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Entities
 {
-    public class Seniority : EntityBase
+    public class Delivery : EntityBase
     {
         [Required]
-        [Column(TypeName = "date")]
-        public DateTime EmploymentDate { get; set; }
-        
-        [Required]
-        public int EmployeeId { get; set; }
-        
-        public Employee Employee { get; set; }
+        [Column(TypeName = "smalldatetime")]
+        public DateTime Arrival { get; set; }
+
+        [MaxLength(50)]
+        public string CompanyName { get; set; }
+        public List<Pallet> Pallets { get; set; }
     }
 }

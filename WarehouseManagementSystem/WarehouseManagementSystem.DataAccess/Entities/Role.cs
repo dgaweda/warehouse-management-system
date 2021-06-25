@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccess.Entities.EntityBases;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,11 +12,15 @@ namespace DataAccess.Entities
     {
         [Required]
         [MaxLength(50)]
-        public int Name { get; set; }
+        public string Name { get; set; }
+
         [Required]
         [MaxLength(250)]
         public string Description { get; set; }
+
         [Required]
+        [DataType(DataType.Currency)]
+        [Range(2800, 10000)]
         public decimal Salary { get; set; }
 
         public Employee Employee { get; set; }
