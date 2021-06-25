@@ -14,6 +14,6 @@ namespace DataAccess.Repository
         void Insert(T entity);
         void Update(T entity);
         void Delete(int id);
-        void checkIfEntityIsNull(T entity);
+        void checkIfNull(T entity);
     }
 }

@@ -32,7 +32,7 @@ namespace DataAccess.Repository
 
         public void Insert(T entity)
         {
-            checkIfEntityIsNull(entity);
+            checkIfNull(entity);
 
             entities.Add(entity);
             context.SaveChanges();
@@ -40,13 +40,13 @@ namespace DataAccess.Repository
 
         public void Update(T entity)
         {
-            checkIfEntityIsNull(entity);
+            checkIfNull(entity);
 
             entities.Update(entity);
             context.SaveChanges();
         }
 
-        public void checkIfEntityIsNull(T entity)
+        public void checkIfNull(T entity)
         {
             if (entity == null)
                 throw new ArgumentNullException("Entity is Null");
