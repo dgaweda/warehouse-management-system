@@ -19,8 +19,6 @@ namespace DataAccess.Entities
         public string Description { get; set; }
 
         [Required]
-        [DataType(DataType.Currency)]
-        [Range(2800, 10000)]
         public decimal Salary { get; set; }
 
         public Employee Employee { get; set; }
