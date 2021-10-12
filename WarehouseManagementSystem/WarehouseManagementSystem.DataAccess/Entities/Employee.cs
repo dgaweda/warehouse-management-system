@@ -9,9 +9,11 @@ namespace DataAccess.Entities
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
+
         [Required]
         [MaxLength(50)]
         public string LastName { get; set; }
+
         [Required]
         public int RoleId { get; set; }
         public Seniority Seniority { get; set; }

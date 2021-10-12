@@ -15,7 +15,7 @@ namespace DataAccess.Entities
         public int OrderId { get; set; }
 
         [Required]
-        [Range(0, 999)]
+        [Range(1, 999)]
         public int Amount { get; set; }
 
         public Order Order { get; set; }

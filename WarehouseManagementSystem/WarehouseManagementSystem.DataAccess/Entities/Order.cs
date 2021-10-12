@@ -18,20 +18,20 @@ namespace DataAccess.Entities
         public string Barcode { get; set; }
 
         [Column(TypeName = "smalldatetime")]
-        public DateTime? Start { get; set; }
+        public DateTime? PickingStart { get; set; }
 
         [Column(TypeName = "smalldatetime")]
-        public DateTime? Completion { get; set; }
+        public DateTime? PickingEnd { get; set; }
         public List<OrderLine> OrderLines { get; set; }
         public List<Pallet> Pallets { get; set; }
     }
     
     public enum State
     {
-        RECEIVED = 1,
-        IN_PROGRESS = 2,
-        READY_FOR_DEPARTURE = 3,
-        SENT = 4,
-        DELIVERED = 5
+        RECEIVED,
+        IN_PROGRESS,
+        READY_FOR_DEPARTURE,
+        SENT,
+        DELIVERED
     }
 }

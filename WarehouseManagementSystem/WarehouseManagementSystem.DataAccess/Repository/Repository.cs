@@ -22,8 +22,9 @@ namespace DataAccess.Repository
         public void Delete(int id)
         {
             T record = entities.SingleOrDefault(i => i.Id == id);
+
             entities.Remove(record);
-            context.SaveChanges();
+            SaveChanges();
         }
 
         public IEnumerable<T> GetAll() => entities.AsEnumerable();
@@ -32,24 +33,29 @@ namespace DataAccess.Repository
 
         public void Insert(T entity)
         {
-            checkIfNull(entity);
+            CheckIfNull(entity);
 
             entities.Add(entity);
-            context.SaveChanges();
+            SaveChanges();
         }
 
         public void Update(T entity)
         {
-            checkIfNull(entity);
+            CheckIfNull(entity);
 
             entities.Update(entity);
-            context.SaveChanges();
+            SaveChanges();
         }
 
-        public void checkIfNull(T entity)
+        private void CheckIfNull(T entity)
         {
             if (entity == null)
                 throw new ArgumentNullException("Entity is Null");
+        }
+
+        private void SaveChanges()
+        {
+            context.SaveChanges();
         }
     }
 }

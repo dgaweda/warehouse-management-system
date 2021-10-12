@@ -22,14 +22,11 @@ namespace DataAccess.Entities
 
         [Required]
         [Range(1, 999)]
-        public int Amount { get; set; }
+        public int CurrentAmount { get; set; }
 
         [Required]
         [Range(1, 999)]
         public int MaxAmount { get; set; }
-
-        [Required]
-        public bool Special { get; set; }
 
         public DeliveryProduct DeliveryProduct { get; set; }
 
@@ -39,8 +36,8 @@ namespace DataAccess.Entities
 
     public enum Type
     {
-        SHORT_DATE = 1,
-        FRIDGE = 2,
-        NORMAL = 3
+        NORMAL,
+        SHORT_DATE,
+        FRIDGE  
     }
 }

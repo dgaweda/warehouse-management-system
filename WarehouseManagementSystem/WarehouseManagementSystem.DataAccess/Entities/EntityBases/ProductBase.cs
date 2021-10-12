@@ -12,9 +12,7 @@ namespace DataAccess.Entities.EntityBases
     {
         [Required]
         [Column(TypeName = "date")]
-        public DateTime Expiration { get; set; }
-
-        public bool Special { get; set; }
+        public DateTime ExpirationDate { get; set; }
         
         [Required]
         [MaxLength(50)]
