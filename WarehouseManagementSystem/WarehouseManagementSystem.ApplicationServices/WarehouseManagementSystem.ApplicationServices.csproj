@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="API\Handlers\" />
+    <ProjectReference Include="..\WarehouseManagementSystem.DataAccess\WarehouseManagementSystem.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

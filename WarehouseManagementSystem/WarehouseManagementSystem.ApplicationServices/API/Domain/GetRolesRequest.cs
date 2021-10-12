@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain
 {
-    public class GetEmployeeRequest : IRequest<GetEmployeeResponse>
+    public class GetRolesRequest : IRequest<GetRolesResponse>
     {
     }
 }

@@ -7,7 +7,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain
 {
-    public class GetEmployeeResponse : ResponseBase<List<Employee>>
+    public class GetRolesResponse : ResponseBase<List<Role>>
     {
     }
 }
