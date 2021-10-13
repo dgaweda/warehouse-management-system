@@ -13,11 +13,11 @@ namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class RolesController : ControllerBase
+    public class RoleController : ControllerBase
     {
 
         private readonly IMediator mediator;
-        public RolesController(IMediator mediator)
+        public RoleController(IMediator mediator)
         {
             this.mediator = mediator;
         }

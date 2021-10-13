@@ -8,10 +8,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
     public abstract class HandlerBase<T> : IHandlerBase<T>
     {
-        public abstract void GetRepositoryEntity();
+        public abstract T PrepareResponse();
 
         public abstract void PrepareDomainData();
 
-        public abstract T PrepareResponse();
+        public abstract void GetRepositoryEntity();
     }
 }
