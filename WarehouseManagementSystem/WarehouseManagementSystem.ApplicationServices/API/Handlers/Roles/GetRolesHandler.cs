@@ -11,9 +11,11 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public class GetRolesHandler : IRequestHandler<GetRolesRequest, GetRolesResponse>
+    public class GetRolesHandler : HandlerBase<GetRolesResponse>, IRequestHandler<GetRolesRequest, GetRolesResponse>
     {
         private readonly IRepository<Role> roleRepository;
+        private IEnumerable<Role> roles;
+        private IEnumerable<Domain.Models.Role> domainRoles;
 
         public GetRolesHandler(IRepository<Role> roleRepository)
         {
@@ -22,29 +24,13 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 
         public Task<GetRolesResponse> Handle(GetRolesRequest request, CancellationToken cancellationToken)
         {
-            var roles = GetRolesFromRepository();
-            var domainRoles = PrepareDomainRoles(roles);
-            var response = CreateResponse(domainRoles);
-
+            var response = PrepareResponse();
             return Task.FromResult(response);
         }
 
-        private IEnumerable<Domain.Models.Role> PrepareDomainRoles(IEnumerable<Role> roles)
-        { 
-            var domainRoles = roles.Select(x => new Domain.Models.Role()
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Salary = x.Salary
-            });
-
-            return domainRoles;
-        }
-
-        private IEnumerable<Role> GetRolesFromRepository() => roleRepository.GetAll();
-
-        private GetRolesResponse CreateResponse(IEnumerable<Domain.Models.Role> domainRoles)
+        public override GetRolesResponse PrepareResponse()
         {
+            PrepareDomainData();
             var response = new GetRolesResponse()
             {
                 Data = domainRoles.ToList()
@@ -53,5 +39,21 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
             return response;
         }
 
+       public override void PrepareDomainData()
+        {
+            GetRepositoryEntity();
+            domainRoles = roles.Select(x => new Domain.Models.Role()
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Salary = x.Salary
+            });
+        }
+
+        public override void GetRepositoryEntity()
+        {
+            roles = roleRepository.GetAll();
+        }
     }
 }
+

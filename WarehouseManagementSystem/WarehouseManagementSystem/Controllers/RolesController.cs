@@ -23,7 +23,7 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("")]
+        [Route("All")]
         public async Task<IActionResult> GetAllRoles([FromQuery] GetRolesRequest request)
         {
             var response = await mediator.Send(request);

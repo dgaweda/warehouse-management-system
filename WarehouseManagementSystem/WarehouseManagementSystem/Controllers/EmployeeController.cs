@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MediatR;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 
 namespace warehouse_management_system.Controllers
 {
@@ -12,19 +14,19 @@ namespace warehouse_management_system.Controllers
     [Route("[controller]")]
     public class EmployeeController : ControllerBase
     {
-        private readonly IRepository<Employee> employeeRepository;
+        private readonly IMediator mediator;
 
-        public EmployeeController(IRepository<Employee> employeeRepository)
+        public EmployeeController(IMediator mediator)
         {
-            this.employeeRepository = employeeRepository;
+            this.mediator = mediator;
         }
 
         [HttpGet]
-        [Route("")]
-        public IEnumerable<Employee> GetAllEmployees() => employeeRepository.GetAll();
-
-        [HttpGet]
-        [Route("{employeeId}")]
-        public Employee GetEmployeeById(int employeeId) => employeeRepository.GetById(employeeId);
+        [Route("All")]
+        public async Task<IActionResult> GetAllEmployees([FromQuery] GetEmployeesRequest request)
+        {
+            var response = await mediator.Send(request);
+            return Ok(response);
+        }
     }
 }
