@@ -11,48 +11,32 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public class GetRolesHandler : HandlerBase<GetRolesResponse>, IRequestHandler<GetRolesRequest, GetRolesResponse>
+    public class GetRolesHandler : HandlerBase<Role, Domain.Models.Role, GetRolesResponse, GetRolesRequest>, IRequestHandler<GetRolesRequest, GetRolesResponse>
     {
         private readonly IRepository<Role> roleRepository;
-        private IEnumerable<Role> roles;
-        private IEnumerable<Domain.Models.Role> domainRoles;
+        private HandlerBase<Role, Domain.Models.Role, GetRolesResponse, GetRolesRequest> handler = new HandlerBase<Role, Domain.Models.Role, GetRolesResponse, GetRolesRequest>();
 
         public GetRolesHandler(IRepository<Role> roleRepository)
         {
             this.roleRepository = roleRepository;
         }
 
-        public Task<GetRolesResponse> Handle(GetRolesRequest request, CancellationToken cancellationToken)
-        {
-            var response = PrepareResponse();
-            return Task.FromResult(response);
-        }
-
-        public override GetRolesResponse PrepareResponse()
+        public Task<GetRolesResponse> Handle(GetRolesRequest request, CancellationToken cancellation)
         {
             PrepareDomainData();
-            var response = new GetRolesResponse()
-            {
-                Data = domainRoles.ToList()
-            };
-
-            return response;
+            var response = handler.PrepareResponse();
+            return Task.FromResult(response);
         }
-
-       public override void PrepareDomainData()
+        public void PrepareDomainData()
         {
-            GetRepositoryEntity();
-            domainRoles = roles.Select(x => new Domain.Models.Role()
+            handler.SetCurrentRepository(roleRepository);
+            handler.GetRepositoryEntity();
+            handler.domainModel = handler.entityModel.Select(x => new Domain.Models.Role()
             {
                 Id = x.Id,
                 Name = x.Name,
                 Salary = x.Salary
             });
-        }
-
-        public override void GetRepositoryEntity()
-        {
-            roles = roleRepository.GetAll();
         }
     }
 }

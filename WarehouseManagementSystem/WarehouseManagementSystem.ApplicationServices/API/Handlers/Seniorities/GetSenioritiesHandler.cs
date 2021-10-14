@@ -12,11 +12,10 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Seniorities
 {
-    public class GetSenioritiesHandler : HandlerBase<GetSenioritiesResponse>, IRequestHandler<GetSenioritiesRequest, GetSenioritiesResponse>
+    public class GetSenioritiesHandler : HandlerBase<Seniority, Domain.Models.Seniority, GetSenioritiesResponse, GetSenioritiesRequest>, IRequestHandler<GetSenioritiesRequest, GetSenioritiesResponse>
     {
-        private readonly IRepository<Seniority> seniorityRepository;
-        private IEnumerable<Seniority> seniorities;
-        private IEnumerable<Domain.Models.Seniority> domainSeniorities;
+        private IRepository<Seniority> seniorityRepository { get; set; }
+        private HandlerBase<Seniority, Domain.Models.Seniority, GetSenioritiesResponse, GetSenioritiesRequest> handler = new HandlerBase<Seniority, Domain.Models.Seniority, GetSenioritiesResponse, GetSenioritiesRequest>();   
         public GetSenioritiesHandler(IRepository<Seniority> seniorityRepository)
         {
             this.seniorityRepository = seniorityRepository;
@@ -24,33 +23,20 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Seniorities
 
         public Task<GetSenioritiesResponse> Handle(GetSenioritiesRequest request, CancellationToken cancellationToken)
         {
-            var response = PrepareResponse();
-            return Task.FromResult(response);
-        }
-
-        public override GetSenioritiesResponse PrepareResponse()
-        {
             PrepareDomainData();
-            var response = new GetSenioritiesResponse()
-            {
-                Data = domainSeniorities.ToList()
-            };
-
-            return response;
+            return handler.Handle(request, cancellationToken);
         }
 
-        public override void PrepareDomainData()
+        private void PrepareDomainData()
         {
-            GetRepositoryEntity();
-            domainSeniorities = seniorities.Select(x => new Domain.Models.Seniority()
-            { 
+            handler.SetCurrentRepository(seniorityRepository);
+            handler.GetRepositoryEntity();
+
+            handler.domainModel = handler.entityModel.Select(x => new Domain.Models.Seniority()
+            {
                 EmployeeId = x.EmployeeId,
                 EmploymentDate = x.EmploymentDate
             });
-        }
-        public override void GetRepositoryEntity()
-        {
-            seniorities = seniorityRepository.GetAll();
         }
     }
 }
