@@ -21,16 +21,20 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
             this.roleRepository = roleRepository;
         }
 
-        public Task<GetRolesResponse> Handle(GetRolesRequest request, CancellationToken cancellation)
+        public new Task<GetRolesResponse> Handle(GetRolesRequest request, CancellationToken cancellationToken)
         {
             PrepareDomainData();
-            var response = handler.PrepareResponse();
-            return Task.FromResult(response);
+            return handler.Handle(request, cancellationToken);
         }
-        public void PrepareDomainData()
+        private void PrepareDomainData()
         {
             handler.SetCurrentRepository(roleRepository);
-            handler.GetRepositoryEntity();
+            handler.GetAllCurrentRepositoryEntityData();
+            SetDomainModel();
+        }
+
+        public override void SetDomainModel()
+        {
             handler.domainModel = handler.entityModel.Select(x => new Domain.Models.Role()
             {
                 Id = x.Id,

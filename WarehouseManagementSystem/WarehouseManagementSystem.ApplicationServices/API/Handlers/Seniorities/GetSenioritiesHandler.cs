@@ -16,12 +16,13 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Seniorities
     {
         private IRepository<Seniority> seniorityRepository { get; set; }
         private HandlerBase<Seniority, Domain.Models.Seniority, GetSenioritiesResponse, GetSenioritiesRequest> handler = new HandlerBase<Seniority, Domain.Models.Seniority, GetSenioritiesResponse, GetSenioritiesRequest>();   
+       
         public GetSenioritiesHandler(IRepository<Seniority> seniorityRepository)
         {
             this.seniorityRepository = seniorityRepository;
         }
 
-        public Task<GetSenioritiesResponse> Handle(GetSenioritiesRequest request, CancellationToken cancellationToken)
+        public new Task<GetSenioritiesResponse> Handle(GetSenioritiesRequest request, CancellationToken cancellationToken)
         {
             PrepareDomainData();
             return handler.Handle(request, cancellationToken);
@@ -30,10 +31,14 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Seniorities
         private void PrepareDomainData()
         {
             handler.SetCurrentRepository(seniorityRepository);
-            handler.GetRepositoryEntity();
+            handler.GetAllCurrentRepositoryEntityData();
+            SetDomainModel();
+        }
 
+        public override void SetDomainModel()
+        {
             handler.domainModel = handler.entityModel.Select(x => new Domain.Models.Seniority()
-            {
+            { 
                 EmployeeId = x.EmployeeId,
                 EmploymentDate = x.EmploymentDate
             });

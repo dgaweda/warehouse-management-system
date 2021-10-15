@@ -16,25 +16,27 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Employees
     {
         private IRepository<Employee> employeeRepository { get; set; }
         private HandlerBase<Employee, Domain.Models.Employee, GetEmployeesResponse, GetEmployeesRequest> handler = new HandlerBase<Employee, Domain.Models.Employee, GetEmployeesResponse, GetEmployeesRequest>();
+       
         public GetEmployeesHandler(IRepository<Employee> employeeRepository)
         {
            this.employeeRepository = employeeRepository;
         }
 
-        public Task<GetEmployeesResponse> Handle(GetEmployeesRequest request, CancellationToken cancellationToken)
+        public new Task<GetEmployeesResponse> Handle(GetEmployeesRequest request, CancellationToken cancellationToken)
         {
             PrepareDomainData();
-            var response = new GetEmployeesResponse()
-            {
-                Data = handler.domainModel.ToList()
-            };
-
-            return Task.FromResult(response);
+            return handler.Handle(request, cancellationToken);
         }
+
         private void PrepareDomainData()
         {
             handler.SetCurrentRepository(employeeRepository);
-            handler.GetRepositoryEntity();
+            handler.GetAllCurrentRepositoryEntityData();
+            SetDomainModel();
+        }
+
+        public override void SetDomainModel()
+        {
             handler.domainModel = handler.entityModel.Select(x => new Domain.Models.Employee()
             {
                 Name = x.Name,

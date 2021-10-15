@@ -18,7 +18,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 
         public void SetCurrentRepository(IRepository<Entity> repositoryEntity);
 
-        public void GetRepositoryEntity();
+        public void GetAllCurrentRepositoryEntityData();
 
         public Response PrepareResponse();
 

@@ -21,11 +21,16 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
             this.repositoryEntity = repositoryEntity;
         }
 
-        public void GetRepositoryEntity()
+        public void GetAllCurrentRepositoryEntityData()
         {
             entityModel = repositoryEntity.GetAll();
         }
 
+        public Task<Response> Handle(Request request, CancellationToken cancellationToken)
+        {
+            var response = PrepareResponse();
+            return Task.FromResult(response);
+        }
         public Response PrepareResponse()
         {
             var response = new Response()
@@ -35,10 +40,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
             return response;
         }
 
-        public Task<Response> Handle(Request request, CancellationToken cancellationToken)
+        public virtual void SetDomainModel()
         {
-            var response = PrepareResponse();
-            return Task.FromResult(response);
+            throw new NotImplementedException();
         }
     }
 }
