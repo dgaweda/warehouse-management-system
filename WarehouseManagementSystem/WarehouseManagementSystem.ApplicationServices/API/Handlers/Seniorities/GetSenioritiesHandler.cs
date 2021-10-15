@@ -9,13 +9,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+using WarehouseManagementSystem.ApplicationServices.API.Handlers.Base;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Seniorities
 {
-    public class GetSenioritiesHandler : HandlerBase<Seniority, Domain.Models.Seniority, GetSenioritiesResponse, GetSenioritiesRequest>, IRequestHandler<GetSenioritiesRequest, GetSenioritiesResponse>
+    public class GetSenioritiesHandler : HandlerBase<Seniority, Domain.Models.Seniority, GetSenioritiesResponse, GetSenioritiesRequest>, IRequestHandler<GetSenioritiesRequest, GetSenioritiesResponse>, IGetAll
     {
         private IRepository<Seniority> seniorityRepository { get; set; }
-        private HandlerBase<Seniority, Domain.Models.Seniority, GetSenioritiesResponse, GetSenioritiesRequest> handler = new HandlerBase<Seniority, Domain.Models.Seniority, GetSenioritiesResponse, GetSenioritiesRequest>();   
+        private HandlerBase<Seniority, Domain.Models.Seniority, GetSenioritiesResponse, GetSenioritiesRequest> handler = new();   
        
         public GetSenioritiesHandler(IRepository<Seniority> seniorityRepository)
         {
@@ -24,21 +25,16 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Seniorities
 
         public Task<GetSenioritiesResponse> Handle(GetSenioritiesRequest request, CancellationToken cancellationToken)
         {
-            PrepareDomainData();
-            var response = CreateResponseFrom(request, cancellationToken);
-            return response;
-        }
-
-        private void PrepareDomainData()
-        {
-            SetCurrentRepository(seniorityRepository);
-            GetAllCurrentRepositoryEntityData();
+            PrepareCurrentRepositoryEntity(seniorityRepository);
             SetDomainModel();
+
+            var response = Service(request, cancellationToken);
+            return response;
         }
 
         public override void SetDomainModel()
         {
-            handler.domainModel = handler.entityModel.Select(x => new Domain.Models.Seniority()
+            domainModel = entityModel.Select(x => new Domain.Models.Seniority()
             { 
                 EmployeeId = x.EmployeeId,
                 EmploymentDate = x.EmploymentDate

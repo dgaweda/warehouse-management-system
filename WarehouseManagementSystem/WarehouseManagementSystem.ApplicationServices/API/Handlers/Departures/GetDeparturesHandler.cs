@@ -9,10 +9,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+using WarehouseManagementSystem.ApplicationServices.API.Handlers.Base;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Departures
 {
-    public class GetDeparturesHandler : HandlerBase<Departure, Domain.Models.Departure, GetDeparturesResponse, GetDeparturesRequest>, IRequestHandler<GetDeparturesRequest, GetDeparturesResponse>
+    public class GetDeparturesHandler : HandlerBase<Departure, Domain.Models.Departure, GetDeparturesResponse, GetDeparturesRequest>, IRequestHandler<GetDeparturesRequest, GetDeparturesResponse>, IGetAll
     {
         private IRepository<Departure> departureRepository;
         private HandlerBase<Departure, Domain.Models.Departure, GetDeparturesResponse, GetDeparturesRequest> handler = new HandlerBase<Departure, Domain.Models.Departure, GetDeparturesResponse, GetDeparturesRequest>();
@@ -24,16 +25,13 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Departures
 
         public Task<GetDeparturesResponse> Handle(GetDeparturesRequest request, CancellationToken cancellation)
         {
-            PrepareDomainData();
-            var response = CreateResponseFrom(request, cancellation);
+            PrepareCurrentRepositoryEntity(departureRepository);
+            SetDomainModel();
+
+            var response = Service(request, cancellation);
             return response;
         }
-        private void PrepareDomainData()
-        {
-            SetCurrentRepository(departureRepository);
-            GetAllCurrentRepositoryEntityData();
-            SetDomainModel();
-        }
+
         public override void SetDomainModel()
         {
             domainModel = entityModel.Select(x => new Domain.Models.Departure() 

@@ -9,10 +9,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+using WarehouseManagementSystem.ApplicationServices.API.Handlers.Base;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Deliveries
 {
-    public class GetDeliveriesHandler : HandlerBase<Delivery, Domain.Models.Delivery, GetDeliveriesResponse, GetDeliveriesRequest>, IRequestHandler<GetDeliveriesRequest, GetDeliveriesResponse>
+    public class GetDeliveriesHandler : HandlerBase<Delivery, Domain.Models.Delivery, GetDeliveriesResponse, GetDeliveriesRequest>, IRequestHandler<GetDeliveriesRequest, GetDeliveriesResponse>, IGetAll
     {
         private IRepository<Delivery> deliveryRepository;
         private HandlerBase<Delivery, Domain.Models.Delivery, GetDeliveriesResponse, GetDeliveriesRequest> handler = new HandlerBase<Delivery, Domain.Models.Delivery, GetDeliveriesResponse, GetDeliveriesRequest>();
@@ -24,17 +25,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Deliveries
         
         public Task<GetDeliveriesResponse> Handle(GetDeliveriesRequest request, CancellationToken cancellationToken)
         {
-            PrepareDomainData();
-            var response = CreateResponseFrom(request, cancellationToken);
+            PrepareCurrentRepositoryEntity(deliveryRepository);
+            SetDomainModel();
+            var response = Service(request, cancellationToken);
             return response;
          }
 
-        private void PrepareDomainData()
-        {
-            SetCurrentRepository(deliveryRepository);
-            GetAllCurrentRepositoryEntityData();
-            SetDomainModel();
-        }
         public override void SetDomainModel()
         {
             domainModel = entityModel.Select(x => new Domain.Models.Delivery() 

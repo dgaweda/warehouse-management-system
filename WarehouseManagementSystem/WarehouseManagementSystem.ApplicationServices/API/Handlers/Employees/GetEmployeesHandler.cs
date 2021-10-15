@@ -9,10 +9,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+using WarehouseManagementSystem.ApplicationServices.API.Handlers.Base;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Employees
 {
-    public class GetEmployeesHandler : HandlerBase<Employee, Domain.Models.Employee, GetEmployeesResponse, GetEmployeesRequest>, IRequestHandler<GetEmployeesRequest, GetEmployeesResponse>
+    public class GetEmployeesHandler : HandlerBase<Employee, Domain.Models.Employee, GetEmployeesResponse, GetEmployeesRequest>, IRequestHandler<GetEmployeesRequest, GetEmployeesResponse>, IGetAll
     {
         private IRepository<Employee> employeeRepository { get; set; }
         private HandlerBase<Employee, Domain.Models.Employee, GetEmployeesResponse, GetEmployeesRequest> handler = new HandlerBase<Employee, Domain.Models.Employee, GetEmployeesResponse, GetEmployeesRequest>();
@@ -24,16 +25,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Employees
 
         public Task<GetEmployeesResponse> Handle(GetEmployeesRequest request, CancellationToken cancellationToken)
         {
-            PrepareDomainData();
-            var response = CreateResponseFrom(request, cancellationToken);
-            return response;
-        }
-
-        private void PrepareDomainData()
-        {
-            SetCurrentRepository(employeeRepository);
-            GetAllCurrentRepositoryEntityData();
+            PrepareCurrentRepositoryEntity(employeeRepository);
             SetDomainModel();
+
+            var response = Service(request, cancellationToken);
+            return response;
         }
 
         public override void SetDomainModel()

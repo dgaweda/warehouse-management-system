@@ -8,10 +8,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
+using WarehouseManagementSystem.ApplicationServices.API.Handlers.Base;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public class GetRolesHandler : HandlerBase<Role, Domain.Models.Role, GetRolesResponse, GetRolesRequest>, IRequestHandler<GetRolesRequest, GetRolesResponse>
+    public class GetRolesHandler : HandlerBase<Role, Domain.Models.Role, GetRolesResponse, GetRolesRequest>, IRequestHandler<GetRolesRequest, GetRolesResponse>, IGetAll
     {
         private readonly IRepository<Role> roleRepository;
         private HandlerBase<Role, Domain.Models.Role, GetRolesResponse, GetRolesRequest> handler = new HandlerBase<Role, Domain.Models.Role, GetRolesResponse, GetRolesRequest>();
@@ -23,16 +24,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 
         public Task<GetRolesResponse> Handle(GetRolesRequest request, CancellationToken cancellationToken)
         {
-            PrepareDomainData();
-            var response = CreateResponseFrom(request, cancellationToken);
+            PrepareCurrentRepositoryEntity(roleRepository);
+            SetDomainModel();
+            var response = Service(request, cancellationToken);
             return response;
          }
-        private void PrepareDomainData()
-        {
-            SetCurrentRepository(roleRepository);
-            GetAllCurrentRepositoryEntityData();
-            SetDomainModel();
-        }
 
         public override void SetDomainModel()
         {

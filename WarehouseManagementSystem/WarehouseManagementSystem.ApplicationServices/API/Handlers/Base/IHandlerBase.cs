@@ -16,13 +16,15 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
         public IEnumerable<Entity> entityModel { get; set; }
         public IEnumerable<DomainModel> domainModel { get; set; }
 
+        public void PrepareCurrentRepositoryEntity(IRepository<Entity> repositoryEntity);
+
         public void SetCurrentRepository(IRepository<Entity> repositoryEntity);
 
         public void GetAllCurrentRepositoryEntityData();
 
         public Response PrepareResponse();
 
-        public Task<Response> CreateResponseFrom(Request request, CancellationToken cancellationToken);
+        public Task<Response> Service(Request request, CancellationToken cancellationToken);
 
         public void SetDomainModel();
     }

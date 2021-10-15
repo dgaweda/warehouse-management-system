@@ -16,6 +16,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
         public IEnumerable<Entity> entityModel { get; set; }
         public IEnumerable<DomainModel> domainModel { get; set; }
 
+        public void PrepareCurrentRepositoryEntity(IRepository<Entity> repositoryEntity)
+        {
+            SetCurrentRepository(repositoryEntity);
+            GetAllCurrentRepositoryEntityData();
+        }
+
         public void SetCurrentRepository(IRepository<Entity> repositoryEntity)
         {
             this.repositoryEntity = repositoryEntity;
@@ -26,7 +32,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
             entityModel = repositoryEntity.GetAll();
         }
 
-        public Task<Response> CreateResponseFrom(Request request, CancellationToken cancellationToken)
+        public Task<Response> Service(Request request, CancellationToken cancellationToken)
         {
             var response = PrepareResponse();
             return Task.FromResult(response);
