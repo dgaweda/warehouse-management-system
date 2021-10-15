@@ -15,8 +15,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Deliveries
 {
     public class GetDeliveriesHandler : HandlerBase<Delivery, Domain.Models.Delivery, GetDeliveriesResponse, GetDeliveriesRequest>, IRequestHandler<GetDeliveriesRequest, GetDeliveriesResponse>, IGetAll
     {
-        private IRepository<Delivery> deliveryRepository;
-        private HandlerBase<Delivery, Domain.Models.Delivery, GetDeliveriesResponse, GetDeliveriesRequest> handler = new HandlerBase<Delivery, Domain.Models.Delivery, GetDeliveriesResponse, GetDeliveriesRequest>();
+        private readonly IRepository<Delivery> deliveryRepository;
        
         public GetDeliveriesHandler(IRepository<Delivery> deliveryRepository)
         {

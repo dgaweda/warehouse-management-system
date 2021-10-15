@@ -15,8 +15,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Employees
 {
     public class GetEmployeesHandler : HandlerBase<Employee, Domain.Models.Employee, GetEmployeesResponse, GetEmployeesRequest>, IRequestHandler<GetEmployeesRequest, GetEmployeesResponse>, IGetAll
     {
-        private IRepository<Employee> employeeRepository { get; set; }
-        private HandlerBase<Employee, Domain.Models.Employee, GetEmployeesResponse, GetEmployeesRequest> handler = new HandlerBase<Employee, Domain.Models.Employee, GetEmployeesResponse, GetEmployeesRequest>();
+        private readonly IRepository<Employee> employeeRepository;
        
         public GetEmployeesHandler(IRepository<Employee> employeeRepository)
         {

@@ -15,7 +15,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Orders
 {
     public class GetOrdersHandler : HandlerBase<Order, Domain.Models.Order, GetOrdersResponse, GetOrdersRequest>,IRequestHandler<GetOrdersRequest, GetOrdersResponse>, IGetAll
     {
-        private IRepository<Order> orderRepository;
+        private readonly IRepository<Order> orderRepository;
+
         public GetOrdersHandler(IRepository<Order> orderRepository)
         {
             this.orderRepository = orderRepository;

@@ -15,8 +15,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Departures
 {
     public class GetDeparturesHandler : HandlerBase<Departure, Domain.Models.Departure, GetDeparturesResponse, GetDeparturesRequest>, IRequestHandler<GetDeparturesRequest, GetDeparturesResponse>, IGetAll
     {
-        private IRepository<Departure> departureRepository;
-        private HandlerBase<Departure, Domain.Models.Departure, GetDeparturesResponse, GetDeparturesRequest> handler = new HandlerBase<Departure, Domain.Models.Departure, GetDeparturesResponse, GetDeparturesRequest>();
+        private readonly IRepository<Departure> departureRepository;
 
         public GetDeparturesHandler(IRepository<Departure> departureRepository)
         {
