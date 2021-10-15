@@ -22,6 +22,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 
         public Response PrepareResponse();
 
-        public Task<Response> Handle(Request request, CancellationToken cancellationToken);
+        public Task<Response> CreateResponseFrom(Request request, CancellationToken cancellationToken);
+
+        public void SetDomainModel();
     }
 }

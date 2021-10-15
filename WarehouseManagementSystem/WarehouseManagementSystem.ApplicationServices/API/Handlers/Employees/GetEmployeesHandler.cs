@@ -22,22 +22,23 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Employees
            this.employeeRepository = employeeRepository;
         }
 
-        public new Task<GetEmployeesResponse> Handle(GetEmployeesRequest request, CancellationToken cancellationToken)
+        public Task<GetEmployeesResponse> Handle(GetEmployeesRequest request, CancellationToken cancellationToken)
         {
             PrepareDomainData();
-            return handler.Handle(request, cancellationToken);
+            var response = CreateResponseFrom(request, cancellationToken);
+            return response;
         }
 
         private void PrepareDomainData()
         {
-            handler.SetCurrentRepository(employeeRepository);
-            handler.GetAllCurrentRepositoryEntityData();
+            SetCurrentRepository(employeeRepository);
+            GetAllCurrentRepositoryEntityData();
             SetDomainModel();
         }
 
         public override void SetDomainModel()
         {
-            handler.domainModel = handler.entityModel.Select(x => new Domain.Models.Employee()
+            domainModel = entityModel.Select(x => new Domain.Models.Employee()
             {
                 Name = x.Name,
                 LastName = x.LastName

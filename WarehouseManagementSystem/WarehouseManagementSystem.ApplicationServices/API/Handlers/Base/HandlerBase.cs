@@ -26,7 +26,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
             entityModel = repositoryEntity.GetAll();
         }
 
-        public Task<Response> Handle(Request request, CancellationToken cancellationToken)
+        public Task<Response> CreateResponseFrom(Request request, CancellationToken cancellationToken)
         {
             var response = PrepareResponse();
             return Task.FromResult(response);

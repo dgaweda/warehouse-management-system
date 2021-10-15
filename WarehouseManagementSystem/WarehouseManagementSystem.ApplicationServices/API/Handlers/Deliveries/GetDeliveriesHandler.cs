@@ -16,26 +16,28 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Deliveries
     {
         private IRepository<Delivery> deliveryRepository;
         private HandlerBase<Delivery, Domain.Models.Delivery, GetDeliveriesResponse, GetDeliveriesRequest> handler = new HandlerBase<Delivery, Domain.Models.Delivery, GetDeliveriesResponse, GetDeliveriesRequest>();
+       
         public GetDeliveriesHandler(IRepository<Delivery> deliveryRepository)
         {
             this.deliveryRepository = deliveryRepository;
         }
-
-        public new Task<GetDeliveriesResponse> Handle(GetDeliveriesRequest request, CancellationToken cancellationToken)
+        
+        public Task<GetDeliveriesResponse> Handle(GetDeliveriesRequest request, CancellationToken cancellationToken)
         {
             PrepareDomainData();
-            return handler.Handle(request, cancellationToken);
-        }
+            var response = CreateResponseFrom(request, cancellationToken);
+            return response;
+         }
 
         private void PrepareDomainData()
         {
-            handler.SetCurrentRepository(deliveryRepository);
-            handler.GetAllCurrentRepositoryEntityData();
+            SetCurrentRepository(deliveryRepository);
+            GetAllCurrentRepositoryEntityData();
             SetDomainModel();
         }
         public override void SetDomainModel()
         {
-            handler.domainModel = handler.entityModel.Select(x => new Domain.Models.Delivery() 
+            domainModel = entityModel.Select(x => new Domain.Models.Delivery() 
             { 
                 Id = x.Id,
                 ArrivalTime = x.Arrival,

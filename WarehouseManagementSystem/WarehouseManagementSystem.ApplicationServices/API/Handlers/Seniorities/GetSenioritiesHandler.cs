@@ -22,16 +22,17 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Seniorities
             this.seniorityRepository = seniorityRepository;
         }
 
-        public new Task<GetSenioritiesResponse> Handle(GetSenioritiesRequest request, CancellationToken cancellationToken)
+        public Task<GetSenioritiesResponse> Handle(GetSenioritiesRequest request, CancellationToken cancellationToken)
         {
             PrepareDomainData();
-            return handler.Handle(request, cancellationToken);
+            var response = CreateResponseFrom(request, cancellationToken);
+            return response;
         }
 
         private void PrepareDomainData()
         {
-            handler.SetCurrentRepository(seniorityRepository);
-            handler.GetAllCurrentRepositoryEntityData();
+            SetCurrentRepository(seniorityRepository);
+            GetAllCurrentRepositoryEntityData();
             SetDomainModel();
         }
 
