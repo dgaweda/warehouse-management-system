@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities;
+﻿using AutoMapper;
+using DataAccess.Entities;
 using DataAccess.Repository;
 using MediatR;
 using System;
@@ -9,35 +10,26 @@ using System.Threading;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
-using WarehouseManagementSystem.ApplicationServices.API.Handlers.Base;
+
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Employees
 {
-    public class GetEmployeesHandler : HandlerBase<Employee, Domain.Models.Employee, GetEmployeesResponse, GetEmployeesRequest>, IRequestHandler<GetEmployeesRequest, GetEmployeesResponse>, IGetAll
+    public class GetEmployeesHandler : HandlerBase<Employee, Domain.Models.Employee, GetEmployeesResponse, GetEmployeesRequest>, IRequestHandler<GetEmployeesRequest, GetEmployeesResponse>
     {
         private readonly IRepository<Employee> employeeRepository;
+        private readonly IMapper mapper;
        
-        public GetEmployeesHandler(IRepository<Employee> employeeRepository)
+        public GetEmployeesHandler(IRepository<Employee> employeeRepository, IMapper mapper)
         {
-           this.employeeRepository = employeeRepository;
+            this.employeeRepository = employeeRepository;
+            this.mapper = mapper;
         }
 
         public Task<GetEmployeesResponse> Handle(GetEmployeesRequest request, CancellationToken cancellationToken)
         {
-            PrepareCurrentRepositoryEntity(employeeRepository);
-            SetDomainModel();
-
-            var response = Service(request, cancellationToken);
+            SetDomainModel(employeeRepository, mapper);
+            var response = PrepareResponse();
             return response;
-        }
-
-        public override void SetDomainModel()
-        {
-            domainModel = entityModel.Select(x => new Domain.Models.Employee()
-            {
-                Name = x.Name,
-                LastName = x.LastName
-            });
         }
     }
 }

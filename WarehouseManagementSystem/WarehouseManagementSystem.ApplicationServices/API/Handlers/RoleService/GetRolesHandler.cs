@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities;
+﻿using AutoMapper;
+using DataAccess.Entities;
 using DataAccess.Repository;
 using MediatR;
 using System;
@@ -8,35 +9,25 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
-using WarehouseManagementSystem.ApplicationServices.API.Handlers.Base;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public class GetRolesHandler : HandlerBase<Role, Domain.Models.Role, GetRolesResponse, GetRolesRequest>, IRequestHandler<GetRolesRequest, GetRolesResponse>, IGetAll
-    {
+    public class GetRolesHandler : HandlerBase<Role, Domain.Models.Role, GetRolesResponse, GetRolesRequest>, IRequestHandler<GetRolesRequest, GetRolesResponse>
+    { 
         private readonly IRepository<Role> roleRepository;
+        private readonly IMapper mapper;
 
-        public GetRolesHandler(IRepository<Role> roleRepository)
+        public GetRolesHandler(IRepository<Role> roleRepository, IMapper mapper)
         {
             this.roleRepository = roleRepository;
+            this.mapper = mapper;
         }
 
         public Task<GetRolesResponse> Handle(GetRolesRequest request, CancellationToken cancellationToken)
         {
-            PrepareCurrentRepositoryEntity(roleRepository);
-            SetDomainModel();
-            var response = Service(request, cancellationToken);
+            SetDomainModel(roleRepository, mapper);
+            var response = PrepareResponse();
             return response;
-         }
-
-        public override void SetDomainModel()
-        {
-            domainModel = entityModel.Select(x => new Domain.Models.Role()
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Salary = x.Salary
-            });
         }
     }
 }

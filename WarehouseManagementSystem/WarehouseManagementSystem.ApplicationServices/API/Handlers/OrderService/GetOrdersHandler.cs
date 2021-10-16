@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities;
+﻿using AutoMapper;
+using DataAccess.Entities;
 using DataAccess.Repository;
 using MediatR;
 using System;
@@ -9,37 +10,25 @@ using System.Threading;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
-using WarehouseManagementSystem.ApplicationServices.API.Handlers.Base;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Orders
 {
-    public class GetOrdersHandler : HandlerBase<Order, Domain.Models.Order, GetOrdersResponse, GetOrdersRequest>,IRequestHandler<GetOrdersRequest, GetOrdersResponse>, IGetAll
+    public class GetOrdersHandler : HandlerBase<Order, Domain.Models.Order, GetOrdersResponse, GetOrdersRequest>,IRequestHandler<GetOrdersRequest, GetOrdersResponse>
     {
         private readonly IRepository<Order> orderRepository;
+        private readonly IMapper mapper;
 
-        public GetOrdersHandler(IRepository<Order> orderRepository)
+        public GetOrdersHandler(IRepository<Order> orderRepository, IMapper mapper)
         {
             this.orderRepository = orderRepository;
+            this.mapper = mapper;
         }
 
         public Task<GetOrdersResponse> Handle(GetOrdersRequest request, CancellationToken cancellationToken)
         {
-            PrepareCurrentRepositoryEntity(orderRepository);
-            SetDomainModel();
-            var response = Service(request, cancellationToken);
-
+            SetDomainModel(orderRepository, mapper);
+            var response = PrepareResponse();
             return response;
-        }
-        
-        public override void SetDomainModel()
-        {
-            domainModel = entityModel.Select(x => new Domain.Models.Order() 
-            { 
-                State = x.State,
-                Barcode = x.Barcode,
-                PickingStart = x.PickingStart,
-                PickingEnd = x.PickingEnd
-            });
         }
     }
 }

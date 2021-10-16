@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities;
+﻿using AutoMapper;
+using DataAccess.Entities;
 using DataAccess.Repository;
 using MediatR;
 using System;
@@ -9,38 +10,25 @@ using System.Threading;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
-using WarehouseManagementSystem.ApplicationServices.API.Handlers.Base;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletService
 {
-    public class GetPalletsHandler : HandlerBase<Pallet, Domain.Models.Pallet, GetPalletsResponse, GetPalletsRequest>, IRequestHandler<GetPalletsRequest, GetPalletsResponse>, IGetAll
+    public class GetPalletsHandler : HandlerBase<Pallet, Domain.Models.Pallet, GetPalletsResponse, GetPalletsRequest>, IRequestHandler<GetPalletsRequest, GetPalletsResponse>
     {
         private readonly IRepository<Pallet> palletRepository;
+        private readonly IMapper mapper;
 
-        public GetPalletsHandler(IRepository<Pallet> palletRepository)
+        public GetPalletsHandler(IRepository<Pallet> palletRepository, IMapper mapper)
         {
             this.palletRepository = palletRepository;
+            this.mapper = mapper;
         }
 
         public Task<GetPalletsResponse> Handle(GetPalletsRequest request, CancellationToken cancellationToken)
         {
-            PrepareCurrentRepositoryEntity(palletRepository);
-            SetDomainModel();
-            var response = Service(request, cancellationToken);
-
+            SetDomainModel(palletRepository, mapper);
+            var response = PrepareResponse();
             return response;
-        }
-
-        public override void SetDomainModel()
-        {
-            domainModel = entityModel.Select(x => new Domain.Models.Pallet() 
-            { 
-                Barcode = x.Barcode,
-                DeliveryId = x.DeliveryId,
-                DepartureId = x.DepartureId,
-                EmployeeId = x.EmployeeId,
-                OrderId = x.OrderId
-            });
         }
     }
 }

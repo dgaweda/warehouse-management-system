@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities;
+﻿using AutoMapper;
+using DataAccess.Entities;
 using DataAccess.Repository;
 using MediatR;
 using System;
@@ -9,35 +10,25 @@ using System.Threading;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
-using WarehouseManagementSystem.ApplicationServices.API.Handlers.Base;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Deliveries
 {
-    public class GetDeliveriesHandler : HandlerBase<Delivery, Domain.Models.Delivery, GetDeliveriesResponse, GetDeliveriesRequest>, IRequestHandler<GetDeliveriesRequest, GetDeliveriesResponse>, IGetAll
+    public class GetDeliveriesHandler : HandlerBase<Delivery, Domain.Models.Delivery, GetDeliveriesResponse, GetDeliveriesRequest>, IRequestHandler<GetDeliveriesRequest, GetDeliveriesResponse>
     {
         private readonly IRepository<Delivery> deliveryRepository;
+        private readonly IMapper mapper;
        
-        public GetDeliveriesHandler(IRepository<Delivery> deliveryRepository)
+        public GetDeliveriesHandler(IRepository<Delivery> deliveryRepository, IMapper mapper)
         {
             this.deliveryRepository = deliveryRepository;
+            this.mapper = mapper;
         }
         
         public Task<GetDeliveriesResponse> Handle(GetDeliveriesRequest request, CancellationToken cancellationToken)
         {
-            PrepareCurrentRepositoryEntity(deliveryRepository);
-            SetDomainModel();
-            var response = Service(request, cancellationToken);
+            SetDomainModel(deliveryRepository, mapper);
+            var response = PrepareResponse();
             return response;
-         }
-
-        public override void SetDomainModel()
-        {
-            domainModel = entityModel.Select(x => new Domain.Models.Delivery() 
-            { 
-                Id = x.Id,
-                ArrivalTime = x.Arrival,
-                CompanyName = x.CompanyName
-            });
         }
     }
 }

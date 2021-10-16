@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities.EntityBases;
+﻿using AutoMapper;
+using DataAccess.Entities.EntityBases;
 using DataAccess.Repository;
 using System;
 using System.Collections.Generic;
@@ -12,43 +13,33 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
     public class HandlerBase<Entity, DomainModel, Response, Request> : IHandlerBase<Entity, DomainModel, Response, Request> where Entity : EntityBase where DomainModel : new() where Response : ResponseBase<List<DomainModel>>, new()
     {
-        public IRepository<Entity> repositoryEntity { get; set; }
-        public IEnumerable<Entity> entityModel { get; set; }
-        public IEnumerable<DomainModel> domainModel { get; set; }
+        public IRepository<Entity> repositoryEntity;
+        public IEnumerable<Entity> entityModel;
+        public List<DomainModel> domainModel;
 
-        public void PrepareCurrentRepositoryEntity(IRepository<Entity> repositoryEntity)
+        public void SetDomainModel(IRepository<Entity> repositoryEntity, IMapper mapper)
         {
-            SetCurrentRepository(repositoryEntity);
-            GetAllCurrentRepositoryEntityData();
+            SetCurrentRepository(repositoryEntity, mapper);
         }
 
-        public void SetCurrentRepository(IRepository<Entity> repositoryEntity)
+        public void SetCurrentRepository(IRepository<Entity> repositoryEntity, IMapper mapper)
         {
             this.repositoryEntity = repositoryEntity;
+            GetMappedModel(mapper);
         }
-
-        public void GetAllCurrentRepositoryEntityData()
+        public void GetMappedModel(IMapper mapper)
         {
             entityModel = repositoryEntity.GetAll();
+            domainModel = mapper.Map<List<DomainModel>>(entityModel);
         }
 
-        public Task<Response> Service(Request request, CancellationToken cancellationToken)
-        {
-            var response = PrepareResponse();
-            return Task.FromResult(response);
-        }
-        public Response PrepareResponse()
+        public Task<Response> PrepareResponse()
         {
             var response = new Response()
             {
-                Data = domainModel.ToList()
+                Data = domainModel
             };
-            return response;
-        }
-
-        public virtual void SetDomainModel()
-        {
-            throw new NotImplementedException();
+            return Task.FromResult(response);
         }
     }
 }
