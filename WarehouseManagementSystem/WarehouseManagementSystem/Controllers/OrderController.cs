@@ -13,7 +13,7 @@ namespace warehouse_management_system.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        private IMediator mediator;
+        private readonly IMediator mediator;
 
         public OrderController(IMediator mediator)
         {

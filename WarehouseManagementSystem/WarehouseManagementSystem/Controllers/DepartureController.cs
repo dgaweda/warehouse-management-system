@@ -13,7 +13,7 @@ namespace warehouse_management_system.Controllers
     [ApiController]
     public class DepartureController : ControllerBase
     {
-        private IMediator mediator;
+        private readonly IMediator mediator;
         public DepartureController(IMediator mediator)
         {
             this.mediator = mediator;

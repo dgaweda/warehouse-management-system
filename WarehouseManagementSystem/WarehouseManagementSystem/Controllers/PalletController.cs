@@ -13,7 +13,7 @@ namespace warehouse_management_system.Controllers
     [ApiController]
     public class PalletController : ControllerBase
     {
-        private IMediator mediator;
+        private readonly IMediator mediator;
         public PalletController(IMediator mediator)
         {
             this.mediator = mediator;

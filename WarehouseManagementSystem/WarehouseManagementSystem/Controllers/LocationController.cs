@@ -13,7 +13,7 @@ namespace warehouse_management_system.Controllers
     [ApiController]
     public class LocationController : ControllerBase
     {
-        private IMediator mediator;
+        private readonly IMediator mediator;
         public LocationController(IMediator mediator)
         {
             this.mediator = mediator;

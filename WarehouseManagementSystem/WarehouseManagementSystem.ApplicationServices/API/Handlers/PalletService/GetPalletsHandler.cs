@@ -16,6 +16,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletServi
     public class GetPalletsHandler : HandlerBase<Pallet, Domain.Models.Pallet, GetPalletsResponse, GetPalletsRequest>, IRequestHandler<GetPalletsRequest, GetPalletsResponse>, IGetAll
     {
         private readonly IRepository<Pallet> palletRepository;
+
         public GetPalletsHandler(IRepository<Pallet> palletRepository)
         {
             this.palletRepository = palletRepository;
@@ -29,6 +30,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletServi
 
             return response;
         }
+
         public override void SetDomainModel()
         {
             domainModel = entityModel.Select(x => new Domain.Models.Pallet() 

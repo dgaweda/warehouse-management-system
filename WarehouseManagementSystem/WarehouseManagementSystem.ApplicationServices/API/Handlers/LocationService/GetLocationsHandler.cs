@@ -16,6 +16,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.LocationSer
     public class GetLocationsHandler : HandlerBase<Location, Domain.Models.Location, GetLocationsResponse, GetLocationsRequest>, IRequestHandler<GetLocationsRequest, GetLocationsResponse>, IGetAll
     {
         private readonly IRepository<Location> locationRepository;
+
         public GetLocationsHandler(IRepository<Location> locationRepository)
         {
             this.locationRepository = locationRepository;
