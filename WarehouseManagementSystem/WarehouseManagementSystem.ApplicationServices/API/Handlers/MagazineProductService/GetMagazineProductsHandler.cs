@@ -20,9 +20,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.MagazinePro
             this.mapper = mapper;
         }
 
-        public Task<GetMagazineProductsResponse> Handle(GetMagazineProductsRequest request, CancellationToken cancellationToken)
+        public async Task<GetMagazineProductsResponse> Handle(GetMagazineProductsRequest request, CancellationToken cancellationToken)
         {
-            SetDomainModel(magazineProductRepository, mapper);
+            await SetDomainModel(magazineProductRepository, mapper);
             var response = PrepareResponse();
             return response;
         }

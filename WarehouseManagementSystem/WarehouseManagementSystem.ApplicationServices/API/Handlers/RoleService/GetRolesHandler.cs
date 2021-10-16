@@ -23,9 +23,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
             this.mapper = mapper;
         }
 
-        public Task<GetRolesResponse> Handle(GetRolesRequest request, CancellationToken cancellationToken)
+        public async Task<GetRolesResponse> Handle(GetRolesRequest request, CancellationToken cancellationToken)
         {
-            SetDomainModel(roleRepository, mapper);
+            await SetDomainModel(roleRepository, mapper);
             var response = PrepareResponse();
             return response;
         }

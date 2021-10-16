@@ -20,9 +20,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Departures
             this.mapper = mapper;
         }
 
-        public Task<GetDeparturesResponse> Handle(GetDeparturesRequest request, CancellationToken cancellation)
+        public async Task<GetDeparturesResponse> Handle(GetDeparturesRequest request, CancellationToken cancellation)
         {
-            SetDomainModel(departureRepository, mapper);
+            await SetDomainModel(departureRepository, mapper);
             var response = PrepareResponse();
             return response;
         }

@@ -24,9 +24,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Seniorities
             this.mapper = mapper;
         }
 
-        public Task<GetSenioritiesResponse> Handle(GetSenioritiesRequest request, CancellationToken cancellationToken)
+        public async Task<GetSenioritiesResponse> Handle(GetSenioritiesRequest request, CancellationToken cancellationToken)
         {
-            SetDomainModel(seniorityRepository, mapper);
+            await SetDomainModel(seniorityRepository, mapper);
             var response = PrepareResponse();
             return response;
         }

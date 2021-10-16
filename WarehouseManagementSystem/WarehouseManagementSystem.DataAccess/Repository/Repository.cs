@@ -11,7 +11,7 @@ namespace DataAccess.Repository
     public class Repository<T> : IRepository<T> where T : EntityBase
     {
         protected readonly WMSDatabaseContext context;
-        private DbSet<T> entities;
+        private readonly DbSet<T> entities;
 
         public Repository(WMSDatabaseContext context)
         {
@@ -19,43 +19,40 @@ namespace DataAccess.Repository
             entities = context.Set<T>();
         }
 
-        public void Delete(int id)
+        public Task Delete(int id)
         {
             T record = entities.SingleOrDefault(i => i.Id == id);
 
             entities.Remove(record);
-            SaveChanges();
+            return SaveChanges();
         }
 
-        public IEnumerable<T> GetAll() => entities.AsEnumerable();
+        public Task<List<T>> GetAll() => entities.ToListAsync();
 
-        public T GetById(int id) => entities.SingleOrDefault(i => i.Id == id);
+        public Task<T> GetById(int id) => entities.SingleOrDefaultAsync(i => i.Id == id);
 
-        public void Insert(T entity)
+        public Task Insert(T entity)
         {
-            CheckIfNull(entity);
+            CheckIfNotNull(entity);
 
             entities.Add(entity);
-            SaveChanges();
+            return SaveChanges();
         }
 
-        public void Update(T entity)
+        public Task Update(T entity)
         {
-            CheckIfNull(entity);
+            CheckIfNotNull(entity);
 
             entities.Update(entity);
-            SaveChanges();
+            return SaveChanges();
         }
 
-        private void CheckIfNull(T entity)
+        private void CheckIfNotNull(T entity)
         {
             if (entity == null)
-                throw new ArgumentNullException("Entity is Null");
+                throw new ArgumentNullException("Entity is Empty");
         }
 
-        private void SaveChanges()
-        {
-            context.SaveChanges();
-        }
+        private Task SaveChanges() => context.SaveChangesAsync();
     }
 }

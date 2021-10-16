@@ -25,9 +25,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Employees
             this.mapper = mapper;
         }
 
-        public Task<GetEmployeesResponse> Handle(GetEmployeesRequest request, CancellationToken cancellationToken)
+        public async Task<GetEmployeesResponse> Handle(GetEmployeesRequest request, CancellationToken cancellationToken)
         {
-            SetDomainModel(employeeRepository, mapper);
+            await SetDomainModel(employeeRepository, mapper);
             var response = PrepareResponse();
             return response;
         }

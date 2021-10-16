@@ -13,11 +13,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
     public interface IHandlerBase<Entity, DomainModel, Response, Request> where Entity : EntityBase where DomainModel : new() where Response : ResponseBase<List<DomainModel>>, new()
     {
-        public void SetDomainModel(IRepository<Entity> repositoryEntity, IMapper mapper);
+        public Task SetDomainModel(IRepository<Entity> repositoryEntity, IMapper mapper);
 
-        public void SetCurrentRepository(IRepository<Entity> repositoryEntity, IMapper mapper);
-        public void GetMappedModel(IMapper mapper);
+        public Task SetCurrentRepository(IRepository<Entity> repositoryEntity, IMapper mapper);
+        public Task GetMappedModel(IMapper mapper);
 
-        public Task<Response> PrepareResponse();
+        public Response PrepareResponse();
     }
 }

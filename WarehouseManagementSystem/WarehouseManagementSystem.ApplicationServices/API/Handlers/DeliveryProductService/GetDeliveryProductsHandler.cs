@@ -24,9 +24,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryPro
             this.mapper = mapper;
         }
 
-        public Task<GetDeliveryProductsResponse> Handle(GetDeliveryProductsRequest request, CancellationToken cancellationToken)
+        public async Task<GetDeliveryProductsResponse> Handle(GetDeliveryProductsRequest request, CancellationToken cancellationToken)
         {
-            SetDomainModel(deliveryProductRepository, mapper);
+            await SetDomainModel(deliveryProductRepository, mapper);
             var response = PrepareResponse();
             return response;
         }

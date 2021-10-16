@@ -17,6 +17,7 @@ namespace DataAccess.Entities
 
         [MaxLength(50)]
         public string CompanyName { get; set; }
+
         public List<Pallet> Pallets { get; set; }
     }
 }

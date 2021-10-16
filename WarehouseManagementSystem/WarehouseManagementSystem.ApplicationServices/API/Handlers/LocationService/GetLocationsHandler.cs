@@ -19,9 +19,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.LocationSer
             this.locationRepository = locationRepository;
             this.mapper = mapper;
         }
-        public Task<GetLocationsResponse> Handle(GetLocationsRequest request, CancellationToken cancellationToken)
+        public async Task<GetLocationsResponse> Handle(GetLocationsRequest request, CancellationToken cancellationToken)
         {
-            SetDomainModel(locationRepository, mapper);
+            await SetDomainModel(locationRepository, mapper);
             var response = PrepareResponse();
 
             return response;

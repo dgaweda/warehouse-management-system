@@ -24,9 +24,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletServi
             this.mapper = mapper;
         }
 
-        public Task<GetPalletsResponse> Handle(GetPalletsRequest request, CancellationToken cancellationToken)
+        public async Task<GetPalletsResponse> Handle(GetPalletsRequest request, CancellationToken cancellationToken)
         {
-            SetDomainModel(palletRepository, mapper);
+            await SetDomainModel(palletRepository, mapper);
             var response = PrepareResponse();
             return response;
         }

@@ -24,9 +24,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Orders
             this.mapper = mapper;
         }
 
-        public Task<GetOrdersResponse> Handle(GetOrdersRequest request, CancellationToken cancellationToken)
+        public async Task<GetOrdersResponse> Handle(GetOrdersRequest request, CancellationToken cancellationToken)
         {
-            SetDomainModel(orderRepository, mapper);
+            await SetDomainModel(orderRepository, mapper);
             var response = PrepareResponse();
             return response;
         }

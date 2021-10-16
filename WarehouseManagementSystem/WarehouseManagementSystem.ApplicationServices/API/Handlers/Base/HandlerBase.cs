@@ -17,29 +17,29 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
         public IEnumerable<Entity> entityModel;
         public List<DomainModel> domainModel;
 
-        public void SetDomainModel(IRepository<Entity> repositoryEntity, IMapper mapper)
+        public async Task SetDomainModel(IRepository<Entity> repositoryEntity, IMapper mapper)
         {
-            SetCurrentRepository(repositoryEntity, mapper);
+            await SetCurrentRepository(repositoryEntity, mapper);
         }
 
-        public void SetCurrentRepository(IRepository<Entity> repositoryEntity, IMapper mapper)
+        public async Task SetCurrentRepository(IRepository<Entity> repositoryEntity, IMapper mapper)
         {
             this.repositoryEntity = repositoryEntity;
-            GetMappedModel(mapper);
+            await GetMappedModel(mapper);
         }
-        public void GetMappedModel(IMapper mapper)
+        public async Task GetMappedModel(IMapper mapper)
         {
-            entityModel = repositoryEntity.GetAll();
+            entityModel = await repositoryEntity.GetAll();
             domainModel = mapper.Map<List<DomainModel>>(entityModel);
         }
 
-        public Task<Response> PrepareResponse()
+        public Response PrepareResponse()
         {
             var response = new Response()
             {
                 Data = domainModel
             };
-            return Task.FromResult(response);
+            return response;
         }
     }
 }
