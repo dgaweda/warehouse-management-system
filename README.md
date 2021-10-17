@@ -1,10 +1,10 @@
 # warehouse-management-system - Application 
 <br />
-<h1> Technologies:
+<h1> Technologies:</h1>
   <hr />
-  - ASP.NET 5
-  - MediatR - 14.10.2021
-  - AutoMapper - 16.10.2021
-  - CQRS Pattern - Commands/Queries
+  - ASP.NET 5 <br/>
+  - MediatR - 14.10.2021 <br/>
+  - AutoMapper - 16.10.2021 <br/>
+  - CQRS Pattern - Commands/Queries <br/>
  
   Dariusz Gawęda 2021
