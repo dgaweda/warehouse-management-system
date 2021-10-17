@@ -6,5 +6,5 @@
   - MediatR - 14.10.2021 <br/>
   - AutoMapper - 16.10.2021 <br/>
   - CQRS Pattern - Commands/Queries <br/>
- 
-  Dariusz Gawęda 2021
+ <br/><br/>
+  # Dariusz Gawęda 2021
