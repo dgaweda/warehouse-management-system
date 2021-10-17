@@ -7,4 +7,4 @@
   - AutoMapper - 16.10.2021 <br/>
   - CQRS Pattern - Commands/Queries <br/>
  <br/><br/>
-  # Dariusz Gawęda 2021
+ # Dariusz Gawęda 2021
