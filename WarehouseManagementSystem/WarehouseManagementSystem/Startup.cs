@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess;
+using DataAccess.CQRS;
 using DataAccess.Repository;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -35,6 +36,7 @@ namespace warehouse_management_system
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IQueryExecutor, QueryExecutor>();
+            services.AddTransient<ICommandExecutor, CommandExecutor>();
 
             services.AddAutoMapper(typeof(EmployeesProfile).Assembly); // This Line Enables AutoMapper to map all profiles without adding everyone of them.
                                                                                 // It gets Assembly from one profile to get all the mappings.

@@ -28,5 +28,13 @@ namespace warehouse_management_system.Controllers
             var response = await mediator.Send(request);
             return Ok(response);
         }
+
+        [HttpPost]
+        [Route("Add/{Id}")]
+        public async Task<IActionResult> AddEmployee([FromBody] AddEmployeeRequest request)
+        {
+            var response = await mediator.Send(request);
+            return Ok(response);
+        }
     }
 }
