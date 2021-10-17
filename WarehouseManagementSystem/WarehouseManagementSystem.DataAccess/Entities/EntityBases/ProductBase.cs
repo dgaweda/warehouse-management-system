@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Entities.EntityBases
 {
-    public class ProductBase : EntityBase
+    public abstract class ProductBase : EntityBase
     {
         [Required]
         [Column(TypeName = "date")]

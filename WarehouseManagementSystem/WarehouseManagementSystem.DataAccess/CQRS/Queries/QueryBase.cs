@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Queries
 {
-    class QueryBase
+    public abstract class QueryBase<TResult>
     {
+        public abstract Task<TResult> Execute(WMSDatabaseContext context);
     }
 }

@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
+using WarehouseManagementSystem.ApplicationServices.API.Handlers;
 using WarehouseManagementSystem.ApplicationServices.Mappings;
 
 namespace warehouse_management_system
@@ -42,6 +43,7 @@ namespace warehouse_management_system
                 option.UseSqlServer(this.Configuration.GetConnectionString("WMSDatabaseContext")));
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IHandlerBase<,,,>), typeof(HandlerBase<,,,>));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

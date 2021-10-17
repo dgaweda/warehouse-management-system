@@ -33,7 +33,8 @@ namespace DataAccess.Repository
 
         public Task Insert(T entity)
         {
-            CheckIfNotNull(entity);
+            if (IsNull(entity))
+                throw new ArgumentNullException();
 
             entities.Add(entity);
             return SaveChanges();
@@ -41,17 +42,14 @@ namespace DataAccess.Repository
 
         public Task Update(T entity)
         {
-            CheckIfNotNull(entity);
+            if(IsNull(entity))
+                throw new ArgumentNullException();
 
             entities.Update(entity);
             return SaveChanges();
         }
 
-        private void CheckIfNotNull(T entity)
-        {
-            if (entity == null)
-                throw new ArgumentNullException("Entity is Empty");
-        }
+        private bool IsNull(T entity) => entity == null;
 
         private Task SaveChanges() => context.SaveChangesAsync();
     }

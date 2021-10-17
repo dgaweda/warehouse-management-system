@@ -13,11 +13,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
     public interface IHandlerBase<Entity, DomainModel, Response, Request> where Entity : EntityBase where DomainModel : new() where Response : ResponseBase<List<DomainModel>>, new()
     {
-        public Task SetDomainModel(IRepository<Entity> repositoryEntity, IMapper mapper);
-
-        public Task SetCurrentRepository(IRepository<Entity> repositoryEntity, IMapper mapper);
-        public Task GetMappedModel(IMapper mapper);
-
-        public Response PrepareResponse();
+        Task SetDomainModel(IRepository<Entity> repositoryEntity, IMapper mapper);
+        Task SetCurrentRepository(IRepository<Entity> repositoryEntity, IMapper mapper);
+        Task GetMappedModel(IMapper mapper);
+        Response PrepareResponse();
     }
 }
