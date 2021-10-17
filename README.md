@@ -1,6 +1,7 @@
 # warehouse-management-system - Application 
 <br />
-<h4> Technologies:
+<h1> Technologies:
+  <hr />
   - ASP.NET 5
   - MediatR - 14.10.2021
   - AutoMapper - 16.10.2021
