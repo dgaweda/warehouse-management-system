@@ -1,6 +1,6 @@
 # Warehouse Management System
 <h3> This is my first official application which is a result of all experience that I've collected. <br />
-Application is still in progress.
+Application is still in progress :)
 <br />
 <h1> Technologies:</h1>
   <hr />
