@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
 using WarehouseManagementSystem.ApplicationServices.API.Handlers;
+using WarehouseManagementSystem.ApplicationServices.API.Handlers.Base;
 using WarehouseManagementSystem.ApplicationServices.Mappings;
 
 namespace warehouse_management_system
@@ -33,9 +34,10 @@ namespace warehouse_management_system
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IQueryExecutor, QueryExecutor>();
+
             services.AddAutoMapper(typeof(EmployeesProfile).Assembly); // This Line Enables AutoMapper to map all profiles without adding everyone of them.
                                                                                 // It gets Assembly from one profile to get all the mappings.
-
             services.AddMediatR(typeof(ResponseBase<>));
 
             services.AddDbContext<WMSDatabaseContext>(

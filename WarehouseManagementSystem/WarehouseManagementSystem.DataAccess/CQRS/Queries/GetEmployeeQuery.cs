@@ -11,6 +11,10 @@ namespace DataAccess.CQRS.Queries
     public class GetEmployeeQuery : QueryBase<Employee>
     {
         public int Id { get; set; }
+        public GetEmployeeQuery(int Id)
+        {
+            this.Id = Id;
+        }
 
         public override async Task<Employee> Execute(WMSDatabaseContext context)
         {

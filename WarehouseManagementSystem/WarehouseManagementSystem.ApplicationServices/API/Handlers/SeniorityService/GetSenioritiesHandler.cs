@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DataAccess.CQRS.Queries;
 using DataAccess.Entities;
 using DataAccess.Repository;
 using MediatR;
@@ -10,25 +11,22 @@ using System.Threading;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+using WarehouseManagementSystem.ApplicationServices.API.Handlers.Base;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Seniorities
 {
-    public class GetSenioritiesHandler : HandlerBase<Seniority, Domain.Models.Seniority, GetSenioritiesResponse, GetSenioritiesRequest>, IRequestHandler<GetSenioritiesRequest, GetSenioritiesResponse>
+    public class GetSenioritiesHandler : IRequestHandler<GetSenioritiesRequest, GetSenioritiesResponse>
     {
-        private readonly IRepository<Seniority> seniorityRepository;
         private readonly IMapper mapper;
-       
-        public GetSenioritiesHandler(IRepository<Seniority> seniorityRepository, IMapper mapper)
+
+        public GetSenioritiesHandler(IMapper mapper)
         {
-            this.seniorityRepository = seniorityRepository;
             this.mapper = mapper;
         }
 
-        public async Task<GetSenioritiesResponse> Handle(GetSenioritiesRequest request, CancellationToken cancellationToken)
+        public Task<GetSenioritiesResponse> Handle(GetSenioritiesRequest request, CancellationToken cancellationToken)
         {
-            await SetDomainModel(seniorityRepository, mapper);
-            var response = PrepareResponse();
-            return response;
+            throw new NotImplementedException();
         }
     }
 }

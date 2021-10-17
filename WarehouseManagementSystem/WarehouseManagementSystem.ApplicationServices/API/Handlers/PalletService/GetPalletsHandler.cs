@@ -13,22 +13,18 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletService
 {
-    public class GetPalletsHandler : HandlerBase<Pallet, Domain.Models.Pallet, GetPalletsResponse, GetPalletsRequest>, IRequestHandler<GetPalletsRequest, GetPalletsResponse>
+    public class GetPalletsHandler : IRequestHandler<GetPalletsRequest, GetPalletsResponse>
     {
-        private readonly IRepository<Pallet> palletRepository;
         private readonly IMapper mapper;
 
-        public GetPalletsHandler(IRepository<Pallet> palletRepository, IMapper mapper)
+        public GetPalletsHandler(IMapper mapper)
         {
-            this.palletRepository = palletRepository;
             this.mapper = mapper;
         }
 
         public async Task<GetPalletsResponse> Handle(GetPalletsRequest request, CancellationToken cancellationToken)
         {
-            await SetDomainModel(palletRepository, mapper);
-            var response = PrepareResponse();
-            return response;
+            throw new NotImplementedException();
         }
     }
 }

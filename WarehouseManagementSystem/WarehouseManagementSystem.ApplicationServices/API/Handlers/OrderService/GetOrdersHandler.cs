@@ -13,22 +13,18 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Orders
 {
-    public class GetOrdersHandler : HandlerBase<Order, Domain.Models.Order, GetOrdersResponse, GetOrdersRequest>,IRequestHandler<GetOrdersRequest, GetOrdersResponse>
+    public class GetOrdersHandler : IRequestHandler<GetOrdersRequest, GetOrdersResponse>
     {
-        private readonly IRepository<Order> orderRepository;
         private readonly IMapper mapper;
 
-        public GetOrdersHandler(IRepository<Order> orderRepository, IMapper mapper)
+        public GetOrdersHandler(IMapper mapper)
         {
-            this.orderRepository = orderRepository;
             this.mapper = mapper;
         }
 
         public async Task<GetOrdersResponse> Handle(GetOrdersRequest request, CancellationToken cancellationToken)
         {
-            await SetDomainModel(orderRepository, mapper);
-            var response = PrepareResponse();
-            return response;
+            throw new NotImplementedException();
         }
     }
 }
