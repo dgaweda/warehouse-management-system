@@ -22,7 +22,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Base
             this.mapper = mapper;
         }
 
-        public async Task<Response> PrepareResponse()
+        public async Task<Response> PrepareResponseAndQuery()
         {
             await PrepareQuery();
             var response = new Response()

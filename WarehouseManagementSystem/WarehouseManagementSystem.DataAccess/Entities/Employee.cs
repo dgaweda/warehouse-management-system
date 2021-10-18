@@ -1,9 +1,11 @@
 ﻿using DataAccess.Entities.EntityBases;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
+    [Index(nameof(RoleId), IsUnique = false)]
     public class Employee : EntityBase
     {
         [Required]
@@ -16,6 +18,7 @@ namespace DataAccess.Entities
 
         [Required]
         public int RoleId { get; set; }
+
         public Seniority Seniority { get; set; }
         public Role Role { get; set; }
     }

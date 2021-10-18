@@ -30,7 +30,7 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpPost]
-        [Route("Add/{Id}")]
+        [Route("Add")]
         public async Task<IActionResult> AddEmployee([FromBody] AddEmployeeRequest request)
         {
             var response = await mediator.Send(request);

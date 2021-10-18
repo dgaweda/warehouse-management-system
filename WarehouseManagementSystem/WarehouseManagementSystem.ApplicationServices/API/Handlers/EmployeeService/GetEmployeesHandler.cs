@@ -27,7 +27,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Employees
 
         public async Task<GetEmployeesResponse> Handle(GetEmployeesRequest request, CancellationToken cancellationToken)
         {
-            var response = await handler.PrepareResponse();
+            var response = await handler.PrepareResponseAndQuery();
             return response;
         }
     }

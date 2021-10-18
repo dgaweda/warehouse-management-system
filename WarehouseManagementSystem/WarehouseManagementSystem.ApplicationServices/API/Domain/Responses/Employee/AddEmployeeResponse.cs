@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Employee
 {
-    public class AddEmployeeResponse : ResponseBase<DataAccess.Entities.Employee>
+    public class AddEmployeeResponse : ResponseBase<Models.Employee>
     {
     }
 }

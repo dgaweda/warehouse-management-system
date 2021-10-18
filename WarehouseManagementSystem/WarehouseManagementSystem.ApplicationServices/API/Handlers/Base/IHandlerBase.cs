@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Base
 {
-    public interface IHandlerBase<Query, DomainModel, Response, TResult>
+    public interface IHandlerBase<Query, DomainModelType, Response, TResult>
     {
-        Task<Response> PrepareResponse();
+        Task<Response> PrepareResponseAndQuery();
         Task PrepareQuery();
         Task ExecuteQuery(Query query);
         void MapDomainModel();
