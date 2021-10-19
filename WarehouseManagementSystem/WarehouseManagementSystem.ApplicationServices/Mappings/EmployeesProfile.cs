@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Employee;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings
 {
@@ -22,7 +23,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
                 .ForMember(x => x.LastName, y => y.MapFrom(z => z.LastName))
-                .ForMember(x => x.RoleId, y => y.MapFrom(z => z.RoleId));
+                .ForMember(x => x.RoleName, y => y.MapFrom(z => z.Role));
         }
     }
 }

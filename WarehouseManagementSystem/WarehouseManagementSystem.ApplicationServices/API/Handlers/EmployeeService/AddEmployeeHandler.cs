@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Employee;
-using WarehouseManagementSystem.ApplicationServices.API.Handlers.Base;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.EmployeeService
 {
@@ -24,12 +23,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.EmployeeSer
             this.commandExecutor = commandExecutor;
             this.mapper = mapper;
         }
-        //private readonly IHandlerBase<AddEmployeeCommand, Domain.Models.Employee, AddEmployeeResponse, Employee> handler;
 
-        //public AddEmployeeHandler(IHandlerBase<AddEmployeeCommand, Domain.Models.Employee, AddEmployeeResponse, Employee> handler)
-        //{
-           //this.handler = handler;
-        //}
         public async Task<AddEmployeeResponse> Handle(AddEmployeeRequest request, CancellationToken cancellationToken)
         {
             var employee = mapper.Map<DataAccess.Entities.Employee>(request);

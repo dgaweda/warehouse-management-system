@@ -1,24 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using DataAccess;
 using DataAccess.CQRS;
 using DataAccess.Repository;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
-using WarehouseManagementSystem.ApplicationServices.API.Handlers;
-using WarehouseManagementSystem.ApplicationServices.API.Handlers.Base;
 using WarehouseManagementSystem.ApplicationServices.Mappings;
 
 namespace warehouse_management_system
@@ -39,7 +30,7 @@ namespace warehouse_management_system
             services.AddTransient<ICommandExecutor, CommandExecutor>();
 
             services.AddAutoMapper(typeof(EmployeesProfile).Assembly); // This Line Enables AutoMapper to map all profiles without adding everyone of them.
-                                                                                // It gets Assembly from one profile to get all the mappings.
+                                                                       // It gets Assembly from one profile to get all the mappings.
             services.AddMediatR(typeof(ResponseBase<>));
 
             services.AddDbContext<WMSDatabaseContext>(
@@ -47,12 +38,11 @@ namespace warehouse_management_system
                 option.UseSqlServer(this.Configuration.GetConnectionString("WMSDatabaseContext")));
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped(typeof(IHandlerBase<,,,>), typeof(HandlerBase<,,,>));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "warehouse_management_system", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "warehouse_management_system", Version = "v1" });
             });
         }
 

@@ -1,33 +1,33 @@
 ﻿using AutoMapper;
 using DataAccess;
 using DataAccess.CQRS.Queries;
-using DataAccess.Entities;
-using DataAccess.Repository;
 using MediatR;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
-using WarehouseManagementSystem.ApplicationServices.API.Handlers.Base;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Employees
 {
     public class GetEmployeesHandler : IRequestHandler<GetEmployeesRequest, GetEmployeesResponse>
     {
-        private readonly IHandlerBase<GetEmployeesQuery, Domain.Models.Employee, GetEmployeesResponse, List<Employee>> handler;
-
-        public GetEmployeesHandler(IHandlerBase<GetEmployeesQuery, Domain.Models.Employee, GetEmployeesResponse, List<Employee>> handler)
+        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMapper _mapper;
+        public GetEmployeesHandler(IQueryExecutor queryExecutor, IMapper mapper)
         {
-            this.handler = handler;
+            _queryExecutor = queryExecutor;
+            _mapper = mapper;
         }
 
         public async Task<GetEmployeesResponse> Handle(GetEmployeesRequest request, CancellationToken cancellationToken)
         {
-            var response = await handler.PrepareResponseAndQuery();
+            var entityModel = await _queryExecutor.Execute(new GetEmployeesQuery());
+            var domainModel = _mapper.Map<List<Domain.Models.Employee>>(entityModel);
+            var response = new GetEmployeesResponse()
+            {
+                Data = domainModel
+            };
             return response;
         }
     }
