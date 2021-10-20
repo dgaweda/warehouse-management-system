@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DataAccess;
 using DataAccess.CQRS.Queries;
+using DataAccess.Entities;
 using MediatR;
 using System.Collections.Generic;
 using System.Threading;
@@ -25,7 +26,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.EmployeeSer
                 RoleName = request.RoleName
             };
             var employeeModel = await _queryExecutor.Execute(query);
-            var domainEmployeeModel = _mapper.Map<List<Domain.Models.Employee>>(employeeModel);
+            var domainEmployeeModel = _mapper.Map<List<Domain.Models.Employee>>((employeeModel, request));
             var response = new GetEmployeesByRoleResponse()
             {
                 Data = domainEmployeeModel

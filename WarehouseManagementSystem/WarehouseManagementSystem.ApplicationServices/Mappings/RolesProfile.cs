@@ -12,10 +12,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
     {
         public RolesProfile()
         {
-            CreateMap<Role, API.Domain.Models.Role>()
-                .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))
-                .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
-                .ForMember(x => x.Salary, y => y.MapFrom(z => z.Salary));
+            CreateMap<Role, API.Domain.Models.Role>().ReverseMap();
         }
         
     }

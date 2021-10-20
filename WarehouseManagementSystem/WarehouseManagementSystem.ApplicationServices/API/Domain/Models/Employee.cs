@@ -12,5 +12,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
         public string Name { get; set; }
         public string LastName { get; set; }
         public string RoleName { get; set; }
+        public Role Role { get; set; }
     }
 }
