@@ -26,7 +26,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.EmployeeSer
                 RoleName = request.RoleName
             };
             var employeeModel = await _queryExecutor.Execute(query);
-            var domainEmployeeModel = _mapper.Map<List<Domain.Models.Employee>>((employeeModel, request));
+            var domainEmployeeModel = _mapper.Map<List<Domain.Models.Employee>>(employeeModel);
             var response = new GetEmployeesByRoleResponse()
             {
                 Data = domainEmployeeModel

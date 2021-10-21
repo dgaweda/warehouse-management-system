@@ -11,7 +11,8 @@ namespace DataAccess.CQRS.Queries
         public string RoleName { get; set; }
         public override async Task<List<Employee>> Execute(WMSDatabaseContext context)
         {
-            var employees = await context.Employees.Where(x => x.Role.Name == RoleName).ToListAsync();
+            var employees = await context.Employees.Include(x => x.Role).Where(y => y.Role.Name == RoleName).ToListAsync();
+
             return employees;
         }
     }
