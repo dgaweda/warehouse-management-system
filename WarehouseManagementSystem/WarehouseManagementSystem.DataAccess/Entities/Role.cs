@@ -15,7 +15,5 @@ namespace DataAccess.Entities
 
         [Required]
         public decimal Salary { get; set; }
-
-        public Employee Employee { get; set; }
     }
 }

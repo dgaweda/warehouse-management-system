@@ -53,5 +53,13 @@ namespace warehouse_management_system.Controllers
             var response = await mediator.Send(request);
             return Ok(response);
         }
+
+        [HttpPut]
+        [Route("Edit")]
+        public async Task<IActionResult> EditEmployeeData([FromBody] EditEmployeeDataRequest request)
+        {
+            var response = await mediator.Send(request);
+            return Ok(response);
+        }
     }
 }

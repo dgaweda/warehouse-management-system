@@ -1,6 +1,7 @@
 ﻿using DataAccess.Entities.EntityBases;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace DataAccess.Entities
 {
@@ -19,6 +20,8 @@ namespace DataAccess.Entities
         public int RoleId { get; set; }
 
         public Seniority Seniority { get; set; }
+
+        [JsonIgnore]
         public Role Role { get; set; }
     }
 }
