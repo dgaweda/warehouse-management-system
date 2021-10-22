@@ -24,6 +24,11 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
                 .ForMember(dest => dest.RoleName, opt => opt.MapFrom(src => src.Role.Name));
 
+            CreateMap<EditEmployeeRequest, Employee>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
+                .ForMember(dest => dest.RoleId, opt => opt.MapFrom(src => src.RoleId));
+
         }
     }
 }

@@ -11,6 +11,5 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Salary { get; set; }
-        public Employee Employee { get; set; }
     }
 }

@@ -21,7 +21,6 @@ namespace DataAccess.Entities
 
         public Seniority Seniority { get; set; }
 
-        [JsonIgnore]
         public Role Role { get; set; }
     }
 }

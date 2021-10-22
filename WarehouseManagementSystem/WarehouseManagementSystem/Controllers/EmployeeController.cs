@@ -56,7 +56,7 @@ namespace warehouse_management_system.Controllers
 
         [HttpPut]
         [Route("Edit")]
-        public async Task<IActionResult> EditEmployeeData([FromBody] EditEmployeeDataRequest request)
+        public async Task<IActionResult> EditEmployee([FromBody] EditEmployeeRequest request)
         {
             var response = await mediator.Send(request);
             return Ok(response);
