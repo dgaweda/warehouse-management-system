@@ -10,5 +10,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests
 {
     public class GetEmployeesRequest : IRequest<GetEmployeesResponse>
     {
+        public int EmployeeId { get; set; }
+        public string RoleName { get; set; }
     }
 }

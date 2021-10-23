@@ -22,7 +22,13 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Employees
 
         public async Task<GetEmployeesResponse> Handle(GetEmployeesRequest request, CancellationToken cancellationToken)
         {
-            var entityModel = await _queryExecutor.Execute(new GetEmployeesQuery());
+            var query = new GetEmployeesQuery()
+            {
+                EmployeeId = request.EmployeeId,
+                RoleName = request.RoleName
+            };
+
+            var entityModel = await _queryExecutor.Execute(query);
             var domainModel = _mapper.Map<List<Domain.Models.Employee>>(entityModel);
             var response = new GetEmployeesResponse()
             {

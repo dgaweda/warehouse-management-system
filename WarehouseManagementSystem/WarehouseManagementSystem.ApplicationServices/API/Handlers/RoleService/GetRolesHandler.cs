@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using DataAccess;
+using DataAccess.CQRS.Queries.RoleQueries;
 using DataAccess.Entities;
 using DataAccess.Repository;
 using MediatR;
@@ -14,16 +16,25 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
     public class GetRolesHandler : IRequestHandler<GetRolesRequest, GetRolesResponse>
     { 
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
+        private readonly IQueryExecutor _queryExecutor;
 
-        public GetRolesHandler(IMapper mapper)
+        public GetRolesHandler(IMapper mapper, IQueryExecutor queryExecutor)
         {
-            this.mapper = mapper;
+            _mapper = mapper;
+            _queryExecutor = queryExecutor;
         }
 
         public async Task<GetRolesResponse> Handle(GetRolesRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var query = new GetRolesQuery();
+            var roles = await _queryExecutor.Execute(query);
+            var domainRolesModel = _mapper.Map<List<Domain.Models.Role>>(roles);
+            var response = new GetRolesResponse()
+            {
+                Data = domainRolesModel
+            };
+            return response;
         }
     }
 }

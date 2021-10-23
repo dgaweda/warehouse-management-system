@@ -23,24 +23,8 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("All")]
-        public async Task<IActionResult> GetAllEmployees([FromQuery] GetEmployeesRequest request)
-        {
-            var response = await mediator.Send(request);
-            return Ok(response);
-        }
-
-        [HttpGet]
-        [Route("Id")]
-        public async Task<IActionResult> GetEmployeeById([FromQuery] GetEmployeeByIdRequest request)
-        {
-            var response = await mediator.Send(request);
-            return Ok(response);
-        }
-
-        [HttpGet]
-        [Route("Role")]
-        public async Task<IActionResult> GetEmployeesByRole([FromQuery] GetEmployeesByRoleRequest request)
+        [Route("")]
+        public async Task<IActionResult> GetEmployees([FromQuery] GetEmployeesRequest request)
         {
             var response = await mediator.Send(request);
             return Ok(response);

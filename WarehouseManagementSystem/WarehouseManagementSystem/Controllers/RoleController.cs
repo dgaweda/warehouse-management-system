@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Role;
 
 namespace warehouse_management_system.Controllers
 {
@@ -24,6 +25,22 @@ namespace warehouse_management_system.Controllers
         [HttpGet]
         [Route("All")]
         public async Task<IActionResult> GetAllRoles([FromQuery] GetRolesRequest request)
+        {
+            var response = await mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpPut]
+        [Route("Edit")]
+        public async Task<IActionResult> EditRole([FromBody] EditRoleRequest request)
+        {
+            var response = await mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpPost]
+        [Route("Add")]
+        public async Task<IActionResult> AddRole([FromBody] AddRoleRequest request)
         {
             var response = await mediator.Send(request);
             return Ok(response);
