@@ -1,7 +1,9 @@
 ﻿using DataAccess.Entities.EntityBases;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace DataAccess.Entities
 {

@@ -2,7 +2,7 @@
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Employee
 {
-    public class GetEmployeesByRoleResponse : ResponseBase<List<Domain.Models.Employee>>
+    public class GetEmployeesByRoleResponse : ResponseBase<List<DataAccess.Entities.Employee>>
     {
     }
 }

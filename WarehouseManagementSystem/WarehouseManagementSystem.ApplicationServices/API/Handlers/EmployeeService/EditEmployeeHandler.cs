@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DataAccess.CQRS;
 using DataAccess.CQRS.Commands;
+using DataAccess.Entities;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,9 +29,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.EmployeeSer
                 Parameter = employee 
             };
             var updatedEmployee = await _commandExecutor.Execute(command);
+            var domainModel = _mapper.Map<API.Domain.Models.Employee>(updatedEmployee);
             return new EditEmployeeResponse()
             {
-                Data = _mapper.Map<Domain.Models.Employee>(updatedEmployee)
+                Data = domainModel
             };
         }
     }

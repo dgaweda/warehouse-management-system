@@ -12,9 +12,13 @@ namespace DataAccess.CQRS.Commands
     {
         public override async Task<Employee> Execute(WMSDatabaseContext context)
         {
+            if (Parameter == null)
+                throw new ArgumentNullException();
+
             context.Entry(Parameter).State = EntityState.Modified;
             await context.SaveChangesAsync();
-            return Parameter;
+            var updatedRecord = await context.Employees.Include(x => x.Role).FirstOrDefaultAsync(employee => employee.Id == Parameter.Id);
+            return updatedRecord;
         }
     }
 }

@@ -61,5 +61,13 @@ namespace warehouse_management_system.Controllers
             var response = await mediator.Send(request);
             return Ok(response);
         }
+
+        [HttpDelete]
+        [Route("Remove")]
+        public async Task<IActionResult> RemoveEmployee([FromBody] RemoveEmployeeRequest request)
+        {
+            var response = await mediator.Send(request);
+            return Ok(response);
+        }
     }
 }
