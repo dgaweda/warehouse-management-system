@@ -22,17 +22,17 @@ namespace warehouse_management_system.Controllers
             this.mediator = mediator;
         }
 
-        [HttpGet]
-        [Route("")]
-        public async Task<IActionResult> GetEmployees([FromQuery] GetEmployeesRequest request)
+        [HttpPost]
+        [Route("Add")]
+        public async Task<IActionResult> AddEmployee([FromBody] AddEmployeeRequest request)
         {
             var response = await mediator.Send(request);
             return Ok(response);
         }
 
-        [HttpPost]
-        [Route("Add")]
-        public async Task<IActionResult> AddEmployee([FromBody] AddEmployeeRequest request)
+        [HttpGet]
+        [Route("")]
+        public async Task<IActionResult> GetEmployees([FromQuery] GetEmployeesRequest request)
         {
             var response = await mediator.Send(request);
             return Ok(response);

@@ -27,7 +27,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 
         public async Task<GetRolesResponse> Handle(GetRolesRequest request, CancellationToken cancellationToken)
         {
-            var query = new GetRolesQuery();
+            var query = new GetRolesQuery()
+            {
+                RoleName = request.RoleName,
+                RoleId = request.RoleId
+            };
             var roles = await _queryExecutor.Execute(query);
             var domainRolesModel = _mapper.Map<List<Domain.Models.Role>>(roles);
             var response = new GetRolesResponse()

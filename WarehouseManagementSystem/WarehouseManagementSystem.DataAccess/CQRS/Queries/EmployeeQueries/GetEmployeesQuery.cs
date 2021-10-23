@@ -3,14 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 namespace DataAccess.CQRS.Queries
 {
     public class GetEmployeesQuery : QueryBase<List<Employee>>
     {
         public int EmployeeId { get; set; }
         public string RoleName { get; set; }
-
         public override async Task<List<Employee>> Execute(WMSDatabaseContext context)
         {
             return await context.Employees

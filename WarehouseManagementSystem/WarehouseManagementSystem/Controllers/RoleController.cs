@@ -22,9 +22,17 @@ namespace warehouse_management_system.Controllers
             this.mediator = mediator;
         }
 
+        [HttpPost]
+        [Route("Add")]
+        public async Task<IActionResult> AddRole([FromBody] AddRoleRequest request)
+        {
+            var response = await mediator.Send(request);
+            return Ok(response);
+        }
+
         [HttpGet]
-        [Route("All")]
-        public async Task<IActionResult> GetAllRoles([FromQuery] GetRolesRequest request)
+        [Route("")]
+        public async Task<IActionResult> GetRoles([FromQuery] GetRolesRequest request)
         {
             var response = await mediator.Send(request);
             return Ok(response);
@@ -38,9 +46,10 @@ namespace warehouse_management_system.Controllers
             return Ok(response);
         }
 
-        [HttpPost]
-        [Route("Add")]
-        public async Task<IActionResult> AddRole([FromBody] AddRoleRequest request)
+
+        [HttpDelete]
+        [Route("Delete")]
+        public async Task<IActionResult> RemoveRole([FromBody] RemoveRoleRequest request)
         {
             var response = await mediator.Send(request);
             return Ok(response);

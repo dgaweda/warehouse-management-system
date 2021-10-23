@@ -30,7 +30,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.EmployeeSer
         {
             var command = new RemoveEmployeeCommand()
             {
-                EmployeeId = request.EmployeeId
+                Parameter = request.EmployeeId
             };
             var removedEmployee = await _commandExecutor.Execute(command);
             var domainModel = _mapper.Map<API.Domain.Models.Employee>(removedEmployee);

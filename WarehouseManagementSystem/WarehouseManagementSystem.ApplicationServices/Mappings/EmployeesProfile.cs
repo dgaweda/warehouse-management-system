@@ -31,6 +31,8 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
                 .ForMember(dest => dest.RoleId, opt => opt.MapFrom(src => src.RoleId));
 
+            CreateMap<RemoveEmployeeRequest, Employee>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.EmployeeId));
         }
     }
 }
