@@ -5,8 +5,9 @@
   - Trello for Task Organization <br />
   - Entity Framework <br />
   - ASP.NET 5 <br/>
-  - MediatR - 14.10.2021 <br/>
-  - AutoMapper - 16.10.2021 <br/>
+  - MediatR<br/>
+  - AutoMapper<br/>
   - CQRS Pattern - Commands/Queries <br/>
+  - Fluent Validation <br/>
  <br/><br/>
 <h2> Dariusz Gawęda 2021
