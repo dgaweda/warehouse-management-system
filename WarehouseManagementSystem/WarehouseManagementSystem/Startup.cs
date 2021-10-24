@@ -1,6 +1,7 @@
 using DataAccess;
 using DataAccess.CQRS;
 using DataAccess.Repository;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
+using WarehouseManagementSystem.ApplicationServices.API.Validators;
 using WarehouseManagementSystem.ApplicationServices.Mappings;
 
 namespace warehouse_management_system
@@ -26,7 +28,11 @@ namespace warehouse_management_system
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvcCore()
+                .AddFluentValidation(fluentValidator => fluentValidator.RegisterValidatorsFromAssemblyContaining<AddEmployeeRequestValidator>());
+
             services.AddTransient<IQueryExecutor, QueryExecutor>();
+
             services.AddTransient<ICommandExecutor, CommandExecutor>();
 
             services.AddAutoMapper(typeof(EmployeesProfile).Assembly); // This Line Enables AutoMapper to map all profiles without adding everyone of them.
