@@ -12,5 +12,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests
     {
         public int EmployeeId { get; set; }
         public string RoleName { get; set; }
+        public string PESEL { get; set; }
+        public int Age { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
     }
 }

@@ -15,5 +15,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Empl
         public string Name { get; set; }
         public string LastName { get; set; }
         public int RoleId { get; set; }
+        public string PESEL { get; set; }
+        public int Age { get; set; }
     }
 }

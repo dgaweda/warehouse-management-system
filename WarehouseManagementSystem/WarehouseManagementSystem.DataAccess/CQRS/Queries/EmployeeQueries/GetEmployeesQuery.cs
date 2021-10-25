@@ -9,16 +9,28 @@ namespace DataAccess.CQRS.Queries
     {
         public int EmployeeId { get; set; }
         public string RoleName { get; set; }
+        public string PESEL { get; set; }
+        public int Age { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
+
         public override async Task<List<Employee>> Execute(WMSDatabaseContext context)
         {
-            return await context.Employees
+            var employees = await context.Employees
                 .Include(entity => entity.Role)
                 .Include(entity => entity.Seniority)
                 .Where(employee =>
-                (EmployeeId != 0) && (RoleName != null) ? (employee.Id == EmployeeId) && (employee.Role.Name == RoleName) :
-                (EmployeeId == 0) && (RoleName != null) ? (employee.Role.Name == RoleName) :
-                (EmployeeId != 0) && (RoleName == null) && (employee.Id == EmployeeId))
+                EmployeeId != 0 && RoleName != null ? 
+                    employee.Id == EmployeeId && employee.Role.Name == RoleName :
+                EmployeeId == 0 && RoleName != null ? 
+                    employee.Role.Name == RoleName :
+                EmployeeId != 0 && RoleName == null && employee.Id == EmployeeId)
                 .ToListAsync();
+
+            if (EmployeeId == 0 && RoleName == null && PESEL == null && Age == 0 && Name == null && LastName == null)
+                return await context.Employees.ToListAsync();
+            return employees;
         }
+
     }
 }

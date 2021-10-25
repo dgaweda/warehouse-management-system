@@ -18,6 +18,14 @@ namespace DataAccess.Entities
         public string LastName { get; set; }
 
         [Required]
+        [MaxLength(11)]
+        public string PESEL { get; set; }
+
+        [Required]
+        [Range(16, 99)]
+        public int Age { get; set; }
+
+        [Required]
         public int RoleId { get; set; }
 
         public Seniority Seniority { get; set; }
