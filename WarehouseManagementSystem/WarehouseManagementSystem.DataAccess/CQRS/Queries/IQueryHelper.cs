@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Queries
 {
-    class IQueryHelper
+    public interface IQueryHelper<TResult>
     {
+        
     }
 }

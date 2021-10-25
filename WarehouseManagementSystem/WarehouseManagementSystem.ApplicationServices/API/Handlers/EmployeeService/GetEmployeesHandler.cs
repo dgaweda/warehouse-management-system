@@ -25,7 +25,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Employees
             var query = new GetEmployeesQuery()
             {
                 EmployeeId = request.EmployeeId,
-                RoleName = request.RoleName
+                RoleName = request.RoleName,
+                PESEL = request.PESEL
             };
 
             var entityModel = await _queryExecutor.Execute(query);
