@@ -1,9 +1,8 @@
 ﻿using DataAccess.Entities.EntityBases;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace DataAccess.Entities
 {
@@ -24,5 +23,6 @@ namespace DataAccess.Entities
         public Seniority Seniority { get; set; }
 
         public Role Role { get; set; }
+        public List<Pallet> Pallets { get; set; }
     }
 }

@@ -16,8 +16,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
                 .ForMember(x => x.Amount, y => y.MapFrom(z => z.Amount))
                 .ForMember(x => x.ExpirationDate, y => y.MapFrom(z => z.ExpirationDate))
-                .ForMember(x => x.Barcode, y => y.MapFrom(z => z.Barcode))
-                .ForMember(x => x.PalletId, y => y.MapFrom(z => z.PalletId));
+                .ForMember(x => x.Barcode, y => y.MapFrom(z => z.Barcode));
         }
     }
 }

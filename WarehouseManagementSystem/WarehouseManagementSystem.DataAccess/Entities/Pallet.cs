@@ -1,6 +1,7 @@
 ﻿using DataAccess.Entities.EntityBases;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
@@ -14,9 +15,18 @@ namespace DataAccess.Entities
         public int? DeliveryId { get; set; }
         public int? EmployeeId { get; set; }
 
+        [ForeignKey("DepartureId")]
         public Departure Departure { get; set; }
-        public Delivery Delivery { get; set; }
-        public List<DeliveryProduct> Products { get; set; }
 
+        [ForeignKey("DeliveryId")]
+        public Delivery Delivery { get; set; }
+
+        public List<DeliveryProductPalletLine> DeliveryProductPalletLines { get; set; }
+
+        [ForeignKey("OrderId")]
+        public Order Order { get; set; }
+
+        [ForeignKey("EmployeeId")]
+        public Employee Employee { get; set; }
     }
 }

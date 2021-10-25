@@ -7,6 +7,7 @@ namespace DataAccess.Entities
 {
     public class MagazineProduct : ProductBase
     {
+        [Required]
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(5, 2)")]
         public decimal UnitPrice { get; set; }

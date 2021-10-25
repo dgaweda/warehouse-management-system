@@ -8,9 +8,9 @@ namespace DataAccess.Entities
     public class Seniority : EntityBase
     {
         [Required]
-        [Column(TypeName = "smalldatetime")]
         public DateTime EmploymentDate { get; set; }
+
+        public DateTime EmploymentDuration { get; set; }
         public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
     }
 }

@@ -21,5 +21,6 @@ namespace DataAccess
         public DbSet<MagazineProduct> MagazineProducts { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<DeliveryProductPalletLine> DeliveryProductPalletLines { get; set; }
     }
 }
