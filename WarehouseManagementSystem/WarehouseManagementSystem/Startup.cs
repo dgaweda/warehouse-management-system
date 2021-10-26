@@ -1,5 +1,6 @@
 using DataAccess;
 using DataAccess.CQRS;
+using DataAccess.CQRS.Queries.EmployeeQueries;
 using DataAccess.Repository;
 using FluentValidation.AspNetCore;
 using MediatR;
@@ -32,6 +33,7 @@ namespace warehouse_management_system
                 .AddFluentValidation(fluentValidator => fluentValidator.RegisterValidatorsFromAssemblyContaining<AddEmployeeRequestValidator>());
 
             services.AddTransient<IQueryExecutor, QueryExecutor>();
+            services.AddTransient<IGetEmployeesHelper, GetEmployeesHelper>();
 
             services.AddTransient<ICommandExecutor, CommandExecutor>();
 
