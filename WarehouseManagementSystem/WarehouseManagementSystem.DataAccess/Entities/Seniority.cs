@@ -8,6 +8,7 @@ namespace DataAccess.Entities
     public class Seniority : EntityBase
     {
         [Required]
+        [Column(TypeName = "date")]
         public DateTime EmploymentDate { get; set; }
 
         public DateTime EmploymentDuration { get; set; }

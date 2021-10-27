@@ -4,14 +4,16 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(WMSDatabaseContext))]
-    partial class WMSDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20211027190848_ChangeDateTypeOfEmploymentDate3")]
+    partial class ChangeDateTypeOfEmploymentDate3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -329,7 +331,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EmploymentDate")
-                        .HasColumnType("date");
+                        .HasColumnType("datetime4");
 
                     b.Property<DateTime>("EmploymentDuration")
                         .HasColumnType("datetime2");
