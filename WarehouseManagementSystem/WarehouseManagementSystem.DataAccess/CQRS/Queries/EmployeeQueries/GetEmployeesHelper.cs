@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Queries.EmployeeQueries
 {
-    public class GetEmployeesHelper : IGetEmployeesHelper
+    public class GetEmployeesHelper : IGetEntityHelper<Employee>
     {
         public int EmployeeId { get; set; }
         public string RoleName { get; set; }
@@ -17,7 +17,7 @@ namespace DataAccess.CQRS.Queries.EmployeeQueries
         public string Name { get; set; }
         public string LastName { get; set; }
 
-        public async Task<List<Employee>> GetFilteredQuery(WMSDatabaseContext context)
+        public async Task<List<Employee>> GetFilteredData(WMSDatabaseContext context)
         {
             var employees = await context.Employees.Include(x => x.Role).ToListAsync();
 
@@ -44,12 +44,11 @@ namespace DataAccess.CQRS.Queries.EmployeeQueries
         }
 
         private async Task<List<Employee>> SearchByEmployeeId(WMSDatabaseContext context) => await context.Employees.Where(employee => employee.Id == EmployeeId).ToListAsync();
-        private async Task<List<Employee>> SearchByRoleName(WMSDatabaseContext context) => await context.Employees.Include(x => x.Role).Where(employee => employee.Role.Name == RoleName).ToListAsync();
+        private async Task<List<Employee>> SearchByRoleName(WMSDatabaseContext context) => await context.Employees.Include(x => x.Role).Where(employee => employee.Role.Name.Contains(RoleName)).ToListAsync();
         private async Task<List<Employee>> SearchByPESEL(WMSDatabaseContext context) => await context.Employees.Where(employee => employee.PESEL == PESEL).ToListAsync();
         private async Task<List<Employee>> SearchByAge(WMSDatabaseContext context) => await context.Employees.Where(employee => employee.Age == Age).ToListAsync();
-        private async Task<List<Employee>> SearchByName(WMSDatabaseContext context) => await context.Employees.Where(employee => employee.Name == Name).ToListAsync();
-        private async Task<List<Employee>> SearchByLastName(WMSDatabaseContext context) => await context.Employees.Where(employee => employee.LastName == LastName).ToListAsync();
-
+        private async Task<List<Employee>> SearchByName(WMSDatabaseContext context) => await context.Employees.Where(employee => employee.Name.Contains(Name)).ToListAsync();
+        private async Task<List<Employee>> SearchByLastName(WMSDatabaseContext context) => await context.Employees.Where(employee => employee.LastName.Contains(LastName)).ToListAsync();
         public bool PropertiesAreEmpty() => EmployeeId == 0 && string.IsNullOrEmpty(RoleName) && string.IsNullOrEmpty(PESEL) && Age == 0 && string.IsNullOrEmpty(Name) && string.IsNullOrEmpty(LastName);
     }
 }

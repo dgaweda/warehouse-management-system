@@ -2,6 +2,7 @@
 using DataAccess;
 using DataAccess.CQRS.Queries;
 using DataAccess.CQRS.Queries.EmployeeQueries;
+using DataAccess.Entities;
 using MediatR;
 using System.Collections.Generic;
 using System.Threading;
@@ -15,12 +16,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Employees
     {
         private readonly IQueryExecutor _queryExecutor;
         private readonly IMapper _mapper;
-        private readonly IGetEmployeesHelper _helper;
-        public GetEmployeesHandler(IQueryExecutor queryExecutor, IMapper mapper, IGetEmployeesHelper helper)
+        public GetEmployeesHandler(IQueryExecutor queryExecutor, IMapper mapper, IGetEntityHelper<Employee> helper)
         { 
             _queryExecutor = queryExecutor;
             _mapper = mapper;
-            _helper = helper;
         }
 
         public async Task<GetEmployeesResponse> Handle(GetEmployeesRequest request, CancellationToken cancellationToken)

@@ -7,8 +7,8 @@ namespace DataAccess.CQRS.Queries
 {
     public class GetEmployeesQuery : QueryBase<List<Employee>>
     {
-        public readonly IGetEmployeesHelper _helper;
-        public GetEmployeesQuery(IGetEmployeesHelper helper)
+        public readonly IGetEntityHelper<Employee> _helper;
+        public GetEmployeesQuery(IGetEntityHelper<Employee> helper)
         {
             _helper = helper;
         }
@@ -16,9 +16,9 @@ namespace DataAccess.CQRS.Queries
         public override async Task<List<Employee>> Execute(WMSDatabaseContext context)
         {
             if (_helper.PropertiesAreEmpty())
-                return await context.Employees.ToListAsync();
+                return await context.Employees.Include(x => x.Role).ToListAsync();
             else
-                return await _helper.GetFilteredQuery(context);
+                return await _helper.GetFilteredData(context);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities;
+﻿using DataAccess.CQRS.Queries.EmployeeQueries;
+using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,21 +11,18 @@ namespace DataAccess.CQRS.Queries.RoleQueries
 {
     public class GetRolesQuery : QueryBase<List<Role>>
     {
-        public int RoleId { get; set; }
-        public string RoleName { get; set; }
+        private readonly IGetEntityHelper<Role> _helper;
+        public GetRolesQuery(IGetEntityHelper<Role> helper)
+        {
+            _helper = helper;
+        }
+
         public override async Task<List<Role>> Execute(WMSDatabaseContext context)
         {
-            var roles = await context.Roles.Where(role =>
-                RoleId == 0 || RoleName == null ? 
-                RoleId == 0 && RoleName != null ? 
-                    role.Name == RoleName : 
-                    role.Id == RoleId :
-                    role.Id == RoleId && role.Name == RoleName)
-                .ToListAsync();
-
-            if (RoleId == 0 && RoleName == null)
+            if (_helper.PropertiesAreEmpty())
                 return await context.Roles.ToListAsync();
-            return roles;
+            else
+                return await _helper.GetFilteredData(context);
         }
     }
 }
