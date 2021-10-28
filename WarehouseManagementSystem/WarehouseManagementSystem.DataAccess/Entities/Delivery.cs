@@ -12,9 +12,6 @@ namespace DataAccess.Entities
         [Column(TypeName = "smalldatetime")]
         public DateTime Arrival { get; set; }
 
-        [MaxLength(50)]
-        public string CompanyName { get; set; }
-
-        public List<Pallet> Pallets { get; set; }
+        public List<Invoice> Invoices { get; set; }
     }
 }

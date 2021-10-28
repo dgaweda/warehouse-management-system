@@ -14,8 +14,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
         {
             CreateMap<Delivery, API.Domain.Models.Delivery>()
                 .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))
-                .ForMember(x => x.ArrivalTime, y => y.MapFrom(z => z.Arrival))
-                .ForMember(x => x.CompanyName, y => y.MapFrom(z => z.CompanyName));
+                .ForMember(x => x.ArrivalTime, y => y.MapFrom(z => z.Arrival));
         }
     }
 }

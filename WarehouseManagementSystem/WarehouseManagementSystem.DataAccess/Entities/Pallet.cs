@@ -12,14 +12,14 @@ namespace DataAccess.Entities
         public string Barcode { get; set; }
         public int? OrderId { get; set; }
         public int? DepartureId { get; set; }
-        public int? DeliveryId { get; set; }
+        public int? InvoiceId { get; set; }
         public int? EmployeeId { get; set; }
 
         [ForeignKey("DepartureId")]
         public Departure Departure { get; set; }
 
-        [ForeignKey("DeliveryId")]
-        public Delivery Delivery { get; set; }
+        [ForeignKey("InvoiceId")]
+        public Invoice Invoice{ get; set; }
 
         public List<DeliveryProductPalletLine> DeliveryProductPalletLines { get; set; }
 
