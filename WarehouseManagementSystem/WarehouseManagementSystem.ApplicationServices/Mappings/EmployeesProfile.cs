@@ -26,7 +26,9 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
                 .ForMember(dest => dest.RoleId, opt => opt.MapFrom(src => src.RoleId))
-                .ForMember(dest => dest.RoleName, opt => opt.MapFrom(src => src.Role.Name));
+                .ForMember(dest => dest.RoleName, opt => opt.MapFrom(src => src.Role.Name))
+                .ForMember(dest => dest.EmploymentDuration, opt => opt.MapFrom(src =>
+                    string.Format("{0} Year/s {1} Month/s)", (DateTime.Now - src.Seniority.EmploymentDate).Days / 365, ((DateTime.Now - src.Seniority.EmploymentDate).Days % 365) / 30)));
 
             CreateMap<EditEmployeeRequest, Employee>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))

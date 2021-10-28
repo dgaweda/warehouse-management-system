@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Queries.EmployeeQueries
@@ -17,14 +16,18 @@ namespace DataAccess.CQRS.Queries.EmployeeQueries
         public string Name { get; set; }
         public string LastName { get; set; }
 
+
         public async Task<List<Employee>> GetFilteredData(WMSDatabaseContext context)
         {
-            var employees = await context.Employees.Include(x => x.Role).ToListAsync();
+            var employees = await context.Employees
+                .Include(x => x.Role)
+                .Include(x => x.Seniority)
+                .ToListAsync();
 
             if (EmployeeId != 0)
                 employees = await SearchByEmployeeId(context);
 
-            if (!string.IsNullOrEmpty(RoleName)) 
+            if (!string.IsNullOrEmpty(RoleName))
                 employees = await SearchByRoleName(context);
 
             if (!string.IsNullOrEmpty(PESEL))

@@ -10,8 +10,6 @@ namespace DataAccess.Entities
         [Required]
         [Column(TypeName = "date")]
         public DateTime EmploymentDate { get; set; }
-
-        public DateTime EmploymentDuration { get; set; }
         public int EmployeeId { get; set; }
     }
 }
