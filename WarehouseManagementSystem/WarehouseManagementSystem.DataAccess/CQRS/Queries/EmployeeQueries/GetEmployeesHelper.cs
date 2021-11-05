@@ -42,7 +42,7 @@ namespace DataAccess.CQRS.Queries.EmployeeQueries
             if (!string.IsNullOrEmpty(LastName))
                 employees = await SearchByLastName(context);
 
-            var filteredEmployees = employees.ToList();
+            var filteredEmployees = employees;
             return filteredEmployees;
         }
 

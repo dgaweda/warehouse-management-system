@@ -13,7 +13,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
         public string Provider { get; set; }
         public DateTime InvoiceDate { get; set; }
         public DateTime InvoiceReceiptDate { get; set; }
-        public int DeliveryName { get; set; }
+        public string DeliveryName { get; set; }
 
     }
 }

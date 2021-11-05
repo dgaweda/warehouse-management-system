@@ -16,7 +16,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Employees
     {
         private readonly IQueryExecutor _queryExecutor;
         private readonly IMapper _mapper;
-        public GetEmployeesHandler(IQueryExecutor queryExecutor, IMapper mapper, IGetEntityHelper<Employee> helper)
+        public GetEmployeesHandler(IQueryExecutor queryExecutor, IMapper mapper)
         { 
             _queryExecutor = queryExecutor;
             _mapper = mapper;
