@@ -17,7 +17,7 @@ namespace DataAccess.Entities
 
         [Required]
         [MaxLength(50)]
-        public string From { get; set; }
+        public string Provider { get; set; }
 
         [Required]
         [Column(TypeName = "date")]
