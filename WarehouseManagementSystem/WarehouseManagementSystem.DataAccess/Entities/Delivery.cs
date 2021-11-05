@@ -9,6 +9,9 @@ namespace DataAccess.Entities
     public class Delivery : EntityBase
     {
         [Required]
+        [MaxLength(50)]
+        public string Name { get; set; }
+        [Required]
         [Column(TypeName = "smalldatetime")]
         public DateTime Arrival { get; set; }
 

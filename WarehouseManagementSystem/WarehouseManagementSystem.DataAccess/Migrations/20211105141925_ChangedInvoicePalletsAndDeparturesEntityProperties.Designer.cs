@@ -4,14 +4,16 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(WMSDatabaseContext))]
-    partial class WMSDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20211105141925_ChangedInvoicePalletsAndDeparturesEntityProperties")]
+    partial class ChangedInvoicePalletsAndDeparturesEntityProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,11 +30,6 @@ namespace DataAccess.Migrations
 
                     b.Property<DateTime>("Arrival")
                         .HasColumnType("smalldatetime");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -97,12 +94,7 @@ namespace DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DepartureTime")
-                        .HasColumnType("smalldatetime");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -159,8 +151,8 @@ namespace DataAccess.Migrations
 
                     b.Property<string>("InvoiceNumber")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<DateTime>("InvoiceReceiptDate")
                         .HasColumnType("smalldatetime");

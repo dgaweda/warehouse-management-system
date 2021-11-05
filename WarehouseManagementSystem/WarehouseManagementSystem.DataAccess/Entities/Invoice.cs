@@ -12,7 +12,7 @@ namespace DataAccess.Entities
     public class Invoice : EntityBase
     {
         [Required]
-        [MaxLength(20)]
+        [MaxLength(50)]
         public string InvoiceNumber { get; set; }
 
         [Required]
@@ -30,6 +30,7 @@ namespace DataAccess.Entities
         [Required]
         public int DeliveryId { get; set; }
 
+        public Delivery Delivery { get; set; }
         public List<Pallet> Pallets { get; set; }
     }
 }
