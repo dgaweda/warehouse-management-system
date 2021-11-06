@@ -11,20 +11,14 @@ namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class DeliveryController : ControllerBase
+    public class DeliveryController : ControllerHandler
     {
-        private IMediator mediator;
-        public DeliveryController(IMediator mediator)
+        public DeliveryController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("GetAll")]
-        public async Task<IActionResult> GetAllDeliveries([FromQuery] GetDeliveriesRequest request)
-        {
-            var response = await mediator.Send(request);
-            return Ok(response);
-        }
+        public async Task<IActionResult> GetAllDeliveries([FromQuery] GetDeliveriesRequest request) => await Handle<GetDeliveriesRequest>(request);
     }
 }

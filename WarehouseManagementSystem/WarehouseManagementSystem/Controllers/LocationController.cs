@@ -11,20 +11,14 @@ namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class LocationController : ControllerBase
+    public class LocationController : ControllerHandler
     {
-        private readonly IMediator mediator;
-        public LocationController(IMediator mediator)
+        public LocationController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("All")]
-        public async Task<IActionResult> GetAllLocations([FromQuery] GetLocationsRequest request)
-        {
-            var response = await mediator.Send(request);
-            return Ok(response);
-        }
+        public async Task<IActionResult> GetAllLocations([FromQuery] GetLocationsRequest request) => await Handle(request);
     }
 }

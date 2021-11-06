@@ -11,20 +11,14 @@ namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class MagazineProductController : ControllerBase
+    public class MagazineProductController : ControllerHandler
     {
-        private readonly IMediator mediator;
-        public MagazineProductController(IMediator mediator)
+        public MagazineProductController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("All")]
-        public async Task<IActionResult> GetAllMagazineProducts([FromQuery] GetMagazineProductsRequest request)
-        {
-            var response = await mediator.Send(request);
-            return Ok(response);
-        }
+        public async Task<IActionResult> GetAllMagazineProducts([FromQuery] GetMagazineProductsRequest request) => await Handle(request);
     }
 }

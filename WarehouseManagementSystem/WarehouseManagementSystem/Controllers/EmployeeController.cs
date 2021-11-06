@@ -13,45 +13,26 @@ namespace warehouse_management_system.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class EmployeeController : ControllerBase
+    public class EmployeeController : ControllerHandler
     {
-        private readonly IMediator mediator;
-
-        public EmployeeController(IMediator mediator)
+        public EmployeeController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
         }
 
         [HttpPost]
         [Route("Add")]
-        public async Task<IActionResult> AddEmployee([FromBody] AddEmployeeRequest request)
-        {
-            var response = await mediator.Send(request);
-            return Ok(response);
-        }
+        public async Task<IActionResult> AddEmployee([FromBody] AddEmployeeRequest request) => await Handle(request);
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetEmployees([FromQuery] GetEmployeesRequest request)
-        {
-            var response = await mediator.Send(request);
-            return Ok(response);
-        }
+        public async Task<IActionResult> GetEmployees([FromQuery] GetEmployeesRequest request) => await Handle(request);
 
         [HttpPut]
         [Route("Edit")]
-        public async Task<IActionResult> EditEmployee([FromBody] EditEmployeeRequest request)
-        {
-            var response = await mediator.Send(request);
-            return Ok(response);
-        }
+        public async Task<IActionResult> EditEmployee([FromBody] EditEmployeeRequest request) => await Handle(request);
 
         [HttpDelete]
         [Route("Remove")]
-        public async Task<IActionResult> RemoveEmployee([FromBody] RemoveEmployeeRequest request)
-        {
-            var response = await mediator.Send(request);
-            return Ok(response);
-        }
+        public async Task<IActionResult> RemoveEmployee([FromBody] RemoveEmployeeRequest request) => await Handle(request);
     }
 }

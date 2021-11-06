@@ -7,20 +7,19 @@ namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class InvoiceController : ControllerBase
+    public class InvoiceController : ControllerHandler
     {
-        private readonly IMediator _mediator;
-        public InvoiceController(IMediator mediator)
+        public InvoiceController(IMediator mediator) : base(mediator)
         {
-            _mediator = mediator;
-        }
-        [HttpGet]
-        [Route("")]
-        public async Task<IActionResult> GetInvoices([FromQuery] GetInvoicesRequest request)
-        {
-            var response = await _mediator.Send(request);
-            return Ok(response);
+
         }
 
+        [HttpGet]
+        [Route("")]
+        public async Task<IActionResult> GetInvoices([FromQuery] GetInvoicesRequest request) => await Handle<GetInvoicesRequest>(request);
+
+        //[HttpPost]
+       // [Route("Add")]
+        //public async Task<IActionResult> AddInvoice([FromBody] AddInvoiceRequest request) => await Handle<AddInvoiceRequest>(request);
     }
 }

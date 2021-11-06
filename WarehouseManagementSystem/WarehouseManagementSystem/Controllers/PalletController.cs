@@ -13,18 +13,12 @@ namespace warehouse_management_system.Controllers
     [ApiController]
     public class PalletController : ControllerBase
     {
-        private readonly IMediator mediator;
-        public PalletController(IMediator mediator)
+        public PalletController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("All")]
-        public async Task<IActionResult> GetAllPallets([FromQuery] GetPalletsRequest request)
-        {
-            var response = await mediator.Send(request);
-            return Ok(response);
-        }
+        public async Task<IActionResult> GetAllPallets([FromQuery] GetPalletsRequest request) => base(request);
     }
 }

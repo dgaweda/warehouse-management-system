@@ -14,45 +14,27 @@ namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class RoleController : ControllerBase
+    public class RoleController : ControllerHandler
     {
-        private readonly IMediator mediator;
-        public RoleController(IMediator mediator)
+        public RoleController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
         }
 
         [HttpPost]
         [Route("Add")]
-        public async Task<IActionResult> AddRole([FromBody] AddRoleRequest request)
-        {
-            var response = await mediator.Send(request);
-            return Ok(response);
-        }
+        public async Task<IActionResult> AddRole([FromBody] AddRoleRequest request) => await Handle(request);
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetRoles([FromQuery] GetRolesRequest request)
-        {
-            var response = await mediator.Send(request);
-            return Ok(response);
-        }
+        public async Task<IActionResult> GetRoles([FromQuery] GetRolesRequest request) => await Handle(request);
 
         [HttpPut]
         [Route("Edit")]
-        public async Task<IActionResult> EditRole([FromBody] EditRoleRequest request)
-        {
-            var response = await mediator.Send(request);
-            return Ok(response);
-        }
+        public async Task<IActionResult> EditRole([FromBody] EditRoleRequest request) => await Handle(request);
 
 
         [HttpDelete]
         [Route("Delete")]
-        public async Task<IActionResult> RemoveRole([FromBody] RemoveRoleRequest request)
-        {
-            var response = await mediator.Send(request);
-            return Ok(response);
-        }
+        public async Task<IActionResult> RemoveRole([FromBody] RemoveRoleRequest request) => await Handle(request);
     }
 }

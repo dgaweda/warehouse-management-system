@@ -10,20 +10,14 @@ namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class SeniorityController : ControllerBase
+    public class SeniorityController : ControllerHandler
     {
-        private readonly IMediator mediator;
-        public SeniorityController(IMediator mediator)
+        public SeniorityController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("All")]
-        public async Task<IActionResult> GetAllSeniorities([FromQuery] GetSenioritiesRequest request)
-        {
-            var response = await mediator.Send(request);
-            return Ok(response);
-        }
+        public async Task<IActionResult> GetAllSeniorities([FromQuery] GetSenioritiesRequest request) => await Handle(request);
     }
 }
