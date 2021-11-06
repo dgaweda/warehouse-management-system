@@ -51,7 +51,16 @@ namespace warehouse_management_system
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    var dateConverter = new Newtonsoft.Json.Converters.IsoDateTimeConverter
+                    {
+                        DateTimeFormat = "dd'.'MM'.'yyyy"
+                    };
+                    options.SerializerSettings.Converters.Add(dateConverter);
+                });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "warehouse_management_system", Version = "v1" });
