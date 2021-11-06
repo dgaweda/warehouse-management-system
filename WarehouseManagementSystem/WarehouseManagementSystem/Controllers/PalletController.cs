@@ -11,7 +11,7 @@ namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class PalletController : ControllerBase
+    public class PalletController : ControllerHandler
     {
         public PalletController(IMediator mediator) : base(mediator)
         {
@@ -19,6 +19,6 @@ namespace warehouse_management_system.Controllers
 
         [HttpGet]
         [Route("All")]
-        public async Task<IActionResult> GetAllPallets([FromQuery] GetPalletsRequest request) => base(request);
+        public async Task<IActionResult> GetAllPallets([FromQuery] GetPalletsRequest request) => await Handle(request);
     }
 }

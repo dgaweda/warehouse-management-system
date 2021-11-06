@@ -16,10 +16,10 @@ namespace warehouse_management_system.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetInvoices([FromQuery] GetInvoicesRequest request) => await Handle<GetInvoicesRequest>(request);
+        public async Task<IActionResult> GetInvoices([FromQuery] GetInvoicesRequest request) => await Handle(request);
 
-        //[HttpPost]
-       // [Route("Add")]
-        //public async Task<IActionResult> AddInvoice([FromBody] AddInvoiceRequest request) => await Handle<AddInvoiceRequest>(request);
+        [HttpPost]
+        [Route("Add")]
+        public async Task<IActionResult> AddInvoice([FromBody] AddInvoiceRequest request) => await Handle(request);
     }
 }
