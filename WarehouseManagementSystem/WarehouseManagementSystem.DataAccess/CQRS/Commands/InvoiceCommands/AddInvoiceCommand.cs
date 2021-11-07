@@ -12,31 +12,30 @@ namespace DataAccess.CQRS.Commands
     {
         public override async Task<Invoice> Execute(WMSDatabaseContext context)
         {
-            await SetInvoiceNumber(context);
+            var invoices = await context.Invoices.ToListAsync();
+
+            SetInvoiceNumber(invoices);
             await context.Invoices.AddAsync(Parameter);
             await context.SaveChangesAsync();
             return Parameter;
         }
 
-        private async Task SetInvoiceNumber(WMSDatabaseContext context)
+        private void SetInvoiceNumber(List<Invoice> invoices)
         {
-            int i = 1;
-            if (await SameInvoiceDataExistsIn(context))
-                i++;
+            var id = CountRepetitionOfDateAndProvider(invoices);
 
-            Parameter.InvoiceNumber = "INV/" + i + "/" + Parameter.Provider + "/" + Parameter.CreationDate.Day + "/" + Parameter.CreationDate.Month + "/" + Parameter.CreationDate.Year;
+            Parameter.InvoiceNumber = $"INV/{id}/{Parameter.Provider}/{ Parameter.CreationDate.Day}/{Parameter.CreationDate.Month}/{Parameter.CreationDate.Year}";
         }
 
-        private async Task<bool> SameInvoiceDataExistsIn(WMSDatabaseContext context)
+        private int CountRepetitionOfDateAndProvider(List<Invoice> invoices)
         {
-            var exists = false;
-            await context.Invoices
-                .ForEachAsync(invoice => 
+            var id = 1;
+            invoices.ForEach(invoice => 
                 {
                     if (invoice.CreationDate.Date == Parameter.CreationDate.Date && invoice.Provider == Parameter.Provider)
-                        exists = true;
+                        id++;
                 });
-            return exists;
+            return id;
         }
     }
 }

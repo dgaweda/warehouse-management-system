@@ -30,7 +30,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Deliveries
         {
             var data = new GetDeliveriesHelper()
             {
-                Name = request.Name
+                Name = request.Name.ToUpper()
             };
             var query = new GetDeliveriesQuery(data);
             var entityModel = await _queryExecutor.Execute(query);

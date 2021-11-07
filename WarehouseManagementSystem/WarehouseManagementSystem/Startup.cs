@@ -56,7 +56,7 @@ namespace warehouse_management_system
                 {
                     var dateConverter = new Newtonsoft.Json.Converters.IsoDateTimeConverter
                     {
-                        DateTimeFormat = "dd'.'MM'.'yyyy"
+                        DateTimeFormat = "dd'.'MM'.'yyyy HH:mm:ss"
                     };
                     options.SerializerSettings.Converters.Add(dateConverter);
                 });
