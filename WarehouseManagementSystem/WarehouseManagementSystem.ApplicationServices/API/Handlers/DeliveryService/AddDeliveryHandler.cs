@@ -12,31 +12,17 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryService
 {
-    public class AddDeliveryHandler : IRequestHandler<AddDeliveryRequest, AddDeliveryResponse>
+    public class AddDeliveryHandler : 
+        CommandHandler<AddDeliveryRequest, AddDeliveryResponse,Delivery, Domain.Models.Delivery, AddDeliveryCommand>, 
+        IRequestHandler<AddDeliveryRequest, AddDeliveryResponse>
     {
-        private readonly IMapper _mapper;
-        private readonly ICommandExecutor _commandExecutor;
-
-        public AddDeliveryHandler(IMapper mapper, ICommandExecutor commandExecutor)
+        public AddDeliveryHandler(IMapper mapper, ICommandExecutor commandExecutor) : base(mapper, commandExecutor)
         {
-            _mapper = mapper;
-            _commandExecutor = commandExecutor;
         }
 
         public async Task<AddDeliveryResponse> Handle(AddDeliveryRequest request, CancellationToken cancellationToken)
         {
-            var requestData = _mapper.Map<Delivery>(request);
-            var command = new AddDeliveryCommand()
-            {
-                Parameter = requestData
-            };
-            var entityModel = await _commandExecutor.Execute(command);
-            var domainModel = _mapper.Map<Domain.Models.Delivery>(entityModel);
-            var response = new AddDeliveryResponse()
-            {
-                Data = domainModel
-            };
-            return response;
-        }
+            return await SendResponse(request);
+        }    
     }
 }

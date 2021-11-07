@@ -23,7 +23,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.EmployeeSer
 
         public async Task<EditEmployeeResponse> Handle(EditEmployeeRequest request, CancellationToken cancellationToken)
         {
-            var employee = _mapper.Map<DataAccess.Entities.Employee>(request);
+            var employee = _mapper.Map<Employee>(request);
             var command = new EditEmployeeCommand() 
             { 
                 Parameter = employee 

@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
+using WarehouseManagementSystem.ApplicationServices.API.Handlers;
 using WarehouseManagementSystem.ApplicationServices.API.Validators;
 using WarehouseManagementSystem.ApplicationServices.Mappings;
 
@@ -38,6 +39,7 @@ namespace warehouse_management_system
             services.AddTransient<IQueryExecutor, QueryExecutor>();
             services.AddTransient<IGetEntityHelper<Role>, GetRolesHelper>();
             services.AddTransient<IGetEntityHelper<Employee>, GetEmployeesHelper>();
+            //services.AddScoped(typeof(ICommandHandler<,,,,>), typeof(CommandHandler<,,,,>));
 
             services.AddTransient<ICommandExecutor, CommandExecutor>();
 
