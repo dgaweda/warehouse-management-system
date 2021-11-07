@@ -7,8 +7,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Invo
     public class AddInvoiceRequest : IRequest<AddInvoiceResponse>
     {
         public string Provider { get; set; }
-        public DateTime InvoiceDate { get; set; }
-        public DateTime InvoiceReceiptDate { get; set; }
+        public DateTime CreationDate { get; set; }
+        public DateTime ReceiptDateTime { get; set; }
         public int DeliveryId { get; set; }
 
     }

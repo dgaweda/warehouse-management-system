@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings
 {
@@ -13,8 +14,11 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
         public DeliveriesProfile()
         {
             CreateMap<Delivery, API.Domain.Models.Delivery>()
-                .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))
-                .ForMember(x => x.ArrivalTime, y => y.MapFrom(z => z.Arrival));
+                .ForMember(dest => dest.Arrival, option => option.MapFrom(src => src.Arrival))
+                .ForMember(dest => dest.Name, option => option.MapFrom(src => src.Name));
+
+            CreateMap<AddDeliveryRequest, Delivery>()
+                .ForMember(dest => dest.Arrival, option => option.MapFrom(src => src.Arrival));
         }
     }
 }

@@ -19,13 +19,13 @@ namespace DataAccess.CQRS.Queries.InvoiceQueries
                 .Include(x => x.Delivery)
                 .ToListAsync();
 
-            if (!PropertiesAreEmpty())
-                invoices = await SearchByInvoiceNumber(context);
-
-            return invoices;
+            if (PropertiesAreEmpty())
+                return invoices;
+            else
+                return SearchByInvoiceNumber(invoices);
         }
 
-        private async Task<List<Invoice>> SearchByInvoiceNumber(WMSDatabaseContext context) => await context.Invoices.Where(invoice => invoice.InvoiceNumber.Contains(InvoiceNumber)).ToListAsync();
+        private List<Invoice> SearchByInvoiceNumber(List<Invoice> invoices) => invoices.Where(invoice => invoice.InvoiceNumber.Contains(InvoiceNumber)).ToList();
         
         public bool PropertiesAreEmpty() => string.IsNullOrEmpty(InvoiceNumber);
     }

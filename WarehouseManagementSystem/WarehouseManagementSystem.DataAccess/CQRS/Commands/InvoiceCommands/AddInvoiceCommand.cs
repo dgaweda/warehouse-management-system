@@ -24,16 +24,16 @@ namespace DataAccess.CQRS.Commands
             if (await SameInvoiceDataExistsIn(context))
                 i++;
 
-            Parameter.InvoiceNumber = "INV/" + i + "/" + Parameter.Provider + "/" + Parameter.InvoiceDate.Day + "/" + Parameter.InvoiceDate.Month + "/" + Parameter.InvoiceDate.Year;
+            Parameter.InvoiceNumber = "INV/" + i + "/" + Parameter.Provider + "/" + Parameter.CreationDate.Day + "/" + Parameter.CreationDate.Month + "/" + Parameter.CreationDate.Year;
         }
 
         private async Task<bool> SameInvoiceDataExistsIn(WMSDatabaseContext context)
         {
             var exists = false;
             await context.Invoices
-                .ForEachAsync(property => 
+                .ForEachAsync(invoice => 
                 {
-                    if (property.InvoiceDate == Parameter.InvoiceDate)
+                    if (invoice.CreationDate.Date == Parameter.CreationDate.Date && invoice.Provider == Parameter.Provider)
                         exists = true;
                 });
             return exists;

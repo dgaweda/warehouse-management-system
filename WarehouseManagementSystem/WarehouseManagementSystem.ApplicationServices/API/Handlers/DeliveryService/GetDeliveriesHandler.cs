@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using DataAccess;
+using DataAccess.CQRS.Queries.DeliveryQueries;
 using DataAccess.Entities;
 using DataAccess.Repository;
 using MediatR;
@@ -15,16 +17,29 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Deliveries
 {
     public class GetDeliveriesHandler : IRequestHandler<GetDeliveriesRequest, GetDeliveriesResponse>
     {
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
+        private readonly IQueryExecutor _queryExecutor;
        
-        public GetDeliveriesHandler(IMapper mapper)
+        public GetDeliveriesHandler(IMapper mapper, IQueryExecutor queryExecutor)
         {
-            this.mapper = mapper;
+            _mapper = mapper;
+            _queryExecutor = queryExecutor;
         }
         
-        public Task<GetDeliveriesResponse> Handle(GetDeliveriesRequest request, CancellationToken cancellationToken)
+        public async Task<GetDeliveriesResponse> Handle(GetDeliveriesRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var data = new GetDeliveriesHelper()
+            {
+                Name = request.Name
+            };
+            var query = new GetDeliveriesQuery(data);
+            var entityModel = await _queryExecutor.Execute(query);
+            var domainModel = _mapper.Map<List<Domain.Models.Delivery>>(entityModel);
+            var response = new GetDeliveriesResponse()
+            {
+                Data = domainModel
+            };
+            return response;
         }
     }
 }

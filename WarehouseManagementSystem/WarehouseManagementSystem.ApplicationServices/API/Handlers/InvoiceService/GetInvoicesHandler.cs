@@ -27,7 +27,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.InvoiceServ
         {
             var data = new GetInvoicesHelper()
             {
-                InvoiceNumber = request.InvoiceNumber
+                InvoiceNumber = request.InvoiceNumber.ToUpper()
             };
 
             var query = new GetInvoicesQuery(data);

@@ -8,9 +8,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
 {
     public class Delivery
     {
-        public int Id { get; set; }
-        public DateTime ArrivalTime { get; set; }
-        public string CompanyName { get; set; }
-
+        public DateTime Arrival { get; set; }
+        public string Name { get; set; }
     }
 }

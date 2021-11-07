@@ -21,11 +21,11 @@ namespace DataAccess.Entities
 
         [Required]
         [Column(TypeName = "date")]
-        public DateTime InvoiceDate { get; set; }
+        public DateTime CreationDate { get; set; }
 
         [Required]
         [Column(TypeName = "smalldatetime")]
-        public DateTime InvoiceReceiptDate { get; set; }
+        public DateTime ReceiptDateTime { get; set; }
 
         [Required]
         public int DeliveryId { get; set; }

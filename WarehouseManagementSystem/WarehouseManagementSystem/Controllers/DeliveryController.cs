@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery;
 
 namespace warehouse_management_system.Controllers
 {
@@ -18,7 +19,15 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("GetAll")]
-        public async Task<IActionResult> GetAllDeliveries([FromQuery] GetDeliveriesRequest request) => await Handle(request);
+        [Route("Get")]
+        public async Task<IActionResult> GetDeliveries([FromQuery] GetDeliveriesRequest request) => await Handle(request);
+
+        [HttpPost]
+        [Route("Add")]
+        public async Task<IActionResult> AddDelivery([FromBody] AddDeliveryRequest request) => await Handle(request);
+
+        [HttpDelete]
+        [Route("Remove")]
+        public async Task<IActionResult> RemoveDelivery([FromBody] RemoveDeliveryRequest request) => await Handle(request);
     }
 }

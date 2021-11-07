@@ -10,11 +10,11 @@ namespace DataAccess.CQRS.Queries.InvoiceQueries
 {
     public class GetInvoicesQuery : QueryBase<List<Invoice>>
     {
-        private readonly IGetEntityHelper<Invoice> _helper;
+        private readonly IGetEntityHelper<Invoice> _invoice;
         public GetInvoicesQuery(IGetEntityHelper<Invoice> helper)
         {
-            _helper = helper;
+            _invoice = helper;
         }
-        public override async Task<List<Invoice>> Execute(WMSDatabaseContext context) => await _helper.GetFilteredData(context);
+        public override async Task<List<Invoice>> Execute(WMSDatabaseContext context) => await _invoice.GetFilteredData(context);
     }
 }
