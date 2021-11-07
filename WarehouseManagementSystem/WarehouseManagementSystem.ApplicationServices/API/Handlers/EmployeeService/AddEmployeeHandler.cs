@@ -14,25 +14,14 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Employe
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.EmployeeService
 {
-    public class AddEmployeeHandler : IRequestHandler<AddEmployeeRequest, AddEmployeeResponse>
+    public class AddEmployeeHandler : 
+        CommandHandler<AddEmployeeRequest, AddEmployeeResponse, DataAccess.Entities.Employee, Domain.Models.Employee, AddEmployeeCommand>,
+        IRequestHandler<AddEmployeeRequest, AddEmployeeResponse>
     {
-        private readonly ICommandExecutor commandExecutor;
-        private readonly IMapper mapper;
-        public AddEmployeeHandler(ICommandExecutor commandExecutor, IMapper mapper)
+        public AddEmployeeHandler(ICommandExecutor commandExecutor, IMapper mapper) : base(mapper, commandExecutor)
         {
-            this.commandExecutor = commandExecutor;
-            this.mapper = mapper;
         }
 
-        public async Task<AddEmployeeResponse> Handle(AddEmployeeRequest request, CancellationToken cancellationToken)
-        {
-            var employee = mapper.Map<DataAccess.Entities.Employee>(request);
-            var command = new AddEmployeeCommand() { Parameter = employee };
-            var employeeFromDb = await commandExecutor.Execute(command);
-            return new AddEmployeeResponse()
-            {
-                Data = mapper.Map<Domain.Models.Employee>(employeeFromDb)
-            };
-        }
+        public async Task<AddEmployeeResponse> Handle(AddEmployeeRequest request, CancellationToken cancellationToken) => await SendResponse(request);
     }
 }

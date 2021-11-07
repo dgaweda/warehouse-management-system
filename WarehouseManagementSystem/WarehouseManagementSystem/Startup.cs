@@ -16,7 +16,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
 using WarehouseManagementSystem.ApplicationServices.API.Handlers;
-using WarehouseManagementSystem.ApplicationServices.API.Validators;
 using WarehouseManagementSystem.ApplicationServices.Mappings;
 
 namespace warehouse_management_system
@@ -33,8 +32,7 @@ namespace warehouse_management_system
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvcCore()
-                .AddFluentValidation(fluentValidator => fluentValidator.RegisterValidatorsFromAssemblyContaining<AddEmployeeRequestValidator>());
+            services.AddMvcCore();
 
             services.AddTransient<IQueryExecutor, QueryExecutor>();
             services.AddTransient<IGetEntityHelper<Role>, GetRolesHelper>();
