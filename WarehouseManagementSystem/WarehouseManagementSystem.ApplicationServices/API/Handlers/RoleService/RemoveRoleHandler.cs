@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.RoleCommands;
+using DataAccess.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -13,30 +14,14 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.RoleService
 {
-    public class RemoveRoleHandler : IRequestHandler<RemoveRoleRequest, RemoveRoleResponse>
+    public class RemoveRoleHandler
+        : CommandHandler<RemoveRoleRequest, RemoveRoleResponse, Role, Domain.Models.Role, RemoveRoleCommand>,
+        IRequestHandler<RemoveRoleRequest, RemoveRoleResponse>
     {
-        private readonly ICommandExecutor _commandExecutor;
-        private readonly IMapper _mapper;
-
-        public RemoveRoleHandler(ICommandExecutor commandExecutor, IMapper mapper)
+        public RemoveRoleHandler(ICommandExecutor commandExecutor, IMapper mapper) : base(mapper, commandExecutor)
         {
-            _commandExecutor = commandExecutor;
-            _mapper = mapper;
         }
 
-        public async Task<RemoveRoleResponse> Handle(RemoveRoleRequest request, CancellationToken cancellationToken)
-        {
-            var command = new RemoveRoleCommand()
-            {
-                Parameter = request.RoleId
-            };
-            var removedRole = await _commandExecutor.Execute(command);
-            var domainRoleModel = _mapper.Map<API.Domain.Models.Role>(removedRole);
-            var response = new RemoveRoleResponse()
-            {
-                Data = domainRoleModel
-            };
-            return response;
-        }
+        public async Task<RemoveRoleResponse> Handle(RemoveRoleRequest request, CancellationToken cancellationToken) => await PrepareResponse(request);
     }
 }

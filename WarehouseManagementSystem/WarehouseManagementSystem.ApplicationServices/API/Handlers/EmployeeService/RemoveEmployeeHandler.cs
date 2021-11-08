@@ -15,31 +15,14 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Employe
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.EmployeeService
 {
-    public class RemoveEmployeeHandler : IRequestHandler<RemoveEmployeeRequest, RemoveEmployeeResponse>
+    public class RemoveEmployeeHandler 
+        :CommandHandler<RemoveEmployeeRequest, RemoveEmployeeResponse, Employee, Domain.Models.Employee, RemoveEmployeeCommand>,
+        IRequestHandler<RemoveEmployeeRequest, RemoveEmployeeResponse>
     {
-        private readonly ICommandExecutor _commandExecutor;
-        private readonly IMapper _mapper;
-
-        public RemoveEmployeeHandler(ICommandExecutor commandExecutor, IMapper mapper)
+        public RemoveEmployeeHandler(ICommandExecutor commandExecutor, IMapper mapper) : base(mapper, commandExecutor)
         {
-            _commandExecutor = commandExecutor;
-            _mapper = mapper;
         }
 
-        public async Task<RemoveEmployeeResponse> Handle(RemoveEmployeeRequest request, CancellationToken cancellationToken)
-        {
-            var command = new RemoveEmployeeCommand()
-            {
-                Parameter = request.EmployeeId
-            };
-            var removedEmployee = await _commandExecutor.Execute(command);
-            var domainModel = _mapper.Map<API.Domain.Models.Employee>(removedEmployee);
-
-            var response = new RemoveEmployeeResponse()
-            {
-                Data = domainModel
-            };
-            return response;
-        }
+        public async Task<RemoveEmployeeResponse> Handle(RemoveEmployeeRequest request, CancellationToken cancellationToken) => await PrepareResponse(request);
     }
 }

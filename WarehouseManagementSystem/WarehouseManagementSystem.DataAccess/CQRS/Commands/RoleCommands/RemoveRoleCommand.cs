@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Commands.RoleCommands
 {
-    public class RemoveRoleCommand : CommandBase<int, Role>
+    public class RemoveRoleCommand : CommandBase<Role, Role>
     {
         public override async Task<Role> Execute(WMSDatabaseContext context)
         {
-            var role = await context.Roles.FirstOrDefaultAsync(x => x.Id == Parameter);
+            var role = await context.Roles.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
             context.Roles.Remove(role);
             await context.SaveChangesAsync();
 
