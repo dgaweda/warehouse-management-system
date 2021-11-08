@@ -22,6 +22,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.EmployeeSer
         {
         }
 
-        public async Task<AddEmployeeResponse> Handle(AddEmployeeRequest request, CancellationToken cancellationToken) => await SendResponse(request);
+        public async Task<AddEmployeeResponse> Handle(AddEmployeeRequest request, CancellationToken cancellationToken) => await PrepareResponse(request);
     }
 }

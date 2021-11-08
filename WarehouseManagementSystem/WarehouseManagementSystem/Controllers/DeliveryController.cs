@@ -28,6 +28,6 @@ namespace warehouse_management_system.Controllers
 
         [HttpDelete]
         [Route("Remove")]
-        public async Task<IActionResult> RemoveDelivery([FromBody] RemoveDeliveryRequest request) => await Handle(request);
+        public async Task<IActionResult> RemoveDelivery([FromQuery] RemoveDeliveryRequest request) => await Handle(request);
     }
 }

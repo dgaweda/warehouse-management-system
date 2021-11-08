@@ -14,7 +14,10 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public class CommandHandler<TRequest, TResponse, TEntity, TDomainModel, TCommand> : ICommandHandler<TRequest, TResponse, TEntity, TDomainModel, TCommand> where TResponse : ResponseBase<TDomainModel>, new() where TCommand : CommandBase<TEntity, TEntity>, new()
+    public class CommandHandler<TRequest, TResponse, TEntity, TDomainModel, TCommand>
+        : ICommandHandler<TRequest, TResponse, TDomainModel> 
+        where TResponse : ResponseBase<TDomainModel>, new()
+        where TCommand : CommandBase<TEntity, TEntity>, new()
     {
         private readonly IMapper _mapper;
         private readonly ICommandExecutor _commandExecutor;
@@ -25,34 +28,23 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
             _commandExecutor = commandExecutor;
         }
 
-        public async Task<TResponse> SendResponse(TRequest request) => await CreateResponse(request);
-
-        public async Task<TResponse> CreateResponse(TRequest request) => new TResponse() { Data = await CreateDomainModel(request) };
-
-        public async Task<TDomainModel> CreateDomainModel(TRequest request)
+        public async Task<TResponse> PrepareResponse(TRequest request)
         {
-            var domainModel = MapRequestData(request);
-            return await domainModel;
+            var mappedEntityWithRequestData = Map(request);
+            var command = CreateCommand(mappedEntityWithRequestData);
+            var entityModel = await Execute(command);
+            var domainModel = MapDomainModel(entityModel);
+            var response = CreateResponse(domainModel);
+            return response;
         }
+        private TEntity Map(TRequest request) => _mapper.Map<TEntity>(request);
 
-        public async Task<TDomainModel> MapRequestData(TRequest request)
-        {
-            var mappedEntityWithRequestData = _mapper.Map<TEntity>(request);
-            return await CreateCommand(mappedEntityWithRequestData);
-        }
+        private TCommand CreateCommand(TEntity entityWithRequestData) => new() { Parameter = entityWithRequestData };
 
-        public async Task<TDomainModel> CreateCommand(TEntity entityWithRequestData)
-        {
-            var command = new TCommand() { Parameter = entityWithRequestData };
-            return await ExecuteCommand(command);
-        }
+        private async Task<TEntity> Execute(TCommand command) => await _commandExecutor.Execute(command);
 
-        public async Task<TDomainModel> ExecuteCommand(TCommand command)
-        {
-            var entityModel = await _commandExecutor.Execute(command);
-            return MapDomainModel(entityModel);
-        }
+        private TDomainModel MapDomainModel(TEntity entityModel) => _mapper.Map<TDomainModel>(entityModel);
 
-        public TDomainModel MapDomainModel(TEntity entityModel) => _mapper.Map<TDomainModel>(entityModel);
+        private TResponse CreateResponse(TDomainModel domainModel) => new() { Data = domainModel };
     }
 }

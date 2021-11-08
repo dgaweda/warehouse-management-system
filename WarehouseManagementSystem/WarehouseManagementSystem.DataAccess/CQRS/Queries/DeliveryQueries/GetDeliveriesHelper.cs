@@ -24,6 +24,6 @@ namespace DataAccess.CQRS.Queries.DeliveryQueries
         }
 
         public bool PropertiesAreEmpty() => string.IsNullOrEmpty(Name);
-        private List<Delivery> SearchByName(List<Delivery> deliveries) => deliveries.Where(delivery => delivery.Name.Contains(Name)).ToList();
+        private List<Delivery> SearchByName(List<Delivery> deliveries) => deliveries.Where(delivery => delivery.Name.Contains(Name.ToUpper())).ToList();
     }
 }

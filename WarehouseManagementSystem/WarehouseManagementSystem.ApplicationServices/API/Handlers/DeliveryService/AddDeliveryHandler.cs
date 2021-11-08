@@ -20,9 +20,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliverySer
         {
         }
 
-        public async Task<AddDeliveryResponse> Handle(AddDeliveryRequest request, CancellationToken cancellationToken)
-        {
-            return await SendResponse(request);
-        }    
+        public async Task<AddDeliveryResponse> Handle(AddDeliveryRequest request, CancellationToken cancellationToken) => await PrepareResponse(request);   
     }
 }

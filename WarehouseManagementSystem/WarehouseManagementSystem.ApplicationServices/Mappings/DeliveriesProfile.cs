@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DataAccess.CQRS.Commands.DeliveryCommands;
 using DataAccess.Entities;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,9 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
 
             CreateMap<AddDeliveryRequest, Delivery>()
                 .ForMember(dest => dest.Arrival, option => option.MapFrom(src => src.Arrival));
+
+            CreateMap<RemoveDeliveryRequest, Delivery>()
+                .ForMember(dest => dest.Id, option => option.MapFrom(src => src.DeliveryId));
         }
     }
 }
