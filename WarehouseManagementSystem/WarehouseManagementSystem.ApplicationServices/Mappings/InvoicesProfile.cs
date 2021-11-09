@@ -29,6 +29,12 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
             CreateMap<RemoveInvoiceRequest, Invoice>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.InvoiceId));
 
+            CreateMap<EditInvoiceRequest, Invoice>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Provider, opt => opt.MapFrom(src => src.Provider))
+                .ForMember(dest => dest.CreationDate, opt => opt.MapFrom(src => src.CreationDate))
+                .ForMember(dest => dest.ReceiptDateTime, opt => opt.MapFrom(src => src.ReceiptDateTime))
+                .ForMember(dest => dest.DeliveryId, opt => opt.MapFrom(src => src.DeliveryId));
         }
     }
 }

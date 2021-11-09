@@ -15,6 +15,8 @@ namespace DataAccess.CQRS.Commands
             if (Parameter == null)
                 throw new ArgumentNullException();
 
+            var invoices = await context.Invoices.ToListAsync();
+            
             context.Entry(Parameter).State = EntityState.Modified;
             await context.SaveChangesAsync();
             var updatedRecord = await context.Employees.Include(x => x.Role).FirstOrDefaultAsync(employee => employee.Id == Parameter.Id);

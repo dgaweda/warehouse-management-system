@@ -9,6 +9,7 @@ namespace DataAccess
         {
             var optionsBuilder = new DbContextOptionsBuilder<WMSDatabaseContext>();
             optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=WarehouseManagementSystemStorage;Integrated Security=True");
+            optionsBuilder.EnableSensitiveDataLogging();
             return new WMSDatabaseContext(optionsBuilder.Options);
         }
     }

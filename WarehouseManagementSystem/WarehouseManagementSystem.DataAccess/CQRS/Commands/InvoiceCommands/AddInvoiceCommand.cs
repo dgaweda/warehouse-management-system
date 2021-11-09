@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities;
+﻿using DataAccess.CQRS.Commands.InvoiceCommands;
+using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,28 +15,10 @@ namespace DataAccess.CQRS.Commands
         {
             var invoices = await context.Invoices.ToListAsync();
 
-            SetInvoiceNumber(invoices);
+            new SetInvoiceNumber().Set(invoices, Parameter);
             await context.Invoices.AddAsync(Parameter);
             await context.SaveChangesAsync();
             return Parameter;
-        }
-
-        private void SetInvoiceNumber(List<Invoice> invoices)
-        {
-            var id = CountRepetitionOfDateAndProvider(invoices);
-
-            Parameter.InvoiceNumber = $"INV/{id}/{Parameter.Provider}/{ Parameter.CreationDate.Day}/{Parameter.CreationDate.Month}/{Parameter.CreationDate.Year}";
-        }
-
-        private int CountRepetitionOfDateAndProvider(List<Invoice> invoices)
-        {
-            var id = 1;
-            invoices.ForEach(invoice => 
-                {
-                    if (invoice.CreationDate.Date == Parameter.CreationDate.Date && invoice.Provider == Parameter.Provider)
-                        id++;
-                });
-            return id;
         }
     }
 }

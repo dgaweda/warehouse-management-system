@@ -8,7 +8,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
         where TQuery : QueryBase<TResult>
         where TResponse : ResponseBase<TDomainModel>, new()
     {
-        TQuery CreateQuery(TRequest request);
-        Task<TResponse> Response(TQuery query);
+        Task<TResponse> PrepareResponse(TQuery query);
     }
 }

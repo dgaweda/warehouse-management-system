@@ -27,7 +27,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Deliveries
         public async Task<GetDeliveriesResponse> Handle(GetDeliveriesRequest request, CancellationToken cancellationToken)
         {
             var query = CreateQuery(request);
-            return await Response(query);
+            var response = await PrepareResponse(query);
+            return response;
         }
 
         public override GetDeliveriesQuery CreateQuery(GetDeliveriesRequest request)

@@ -19,14 +19,13 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
             _queryExecutor = queryExecutor;
         }
 
-        public async Task<TResponse> Response(TQuery query)
+        public async Task<TResponse> PrepareResponse(TQuery query)
         {
             var entityModel = await GetQueryResult(query);
             var domainModel = MapDomainModelBy(entityModel);
             var response = CreateResponse(domainModel);
             return response;
         }
-
         private async Task<TResult> GetQueryResult(TQuery query) => await _queryExecutor.Execute(query);
 
         private TDomainModel MapDomainModelBy(TResult entityModel) => _mapper.Map<TDomainModel>(entityModel);
