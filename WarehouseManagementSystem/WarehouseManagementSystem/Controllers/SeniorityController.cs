@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seniority;
 
 namespace warehouse_management_system.Controllers
 {
@@ -19,5 +20,9 @@ namespace warehouse_management_system.Controllers
         [HttpGet]
         [Route("All")]
         public async Task<IActionResult> GetSeniorities([FromQuery] GetSenioritiesRequest request) => await Handle(request);
+
+        [HttpPost]
+        [Route("Add")]
+        public async Task<IActionResult> AddSeniority([FromQuery] AddSeniorityRequest request) => await Handle(request);
     }
 }

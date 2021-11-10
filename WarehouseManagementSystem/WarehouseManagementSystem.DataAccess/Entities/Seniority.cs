@@ -12,7 +12,6 @@ namespace DataAccess.Entities
         public DateTime EmploymentDate { get; set; }
         public int EmployeeId { get; set; }
 
-        [ForeignKey("EmployeeId")]
         public Employee Employee { get; set; }
     }
 }

@@ -24,7 +24,7 @@ namespace warehouse_management_system.Controllers
         public async Task<IActionResult> AddEmployee([FromBody] AddEmployeeRequest request) => await Handle(request);
 
         [HttpGet]
-        [Route("")]
+        [Route("Get")]
         public async Task<IActionResult> GetEmployees([FromQuery] GetEmployeesRequest request) => await Handle(request);
 
         [HttpPut]

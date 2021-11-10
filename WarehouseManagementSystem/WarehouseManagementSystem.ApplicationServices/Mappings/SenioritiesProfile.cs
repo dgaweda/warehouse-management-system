@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seniority;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings
 {
@@ -19,6 +20,10 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(x => x.LastName, y => y.MapFrom(z => z.Employee.LastName))
                 .ForMember(dest => dest.EmploymentDuration, opt => opt.MapFrom(src =>
                     string.Format("{0} Year/s {1} Month/s)", (DateTime.Now - src.EmploymentDate).Days / 365, ((DateTime.Now - src.EmploymentDate).Days % 365) / 30)));
+
+            CreateMap<AddSeniorityRequest, Seniority>()
+                .ForMember(x => x.EmploymentDate, y => y.MapFrom(z => z.EmploymentDate))
+                .ForMember(x => x.EmployeeId, y => y.MapFrom(z => z.EmployeeId));
 
 
         }
