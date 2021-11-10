@@ -24,6 +24,9 @@ namespace DataAccess.CQRS.Queries.EmployeeQueries
                 .Include(x => x.Seniority)
                 .ToListAsync();
 
+            if (PropertiesAreEmpty())
+                return employees;
+
             if (EmployeeId != 0)
                 employees = SearchByEmployeeId(employees);
 

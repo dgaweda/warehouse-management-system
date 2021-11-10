@@ -1,6 +1,10 @@
 ﻿using AutoMapper;
+using DataAccess;
+using DataAccess.CQRS.Queries.SeniorityQueries;
+using DataAccess.Entities;
 using MediatR;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
@@ -8,18 +12,30 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Seniorities
 {
-    public class GetSenioritiesHandler : IRequestHandler<GetSenioritiesRequest, GetSenioritiesResponse>
+    public class GetSenioritiesHandler : 
+        QueryHandler<GetSenioritiesRequest, GetSenioritiesResponse, GetSenioritiesQuery, List<Seniority> , List<Domain.Models.Seniority>>,
+        IRequestHandler<GetSenioritiesRequest, GetSenioritiesResponse>
     {
-        private readonly IMapper mapper;
-
-        public GetSenioritiesHandler(IMapper mapper)
+        public GetSenioritiesHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
         {
-            this.mapper = mapper;
         }
 
-        public Task<GetSenioritiesResponse> Handle(GetSenioritiesRequest request, CancellationToken cancellationToken)
+        public override GetSenioritiesQuery CreateQuery(GetSenioritiesRequest request)
         {
-            throw new NotImplementedException();
+            var query = new GetSenioritiesHelper()
+            {
+                EmploymentDate = request.EmploymentDate,
+                EmployeeLastName = request.EmployeeLastName,
+                EmployeeName = request.EmployeeName
+            };
+            return new GetSenioritiesQuery(query);
+        }
+
+        public async Task<GetSenioritiesResponse> Handle(GetSenioritiesRequest request, CancellationToken cancellationToken)
+        {
+            var query = CreateQuery(request);
+            var response = await PrepareResponse(query);
+            return response;
         }
     }
 }

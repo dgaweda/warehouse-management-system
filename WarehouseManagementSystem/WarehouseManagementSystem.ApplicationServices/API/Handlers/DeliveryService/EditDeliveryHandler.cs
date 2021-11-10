@@ -21,6 +21,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliverySer
         public EditDeliveryHandler(IMapper mapper, ICommandExecutor commandExecutor) : base(mapper, commandExecutor)
         {
         }
+
         public Task<EditDeliveryResponse> Handle(EditDeliveryRequest request, CancellationToken cancellationToken) => PrepareResponse(request);
     }
 }

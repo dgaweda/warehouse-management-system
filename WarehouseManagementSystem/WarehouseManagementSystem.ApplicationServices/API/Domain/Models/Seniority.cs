@@ -9,7 +9,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
     public class Seniority
     {
         public DateTime EmploymentDate { get; set; }
-        public DateTime EmploymentDuration { get; set; }
+        public string EmploymentDuration { get; set; }
         public int EmployeeId { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
     }
 }

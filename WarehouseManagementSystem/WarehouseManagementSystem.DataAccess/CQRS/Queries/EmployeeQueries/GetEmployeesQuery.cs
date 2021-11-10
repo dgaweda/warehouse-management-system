@@ -12,13 +12,6 @@ namespace DataAccess.CQRS.Queries
             _employee = helper;
         }
 
-        public override async Task<List<Employee>> Execute(WMSDatabaseContext context)
-        {
-            if (_employee.PropertiesAreEmpty())
-                return await context.Employees.Include(x => x.Role).Include(x => x.Seniority).ToListAsync();
-            else
-                return await _employee.GetFilteredData(context);
-
-        }
+        public override async Task<List<Employee>> Execute(WMSDatabaseContext context) => await _employee.GetFilteredData(context);
     }
 }
