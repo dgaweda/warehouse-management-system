@@ -25,6 +25,10 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
 
             CreateMap<RemoveDeliveryRequest, Delivery>()
                 .ForMember(dest => dest.Id, option => option.MapFrom(src => src.DeliveryId));
+
+            CreateMap<EditDeliveryRequest, Delivery>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Arrival, opt => opt.MapFrom(src => src.Arrival));
         }
     }
 }
