@@ -21,6 +21,9 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
 
             CreateMap<RemoveDepartureRequest, Departure>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.DepartureId));
+
+            CreateMap<AddDepartureRequest, Departure>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
         }
     }
 }
