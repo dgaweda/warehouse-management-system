@@ -29,6 +29,6 @@ namespace DataAccess.Entities
     public enum StateType
     {
         OPEN,
-        CLOSe
+        CLOSED
     }
 }
