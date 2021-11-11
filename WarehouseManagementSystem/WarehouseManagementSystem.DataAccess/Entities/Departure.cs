@@ -8,14 +8,42 @@ namespace DataAccess.Entities
 {
     public class Departure : EntityBase
     {
-        [DataType(DataType.DateTime)]
-        [Column(TypeName = "smalldatetime")]
-        public DateTime DepartureTime { get; set; }
+        private DateTime _openingTime;
+        private DateTime? _closeTime = null;
 
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
 
+        [Required]
+        public StateType State { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [Column(TypeName = "smalldatetime")]
+        public DateTime? CloseTime 
+        {
+            get => _closeTime; 
+            set
+            {
+                if (State == 0)
+                    _closeTime = DateTime.Now;
+                else
+                    _closeTime = default;
+            }
+        }
+
+        [DataType(DataType.DateTime)]
+        [Column(TypeName = "smalldatetime")]
+        public DateTime OpeningTime { 
+            get => _openingTime; 
+            set => _openingTime = DateTime.Now; 
+        }
+
         public List<Pallet> Pallets { get; set; }
+    }
+    public enum StateType
+    {
+        CLOSED,
+        OPEN
     }
 }

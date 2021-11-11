@@ -3,6 +3,7 @@ using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.InvoiceCommands;
 using DataAccess.CQRS.Queries;
 using DataAccess.CQRS.Queries.DeliveryQueries;
+using DataAccess.CQRS.Queries.DepartureQueries;
 using DataAccess.CQRS.Queries.EmployeeQueries;
 using DataAccess.CQRS.Queries.RoleQueries;
 using DataAccess.Entities;
@@ -40,6 +41,7 @@ namespace warehouse_management_system
             services.AddTransient<IGetEntityHelper<Role>, GetRolesHelper>();
             services.AddTransient<IGetEntityHelper<Employee>, GetEmployeesHelper>();
             services.AddTransient<IGetEntityHelper<Delivery>, GetDeliveriesHelper>();
+            services.AddTransient<IGetEntityHelper<Departure>, GetDeparturesHelper>();
             //services.AddScoped(typeof(ICommandHandler<,,,,>), typeof(CommandHandler<,,,,>));
 
             services.AddTransient<ICommandExecutor, CommandExecutor>();
@@ -56,13 +58,13 @@ namespace warehouse_management_system
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
-                {
-                    var dateConverter = new Newtonsoft.Json.Converters.IsoDateTimeConverter
-                    {
-                        DateTimeFormat = "dd'.'MM'.'yyyy HH:mm:ss"
-                    };
-                    options.SerializerSettings.Converters.Add(dateConverter);
-                });
+                 {
+                     var dateConverter = new Newtonsoft.Json.Converters.IsoDateTimeConverter
+                     {
+                         DateTimeFormat = "dd'.'MM'.'yyyy HH:mm:ss"
+                     };
+                     options.SerializerSettings.Converters.Add(dateConverter);
+                 });
 
             services.AddSwaggerGen(c =>
             {
