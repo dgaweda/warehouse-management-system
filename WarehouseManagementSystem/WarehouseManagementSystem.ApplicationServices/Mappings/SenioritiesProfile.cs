@@ -25,7 +25,9 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(x => x.EmploymentDate, y => y.MapFrom(z => z.EmploymentDate))
                 .ForMember(x => x.EmployeeId, y => y.MapFrom(z => z.EmployeeId));
 
-
+            CreateMap<EditSeniorityRequest, Seniority>()
+                .ForMember(x => x.EmploymentDate, opt => opt.MapFrom(src => src.EmploymentDate))
+                .ForMember(x => x.EmployeeId, opt => opt.MapFrom(src => src.EmployeeId));
         }
     }
 }
