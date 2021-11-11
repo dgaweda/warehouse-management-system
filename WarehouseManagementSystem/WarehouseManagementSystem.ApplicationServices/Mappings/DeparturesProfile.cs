@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Departure;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings
 {
@@ -17,6 +18,9 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.State))
                 .ForMember(dest => dest.CloseTime, opt => opt.MapFrom(src => src.CloseTime));
+
+            CreateMap<RemoveDepartureRequest, Departure>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.DepartureId));
         }
     }
 }
