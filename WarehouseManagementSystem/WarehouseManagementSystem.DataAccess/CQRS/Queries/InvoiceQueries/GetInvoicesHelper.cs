@@ -25,7 +25,7 @@ namespace DataAccess.CQRS.Queries.InvoiceQueries
                 return SearchByInvoiceNumber(invoices);
         }
 
-        private List<Invoice> SearchByInvoiceNumber(List<Invoice> invoices) => invoices.Where(invoice => invoice.InvoiceNumber.Contains(InvoiceNumber)).ToList();
+        private List<Invoice> SearchByInvoiceNumber(List<Invoice> invoices) => invoices.Where(invoice => invoice.InvoiceNumber.Contains(InvoiceNumber.ToUpper())).ToList();
         
         public bool PropertiesAreEmpty() => string.IsNullOrEmpty(InvoiceNumber);
     }

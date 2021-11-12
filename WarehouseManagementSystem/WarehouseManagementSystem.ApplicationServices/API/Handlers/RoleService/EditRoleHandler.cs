@@ -14,30 +14,14 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.RoleService
 {
-    public class EditRoleHandler : IRequestHandler<EditRoleRequest, EditRoleResponse>
+    public class EditRoleHandler :
+        CommandHandler<EditRoleRequest, EditRoleResponse, Role, Domain.Models.Role, EditRoleCommand>,
+        IRequestHandler<EditRoleRequest, EditRoleResponse>
     {
-        private readonly ICommandExecutor _commandExecutor;
-        private readonly IMapper _mapper;
-
-        public EditRoleHandler(ICommandExecutor commandExecutor, IMapper mapper)
+        public EditRoleHandler(ICommandExecutor commandExecutor, IMapper mapper) : base(mapper, commandExecutor)
         {
-            _commandExecutor = commandExecutor;
-            _mapper = mapper;
         }
 
-        public async Task<EditRoleResponse> Handle(EditRoleRequest request, CancellationToken cancellationToken)
-        {
-            var role = _mapper.Map<Role>(request);
-            var command = new EditRoleCommand()
-            {
-                Parameter = role
-            };
-            var changedRole = await _commandExecutor.Execute(command);
-            var response = new EditRoleResponse()
-            {
-                Data = changedRole
-            };
-            return response;
-        }
+        public async Task<EditRoleResponse> Handle(EditRoleRequest request, CancellationToken cancellationToken) => await PrepareResponse(request);
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role
 {
-    public class RemoveRoleResponse : ResponseBase<API.Domain.Models.Role>
+    public class RemoveRoleResponse : ResponseBase<Domain.Models.Role>
     {
     }
 }

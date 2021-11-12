@@ -10,31 +10,15 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Employe
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.EmployeeService
 {
-    public class EditEmployeeHandler : IRequestHandler<EditEmployeeRequest, EditEmployeeResponse>
+    public class EditEmployeeHandler : 
+        CommandHandler<EditEmployeeRequest, EditEmployeeResponse, Employee, Domain.Models.Employee, EditEmployeeCommand>,
+        IRequestHandler<EditEmployeeRequest, EditEmployeeResponse>
     {
-        private readonly ICommandExecutor _commandExecutor;
-        private readonly IMapper _mapper;
-
-        public EditEmployeeHandler(ICommandExecutor commandExecutor, IMapper mapper)
+        public EditEmployeeHandler(ICommandExecutor commandExecutor, IMapper mapper) : base(mapper, commandExecutor)
         {
-            _commandExecutor = commandExecutor;
-            _mapper = mapper;
         }
 
-        public async Task<EditEmployeeResponse> Handle(EditEmployeeRequest request, CancellationToken cancellationToken)
-        {
-            var employee = _mapper.Map<Employee>(request);
-            var command = new EditEmployeeCommand() 
-            { 
-                Parameter = employee 
-            };
-            var updatedEmployee = await _commandExecutor.Execute(command);
-            var domainModel = _mapper.Map<API.Domain.Models.Employee>(updatedEmployee);
-            return new EditEmployeeResponse()
-            {
-                Data = domainModel
-            };
-        }
+        public async Task<EditEmployeeResponse> Handle(EditEmployeeRequest request, CancellationToken cancellationToken) => await PrepareResponse(request);
     }
 }
 

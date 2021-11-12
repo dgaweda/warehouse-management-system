@@ -14,34 +14,31 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public class GetRolesHandler : IRequestHandler<GetRolesRequest, GetRolesResponse>
+    public class GetRolesHandler : 
+        QueryHandler<GetRolesRequest, GetRolesResponse, GetRolesQuery, List<Role>, List<Domain.Models.Role>>,
+        IRequestHandler<GetRolesRequest, GetRolesResponse>
     { 
-        private readonly IMapper _mapper;
-        private readonly IQueryExecutor _queryExecutor;
-
-        public GetRolesHandler(IMapper mapper, IQueryExecutor queryExecutor)
+        public GetRolesHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
         {
-            _mapper = mapper;
-            _queryExecutor = queryExecutor;
         }
 
         public async Task<GetRolesResponse> Handle(GetRolesRequest request, CancellationToken cancellationToken)
+        {
+            var query = CreateQuery(request);
+            var response = await PrepareResponse(query);
+            return response;
+        }
+
+        public override GetRolesQuery CreateQuery(GetRolesRequest request)
         {
             var data = new GetRolesHelper()
             {
                 RoleId = request.RoleId,
                 RoleName = request.RoleName
             };
-
-            var query = new GetRolesQuery(data);
-            var roles = await _queryExecutor.Execute(query);
-            var domainRolesModel = _mapper.Map<List<Domain.Models.Role>>(roles);
-            var response = new GetRolesResponse()
-            {
-                Data = domainRolesModel
-            };
-            return response;
+            return new GetRolesQuery(data);
         }
+
     }
 }
 

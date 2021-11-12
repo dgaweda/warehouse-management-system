@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DataAccess;
 using DataAccess.CQRS.Queries.InvoiceQueries;
+using DataAccess.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -13,32 +14,28 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Invoice
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.InvoiceService
 {
-    public class GetInvoicesHandler : IRequestHandler<GetInvoicesRequest, GetInvoicesResponse>
+    public class GetInvoicesHandler : 
+        QueryHandler<GetInvoicesRequest, GetInvoicesResponse, GetInvoicesQuery, List<Invoice> , List<Domain.Models.Invoice>>,
+        IRequestHandler<GetInvoicesRequest, GetInvoicesResponse>
     {
-        private readonly IMapper _mapper;
-        private readonly IQueryExecutor _queryExecutor;
-        public GetInvoicesHandler(IQueryExecutor queryExecutor, IMapper automapper)
+        public GetInvoicesHandler(IQueryExecutor queryExecutor, IMapper mapper) : base(mapper, queryExecutor)
         {
-            _mapper = automapper;
-            _queryExecutor = queryExecutor;
+        }
+        public async Task<GetInvoicesResponse> Handle(GetInvoicesRequest request, CancellationToken cancellationToken)
+        {
+            var query = CreateQuery(request);
+            var response = await PrepareResponse(query);
+            return response;
         }
 
-        public async Task<GetInvoicesResponse> Handle(GetInvoicesRequest request, CancellationToken cancellationToken)
+        public override GetInvoicesQuery CreateQuery(GetInvoicesRequest request)
         {
             var data = new GetInvoicesHelper()
             {
-                InvoiceNumber = request.InvoiceNumber.ToUpper()
+                InvoiceNumber = request.InvoiceNumber
             };
-
-            var query = new GetInvoicesQuery(data);
-
-            var entityModel = await _queryExecutor.Execute(query);
-            var domianModel = _mapper.Map<List<Domain.Models.Invoice>>(entityModel);
-            var response = new GetInvoicesResponse()
-            {
-                Data = domianModel
-            };
-            return response;
+            return new GetInvoicesQuery(data);
         }
+
     }
 }

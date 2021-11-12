@@ -12,17 +12,22 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Employees
 {
-    public class GetEmployeesHandler : IRequestHandler<GetEmployeesRequest, GetEmployeesResponse>
+    public class GetEmployeesHandler :
+        QueryHandler<GetEmployeesRequest, GetEmployeesResponse, GetEmployeesQuery, List<Employee>, List<Domain.Models.Employee>>,
+        IRequestHandler<GetEmployeesRequest, GetEmployeesResponse>
     {
-        private readonly IQueryExecutor _queryExecutor;
-        private readonly IMapper _mapper;
-        public GetEmployeesHandler(IQueryExecutor queryExecutor, IMapper mapper)
-        { 
-            _queryExecutor = queryExecutor;
-            _mapper = mapper;
+        public GetEmployeesHandler(IQueryExecutor queryExecutor, IMapper mapper) : base(mapper, queryExecutor)
+        {
         }
 
         public async Task<GetEmployeesResponse> Handle(GetEmployeesRequest request, CancellationToken cancellationToken)
+        {
+            var query = CreateQuery(request);
+            var response = await PrepareResponse(query);
+            return response;
+        }
+
+        public override GetEmployeesQuery CreateQuery(GetEmployeesRequest request)
         {
             var data = new GetEmployeesHelper()
             {
@@ -33,15 +38,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Employees
                 PESEL = request.PESEL,
                 RoleName = request.RoleName
             };
-            var query = new GetEmployeesQuery(data);
-
-            var entityModel = await _queryExecutor.Execute(query);
-            var domainModel = _mapper.Map<List<Domain.Models.Employee>>(entityModel);
-            var response = new GetEmployeesResponse()
-            {
-                Data = domainModel
-            };
-            return response;
+            return new GetEmployeesQuery(data);
         }
     }
 }
