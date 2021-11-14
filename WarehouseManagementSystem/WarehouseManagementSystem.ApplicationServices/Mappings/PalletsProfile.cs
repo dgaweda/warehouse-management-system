@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings
 {
@@ -18,6 +19,9 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(x => x.Departure, y => y.MapFrom(z => z.Departure))
                 .ForMember(x => x.Delivery, y => y.MapFrom(z => z.Invoice.Delivery))
                 .ForMember(x => x.Employee, y => y.MapFrom(z => z.Employee));
+
+            CreateMap<RemovePalletRequest, Pallet>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.PalletId));
         }
     }
 }
