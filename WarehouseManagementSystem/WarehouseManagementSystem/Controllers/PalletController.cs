@@ -23,11 +23,15 @@ namespace warehouse_management_system.Controllers
         public async Task<IActionResult> GetPallets([FromQuery] GetPalletsRequest request) => await Handle(request);
 
         [HttpDelete]
-        [Route("Edit")]
+        [Route("Remove")]
         public async Task<IActionResult> RemovePallet([FromQuery] RemovePalletRequest request) => await Handle(request);
 
         [HttpPost]
         [Route("Add")]
         public async Task<IActionResult> AddPallet([FromQuery] AddPalletRequest request) => await Handle(request);
+
+        [HttpPatch]
+        [Route("Edit")]
+        public async Task<IActionResult> SetPalletDestination([FromQuery] SetPalletDestinationRequest request) => await Handle(request);
     }
 }

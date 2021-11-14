@@ -26,7 +26,7 @@ namespace warehouse_management_system.Controllers
         [Route("Add")]
         public async Task<IActionResult> AddDeparture([FromBody] AddDepartureRequest request) => await Handle(request);
 
-        [HttpPut]
+        [HttpPatch]
         [Route("Edit")]
         public async Task<IActionResult> EditDepartureState([FromQuery] EditDepartureStateRequest request) => await Handle(request);
 

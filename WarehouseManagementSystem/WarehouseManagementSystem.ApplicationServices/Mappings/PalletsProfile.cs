@@ -30,6 +30,12 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(x => x.InvoiceId, y => y.MapFrom(z => z.InvoiceId))
                 .ForMember(x => x.EmployeeId, y => y.MapFrom(z => z.EmployeeId));
 
+            CreateMap<SetPalletDestinationRequest, Pallet>()
+                .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))
+                .ForMember(x => x.OrderId, y => y.MapFrom(z => z.OrderId))
+                .ForMember(x => x.DepartureId, y => y.MapFrom(z => z.DepartureId))
+                .ForMember(x => x.InvoiceId, y => y.MapFrom(z => z.InvoiceId))
+                .ForMember(x => x.EmployeeId, y => y.MapFrom(z => z.EmployeeId));
         }
     }
 }
