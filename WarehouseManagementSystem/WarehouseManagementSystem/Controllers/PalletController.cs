@@ -25,5 +25,9 @@ namespace warehouse_management_system.Controllers
         [HttpDelete]
         [Route("Edit")]
         public async Task<IActionResult> RemovePallet([FromQuery] RemovePalletRequest request) => await Handle(request);
+
+        [HttpPost]
+        [Route("Add")]
+        public async Task<IActionResult> AddPallet([FromQuery] AddPalletRequest request) => await Handle(request);
     }
 }

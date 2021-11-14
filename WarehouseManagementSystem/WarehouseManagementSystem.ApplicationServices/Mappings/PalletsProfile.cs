@@ -22,6 +22,14 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
 
             CreateMap<RemovePalletRequest, Pallet>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.PalletId));
+
+            CreateMap<AddPalletRequest, Pallet>()
+                .ForMember(x => x.Barcode, y => y.MapFrom(z => z.Barcode))
+                .ForMember(x => x.OrderId, y => y.MapFrom(z => z.OrderId))
+                .ForMember(x => x.DepartureId, y => y.MapFrom(z => z.DepartureId))
+                .ForMember(x => x.InvoiceId, y => y.MapFrom(z => z.InvoiceId))
+                .ForMember(x => x.EmployeeId, y => y.MapFrom(z => z.EmployeeId));
+
         }
     }
 }
