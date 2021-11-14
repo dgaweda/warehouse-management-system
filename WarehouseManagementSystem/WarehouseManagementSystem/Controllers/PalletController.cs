@@ -18,7 +18,7 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("All")]
-        public async Task<IActionResult> GetAllPallets([FromQuery] GetPalletsRequest request) => await Handle(request);
+        [Route("Get")]
+        public async Task<IActionResult> GetPallets([FromQuery] GetPalletsRequest request) => await Handle(request);
     }
 }

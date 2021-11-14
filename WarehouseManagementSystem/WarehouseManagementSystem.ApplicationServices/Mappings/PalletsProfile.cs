@@ -14,9 +14,10 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
         {
             CreateMap<Pallet, API.Domain.Models.Pallet>()
                 .ForMember(x => x.Barcode, y => y.MapFrom(z => z.Barcode))
-                .ForMember(x => x.OrderId, y => y.MapFrom(z => z.OrderId))
-                .ForMember(x => x.DepartureId, y => y.MapFrom(z => z.DepartureId))
-                .ForMember(x => x.EmployeeId, y => y.MapFrom(z => z.EmployeeId));
+                .ForMember(x => x.Order, y => y.MapFrom(z => z.Order))
+                .ForMember(x => x.Departure, y => y.MapFrom(z => z.Departure))
+                .ForMember(x => x.Delivery, y => y.MapFrom(z => z.Invoice.Delivery))
+                .ForMember(x => x.Employee, y => y.MapFrom(z => z.Employee));
         }
     }
 }

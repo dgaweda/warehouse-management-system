@@ -9,9 +9,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
     public class Pallet
     {
         public string Barcode { get; set; }
-        public int? OrderId { get; set; }
-        public int? DepartureId { get; set; }
-        public int? DeliveryId { get; set; }
-        public int? EmployeeId { get; set; }
+        public Order Order{ get; set; }
+        public Departure Departure { get; set; }
+        public Delivery Delivery { get; set; }
+        public Employee Employee { get; set; }
     }
 }

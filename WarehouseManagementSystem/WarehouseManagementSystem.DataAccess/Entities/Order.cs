@@ -8,7 +8,7 @@ namespace DataAccess.Entities
 {
     public class Order : EntityBase
     {
-        public State State { get; set; }
+        public State OrderState { get; set; }
 
         [Required]
         [MaxLength(10)]

@@ -5,6 +5,7 @@ using DataAccess.CQRS.Queries;
 using DataAccess.CQRS.Queries.DeliveryQueries;
 using DataAccess.CQRS.Queries.DepartureQueries;
 using DataAccess.CQRS.Queries.EmployeeQueries;
+using DataAccess.CQRS.Queries.PalletQueries;
 using DataAccess.CQRS.Queries.RoleQueries;
 using DataAccess.Entities;
 using DataAccess.Repository;
@@ -42,6 +43,7 @@ namespace warehouse_management_system
             services.AddTransient<IGetEntityHelper<Employee>, GetEmployeesHelper>();
             services.AddTransient<IGetEntityHelper<Delivery>, GetDeliveriesHelper>();
             services.AddTransient<IGetEntityHelper<Departure>, GetDeparturesHelper>();
+            services.AddTransient<IGetEntityHelper<Pallet>, GetPalletsHelper>();
             //services.AddScoped(typeof(ICommandHandler<,,,,>), typeof(CommandHandler<,,,,>));
 
             services.AddTransient<ICommandExecutor, CommandExecutor>();
