@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using DataAccess;
+using DataAccess.CQRS.Queries.LocationQueries;
 using DataAccess.Entities;
 using DataAccess.Repository;
 using MediatR;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
@@ -10,17 +13,29 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.LocationService
 {
-    public class GetLocationsHandler :IRequestHandler<GetLocationsRequest, GetLocationsResponse>
+    public class GetLocationsHandler :
+        QueryHandler<GetLocationsRequest, GetLocationsResponse, GetLocationsQuery, List<Location>, List<Domain.Models.Location>>,
+        IRequestHandler<GetLocationsRequest, GetLocationsResponse>
     {
-        private readonly IMapper mapper;
-
-        public GetLocationsHandler(IMapper mapper)
+        public GetLocationsHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
         {
-            this.mapper = mapper;
         }
+
         public async Task<GetLocationsResponse> Handle(GetLocationsRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var query = CreateQuery(request);
+            var response = await PrepareResponse(query);
+            return response;
+        }
+
+        public override GetLocationsQuery CreateQuery(GetLocationsRequest request)
+        {
+            var dataFromRequest = new GetLocationsHelper()
+            {
+                LocationType = request.LocationType,
+                Name = request.Name
+            };
+            return new GetLocationsQuery(dataFromRequest);
         }
     }
 }
