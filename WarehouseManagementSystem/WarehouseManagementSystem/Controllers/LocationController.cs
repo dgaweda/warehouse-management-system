@@ -25,5 +25,9 @@ namespace warehouse_management_system.Controllers
         [HttpPut]
         [Route("Add")]
         public async Task<IActionResult> AddLocation([FromBody] AddLocationRequest request) => await Handle(request);
+
+        [HttpPatch]
+        [Route("Edit")]
+        public async Task<IActionResult> EditLocation([FromQuery] EditLocationRequest request) => await Handle(request);
     }
 }
