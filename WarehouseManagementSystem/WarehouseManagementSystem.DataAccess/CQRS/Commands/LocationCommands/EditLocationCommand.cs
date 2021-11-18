@@ -26,9 +26,6 @@ namespace DataAccess.CQRS.Commands.LocationCommands
 
         private void SetLocationProperties(Location location)
         {
-            if (Parameter.CurrentAmount != 0)
-                location.CurrentAmount = Parameter.CurrentAmount;
-
             if (Parameter.MaxAmount != 0)
                 location.MaxAmount = Parameter.MaxAmount;
 

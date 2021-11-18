@@ -20,14 +20,22 @@ namespace warehouse_management_system.Controllers
 
         [HttpGet]
         [Route("Get")]
-        public async Task<IActionResult> GetLocations([FromQuery] GetLocationsRequest request) => await Handle(request);
+        public async Task<IActionResult> Get([FromQuery] GetLocationsRequest request) => await Handle(request);
 
         [HttpPut]
         [Route("Add")]
-        public async Task<IActionResult> AddLocation([FromBody] AddLocationRequest request) => await Handle(request);
+        public async Task<IActionResult> Add([FromBody] AddLocationRequest request) => await Handle(request);
 
         [HttpPatch]
         [Route("Edit")]
-        public async Task<IActionResult> EditLocation([FromQuery] EditLocationRequest request) => await Handle(request);
+        public async Task<IActionResult> Edit([FromBody] EditLocationRequest request) => await Handle(request);
+
+        [HttpPatch]
+        [Route("Edit/CurrentAmount")]
+        public async Task<IActionResult> EditCurrentAmount([FromQuery] EditLocationCurrentAmountRequest request) => await Handle(request);
+
+        [HttpDelete]
+        [Route("Remove")]
+        public async Task<IActionResult> Remove([FromQuery] RemoveLocationRequest request) => await Handle(request);
     }
 }

@@ -13,13 +13,6 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
     {
         public LocationsProfile()
         {
-            CreateMap<EditLocationRequest, Location>()
-                .ForMember(x => x.DeliveryProductId, y => y.MapFrom(z => z.DeliveryProductId))
-                .ForMember(x => x.MagazineProductId, y => y.MapFrom(z => z.MagazineProductId))
-                .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
-                .ForMember(x => x.MaxAmount, y => y.MapFrom(z => z.MaxAmount))
-                .ForMember(x => x.CurrentAmount, y => y.MapFrom(z => z.CurrentAmount));
-
             CreateMap<Location, API.Domain.Models.Location>()
                 .ForMember(x => x.Type, y => y.MapFrom(z => z.Type))
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
@@ -33,6 +26,18 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(x => x.Type, y => y.MapFrom(z => z.LocationType))
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
                 .ForMember(x => x.MaxAmount, y => y.MapFrom(z => z.MaxAmount));
+
+            CreateMap<RemoveLocationRequest, Location>()
+                .ForMember(x => x.Id, y => y.MapFrom(z => z.Id));
+
+            CreateMap<EditLocationRequest, Location>()
+                .ForMember(x => x.DeliveryProductId, y => y.MapFrom(z => z.DeliveryProductId))
+                .ForMember(x => x.MagazineProductId, y => y.MapFrom(z => z.MagazineProductId))
+                .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
+                .ForMember(x => x.MaxAmount, y => y.MapFrom(z => z.MaxAmount));
+
+            CreateMap<EditLocationCurrentAmountRequest, Location>()
+                .ForMember(x => x.CurrentAmount, y => y.MapFrom(z => z.CurrentAmount));
 
         }
     }
