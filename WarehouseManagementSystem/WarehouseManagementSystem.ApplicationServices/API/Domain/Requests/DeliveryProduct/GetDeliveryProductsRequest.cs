@@ -10,5 +10,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests
 {
     public class GetDeliveryProductsRequest : IRequest<GetDeliveryProductsResponse>
     {
+        public string Name { get; set; }
+        public int Id { get; set; }
+        public string Barcode { get; set; }
     }
 }

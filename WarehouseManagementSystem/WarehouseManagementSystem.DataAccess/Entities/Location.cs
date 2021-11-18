@@ -15,6 +15,7 @@ namespace DataAccess.Entities
 
         [Required]
         [MaxLength(10)]
+        [MinLength(7)]
         public string Name { get; set; }
 
         [Required]

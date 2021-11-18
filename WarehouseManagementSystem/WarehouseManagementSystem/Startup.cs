@@ -39,11 +39,7 @@ namespace warehouse_management_system
             services.AddMvcCore();
 
             services.AddTransient<IQueryExecutor, QueryExecutor>();
-            services.AddTransient<IGetEntityHelper<Role>, GetRolesHelper>();
-            services.AddTransient<IGetEntityHelper<Employee>, GetEmployeesHelper>();
-            services.AddTransient<IGetEntityHelper<Delivery>, GetDeliveriesHelper>();
-            services.AddTransient<IGetEntityHelper<Departure>, GetDeparturesHelper>();
-            services.AddTransient<IGetEntityHelper<Pallet>, GetPalletsHelper>();
+            services.AddScoped(typeof(IGetEntityHelper<Role>), typeof(GetRolesHelper));
             //services.AddScoped(typeof(ICommandHandler<,,,,>), typeof(CommandHandler<,,,,>));
 
             services.AddTransient<ICommandExecutor, CommandExecutor>();

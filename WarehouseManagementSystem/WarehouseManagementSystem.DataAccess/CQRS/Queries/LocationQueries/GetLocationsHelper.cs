@@ -15,7 +15,10 @@ namespace DataAccess.CQRS.Queries.LocationQueries
 
         public async Task<List<Location>> GetFilteredData(WMSDatabaseContext context)
         {
-            var locations = await context.Locations.Where(x => x.Type == LocationType).ToListAsync();
+            var locations = await context.Locations
+                .Include(x => x.DeliveryProduct)
+                .Include(x => x.MagazineProduct)
+                .Where(x => x.Type == LocationType).ToListAsync();
             
             if (PropertiesAreEmpty())
                 return locations;
