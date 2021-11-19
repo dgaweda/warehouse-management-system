@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.DeliveryProduct;
 
 namespace warehouse_management_system.Controllers
 {
@@ -16,6 +17,18 @@ namespace warehouse_management_system.Controllers
 
         [HttpGet]
         [Route("Get")]
-        public async Task<IActionResult> GetAllDeliveryProducts([FromQuery] GetDeliveryProductsRequest request) => await Handle(request);
+        public async Task<IActionResult> Get([FromQuery] GetDeliveryProductsRequest request) => await Handle(request);
+
+        [HttpPost]
+        [Route("Add")]
+        public async Task<IActionResult> Add([FromBody] AddDeliveryProductRequest request) => await Handle(request);
+
+        [HttpPatch]
+        [Route("Edit")]
+        public async Task<IActionResult> Edit([FromBody] EditDeliveryProductRequest request) => await Handle(request);
+
+        [HttpPatch]
+        [Route("Edit/Amount")]
+        public async Task<IActionResult> EditAmount([FromBody] EditDeliveryProductAmountRequest request) => await Handle(request);
     }
 }

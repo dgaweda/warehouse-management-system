@@ -17,6 +17,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
         [Column(TypeName = "date")]
         public DateTime ExpirationDate { get; set; }
         public string Barcode { get; set; }
-        public Pallet Pallet { get; set; }
+        public List<DeliveryProductPalletLine> Pallet { get; set; }
     }
 }

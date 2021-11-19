@@ -1,0 +1,22 @@
+﻿using DataAccess.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DataAccess.CQRS.Commands.DeliveryProductCommands
+{
+    public class AddDeliveryProductCommand : CommandBase<DeliveryProduct, DeliveryProduct>
+    {
+        public override async Task<DeliveryProduct> Execute(WMSDatabaseContext context)
+        {
+            if (Parameter == null)
+                throw new ArgumentNullException();
+
+            await context.AddAsync(Parameter);
+            await context.SaveChangesAsync();
+            return Parameter;
+        }
+    }
+}

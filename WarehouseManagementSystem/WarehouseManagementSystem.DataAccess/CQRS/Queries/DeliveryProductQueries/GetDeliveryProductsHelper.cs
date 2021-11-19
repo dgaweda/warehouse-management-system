@@ -13,6 +13,7 @@ namespace DataAccess.CQRS.Queries.DeliveryProductQueries
         public string Name { get; set; }
         public int Id { get; set; }
         public string Barcode { get; set; }
+
         public async Task<List<DeliveryProduct>> GetFilteredData(WMSDatabaseContext context)
         {
             var deliveryProducts = await context.DeliveryProducts
