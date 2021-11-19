@@ -34,6 +34,9 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
 
             CreateMap<EditDeliveryProductAmountRequest, DeliveryProduct>()
                 .ForMember(x => x.Amount, y => y.MapFrom(z => z.Amount));
+
+            CreateMap<RemoveDeliveryProductRequest, DeliveryProduct>()
+                .ForMember(x => x.Id, y => y.MapFrom(z => z.Id));
         }
     }
 }

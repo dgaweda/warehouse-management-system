@@ -30,5 +30,9 @@ namespace warehouse_management_system.Controllers
         [HttpPatch]
         [Route("Edit/Amount")]
         public async Task<IActionResult> EditAmount([FromBody] EditDeliveryProductAmountRequest request) => await Handle(request);
+
+        [HttpDelete]
+        [Route("Remove")]
+        public async Task<IActionResult> Remove([FromQuery] RemoveDeliveryProductRequest request) => await Handle(request);
     }
 }
