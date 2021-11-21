@@ -13,5 +13,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
         public Departure Departure { get; set; }
         public Delivery Delivery { get; set; }
         public Employee Employee { get; set; }
+        public string PalletStatus { get; set; }
     }
 }

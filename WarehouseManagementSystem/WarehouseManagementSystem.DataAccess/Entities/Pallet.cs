@@ -15,6 +15,8 @@ namespace DataAccess.Entities
         public int? InvoiceId { get; set; }
         public int? EmployeeId { get; set; }
 
+        public Status PalletStatus { get; set; }
+
         [ForeignKey("DepartureId")]
         public Departure Departure { get; set; }
 
@@ -28,5 +30,16 @@ namespace DataAccess.Entities
 
         [ForeignKey("EmployeeId")]
         public Employee Employee { get; set; }
+    }
+
+    public enum Status
+    {
+        OPEN,
+        DURING_ORDER_PICKING,
+        READY_TO_BE_UNFOLDED,
+        READY_FOR_DEPARTURE,
+        WAITING_FOR_ACCEPT,
+        SENT,
+        CLOSED
     }
 }
