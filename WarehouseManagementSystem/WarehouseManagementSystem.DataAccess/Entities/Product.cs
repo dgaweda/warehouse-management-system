@@ -1,19 +1,17 @@
-﻿using System;
+﻿using DataAccess.Entities.EntityBases;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DataAccess.Entities.EntityBases
+namespace DataAccess.Entities
 {
-    public abstract class ProductBase : EntityBase
+    public class Product : EntityBase
     {
         [Required]
         [Column(TypeName = "date")]
         public DateTime ExpirationDate { get; set; }
-        
+
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
@@ -21,5 +19,9 @@ namespace DataAccess.Entities.EntityBases
         [Required]
         [MaxLength(10)]
         public string Barcode { get; set; }
+
+        public List<Location> Locations { get; set; }
+
+        public List<PalletLine> PalletLines{ get; set; }
     }
 }

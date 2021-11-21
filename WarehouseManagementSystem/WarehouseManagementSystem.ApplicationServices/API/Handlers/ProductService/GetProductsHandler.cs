@@ -12,21 +12,21 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryProductService
 {
-    public class GetDeliveryProductsHandler :
-        QueryHandler<GetDeliveryProductsRequest, GetDeliveryProductsResponse, GetDeliveryProductsQuery, List<DeliveryProduct>, List<Domain.Models.DeliveryProduct>>,
-        IRequestHandler<GetDeliveryProductsRequest, GetDeliveryProductsResponse>
+    public class GetProductsHandler :
+        QueryHandler<GetProductsRequest, GetProductsResponse, GetDeliveryProductsQuery, List<Product>, List<Domain.Models.Product>>,
+        IRequestHandler<GetProductsRequest, GetProductsResponse>
     {
-        public GetDeliveryProductsHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
+        public GetProductsHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
         {
         }
 
-        public Task<GetDeliveryProductsResponse> Handle(GetDeliveryProductsRequest request, CancellationToken cancellationToken)
+        public Task<GetProductsResponse> Handle(GetProductsRequest request, CancellationToken cancellationToken)
         {
             var query = CreateQuery(request);
             var response = PrepareResponse(query);
             return response;
         }
-        public override GetDeliveryProductsQuery CreateQuery(GetDeliveryProductsRequest request)
+        public override GetDeliveryProductsQuery CreateQuery(GetProductsRequest request)
         {
             var dataFromRequest = new GetDeliveryProductsHelper()
             {

@@ -13,8 +13,7 @@ namespace DataAccess.CQRS.Commands.LocationCommands
         public override async Task<Location> Execute(WMSDatabaseContext context)
         {
             var locationToEdit = await context.Locations
-                .Include(x => x.DeliveryProduct)
-                .Include(x => x.MagazineProduct)
+                .Include(x => x.Product)
                 .FirstOrDefaultAsync(x => x.Id == Parameter.Id);
 
             SetLocationProperties(locationToEdit);
@@ -32,15 +31,9 @@ namespace DataAccess.CQRS.Commands.LocationCommands
             if (Parameter.Name != null)
                 location.Name = Parameter.Name;
 
-            if (Parameter.DeliveryProductId != null)
+            if (Parameter.ProductId != null)
             {
-                location.DeliveryProductId = Parameter.DeliveryProductId;
-                location.MagazineProductId = null;
-            }
-            else
-            {
-                location.MagazineProductId = Parameter.MagazineProductId;
-                location.DeliveryProductId = null;
+                location.ProductId = null;
             }
 
         }

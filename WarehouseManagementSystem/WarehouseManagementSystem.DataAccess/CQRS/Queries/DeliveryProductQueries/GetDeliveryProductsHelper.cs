@@ -8,37 +8,38 @@ using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Queries.DeliveryProductQueries
 {
-    public class GetDeliveryProductsHelper : IGetEntityHelper<DeliveryProduct>
+    public class GetDeliveryProductsHelper : IGetEntityHelper<Product>
     {
         public string Name { get; set; }
         public int Id { get; set; }
         public string Barcode { get; set; }
 
-        public async Task<List<DeliveryProduct>> GetFilteredData(WMSDatabaseContext context)
+        public async Task<List<Product>> GetFilteredData(WMSDatabaseContext context)
         {
-            var deliveryProducts = await context.DeliveryProducts
-                .Include(x => x.DeliveryProductPalletLines)
+            var products = await context.Products
+                .Include(x => x.PalletLines)
                     .ThenInclude(x => x.Pallet)
                 .ToListAsync();
+
             if (PropertiesAreEmpty())
-                return deliveryProducts;
+                return products;
 
             if (!string.IsNullOrEmpty(Name))
-                deliveryProducts = SearchByName(deliveryProducts);
+                products = SearchByName(products);
 
             if (!string.IsNullOrEmpty(Barcode))
-                deliveryProducts = SearchByBarcode(deliveryProducts);
+                products = SearchByBarcode(products);
 
             if (Id != 0)
-                deliveryProducts = SearchById(deliveryProducts);
+                products = SearchById(products);
 
-            return deliveryProducts;
+            return products;
         }
 
         public bool PropertiesAreEmpty() => string.IsNullOrEmpty(Name) && string.IsNullOrEmpty(Barcode) && Id == 0;
 
-        private List<DeliveryProduct> SearchByName(List<DeliveryProduct> deliveryProducts) => deliveryProducts.Where(x => x.Name.Contains(Name)).ToList();
-        private List<DeliveryProduct> SearchByBarcode(List<DeliveryProduct> deliveryProducts) => deliveryProducts.Where(x => x.Barcode == Barcode).ToList();
-        private List<DeliveryProduct> SearchById(List<DeliveryProduct> deliveryProducts) => deliveryProducts.Where(x => x.Id == Id).ToList();
+        private List<Product> SearchByName(List<Product> products) => products.Where(x => x.Name.Contains(Name)).ToList();
+        private List<Product> SearchByBarcode(List<Product> products) => products.Where(x => x.Barcode == Barcode).ToList();
+        private List<Product> SearchById(List<Product> products) => products.Where(x => x.Id == Id).ToList();
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses
 {
-    public class GetMagazineProductsResponse : ResponseBase<List<Domain.Models.MagazineProduct>>
+    public class GetProductsResponse : ResponseBase<List<Domain.Models.Product>>
     {
     }
 }

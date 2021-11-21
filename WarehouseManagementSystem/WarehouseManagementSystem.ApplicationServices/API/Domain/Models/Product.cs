@@ -8,15 +8,13 @@ using System.Threading.Tasks;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
 {
-    public class DeliveryProduct
+    public class Product
     {
         public string Name { get; set; }
-
-        public int Amount { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime ExpirationDate { get; set; }
         public string Barcode { get; set; }
-        public List<DeliveryProductPalletLine> Pallet { get; set; }
+        public List<PalletLine> PalletLines { get; set; }
     }
 }

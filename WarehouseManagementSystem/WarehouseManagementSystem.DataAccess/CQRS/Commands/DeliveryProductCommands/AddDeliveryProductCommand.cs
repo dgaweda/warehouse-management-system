@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Commands.DeliveryProductCommands
 {
-    public class AddDeliveryProductCommand : CommandBase<DeliveryProduct, DeliveryProduct>
+    public class AddDeliveryProductCommand : CommandBase<Product, Product>
     {
-        public override async Task<DeliveryProduct> Execute(WMSDatabaseContext context)
+        public override async Task<Product> Execute(WMSDatabaseContext context)
         {
             if (Parameter == null)
                 throw new ArgumentNullException();

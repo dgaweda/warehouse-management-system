@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
 {
-    public class DeliveryProductPalletLine 
+    public class PalletLine 
     {
         public Pallet Pallet { get; set; }
+        public int ProductAmount { get; set; }
     }
 }

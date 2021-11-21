@@ -8,19 +8,23 @@ using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Commands.DeliveryProductCommands
 {
-    public class EditDeliveryProductAmountCommand : CommandBase<DeliveryProduct, DeliveryProduct>
+    public class EditDeliveryProductAmountCommand : CommandBase<Product, Product>
     {
-        public override async Task<DeliveryProduct> Execute(WMSDatabaseContext context)
+        /*public override async Task<Product> Execute(WMSDatabaseContext context)
         {
             var product = await context.DeliveryProducts
-                .Include(x => x.DeliveryProductPalletLines)
+                .Include(x => x.PalletLine)
                 .FirstOrDefaultAsync(x => x.Id == Parameter.Id);
             
-            product.Amount = Parameter.Amount;
+            product. = Parameter.Amount;
             context.Entry(product).State = EntityState.Modified;
             await context.SaveChangesAsync();
             
             return product;
+        }*/
+        public override Task<Product> Execute(WMSDatabaseContext context)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Commands.DeliveryProductCommands
 {
-    public class RemoveDeliveryProductCommand : CommandBase<DeliveryProduct, DeliveryProduct>
+    public class RemoveDeliveryProductCommand : CommandBase<Product, Product>
     {
-        public override async Task<DeliveryProduct> Execute(WMSDatabaseContext context)
+        public override async Task<Product> Execute(WMSDatabaseContext context)
         {
-            var product = await context.DeliveryProducts.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
+            var product = await context.Products.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
 
             if (product == null)
                 throw new ArgumentNullException();

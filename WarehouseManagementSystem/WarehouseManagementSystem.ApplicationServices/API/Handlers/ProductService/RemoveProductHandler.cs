@@ -14,14 +14,14 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryProductService
 {
-    public class AddDeliveryProductHandler :
-        CommandHandler<AddDeliveryProductRequest, AddDeliveryProductResponse, DeliveryProduct, Domain.Models.DeliveryProduct, AddDeliveryProductCommand>,
-        IRequestHandler<AddDeliveryProductRequest, AddDeliveryProductResponse>
+    public class RemoveProductHandler :
+        CommandHandler<RemoveProductRequest, RemoveProductResponse, Product, Domain.Models.Product, RemoveDeliveryProductCommand>,
+        IRequestHandler<RemoveProductRequest, RemoveProductResponse>
     {
-        public AddDeliveryProductHandler(IMapper mapper, ICommandExecutor commandExecutor) : base(mapper, commandExecutor)
+        public RemoveProductHandler(IMapper mapper, ICommandExecutor commandExecutor) : base(mapper, commandExecutor)
         {
         }
 
-        public async Task<AddDeliveryProductResponse> Handle(AddDeliveryProductRequest request, CancellationToken cancellationToken) => await PrepareResponse(request);
+        public async Task<RemoveProductResponse> Handle(RemoveProductRequest request, CancellationToken cancellationToken) => await PrepareResponse(request);
     }
 }

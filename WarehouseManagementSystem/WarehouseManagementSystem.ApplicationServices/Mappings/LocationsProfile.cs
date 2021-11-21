@@ -18,11 +18,10 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
                 .ForMember(x => x.CurrentAmount, y => y.MapFrom(z => z.CurrentAmount))
                 .ForMember(x => x.MaxAmount, y => y.MapFrom(z => z.MaxAmount))
-                .ForMember(x => x.ProductName, y => y.MapFrom(src => src.DeliveryProductId == null ? src.MagazineProduct.Name : src.DeliveryProduct.Name));
+                .ForMember(x => x.ProductName, y => y.MapFrom(src => src.Product.Name));
 
             CreateMap<AddLocationRequest, Location>()
-                .ForMember(x => x.DeliveryProductId, y => y.MapFrom(z => z.DeliveryProductId))
-                .ForMember(x => x.MagazineProductId, y => y.MapFrom(z => z.MagazineProductId))
+                .ForMember(x => x.ProductId, y => y.MapFrom(z => z.ProductId))
                 .ForMember(x => x.Type, y => y.MapFrom(z => z.LocationType))
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
                 .ForMember(x => x.MaxAmount, y => y.MapFrom(z => z.MaxAmount));
@@ -31,8 +30,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(x => x.Id, y => y.MapFrom(z => z.Id));
 
             CreateMap<EditLocationRequest, Location>()
-                .ForMember(x => x.DeliveryProductId, y => y.MapFrom(z => z.DeliveryProductId))
-                .ForMember(x => x.MagazineProductId, y => y.MapFrom(z => z.MagazineProductId))
+                .ForMember(x => x.ProductId, y => y.MapFrom(z => z.ProductId))
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
                 .ForMember(x => x.MaxAmount, y => y.MapFrom(z => z.MaxAmount));
 

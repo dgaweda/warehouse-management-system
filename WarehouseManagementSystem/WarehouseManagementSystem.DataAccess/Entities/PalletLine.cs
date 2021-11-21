@@ -8,15 +8,17 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Entities
 {
-    public class DeliveryProductPalletLine : EntityBase
+    public class PalletLine : EntityBase
     {
-        public int DeliveryProductId { get; set; }
+        public int ProductId { get; set; }
         public int PalletId { get; set; }
+
+        public int ProductAmount { get; set; }
 
         [ForeignKey("PalletId")]
         public Pallet Pallet { get; set; }
 
-        [ForeignKey("DeliveryProductId")]
-        public DeliveryProduct DeliveryProduct { get; set; }
+        [ForeignKey("ProductId")]
+        public Product Product { get; set; }
     }
 }

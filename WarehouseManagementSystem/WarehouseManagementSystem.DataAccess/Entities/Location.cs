@@ -7,8 +7,7 @@ namespace DataAccess.Entities
 {
     public class Location : EntityBase
     {
-        public int? DeliveryProductId { get; set; }
-        public int? MagazineProductId { get; set; }
+        public int? ProductId { get; set; }
 
         [Required]
         public Type Type { get; set; }
@@ -26,12 +25,8 @@ namespace DataAccess.Entities
         [Range(1, 999)]
         public int MaxAmount { get; set; }
 
-        [ForeignKey("DeliveryProductId")]
-        public DeliveryProduct DeliveryProduct { get; set; }
-
-        [ForeignKey("MagazineProductId")]
-        public MagazineProduct MagazineProduct { get; set; }
-
+        [ForeignKey("ProductId")]
+        public Product Product { get; set; }
     }
 
     public enum Type

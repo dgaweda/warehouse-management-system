@@ -10,8 +10,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Loca
 {
     public class AddLocationRequest : IRequest<AddLocationResponse>
     {
-        public int? DeliveryProductId { get; set; }
-        public int? MagazineProductId { get; set; }
+        public int? ProductId { get; set; }
         public DataAccess.Entities.Type LocationType { get; set; }
         public string Name { get; set; }
         public int MaxAmount { get; set; }

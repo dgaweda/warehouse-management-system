@@ -7,7 +7,7 @@ namespace DataAccess.Entities
 {
     public class OrderLine : EntityBase
     {
-        public int MagazineProductId { get; set; }
+        public int ProductId { get; set; }
 
         public int OrderId { get; set; }
 
@@ -22,7 +22,7 @@ namespace DataAccess.Entities
         [ForeignKey("OrderId")]
         public Order Order { get; set; }
 
-        [ForeignKey("MagazineProductId")]
-        public MagazineProduct MagazineProduct { get; set; }
+        [ForeignKey("ProductId")]
+        public Product Product { get; set; }
     }
 }

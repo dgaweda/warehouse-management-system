@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.DeliveryProduct
 {
-    public class AddDeliveryProductResponse : ResponseBase<Domain.Models.DeliveryProduct>
+    public class RemoveProductResponse : ResponseBase<Domain.Models.Product>
     {
     }
 }

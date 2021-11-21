@@ -13,7 +13,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Loca
         public int Id { get; set; }
         public int? MaxAmount { get; set; }
         public string Name { get; set; }
-        public int? DeliveryProductId { get; set; }
-        public int? MagazineProductId { get; set; }
+        public int? ProductId { get; set; }
     }
 }

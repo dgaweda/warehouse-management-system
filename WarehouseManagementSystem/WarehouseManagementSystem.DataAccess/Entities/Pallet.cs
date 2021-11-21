@@ -21,7 +21,7 @@ namespace DataAccess.Entities
         [ForeignKey("InvoiceId")]
         public Invoice Invoice{ get; set; }
 
-        public List<DeliveryProductPalletLine> DeliveryProductPalletLines { get; set; }
+        public List<PalletLine> PalletsProducts { get; set; }
 
         [ForeignKey("OrderId")]
         public Order Order { get; set; }
