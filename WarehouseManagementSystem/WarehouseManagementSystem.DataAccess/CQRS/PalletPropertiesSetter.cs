@@ -1,10 +1,4 @@
 ﻿using DataAccess.Entities;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Commands.PalletCommands
 {
@@ -39,11 +33,11 @@ namespace DataAccess.CQRS.Commands.PalletCommands
                 pallet.PalletStatus = Status.OPEN;
         }
 
-        private bool PalletIsDuringOrderPicking(Pallet pallet) => pallet.OrderId != null && pallet.EmployeeId != null ? pallet.Order.OrderState == State.IN_PROGRESS : false;
+        private bool PalletIsDuringOrderPicking(Pallet pallet) => pallet.OrderId != null && pallet.EmployeeId != null && pallet.Order.OrderState == State.IN_PROGRESS;
 
-        private bool PalletWasSent(Pallet pallet) => pallet.DepartureId != null ? pallet.Departure.State == StateType.CLOSED : false;
+        private bool PalletWasSent(Pallet pallet) => pallet.DepartureId != null && pallet.Departure.State == StateType.CLOSED;
 
-        private bool PalletIsReadyForDeparture(Pallet pallet) => pallet.OrderId != null ? pallet.Order.OrderState == State.READY_FOR_DEPARTURE : false;
+        private bool PalletIsReadyForDeparture(Pallet pallet) => pallet.OrderId != null && pallet.Order.OrderState == State.READY_FOR_DEPARTURE;
 
         private bool PalletIsReadyToBeUnfolded(Pallet pallet) => pallet.InvoiceId != null;
 
