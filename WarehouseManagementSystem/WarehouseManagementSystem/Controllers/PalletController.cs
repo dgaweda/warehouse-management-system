@@ -28,10 +28,10 @@ namespace warehouse_management_system.Controllers
 
         [HttpPost]
         [Route("Add")]
-        public async Task<IActionResult> AddPallet([FromQuery] AddPalletRequest request) => await Handle(request);
+        public async Task<IActionResult> AddPallet([FromBody] AddPalletRequest request) => await Handle(request);
 
         [HttpPatch]
         [Route("Edit")]
-        public async Task<IActionResult> SetPalletDestination([FromQuery] SetPalletDestinationRequest request) => await Handle(request);
+        public async Task<IActionResult> SetPalletDestination([FromBody] SetPalletDestinationRequest request) => await Handle(request);
     }
 }

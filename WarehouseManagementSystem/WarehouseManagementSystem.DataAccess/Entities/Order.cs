@@ -29,7 +29,6 @@ namespace DataAccess.Entities
         RECEIVED,
         IN_PROGRESS,
         READY_FOR_DEPARTURE,
-        SENT,
-        DELIVERED
+        SENT
     }
 }

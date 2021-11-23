@@ -18,7 +18,8 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(x => x.Order, y => y.MapFrom(z => z.Order))
                 .ForMember(x => x.Departure, y => y.MapFrom(z => z.Departure))
                 .ForMember(x => x.Delivery, y => y.MapFrom(z => z.Invoice.Delivery))
-                .ForMember(x => x.Employee, y => y.MapFrom(z => z.Employee));
+                .ForMember(x => x.Employee, y => y.MapFrom(z => z.Employee))
+                .ForMember(x => x.PalletStatus, y => y.MapFrom(z => z.PalletStatus));
 
             CreateMap<RemovePalletRequest, Pallet>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.PalletId));

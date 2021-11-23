@@ -32,6 +32,6 @@ namespace warehouse_management_system.Controllers
 
         [HttpDelete]
         [Route("Remove")]
-        public async Task<IActionResult> RemoveDeparture([FromQuery] RemoveDepartureRequest request) => await Handle(request);
+        public async Task<IActionResult> RemoveDeparture([FromBody] RemoveDepartureRequest request) => await Handle(request);
     }
 }
