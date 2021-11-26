@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Queries.DeliveryProductQueries
 {
-    public class GetDeliveryProductsHelper : IGetEntityHelper<Product>
+    public class GetProductsHelper : IGetEntityHelper<Product>
     {
         public string Name { get; set; }
         public int Id { get; set; }

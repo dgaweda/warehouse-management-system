@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Queries.DeliveryProductQueries
 {
-    public class GetDeliveryProductsQuery : QueryBase<List<Product>>
+    public class GetProductsQuery : QueryBase<List<Product>>
     {
         private readonly IGetEntityHelper<Product> _deliveryProduct;
-        public GetDeliveryProductsQuery(IGetEntityHelper<Product> deliveryProduct)
+        public GetProductsQuery(IGetEntityHelper<Product> deliveryProduct)
         {
             _deliveryProduct = deliveryProduct;
         }

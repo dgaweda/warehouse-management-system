@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Commands.DeliveryProductCommands
 {
-    public class EditDeliveryProductCommand : CommandBase<Product, Product>
+    public class EditProductCommand : CommandBase<Product, Product>
     {
         public override async Task<Product> Execute(WMSDatabaseContext context)
         {

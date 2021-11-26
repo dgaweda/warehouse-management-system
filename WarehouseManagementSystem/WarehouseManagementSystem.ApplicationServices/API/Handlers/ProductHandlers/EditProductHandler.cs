@@ -15,7 +15,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryProductService
 {
     public class EditProductHandler :
-        CommandHandler<EditProductRequest, EditProductResponse, Product, Domain.Models.Product, EditDeliveryProductCommand>,
+        CommandHandler<EditProductRequest, EditProductResponse, Product, Domain.Models.Product, EditProductCommand>,
         IRequestHandler<EditProductRequest, EditProductResponse>
     {
         public EditProductHandler(IMapper mapper, ICommandExecutor commandExecutor) : base(mapper, commandExecutor)

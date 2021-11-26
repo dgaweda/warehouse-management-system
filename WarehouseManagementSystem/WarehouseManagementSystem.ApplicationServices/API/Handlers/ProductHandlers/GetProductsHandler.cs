@@ -13,7 +13,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryProductService
 {
     public class GetProductsHandler :
-        QueryHandler<GetProductsRequest, GetProductsResponse, GetDeliveryProductsQuery, List<Product>, List<Domain.Models.Product>>,
+        QueryHandler<GetProductsRequest, GetProductsResponse, GetProductsQuery, List<Product>, List<Domain.Models.Product>>,
         IRequestHandler<GetProductsRequest, GetProductsResponse>
     {
         public GetProductsHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
@@ -26,15 +26,15 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryPro
             var response = PrepareResponse(query);
             return response;
         }
-        public override GetDeliveryProductsQuery CreateQuery(GetProductsRequest request)
+        public override GetProductsQuery CreateQuery(GetProductsRequest request)
         {
-            var dataFromRequest = new GetDeliveryProductsHelper()
+            var dataFromRequest = new GetProductsHelper()
             {
                 Barcode = request.Barcode,
                 Id = request.Id,
                 Name = request.Name
             };
-            return new GetDeliveryProductsQuery(dataFromRequest);
+            return new GetProductsQuery(dataFromRequest);
         }
     }
 }

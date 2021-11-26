@@ -15,7 +15,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryProductService
 {
     public class RemoveProductHandler :
-        CommandHandler<RemoveProductRequest, RemoveProductResponse, Product, Domain.Models.Product, RemoveDeliveryProductCommand>,
+        CommandHandler<RemoveProductRequest, RemoveProductResponse, Product, Domain.Models.Product, RemoveProductCommand>,
         IRequestHandler<RemoveProductRequest, RemoveProductResponse>
     {
         public RemoveProductHandler(IMapper mapper, ICommandExecutor commandExecutor) : base(mapper, commandExecutor)

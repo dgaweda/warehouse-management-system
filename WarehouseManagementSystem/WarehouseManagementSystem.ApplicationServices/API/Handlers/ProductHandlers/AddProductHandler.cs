@@ -15,7 +15,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryProductService
 {
     public class AddProductHandler :
-        CommandHandler<AddProductRequest, AddProductResponse, Product, Domain.Models.Product, AddDeliveryProductCommand>,
+        CommandHandler<AddProductRequest, AddProductResponse, Product, Domain.Models.Product, AddProductCommand>,
         IRequestHandler<AddProductRequest, AddProductResponse>
     {
         public AddProductHandler(IMapper mapper, ICommandExecutor commandExecutor) : base(mapper, commandExecutor)
