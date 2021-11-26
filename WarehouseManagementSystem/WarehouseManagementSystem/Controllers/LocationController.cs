@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
 
 namespace warehouse_management_system.Controllers
 {
@@ -33,6 +34,10 @@ namespace warehouse_management_system.Controllers
         [HttpPatch]
         [Route("Edit/CurrentAmount")]
         public async Task<IActionResult> EditCurrentAmount([FromQuery] EditLocationCurrentAmountRequest request) => await Handle(request);
+
+        [HttpPatch]
+        [Route("Set/Location")]
+        public async Task<IActionResult> SetProductLocation([FromBody] SetProductLocationRequest request) => await Handle(request);
 
         [HttpDelete]
         [Route("Remove")]

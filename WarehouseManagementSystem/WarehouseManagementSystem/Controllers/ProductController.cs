@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.DeliveryProduct;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets;
 
 namespace warehouse_management_system.Controllers
 {
@@ -18,6 +19,10 @@ namespace warehouse_management_system.Controllers
         [HttpGet]
         [Route("Get")]
         public async Task<IActionResult> Get([FromQuery] GetProductsRequest request) => await Handle(request);
+
+        [HttpGet]
+        [Route("Get/PalletId")]
+        public async Task<IActionResult> GetProductsByPalletId([FromQuery] GetProductsByPalletIdRequest request) => await Handle(request);
 
         [HttpPost]
         [Route("Add")]
