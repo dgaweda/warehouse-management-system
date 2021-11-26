@@ -23,7 +23,7 @@ namespace warehouse_management_system.Controllers
         [Route("Get")]
         public async Task<IActionResult> Get([FromQuery] GetLocationsRequest request) => await Handle(request);
 
-        [HttpPut]
+        [HttpPost]
         [Route("Add")]
         public async Task<IActionResult> Add([FromBody] AddLocationRequest request) => await Handle(request);
 

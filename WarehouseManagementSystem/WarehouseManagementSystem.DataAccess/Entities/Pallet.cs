@@ -39,5 +39,6 @@ namespace DataAccess.Entities
         READY_FOR_DEPARTURE,    // when OrderID, EmployeeID and DepartureID is filled and order.State = Ready_fro_departure
         SENT,                   // when OrderID, EmployeeID and DepartureID is filled + DepartureState = CLOSED
         READY_TO_BE_UNFOLDED,   // when only InvoiceId is filled
+        UNFOLDED                // when there is nor product on the pallet
     }
 }

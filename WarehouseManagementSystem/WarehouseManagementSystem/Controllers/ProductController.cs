@@ -20,10 +20,6 @@ namespace warehouse_management_system.Controllers
         [Route("Get")]
         public async Task<IActionResult> Get([FromQuery] GetProductsRequest request) => await Handle(request);
 
-        [HttpGet]
-        [Route("Get/PalletId")]
-        public async Task<IActionResult> GetProductsByPalletId([FromQuery] GetProductsByPalletIdRequest request) => await Handle(request);
-
         [HttpPost]
         [Route("Add")]
         public async Task<IActionResult> Add([FromBody] AddProductRequest request) => await Handle(request);
