@@ -11,7 +11,7 @@ namespace warehouse_management_system.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsPalletsController : ControllerHandler
+    public class ProductsPalletsController : ApiControllerBase
     {
         public ProductsPalletsController(IMediator mediator) : base(mediator)
         {

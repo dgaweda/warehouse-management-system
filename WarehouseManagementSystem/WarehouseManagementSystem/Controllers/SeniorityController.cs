@@ -6,12 +6,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seniority;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Seniority;
 
 namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class SeniorityController : ControllerHandler
+    public class SeniorityController : ApiControllerBase
     {
         public SeniorityController(IMediator mediator) : base(mediator)
         {
@@ -19,14 +21,14 @@ namespace warehouse_management_system.Controllers
 
         [HttpGet]
         [Route("All")]
-        public async Task<IActionResult> GetSeniorities([FromQuery] GetSenioritiesRequest request) => await Handle(request);
+        public Task<IActionResult> GetSeniorities([FromQuery] GetSenioritiesRequest request) => Handle<GetSenioritiesRequest, GetSenioritiesResponse>(request);
 
         [HttpPost]
         [Route("Add")]
-        public async Task<IActionResult> AddSeniority([FromQuery] AddSeniorityRequest request) => await Handle(request);
+        public Task<IActionResult> AddSeniority([FromBody] AddSeniorityRequest request) => Handle<AddSeniorityRequest, AddSeniorityResponse>(request);
 
         [HttpPut]
         [Route("Edit")]
-        public async Task<IActionResult> EditSeniority([FromQuery] EditSeniorityRequest request) => await Handle(request);
+        public Task<IActionResult> EditSeniority([FromBody] EditSeniorityRequest request) => Handle<EditSeniorityRequest, EditSeniorityResponse>(request);
     }
 }

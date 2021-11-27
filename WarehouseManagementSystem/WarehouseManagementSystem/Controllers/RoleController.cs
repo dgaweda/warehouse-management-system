@@ -9,12 +9,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Role;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role;
 
 namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class RoleController : ControllerHandler
+    public class RoleController : ApiControllerBase
     {
         public RoleController(IMediator mediator) : base(mediator)
         {
@@ -22,19 +23,19 @@ namespace warehouse_management_system.Controllers
 
         [HttpPost]
         [Route("Add")]
-        public async Task<IActionResult> AddRole([FromBody] AddRoleRequest request) => await Handle(request);
+        public Task<IActionResult> AddRole([FromBody] AddRoleRequest request) => Handle<AddRoleRequest, AddRoleResponse>(request);
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetRoles([FromQuery] GetRolesRequest request) => await Handle(request);
+        public Task<IActionResult> GetRoles([FromQuery] GetRolesRequest request) => Handle<GetRolesRequest, GetRolesResponse>(request);
 
         [HttpPut]
         [Route("Edit")]
-        public async Task<IActionResult> EditRole([FromBody] EditRoleRequest request) => await Handle(request);
+        public Task<IActionResult> EditRole([FromBody] EditRoleRequest request) => Handle<EditRoleRequest, EditRoleResponse>(request);
 
 
         [HttpDelete]
         [Route("Delete")]
-        public async Task<IActionResult> RemoveRole([FromBody] RemoveRoleRequest request) => await Handle(request);
+        public Task<IActionResult> RemoveRole([FromBody] RemoveRoleRequest request) => Handle<RemoveRoleRequest, RemoveRoleResponse>(request);
     }
 }

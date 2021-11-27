@@ -7,12 +7,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 
 namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class PalletController : ControllerHandler
+    public class PalletController : ApiControllerBase
     {
         public PalletController(IMediator mediator) : base(mediator)
         {
@@ -20,22 +22,22 @@ namespace warehouse_management_system.Controllers
 
         [HttpGet]
         [Route("Get")]
-        public async Task<IActionResult> Get([FromQuery] GetPalletsRequest request) => await Handle(request);
+        public Task<IActionResult> Get([FromQuery] GetPalletsRequest request) => Handle<GetPalletsRequest, GetPalletsResponse>(request);
         
         [HttpGet]
         [Route("Get/Status")]
-        public async Task<IActionResult> GetByStatus([FromQuery] GetPalletsByStatusRequest request) => await Handle(request);
+        public Task<IActionResult> GetByStatus([FromQuery] GetPalletsByStatusRequest request) => Handle<GetPalletsByStatusRequest, GetPalletsByStatusResponse>(request);
 
         [HttpDelete]
         [Route("Remove")]
-        public async Task<IActionResult> Remove([FromQuery] RemovePalletRequest request) => await Handle(request);
+        public Task<IActionResult> Remove([FromQuery] RemovePalletRequest request) => Handle<RemovePalletRequest, RemovePalletResponse>(request);
 
         [HttpPost]
         [Route("Add")]
-        public async Task<IActionResult> Add([FromBody] AddPalletRequest request) => await Handle(request);
+        public Task<IActionResult> Add([FromBody] AddPalletRequest request) => Handle<AddPalletRequest, AddPalletResponse>(request);
 
         [HttpPatch]
         [Route("Edit")]
-        public async Task<IActionResult> SetPalletDestination([FromBody] SetPalletDestinationRequest request) => await Handle(request);
+        public Task<IActionResult> SetPalletDestination([FromBody] SetPalletDestinationRequest request) =>  Handle<SetPalletDestinationRequest, SetPalletDestinationResponse>(request);
     }
 }
