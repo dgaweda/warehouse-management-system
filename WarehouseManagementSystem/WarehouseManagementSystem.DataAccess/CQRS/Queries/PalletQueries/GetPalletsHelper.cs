@@ -16,6 +16,7 @@ namespace DataAccess.CQRS.Queries.PalletQueries
         public string EmployeeName { get; set; }
         public string EmployeeLastName { get; set; }
         public string DepartureName { get; set; }
+        public Status PalleStatus { get; set; }
         public DateTime DepartureCloseTime { get; set; }
 
 

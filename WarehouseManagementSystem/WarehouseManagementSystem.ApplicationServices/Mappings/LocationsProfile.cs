@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings
 {
@@ -30,12 +31,15 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(x => x.Id, y => y.MapFrom(z => z.Id));
 
             CreateMap<EditLocationRequest, Location>()
-                .ForMember(x => x.ProductId, y => y.MapFrom(z => z.ProductId))
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
                 .ForMember(x => x.MaxAmount, y => y.MapFrom(z => z.MaxAmount));
 
             CreateMap<EditLocationCurrentAmountRequest, Location>()
                 .ForMember(x => x.CurrentAmount, y => y.MapFrom(z => z.CurrentAmount));
+
+            CreateMap<SetProductLocationRequest, Location>()
+                .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId))
+                .ForMember(dest => dest.CurrentAmount, opt => opt.MapFrom(src => src.Amount));
 
         }
     }

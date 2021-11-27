@@ -1,9 +1,7 @@
 ﻿using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Queries.DeliveryProductQueries
@@ -20,6 +18,8 @@ namespace DataAccess.CQRS.Queries.DeliveryProductQueries
                 .Include(x => x.PalletLines)
                     .ThenInclude(x => x.Pallet)
                 .ToListAsync();
+
+            var palletLines = await context.PalletLines.ToListAsync();
 
             if (PropertiesAreEmpty())
                 return products;
@@ -41,5 +41,5 @@ namespace DataAccess.CQRS.Queries.DeliveryProductQueries
         private List<Product> SearchByName(List<Product> products) => products.Where(x => x.Name.Contains(Name)).ToList();
         private List<Product> SearchByBarcode(List<Product> products) => products.Where(x => x.Barcode == Barcode).ToList();
         private List<Product> SearchById(List<Product> products) => products.Where(x => x.Id == Id).ToList();
-    }
+        }
 }

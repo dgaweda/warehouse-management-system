@@ -30,12 +30,6 @@ namespace DataAccess.CQRS.Commands.LocationCommands
 
             if (Parameter.Name != null)
                 location.Name = Parameter.Name;
-
-            if (Parameter.ProductId != null)
-            {
-                location.ProductId = null;
-            }
-
         }
     }
 }

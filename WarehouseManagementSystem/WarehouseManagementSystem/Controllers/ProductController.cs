@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.DeliveryProduct;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets;
 
 namespace warehouse_management_system.Controllers
 {

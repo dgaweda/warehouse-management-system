@@ -32,6 +32,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
 
             CreateMap<RemoveProductRequest, Product>()
                 .ForMember(x => x.Id, y => y.MapFrom(z => z.Id));
+
         }
     }
 }
