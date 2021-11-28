@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Queries.PalletLineQueries
 {
-    public class GetProductsByPalletIdHelper : IGetEntityHelper<PalletLine>
+    public class GetProductsByPalletIdHelper : IGetEntityHelper<ProductPalletLine>
     {
         public int PalletId { get; set; }
-        public async Task<List<PalletLine>> GetFilteredData(WMSDatabaseContext context)
+        public async Task<List<ProductPalletLine>> GetFilteredData(WMSDatabaseContext context)
         {
             var palletLines = await GetPalletLines(context);
 
@@ -23,7 +23,7 @@ namespace DataAccess.CQRS.Queries.PalletLineQueries
             return palletLines;
         }
 
-        private async Task<List<PalletLine>> GetPalletLines(WMSDatabaseContext context)
+        private async Task<List<ProductPalletLine>> GetPalletLines(WMSDatabaseContext context)
         {
             return await context.PalletLines
                 .Include(x => x.Product)
@@ -40,7 +40,7 @@ namespace DataAccess.CQRS.Queries.PalletLineQueries
 
         public bool PropertiesAreEmpty() => PalletId == 0;
 
-        private List<PalletLine> SearchByPallet(List<PalletLine> palletLines) => palletLines.Where(x => x.PalletId == PalletId).ToList();
+        private List<ProductPalletLine> SearchByPallet(List<ProductPalletLine> palletLines) => palletLines.Where(x => x.PalletId == PalletId).ToList();
         
     }
 }

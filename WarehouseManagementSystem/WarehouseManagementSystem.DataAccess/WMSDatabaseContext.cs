@@ -20,7 +20,7 @@ namespace DataAccess
         public DbSet<Product> Products { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<PalletLine> PalletLines { get; set; }
+        public DbSet<ProductPalletLine> ProductPalletLines { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
     }
 }

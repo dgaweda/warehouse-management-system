@@ -22,6 +22,6 @@ namespace DataAccess.Entities
 
         public List<Location> Locations { get; set; }
 
-        public List<PalletLine> PalletLines{ get; set; }
+        public List<ProductPalletLine> PalletLines{ get; set; }
     }
 }

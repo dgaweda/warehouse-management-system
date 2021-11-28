@@ -12,7 +12,7 @@ namespace DataAccess.CQRS.Commands.ProductsPalletsCommands
     {
         public override async Task<PalletLine> Execute(WMSDatabaseContext context)
         {   
-            var palletLine = await SetProductAmount(context);
+            var palletLine = await DecreaseProductAmount(context);
             
             if (await PalletIsEmpty(context))
                 palletLine.Pallet.PalletStatus = Status.UNFOLDED;
@@ -22,7 +22,7 @@ namespace DataAccess.CQRS.Commands.ProductsPalletsCommands
         }
 
         
-        private async Task<PalletLine> SetProductAmount(WMSDatabaseContext context)
+        private async Task<PalletLine> DecreaseProductAmount(WMSDatabaseContext context)
         {
             var palletLine = await GetPalletLine(context);
 
