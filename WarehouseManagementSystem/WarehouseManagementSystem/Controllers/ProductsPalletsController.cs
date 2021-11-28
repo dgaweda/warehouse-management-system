@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.ProductsPallets;
 
 namespace warehouse_management_system.Controllers
 {
@@ -19,10 +20,10 @@ namespace warehouse_management_system.Controllers
 
         [HttpGet]
         [Route("Get/Products/PalletID")]
-        public async Task<IActionResult> GetProductsByPalletId([FromQuery] GetProductsByPalletIdRequest request) => await Handle(request);
+        public Task<IActionResult> GetProductsByPalletId([FromQuery] GetProductsByPalletIdRequest request) => Handle<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse>(request);
     
         [HttpPatch]
         [Route("Set/ProductAmount")]
-        public async Task<IActionResult> SetProductAmount([FromQuery] SetProductAmountRequest request) => await Handle(request);
+        public Task<IActionResult> SetProductAmount([FromQuery] SetProductAmountRequest request) => Handle<SetProductAmountRequest, SetProductAmountResponse>(request);
     }
 }
