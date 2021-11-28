@@ -5,16 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Role;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Role
 {
-    public class EditRoleRequestValidator : AbstractValidator<EditRoleRequestValidator>
+    public class EditRoleRequestValidator : AbstractValidator<EditRoleRequest>
     {
         private readonly WMSDatabaseContext _context;
         public EditRoleRequestValidator(WMSDatabaseContext context)
         {
             _context = context;
 
+            RuleFor(x => x.Id).Must(Exist).WithMessage("Selected Role doesn't exist.");
             RuleFor(x => x.Name).NotEmpty().WithMessage("Role name must be filled");
             RuleFor(x => x.Name).Must(BeUnique).WithMessage("Role of that name already exists.");
             RuleFor(x => x.Description).NotEmpty().WithMessage("You need to describe the role.");
@@ -22,5 +24,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Role
         }
         
         private bool BeUnique(string name) => !_context.Roles.Any(x => x.Name == name);
+        private bool Exist(int id) => _context.Roles.Any(x => x.Id == id);
     }
 }

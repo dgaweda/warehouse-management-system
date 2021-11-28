@@ -38,7 +38,7 @@ namespace DataAccess.CQRS.Queries.PalletLineQueries
                 .ToListAsync();
         }
 
-        public bool PropertiesAreEmpty() => PalletId != 0;
+        public bool PropertiesAreEmpty() => PalletId == 0;
 
         private List<PalletLine> SearchByPallet(List<PalletLine> palletLines) => palletLines.Where(x => x.PalletId == PalletId).ToList();
         

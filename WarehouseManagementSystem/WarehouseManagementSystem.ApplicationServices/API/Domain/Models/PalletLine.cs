@@ -8,12 +8,13 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
 {
     public class PalletLine 
     {
+        public string PalletBarcode { get; set; }
         public string ProductName { get; set; }
-        public string Barcode { get; set; }
-        public Order Order { get; set; }
-        public Departure Departure { get; set; }
-        public Invoice Invoice { get; set; }
-        public Employee Employee { get; set; }
         public int ProductAmount { get; set; }
+        public string OrderBarcode { get; set; }
+        public string DepartureName { get; set; }
+        public string InvoiceNumber { get; set; }
+        public string EmployeeName { get; set; }
+        public string EmployeeLastName { get; set; }
     }
 }

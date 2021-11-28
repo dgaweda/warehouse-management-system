@@ -27,6 +27,8 @@ namespace DataAccess.CQRS.Queries.PalletQueries
                 .Include(x => x.Order)
                 .Include(x => x.Invoice.Delivery)
                 .Include(x => x.Employee)
+                .Include(x => x.PalletsProducts)
+                    .ThenInclude(x => x.Product)
                 .ToListAsync();
 
             if (PropertiesAreEmpty())

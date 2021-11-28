@@ -14,13 +14,15 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
         public PalletLinesProfile()
         {
             CreateMap<PalletLine, API.Domain.Models.PalletLine>()
+                .ForMember(dest => dest.PalletBarcode, opt => opt.MapFrom(src => src.Pallet.Barcode))
                 .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
-                .ForMember(dest => dest.Barcode, opt => opt.MapFrom(src => src.Pallet.Barcode))
-                .ForMember(dest => dest.Order, opt => opt.MapFrom(src => src.Pallet.Order))
-                .ForMember(dest => dest.Departure, opt => opt.MapFrom(src => src.Pallet.Departure))
-                .ForMember(dest => dest.Invoice, opt => opt.MapFrom(src => src.Pallet.Invoice))
-                .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => src.Pallet.Employee))
-                .ForMember(dest => dest.ProductAmount, opt => opt.MapFrom(src => src.ProductAmount));
+                .ForMember(dest => dest.ProductAmount, opt => opt.MapFrom(src => src.ProductAmount))
+                .ForMember(dest => dest.OrderBarcode, opt => opt.MapFrom(src => src.Pallet.Order != null ? src.Pallet.Order.Barcode : "NO_ORDER"))
+                .ForMember(dest => dest.DepartureName, opt => opt.MapFrom(src => src.Pallet.Departure != null ? src.Pallet.Departure.Name : "NO_DEPARTURE"))
+                .ForMember(dest => dest.InvoiceNumber, opt => opt.MapFrom(src => src.Pallet.Invoice != null ? src.Pallet.Invoice.InvoiceNumber : "NO_INVOICE"))
+                .ForMember(dest => dest.EmployeeName, opt => opt.MapFrom(src => src.Pallet.Employee != null ? src.Pallet.Employee.Name : "NO_EMPLOYEE"))
+                .ForMember(dest => dest.EmployeeLastName, opt => opt.MapFrom(src => src.Pallet.Employee != null ? src.Pallet.Employee.LastName : "NO_EMPLOYEE"));
+
 
             CreateMap<SetProductAmountRequest, PalletLine>()
                 .ForMember(dest => dest.PalletId, opt => opt.MapFrom(src => src.PalletId))
