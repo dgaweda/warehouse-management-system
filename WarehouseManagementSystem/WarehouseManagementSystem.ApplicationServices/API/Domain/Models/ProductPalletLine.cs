@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
 {
-    public class PalletLine 
+    public class ProductPalletLine 
     {
         public string PalletBarcode { get; set; }
         public string ProductName { get; set; }

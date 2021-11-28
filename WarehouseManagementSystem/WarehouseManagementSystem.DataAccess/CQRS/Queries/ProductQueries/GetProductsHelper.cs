@@ -19,7 +19,7 @@ namespace DataAccess.CQRS.Queries.DeliveryProductQueries
                     .ThenInclude(x => x.Pallet)
                 .ToListAsync();
 
-            var palletLines = await context.PalletLines.ToListAsync();
+            var palletLines = await context.ProductPalletLines.ToListAsync();
 
             if (PropertiesAreEmpty())
                 return products;

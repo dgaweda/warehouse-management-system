@@ -25,7 +25,7 @@ namespace DataAccess.CQRS.Queries.PalletLineQueries
 
         private async Task<List<ProductPalletLine>> GetPalletLines(WMSDatabaseContext context)
         {
-            return await context.PalletLines
+            return await context.ProductPalletLines
                 .Include(x => x.Product)
                 .Include(x => x.Pallet)
                     .ThenInclude(order => order.Order)

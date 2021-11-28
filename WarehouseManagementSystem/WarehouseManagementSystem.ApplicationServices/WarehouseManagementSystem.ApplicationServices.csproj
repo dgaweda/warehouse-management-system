@@ -16,8 +16,4 @@
     <ProjectReference Include="..\WarehouseManagementSystem.DataAccess\WarehouseManagementSystem.DataAccess.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="API\Validators\ProductsPallets\" />
-  </ItemGroup>
-
 </Project>

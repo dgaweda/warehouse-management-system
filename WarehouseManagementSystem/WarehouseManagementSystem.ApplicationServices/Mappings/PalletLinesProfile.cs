@@ -13,7 +13,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
     {
         public PalletLinesProfile()
         {
-            CreateMap<PalletLine, API.Domain.Models.PalletLine>()
+            CreateMap<ProductPalletLine, API.Domain.Models.ProductPalletLine>()
                 .ForMember(dest => dest.PalletBarcode, opt => opt.MapFrom(src => src.Pallet.Barcode))
                 .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
                 .ForMember(dest => dest.ProductAmount, opt => opt.MapFrom(src => src.ProductAmount))
@@ -24,7 +24,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(dest => dest.EmployeeLastName, opt => opt.MapFrom(src => src.Pallet.Employee != null ? src.Pallet.Employee.LastName : "NO_EMPLOYEE"));
 
 
-            CreateMap<SetProductAmountRequest, PalletLine>()
+            CreateMap<SetProductAmountRequest, ProductPalletLine>()
                 .ForMember(dest => dest.PalletId, opt => opt.MapFrom(src => src.PalletId))
                 .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId))
                 .ForMember(dest => dest.ProductAmount, opt => opt.MapFrom(src => src.ProductAmount));
