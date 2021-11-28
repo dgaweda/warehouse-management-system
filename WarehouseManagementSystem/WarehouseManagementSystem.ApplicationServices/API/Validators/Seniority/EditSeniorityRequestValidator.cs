@@ -1,6 +1,5 @@
 ﻿using DataAccess;
 using FluentValidation;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +9,10 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seniorit
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Seniority
 {
-    public class AddSeniorityRequestValidator : AbstractValidator<AddSeniorityRequest>
+    public class EditSeniorityRequestValidator : AbstractValidator<EditSeniorityRequest>
     {
         private readonly WMSDatabaseContext _context;
-        public AddSeniorityRequestValidator(WMSDatabaseContext context)
+        public EditSeniorityRequestValidator(WMSDatabaseContext context)
         {
             _context = context;
             RuleFor(x => x.EmploymentDate).GreaterThanOrEqualTo(DateTime.Now.Date).WithMessage($"EmploymentDate must be equal or greater than {DateTime.Now.Date}.");
