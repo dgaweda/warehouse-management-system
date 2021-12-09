@@ -23,7 +23,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.InvoiceVa
             InvoiceValidation();
         }
 
-        public bool CheckIfDeliveryExists(int id) => _invoice.Any(x => x.DeliveryId == id);
+        public bool CheckIfDeliveryExists(int DeliveryId) => _invoice.Any(x => x.DeliveryId == DeliveryId);
         public bool CheckIfInvoiceExists(int id) => _invoice.Any(x => x.Id == id);
         public void InvoiceValidation()
         {
