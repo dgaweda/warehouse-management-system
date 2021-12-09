@@ -24,7 +24,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
 
         private bool CheckIfLocationExist(int Id) => _context.Locations.Any(x => x.Id == Id);
         private bool CheckIfProductExist(int Id) => _context.ProductPalletLines.Any(x => x.ProductId == Id);
-
         private int GetMaxAmount(int Id) => _context.Locations.Where(x => x.Id == Id).Select(x => x.MaxAmount).FirstOrDefault();
     }
 }
