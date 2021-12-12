@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using DataAccess.Entities;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -11,16 +12,21 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
 {
     public class EditLocationCurrentAmountValidator : AbstractValidator<EditLocationCurrentAmountRequest>
     {
-        private readonly WMSDatabaseContext _context;
-        public EditLocationCurrentAmountValidator(WMSDatabaseContext context)
+        private IValidatorHelper _validator;
+        public EditLocationCurrentAmountValidator(IValidatorHelper validator)
         {
-            _context = context;
-            RuleFor(x => x.Id).Must(Exists).WithMessage("Location doesn't exists.");
-            RuleFor(x => x.CurrentAmount).GreaterThan(0).WithMessage(x => $"Current amount must be greater than {x.CurrentAmount}");
-            RuleFor(x => x.CurrentAmount).LessThan(x => GetMaxFromLocation(x.Id)).WithMessage(x => $"Current amount must be less than {GetMaxFromLocation(x.Id)}.");
-        }
+            _validator = validator;
+            RuleFor(x => x.Id)
+                .Must(_validator.CheckIfExist<Location>)
+                .WithMessage("Location doesn't exists.");
 
-        private bool Exists(int Id) => _context.Locations.Any(x => x.Id == Id);
-        private int GetMaxFromLocation(int Id) => _context.Locations.Where(y => y.Id == Id).Select(x => x.MaxAmount).FirstOrDefault();
+            RuleFor(x => x.CurrentAmount)
+                .GreaterThan(0)
+                .WithMessage(x => $"Current amount must be greater than {x.CurrentAmount}");
+
+            RuleFor(x => x.CurrentAmount)
+                .LessThan(x => _validator.GetLocationMaxAmount(x.Id))
+                .WithMessage(x => $"Current amount must be less than {_validator.GetLocationMaxAmount(x.Id)}.");
+        }
     }
 }

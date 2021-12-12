@@ -21,6 +21,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
 using WarehouseManagementSystem.ApplicationServices.API.Handlers;
+using WarehouseManagementSystem.ApplicationServices.API.Validators;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.Seniority;
 using WarehouseManagementSystem.ApplicationServices.Mappings;
 
@@ -57,6 +58,7 @@ namespace warehouse_management_system
                 option.UseSqlServer(this.Configuration.GetConnectionString("WMSDatabaseContext")));
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient<ICustomValidator, CustomValidator>();
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>

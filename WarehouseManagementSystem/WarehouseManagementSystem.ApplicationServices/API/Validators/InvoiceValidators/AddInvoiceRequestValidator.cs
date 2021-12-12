@@ -11,26 +11,16 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Invoice;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.InvoiceValidators
 {
-    public class AddInvoiceRequestValidator : AbstractValidator<AddInvoiceRequest>, IValidationForInvoice
+    public class AddInvoiceRequestValidator : AbstractValidator<AddInvoiceRequest>
     {
-        private readonly WMSDatabaseContext _context;
-        private DbSet<Invoice> _invoice;
-        public AddInvoiceRequestValidator(WMSDatabaseContext context)
+        private readonly IValidatorHelper _validator;
+        public AddInvoiceRequestValidator(IValidatorHelper validator)
         {
-            _context = context;
-            _invoice = _context.Set<Invoice>();
-            RuleFor(x => x.DeliveryId).Must(CheckIfDeliveryExists).WithMessage("Delivery doesn't exists.");
-            InvoiceValidation();
-        }
-
-        public bool CheckIfDeliveryExists(int id) => _invoice.Any(x => x.DeliveryId == id);
-        public bool CheckIfInvoiceExists(int id) => _invoice.Any(x => x.Id == id);
-        public void InvoiceValidation()
-        {
+            _validator = validator;
+            RuleFor(x => x.DeliveryId).Must(_validator.CheckIfExist<Delivery>).WithMessage("Delivery doesn't exists.");
             RuleFor(x => x.Provider).NotEmpty().WithMessage("Provider must be specified.");
             RuleFor(x => x.ReceiptDateTime.Date).LessThanOrEqualTo(DateTime.Now.Date);
             RuleFor(x => x.CreationDate).LessThan(y => y.ReceiptDateTime).WithMessage("Creation date of invoice must be less than Receipt datetime.");
-            RuleFor(x => x.DeliveryId).NotEmpty().WithMessage("Delivery must be specified.");
         }
     }
 }

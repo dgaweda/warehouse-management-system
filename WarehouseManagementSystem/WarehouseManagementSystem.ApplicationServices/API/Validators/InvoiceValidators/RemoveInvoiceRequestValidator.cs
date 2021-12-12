@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using DataAccess.Entities;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.InvoiceVa
 {
     public class RemoveInvoiceRequestValidator : AbstractValidator<RemoveInvoiceRequest>
     {
-        private readonly IValidationForInvoice _invoiceValidation;
-        public RemoveInvoiceRequestValidator()
+        private readonly ICustomValidator _validator;
+        public RemoveInvoiceRequestValidator(ICustomValidator validator)
         {
-            RuleFor(x => x.InvoiceId).Must(_invoiceValidation.CheckIfInvoiceExists).WithMessage(x => $"Invoice with id: {x.InvoiceId} not exists.");
+            _validator = validator;
+            RuleFor(x => x.InvoiceId).Must(_validator.CheckIfExist<Invoice>).WithMessage(x => $"Invoice with id: {x.InvoiceId} not exists.");
         }
     }
 }
