@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using DataAccess.Entities;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductPa
 {
     public class SetProductAmountRequestValidator : AbstractValidator<SetProductAmountRequest>
     {
-        private readonly IValidatorHelper _validator;
-        public SetProductAmountRequestValidator(IValidatorHelper validator)
+        private readonly IValidatorHelper<Product> _validator;
+        public SetProductAmountRequestValidator(IValidatorHelper<Product> validator)
         {
             _validator = validator;
             RuleFor(x => x.PalletId).NotEmpty().WithMessage("This field must be filled");

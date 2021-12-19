@@ -13,6 +13,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
     public class EditLocationCurrentAmountValidator : AbstractValidator<EditLocationCurrentAmountRequest>
     {
         private IValidatorHelper<Location> _validator;
+
         public EditLocationCurrentAmountValidator(IValidatorHelper<Location> validator)
         {
             _validator = validator;

@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using DataAccess.Entities;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductVa
 {
     public class AddProductRequestValidator : AbstractValidator<AddProductRequest>
     {
-        private readonly IValidatorHelper _validator;
+        private readonly IValidatorHelper<Product> _validator;
 
-        public AddProductRequestValidator(IValidatorHelper validator)
+        public AddProductRequestValidator(IValidatorHelper<Product> validator)
         {
             _validator = validator;
-            RuleFor(x => x.Name).Must(CheckIfNameIsUnique).WithMessage(x => $"A product of name: {x.Name} already exists.");
-            RuleFor(x => x.Barcode).Must(CheckIfBarcodeIsUnique).WithMessage(x => $"A product of barcode: {x.Barcode} already exists.");
+            RuleFor(x => x.Barcode).Must(_validator.CheckIfBarcodeIsUnique).WithMessage(x => $"A product of barcode: {x.Barcode} already exists.");
 
             RuleFor(x => x.ExpirationDate).GreaterThan(DateTime.Now.Date.AddMonths(3)).WithMessage($"A product expiration date cannot be lower than {DateTime.Now.Date.AddMonths(3)}");
 
@@ -25,8 +25,5 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductVa
             RuleFor(x => x.Barcode).NotEmpty().WithMessage("A product barcode can't be empty.");
             RuleFor(x => x.ExpirationDate).NotEmpty().WithMessage("A product expiration must be set.");
         }
-
-        private bool CheckIfNameIsUnique(string name) => !_context.Products.Any(x => x.Name == name);
-        private bool CheckIfBarcodeIsUnique(string barcode) => !_context.Products.Any(x => x.Barcode == barcode);
     }
 }
