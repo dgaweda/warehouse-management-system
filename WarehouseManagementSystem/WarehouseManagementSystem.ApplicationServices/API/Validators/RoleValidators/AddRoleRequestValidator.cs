@@ -7,10 +7,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Role
 {
     public class AddRoleRequestValidator : AbstractValidator<AddRoleRequest>
     {
-        private readonly WMSDatabaseContext _context;
-        public AddRoleRequestValidator(WMSDatabaseContext context)
+        private readonly IValidatorHelper<DataAccess.Entities.Role> _validator;
+        public AddRoleRequestValidator(IValidatorHelper<DataAccess.Entities.Role> validator)
         {
-            _context = context;
 
             RuleFor(x => x.Name).NotEmpty().WithMessage("Role name must be filled");
             RuleFor(x => x.Name).Must(BeUnique).WithMessage("Role of that name already exists.");

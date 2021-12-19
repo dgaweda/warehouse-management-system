@@ -11,13 +11,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Role
 {
     public class RemoveRoleRequestValidator : AbstractValidator<RemoveRoleRequest>
     {
-        private readonly WMSDatabaseContext _context;
-        public RemoveRoleRequestValidator(WMSDatabaseContext context)
+        private readonly IValidatorHelper<DataAccess.Entities.Role> _validator;
+        public RemoveRoleRequestValidator(IValidatorHelper<DataAccess.Entities.Role> validator)
         {
-            _context = context;
-            RuleFor(x => x.RoleId).Must(Exist).WithMessage("Selected role doesn't exist.");
+            _validator = validator;
+            RuleFor(x => x.RoleId).Must(_validator.CheckIfExist).WithMessage("Selected role doesn't exist.");
         }
-        
-        private bool Exist(int id) => _context.Roles.Any(x => x.Id == id);
     }
 }

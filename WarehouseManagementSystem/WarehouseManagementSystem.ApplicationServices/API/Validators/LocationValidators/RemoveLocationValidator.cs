@@ -12,12 +12,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
 {
     public class RemoveLocationValidator : AbstractValidator<RemoveLocationRequest>
     {
-        private readonly IValidatorHelper _validator;
+        private readonly IValidatorHelper<Location> _validator;
 
-        public RemoveLocationValidator(IValidatorHelper validator)
+        public RemoveLocationValidator(IValidatorHelper<Location> validator)
         {
             _validator = validator;
-            RuleFor(x => x.Id).Must(_validator.CheckIfExist<Location>).WithMessage("Location doesn't exists");
+            RuleFor(x => x.Id).Must(_validator.CheckIfExist).WithMessage("Location doesn't exists");
         }
     }
 }

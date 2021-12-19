@@ -15,11 +15,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
 {
     public class AddLocationRequestValidator : AbstractValidator<AddLocationRequest>
     {
-
-        private readonly ICustomValidator _validator;
-        public AddLocationRequestValidator(ICustomValidator validator)
+        private readonly IValidatorHelper<DataAccess.Entities.Product> _validator;
+        public AddLocationRequestValidator(IValidatorHelper<DataAccess.Entities.Product> productValidator)
         {
-            _validator = validator;
+            _validator = productValidator;
 
             RuleFor(x => x.Name).Must(_validator.CheckIfLocationNameIsNotTaken).WithMessage(x => $"Location named: {x.Name} already exists.");
             RuleFor(x => x.Name).Must(MatchLocationPattern).WithMessage("Name is invalid. Example location: Z.01-02");
@@ -27,7 +26,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
             RuleFor(x => x.MaxAmount).ExclusiveBetween(1, 999);
             RuleFor(x => x.MaxAmount).NotEmpty().WithMessage("Max amount can't be empty");
 
-            RuleFor(x => x.ProductId).Must(_validator.CheckIfProductExists).WithMessage("Product doesn't exists");
+            RuleFor(x => x.ProductId).Must(_validator.CheckIfExist).WithMessage("Product doesn't exists");
         }
 
         private bool MatchLocationPattern(string name)

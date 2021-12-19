@@ -13,13 +13,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductVa
 {
     public class EditProductRequestValidator : AbstractValidator<EditProductRequest>
     {
-        private readonly WMSDatabaseContext _context;
-        private readonly DbSet<Product> products;
-        public EditProductRequestValidator(WMSDatabaseContext context)
+        private readonly IValidatorHelper _validator;
+        public EditProductRequestValidator(IValidatorHelper validator)
         {
-            _context = context;
-            products = _context.Set<Product>();
-            RuleFor(x => x.Id).Must(CheckIfIdExists).WithMessage("Can't edit product because it doesn't exists.");
+            RuleFor(x => x.Id).Must(_validator.CheckIfExist<Product>).WithMessage("Can't edit product because it doesn't exists.");
             RuleFor(x => x.Id).GreaterThan(0);
 
             RuleFor(x => x.Name).Must(CheckIfNameExists).WithMessage(x => $"Can't edit beacuse product of name: {x.Name} already exists.");

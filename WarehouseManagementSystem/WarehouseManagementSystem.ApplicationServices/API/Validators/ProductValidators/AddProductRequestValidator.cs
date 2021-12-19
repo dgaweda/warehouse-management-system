@@ -11,11 +11,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductVa
 {
     public class AddProductRequestValidator : AbstractValidator<AddProductRequest>
     {
-        private readonly WMSDatabaseContext _context;
+        private readonly IValidatorHelper _validator;
 
-        public AddProductRequestValidator(WMSDatabaseContext context)
+        public AddProductRequestValidator(IValidatorHelper validator)
         {
-            _context = context;
+            _validator = validator;
             RuleFor(x => x.Name).Must(CheckIfNameIsUnique).WithMessage(x => $"A product of name: {x.Name} already exists.");
             RuleFor(x => x.Barcode).Must(CheckIfBarcodeIsUnique).WithMessage(x => $"A product of barcode: {x.Barcode} already exists.");
 

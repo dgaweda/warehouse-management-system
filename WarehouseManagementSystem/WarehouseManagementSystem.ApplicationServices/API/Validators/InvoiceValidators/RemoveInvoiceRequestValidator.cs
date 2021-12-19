@@ -11,11 +11,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.InvoiceVa
 {
     public class RemoveInvoiceRequestValidator : AbstractValidator<RemoveInvoiceRequest>
     {
-        private readonly ICustomValidator _validator;
-        public RemoveInvoiceRequestValidator(ICustomValidator validator)
+        private readonly IValidatorHelper<Invoice> _validator;
+        public RemoveInvoiceRequestValidator(IValidatorHelper<Invoice> validator)
         {
             _validator = validator;
-            RuleFor(x => x.InvoiceId).Must(_validator.CheckIfExist<Invoice>).WithMessage(x => $"Invoice with id: {x.InvoiceId} not exists.");
+            RuleFor(x => x.InvoiceId).Must(_validator.CheckIfExist).WithMessage(x => $"Invoice with id: {x.InvoiceId} not exists.");
         }
     }
 }

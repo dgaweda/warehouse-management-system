@@ -11,14 +11,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Seniority
 {
     public class EditSeniorityRequestValidator : AbstractValidator<EditSeniorityRequest>
     {
-        private readonly WMSDatabaseContext _context;
-        public EditSeniorityRequestValidator(WMSDatabaseContext context)
+        private readonly IValidatorHelper<DataAccess.Entities.Seniority> _validator;
+        public EditSeniorityRequestValidator(IValidatorHelper<DataAccess.Entities.Seniority> validator)
         {
-            _context = context;
+            _validator = validator;
             RuleFor(x => x.EmploymentDate).GreaterThanOrEqualTo(DateTime.Now.Date).WithMessage($"EmploymentDate must be equal or greater than {DateTime.Now.Date}.");
-            RuleFor(x => x.EmployeeId).Must(BeUnique).WithMessage("EmployeeID must be Unique.");
+            RuleFor(x => x.EmployeeId).Must(_validator.CheckIfEmployeeIsNotHired).WithMessage("Employee is already hired.");
         }
-
-        public bool BeUnique(int employeeId) => _context.Seniorities.Any(x => x.EmployeeId == employeeId);
     }
 }

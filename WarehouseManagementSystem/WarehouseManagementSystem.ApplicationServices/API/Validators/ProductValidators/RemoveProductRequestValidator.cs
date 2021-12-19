@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using DataAccess.Entities;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductVa
 {
     public class RemoveProductRequestValidator : AbstractValidator<RemoveProductRequest>
     {
-        private readonly WMSDatabaseContext _context;
-
-        public RemoveProductRequestValidator(WMSDatabaseContext context)
+        private readonly IValidatorHelper<Product> _validator;
+        public RemoveProductRequestValidator(IValidatorHelper<Product> validator)
         {
-            _context = context;
-            RuleFor(x => x.Id).Must(CheckIfIdExists).WithMessage(x => $"Product of ID: {x.Id} doesn't exists.");
+            _validator = validator;
+            RuleFor(x => x.Id).Must(_validator.CheckIfExist).WithMessage(x => $"Product of ID: {x.Id} doesn't exists.");
         }
-
-        private bool CheckIfIdExists(int Id) => _context.Products.Any(x => x.Id == Id);
     }
 }

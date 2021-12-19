@@ -7,29 +7,37 @@ using System.Linq;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators
 {
-    public class ValidatorHelper : IValidatorHelper
+    public class ValidatorHelper<TEntity> : IValidatorHelper<TEntity> where TEntity : EntityBase
     {
         private readonly WMSDatabaseContext _context;
+        private DbSet<TEntity> entity;
 
         public ValidatorHelper(WMSDatabaseContext context)
         {
             _context = context;
+            entity = _context.Set<TEntity>();
         }
 
-        public bool CheckIfExist<TEntity>(int id) where TEntity : EntityBase
+        /// <summary>
+        /// Sprawdza czy istnieje rekord o podanym ID
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool CheckIfExist(int id)
         {
-            var entity = _context.Set<TEntity>();
             return entity.Any(x => x.Id == id);
         }
 
         /// <summary>
-        /// Sprawdza czy dany produkt istnieje
+        /// Sprawdza czy istnieje rekord o podanym ID
         /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool CheckIfProductExists(int? id)
+        public bool CheckIfExist(int? id)
         {
-            return _context.Products.Any(x => x.Id == id);
+            return entity.Any(x => x.Id == id);
         }
 
         /// <summary>
@@ -65,10 +73,42 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
         /// <summary>
         /// Sprawdza czy wskazana paleta do rozłożenia istnieje
         /// </summary>
+        /// <param name="palletId"></param>
         /// <returns></returns>
         public bool CheckIfPalletForUnfoldingExist(int palletId)
         {
             return _context.ProductPalletLines.Any(x => x.PalletId == palletId);
         }
+
+        /// <summary>
+        /// Sprawdza czy kod kreskowy nie
+        /// </summary>
+        /// <param name="barcode"></param>
+        /// <returns></returns>
+        public bool CheckIfBarcodeIsUnique(string barcode)
+        {
+            return !_context.Products.Any(x => x.Barcode == barcode);
+        }
+
+        /// <summary>
+        /// Sprawdza czy w bazie nie istnieje rola o podanej nazwie
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public bool CheckIfRoleNameIsUnique(string name)
+        {
+            return !_context.Roles.Any(x => x.Name == name);
+        }
+
+        /// <summary>
+        /// Sprawdza czy pracownik nie został już zatrudniony
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <returns></returns>
+        public bool CheckIfEmployeeIsNotHired(int employeeId)
+        {
+            return !_context.Seniorities.Any(x => x.EmployeeId == employeeId);
+        }
+
     }
 }
