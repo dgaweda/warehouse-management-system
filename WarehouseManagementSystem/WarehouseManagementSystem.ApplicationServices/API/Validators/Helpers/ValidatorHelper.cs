@@ -10,7 +10,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
     public class ValidatorHelper<TEntity> : IValidatorHelper<TEntity> where TEntity : EntityBase
     {
         private readonly WMSDatabaseContext _context;
-        private DbSet<TEntity> entity;
+        private readonly DbSet<TEntity> entity;
 
         public ValidatorHelper(WMSDatabaseContext context)
         {
@@ -110,5 +110,29 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
             return !_context.Seniorities.Any(x => x.EmployeeId == employeeId);
         }
 
+        /// <summary>
+        /// Sprawdza czy podana dostawa istnieje
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public bool CheckIfDeliveryExist(string name)
+        {
+            return _context.Deliveries.Any(x => x.Name.Contains(name));
+        }
+
+        /// <summary>
+        /// Sprawdza czy nazwa wyjazdu jest unikalna
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public bool CheckIfDepartureNameIsUnique(string name)
+        {
+            return !_context.Departures.Any(x => x.Name == name);
+        }
+
+        public bool CheckIfDepartureNameExist(string name)
+        {
+            return _context.Departures.Any(x => x.Name.Contains(name));
+        }
     }
 }

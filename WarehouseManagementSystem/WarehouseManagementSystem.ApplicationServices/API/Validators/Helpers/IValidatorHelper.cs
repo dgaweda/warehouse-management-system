@@ -14,5 +14,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
         bool CheckIfBarcodeIsUnique(string barcode);
         bool CheckIfRoleNameIsUnique(string name);
         bool CheckIfEmployeeIsNotHired(int employeeId);
+        bool CheckIfDeliveryExist(string name);
+        bool CheckIfDepartureNameIsUnique(string name);
+        bool CheckIfDepartureNameExist(string name);
     }
 }
