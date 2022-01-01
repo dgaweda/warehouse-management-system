@@ -9,7 +9,7 @@ namespace DataAccess.CQRS.Queries.EmployeeQueries
 {
     public class GetEmployeesHelper : IGetEntityHelper<Employee>
     {
-        public int EmployeeId { get; set; }
+        public int? EmployeeId { get; set; }
         public string RoleName { get; set; }
         public string PESEL { get; set; }
         public int Age { get; set; }
@@ -27,7 +27,7 @@ namespace DataAccess.CQRS.Queries.EmployeeQueries
             if (PropertiesAreEmpty())
                 return employees;
 
-            if (EmployeeId != 0)
+            if (EmployeeId != 0 && !(EmployeeId is null))
                 employees = SearchByEmployeeId(employees);
 
             if (!string.IsNullOrEmpty(RoleName))

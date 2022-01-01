@@ -107,7 +107,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
         /// <returns></returns>
         public bool CheckIfRoleNameIsUnique(string name)
         {
-            return !string.IsNullOrEmpty(name) && !_context.Roles.Any(x => x.Name == name);
+            return !_context.Roles.Any(x => x.Name == name);
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
         /// <returns></returns>
         public bool CheckIfDeliveryExist(string name)
         {
-            return !string.IsNullOrEmpty(name) && _context.Deliveries.Any(x => x.Name.Contains(name));
+            return string.IsNullOrEmpty(name) || _context.Deliveries.Any(x => x.Name.Contains(name));
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
         /// <returns></returns>
         public bool CheckIfDepartureNameExist(string name)
         {
-            return !string.IsNullOrEmpty(name) && _context.Departures.Any(x => x.Name.Contains(name));
+            return string.IsNullOrEmpty(name) || _context.Departures.Any(x => x.Name.Contains(name));
         }
     }
 }

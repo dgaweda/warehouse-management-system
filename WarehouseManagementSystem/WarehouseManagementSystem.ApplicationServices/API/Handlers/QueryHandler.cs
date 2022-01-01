@@ -24,7 +24,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
         public async Task<TResponse> PrepareResponse(TQuery query)
         {
             var entityModel = await GetQueryResult(query);
-            CheckIfExist(entityModel);
             var domainModel = MapDomainModelBy(entityModel);
             var response = CreateResponse(domainModel);
             return response;
@@ -33,14 +32,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
         private async Task<TEntityList> GetQueryResult(TQuery query)
         {
             return await _queryExecutor.Execute(query);
-        }
-
-        private static TResponse CheckIfExist(TEntityList entityModel)
-        {
-            return new TResponse()
-            {
-                Error = new ErrorModel(ErrorType.NotFound)
-            };
         }
 
         private TDomainModelList MapDomainModelBy(TEntityList entityModel)

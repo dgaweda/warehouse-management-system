@@ -17,14 +17,14 @@ namespace warehouse_management_system.Controllers
         {
             _mediator = mediator;
             _logger = logger;
-            _logger.LogDebug(1, "NLog injected into" + typeof(TController).Name);
+            _logger.LogDebug(1, "NLog injected into: \n" + typeof(TController).Name);
         }
 
         protected async Task<IActionResult> Handle<TRequest, TResponse>(TRequest request)
             where TRequest : IRequest<TResponse>
             where TResponse : ErrorResponseBase
         {
-            _logger.LogInformation("Handling Request - " + typeof(TRequest).Name);
+            _logger.LogInformation("Handling Request: \n" + typeof(TRequest).Name);
             if (!ModelState.IsValid)
             {
                 return BadRequest(
@@ -33,8 +33,7 @@ namespace warehouse_management_system.Controllers
             }
 
             var response = await _mediator.Send(request);
-            _logger.LogInformation("Response: " + response);
-
+            _logger.LogInformation("Response Errors: \n" + response.Error);
             return response.Error == null ? Ok(response) : ErrorResponse(response.Error);
         }
 
