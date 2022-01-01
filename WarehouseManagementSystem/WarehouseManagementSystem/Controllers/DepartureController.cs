@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,9 @@ namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class DepartureController : ApiControllerBase
+    public class DepartureController : ApiControllerBase<DepartureController>
     {
-        public DepartureController(IMediator mediator) : base(mediator)
+        public DepartureController(IMediator mediator, ILogger<DepartureController> logger) : base(mediator, logger)
         {
         }
 

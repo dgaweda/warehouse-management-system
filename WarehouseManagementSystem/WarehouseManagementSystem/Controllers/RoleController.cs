@@ -3,6 +3,7 @@ using DataAccess.Repository;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,9 @@ namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class RoleController : ApiControllerBase
+    public class RoleController : ApiControllerBase<RoleController>
     {
-        public RoleController(IMediator mediator) : base(mediator)
+        public RoleController(IMediator mediator, ILogger<RoleController> logger) : base(mediator, logger)
         {
         }
 

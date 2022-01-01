@@ -10,14 +10,15 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Employee;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Employee;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+using Microsoft.Extensions.Logging;
 
 namespace warehouse_management_system.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class EmployeeController : ApiControllerBase
+    public class EmployeeController : ApiControllerBase<EmployeeController>
     {
-        public EmployeeController(IMediator mediator) : base(mediator)
+        public EmployeeController(IMediator mediator, ILogger<EmployeeController> logger) : base(mediator, logger)
         {
         }
 

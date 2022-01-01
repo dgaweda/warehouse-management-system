@@ -23,7 +23,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
         private readonly IMapper _mapper;
         private readonly ICommandExecutor _commandExecutor;
 
-        public CommandHandler(IMapper mapper, ICommandExecutor commandExecutor)
+        protected CommandHandler(IMapper mapper, ICommandExecutor commandExecutor)
         {
             _mapper = mapper;
             _commandExecutor = commandExecutor;
@@ -40,12 +40,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
         }
         private TEntity Map(TRequest request) => _mapper.Map<TEntity>(request);
 
-        private TCommand CreateCommand(TEntity entityWithRequestData) => new() { Parameter = entityWithRequestData };
+        private static TCommand CreateCommand(TEntity entityWithRequestData) => new() { Parameter = entityWithRequestData };
 
         private async Task<TEntity> Execute(TCommand command) => await _commandExecutor.Execute(command);
 
         private TDomainModel MapDomainModel(TEntity entityModel) => _mapper.Map<TDomainModel>(entityModel);
 
-        private TResponse CreateResponse(TDomainModel domainModel) => new() { Data = domainModel };
+        private static TResponse CreateResponse(TDomainModel domainModel) => new() { Data = domainModel };
     }
 }

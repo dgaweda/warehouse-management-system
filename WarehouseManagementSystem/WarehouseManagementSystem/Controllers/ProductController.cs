@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.DeliveryProduct;
@@ -11,10 +12,10 @@ namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class ProductController : ApiControllerBase
+    public class ProductController : ApiControllerBase<ProductController>
     {
 
-        public ProductController(IMediator mediator) : base(mediator)
+        public ProductController(IMediator mediator, ILogger<ProductController> logger) : base(mediator, logger)
         {
         }
 

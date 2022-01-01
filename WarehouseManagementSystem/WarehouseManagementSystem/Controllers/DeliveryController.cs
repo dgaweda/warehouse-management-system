@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +15,15 @@ namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class DeliveryController : ApiControllerBase
+    public class DeliveryController : ApiControllerBase<DeliveryController>
     {
-        public DeliveryController(IMediator mediator) : base(mediator)
+        public DeliveryController(IMediator mediator, ILogger<DeliveryController> logger) : base(mediator, logger)
         {
         }
 
         [HttpGet]
         [Route("Get")]
-        public Task<IActionResult> GetDeliveries([FromQuery] GetDeliveriesRequest request) => Handle<GetDeliveriesRequest, GetDeliveriesResponse>(request);
+        public async Task<IActionResult> GetDeliveries([FromQuery] GetDeliveriesRequest request) => await Handle<GetDeliveriesRequest, GetDeliveriesResponse>(request);
 
         [HttpPost]
         [Route("Add")]

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,9 @@ namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class PalletController : ApiControllerBase
+    public class PalletController : ApiControllerBase<PalletController>
     {
-        public PalletController(IMediator mediator) : base(mediator)
+        public PalletController(IMediator mediator, ILogger<PalletController> logger) : base(mediator, logger)
         {
         }
 

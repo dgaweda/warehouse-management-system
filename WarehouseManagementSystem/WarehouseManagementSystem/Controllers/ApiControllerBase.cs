@@ -1,8 +1,6 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -11,31 +9,33 @@ using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 
 namespace warehouse_management_system.Controllers
 {
-    public abstract class ApiControllerBase : ControllerBase
+    public abstract class ApiControllerBase<TController> : ControllerBase
     {
         private readonly IMediator _mediator;
-        protected ApiControllerBase(IMediator mediator)
+        private readonly ILogger<TController> _logger;
+        protected ApiControllerBase(IMediator mediator, ILogger<TController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
+            _logger.LogDebug(1, "NLog injected into" + typeof(TController).Name);
         }
 
         protected async Task<IActionResult> Handle<TRequest, TResponse>(TRequest request)
             where TRequest : IRequest<TResponse>
             where TResponse : ErrorResponseBase
         {
-            if(!ModelState.IsValid)
+            _logger.LogInformation("Handling Request - " + typeof(TRequest).Name);
+            if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState
-                    .Where(x => x.Value.Errors.Any())
+                return BadRequest(
+                    ModelState.Where(x => x.Value.Errors.Any())
                     .Select(x => new { property = x.Key, errors = x.Value.Errors }));
             }
 
             var response = await _mediator.Send(request);
-            if(response.Error != null)
-            {
-                return ErrorResponse(response.Error);
-            }
-            return Ok(response);
+            _logger.LogInformation("Response: " + response);
+
+            return response.Error == null ? Ok(response) : ErrorResponse(response.Error);
         }
 
         private IActionResult ErrorResponse(ErrorModel errorModel)

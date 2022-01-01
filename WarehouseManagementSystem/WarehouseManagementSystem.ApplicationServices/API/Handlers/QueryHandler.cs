@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
 using DataAccess;
 using DataAccess.CQRS.Queries;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
@@ -14,7 +15,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
     {
         private readonly IMapper _mapper;
         private readonly IQueryExecutor _queryExecutor;
-        public QueryHandler(IMapper mapper, IQueryExecutor queryExecutor)
+        protected QueryHandler(IMapper mapper, IQueryExecutor queryExecutor)
         {
             _mapper = mapper;
             _queryExecutor = queryExecutor;
@@ -23,15 +24,34 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
         public async Task<TResponse> PrepareResponse(TQuery query)
         {
             var entityModel = await GetQueryResult(query);
+            CheckIfExist(entityModel);
             var domainModel = MapDomainModelBy(entityModel);
             var response = CreateResponse(domainModel);
             return response;
         }
-        private async Task<TEntityList> GetQueryResult(TQuery query) => await _queryExecutor.Execute(query);
 
-        private TDomainModelList MapDomainModelBy(TEntityList entityModel) => _mapper.Map<TDomainModelList>(entityModel);
+        private async Task<TEntityList> GetQueryResult(TQuery query)
+        {
+            return await _queryExecutor.Execute(query);
+        }
 
-        private TResponse CreateResponse(TDomainModelList domainModel) => new() { Data = domainModel };
+        private static TResponse CheckIfExist(TEntityList entityModel)
+        {
+            return new TResponse()
+            {
+                Error = new ErrorModel(ErrorType.NotFound)
+            };
+        }
+
+        private TDomainModelList MapDomainModelBy(TEntityList entityModel)
+        {
+            return _mapper.Map<TDomainModelList>(entityModel);
+        }
+
+        private static TResponse CreateResponse(TDomainModelList domainModel)
+        {
+            return new() { Data = domainModel };
+        }
 
         public abstract TQuery CreateQuery(TRequest request);
     }

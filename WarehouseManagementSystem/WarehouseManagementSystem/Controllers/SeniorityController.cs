@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,9 @@ namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class SeniorityController : ApiControllerBase
+    public class SeniorityController : ApiControllerBase<SeniorityController>
     {
-        public SeniorityController(IMediator mediator) : base(mediator)
+        public SeniorityController(IMediator mediator, ILogger<SeniorityController> logger) : base(mediator, logger)
         {
         }
 

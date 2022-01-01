@@ -12,6 +12,7 @@ namespace DataAccess.CQRS.Queries.DeliveryQueries
     public class GetDeliveriesHelper : IGetEntityHelper<Delivery>
     {
         public  string Name { get; set; }
+
         public async Task<List<Delivery>> GetFilteredData(WMSDatabaseContext context)
         {
             var deliveries = await context.Deliveries.ToListAsync();
