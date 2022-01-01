@@ -11,7 +11,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
         int GetLocationMaxAmount(int id);
         bool CheckIfProductIsOnPalletForUnfolding(int id);
         bool CheckIfPalletForUnfoldingExist(int palletId);
-        bool CheckIfBarcodeIsUnique(string barcode);
+        bool CheckIfProductBarcodeIsUnique(string barcode);
+        bool CheckIfPalletBarcodeIsUnique(string barcode);
         bool CheckIfRoleNameIsUnique(string name);
         bool CheckIfEmployeeIsNotHired(int employeeId);
         bool CheckIfDeliveryExist(string name);

@@ -37,7 +37,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
         /// <returns></returns>
         public bool CheckIfExist(int? id)
         {
-            return entity.Any(x => x.Id == id);
+            return id is null || entity.Any(x => x.Id == id);
         }
 
         /// <summary>
@@ -81,13 +81,23 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
         }
 
         /// <summary>
-        /// Sprawdza czy kod kreskowy nie
+        /// Sprawdza czy kod kreskowy produktu jest unikalny
         /// </summary>
         /// <param name="barcode"></param>
         /// <returns></returns>
-        public bool CheckIfBarcodeIsUnique(string barcode)
+        public bool CheckIfProductBarcodeIsUnique(string barcode)
         {
             return !_context.Products.Any(x => x.Barcode == barcode);
+        }
+
+        /// <summary>
+        /// Sprawdza czy kod kreskowy palety jest unikalny
+        /// </summary>
+        /// <param name="barcode"></param>
+        /// <returns></returns>
+        public bool CheckIfPalletBarcodeIsUnique(string barcode)
+        {
+            return !_context.Pallets.Any(x => x.Barcode == barcode);
         }
 
         /// <summary>

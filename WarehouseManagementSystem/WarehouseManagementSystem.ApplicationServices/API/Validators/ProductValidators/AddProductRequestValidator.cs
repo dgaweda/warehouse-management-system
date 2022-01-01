@@ -17,7 +17,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductVa
         public AddProductRequestValidator(IValidatorHelper<Product> validator)
         {
             _validator = validator;
-            RuleFor(x => x.Barcode).Must(_validator.CheckIfBarcodeIsUnique).WithMessage(x => $"A product of barcode: {x.Barcode} already exists.");
+            RuleFor(x => x.Barcode).Must(_validator.CheckIfProductBarcodeIsUnique).WithMessage(x => $"A product of barcode: {x.Barcode} already exists.");
 
             RuleFor(x => x.ExpirationDate).GreaterThan(DateTime.Now.Date.AddMonths(3)).WithMessage($"A product expiration date cannot be lower than {DateTime.Now.Date.AddMonths(3)}");
 
