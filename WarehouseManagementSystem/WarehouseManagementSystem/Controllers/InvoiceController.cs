@@ -2,12 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Invoice;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Invoice;
 
 namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class InvoiceController : ControllerHandler
+    public class InvoiceController : ApiControllerBase
     {
         public InvoiceController(IMediator mediator) : base(mediator)
         {
@@ -16,18 +17,18 @@ namespace warehouse_management_system.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetInvoices([FromQuery] GetInvoicesRequest request) => await Handle(request);
+        public Task<IActionResult> GetInvoices([FromQuery] GetInvoicesRequest request) => Handle<GetInvoicesRequest, GetInvoicesResponse>(request);
 
         [HttpPost]
         [Route("Add")]
-        public async Task<IActionResult> AddInvoice([FromBody] AddInvoiceRequest request) => await Handle(request);
+        public Task<IActionResult> AddInvoice([FromBody] AddInvoiceRequest request) => Handle<AddInvoiceRequest, AddInvoiceResponse>(request);
 
         [HttpDelete]
         [Route("Remove")]
-        public async Task<IActionResult> RemoveInvoice([FromQuery] RemoveInvoiceRequest request) => await Handle(request);
+        public Task<IActionResult> RemoveInvoice([FromQuery] RemoveInvoiceRequest request) => Handle<RemoveInvoiceRequest, RemoveInvoiceResponse>(request);
 
         [HttpPut]
         [Route("Edit")]
-        public async Task<IActionResult> EditInvoice([FromBody] EditInvoiceRequest request) => await Handle(request);
+        public Task<IActionResult> EditInvoice([FromBody] EditInvoiceRequest request) => Handle<EditInvoiceRequest, EditInvoiceResponse>(request);
     }
 }

@@ -15,7 +15,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletsProductsHandlers
 {
     public class SetProductAmountHandler :
-        CommandHandler<SetProductAmountRequest, SetProductAmountResponse, PalletLine, Domain.Models.PalletLine, SetProductAmountCommand>,
+        CommandHandler<SetProductAmountRequest, SetProductAmountResponse, ProductPalletLine, Domain.Models.ProductPalletLine, SetProductAmountCommand>,
         IRequestHandler<SetProductAmountRequest, SetProductAmountResponse>
     {
         public SetProductAmountHandler(IMapper mapper, ICommandExecutor commandExecutor) : base(mapper, commandExecutor)

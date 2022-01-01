@@ -258,31 +258,6 @@ namespace DataAccess.Migrations
                     b.ToTable("Pallets");
                 });
 
-            modelBuilder.Entity("DataAccess.Entities.PalletLine", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("PalletId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductAmount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PalletId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("PalletLines");
-                });
-
             modelBuilder.Entity("DataAccess.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -306,6 +281,31 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("DataAccess.Entities.ProductPalletLine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("PalletId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductAmount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PalletId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductPalletLines");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Role", b =>
@@ -431,7 +431,7 @@ namespace DataAccess.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("DataAccess.Entities.PalletLine", b =>
+            modelBuilder.Entity("DataAccess.Entities.ProductPalletLine", b =>
                 {
                     b.HasOne("DataAccess.Entities.Pallet", "Pallet")
                         .WithMany("PalletsProducts")

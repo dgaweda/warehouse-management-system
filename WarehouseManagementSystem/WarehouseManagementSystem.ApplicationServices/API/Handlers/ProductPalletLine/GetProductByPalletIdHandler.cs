@@ -15,7 +15,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Products
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletsProductsHandlers
 {
     public class GetProductByPalletIdHandler : 
-        QueryHandler<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse, GetProductsByPalletIdQuery, List<PalletLine>, List<Domain.Models.PalletLine>>,
+        QueryHandler<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse, GetProductsByPalletIdQuery, List<ProductPalletLine>, List<Domain.Models.ProductPalletLine>>,
         IRequestHandler<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse>
     {
         public GetProductByPalletIdHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)

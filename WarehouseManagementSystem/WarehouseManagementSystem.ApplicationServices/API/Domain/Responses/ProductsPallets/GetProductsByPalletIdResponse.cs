@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets
 {
-    public class GetProductsByPalletIdResponse : ResponseBase<List<Domain.Models.PalletLine>>
+    public class GetProductsByPalletIdResponse : ResponseBase<List<Domain.Models.ProductPalletLine>>
     {
     }
 }

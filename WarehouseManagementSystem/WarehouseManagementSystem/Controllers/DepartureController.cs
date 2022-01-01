@@ -7,12 +7,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Departure;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departure;
 
 namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class DepartureController : ControllerHandler
+    public class DepartureController : ApiControllerBase
     {
         public DepartureController(IMediator mediator) : base(mediator)
         {
@@ -20,18 +22,18 @@ namespace warehouse_management_system.Controllers
 
         [HttpGet]
         [Route("Get")]
-        public async Task<IActionResult> GetDepartures([FromQuery] GetDeparturesRequest request) => await Handle(request);
+        public async Task<IActionResult> GetDepartures([FromQuery] GetDeparturesRequest request) => await Handle<GetDeparturesRequest, GetDeparturesResponse>(request);
 
         [HttpPost]
         [Route("Add")]
-        public async Task<IActionResult> AddDeparture([FromBody] AddDepartureRequest request) => await Handle(request);
+        public async Task<IActionResult> AddDeparture([FromBody] AddDepartureRequest request) => await Handle<AddDepartureRequest, AddDepartureResponse>(request);
 
         [HttpPatch]
         [Route("Edit")]
-        public async Task<IActionResult> EditDepartureState([FromQuery] EditDepartureStateRequest request) => await Handle(request);
+        public async Task<IActionResult> EditDepartureState([FromQuery] EditDepartureStateRequest request) => await Handle<EditDepartureStateRequest, EditDepartureStateResponse>(request);
 
         [HttpDelete]
         [Route("Remove")]
-        public async Task<IActionResult> RemoveDeparture([FromBody] RemoveDepartureRequest request) => await Handle(request);
+        public async Task<IActionResult> RemoveDeparture([FromBody] RemoveDepartureRequest request) => await Handle<RemoveDepartureRequest, RemoveDepartureResponse>(request);
     }
 }

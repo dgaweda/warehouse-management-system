@@ -2,12 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 
 namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class OrderController : ControllerHandler
+    public class OrderController : ApiControllerBase
     {
         public OrderController(IMediator mediator) : base(mediator)
         {
@@ -15,6 +16,6 @@ namespace warehouse_management_system.Controllers
 
         [HttpGet]
         [Route("All")]
-        public async Task<IActionResult> GetAllOrders([FromQuery] GetOrdersRequest request) => await Handle(request);
+        public Task<IActionResult> GetAllOrders([FromQuery] GetOrdersRequest request) => Handle<GetOrdersRequest, GetOrdersResponse>(request);
     }
 }

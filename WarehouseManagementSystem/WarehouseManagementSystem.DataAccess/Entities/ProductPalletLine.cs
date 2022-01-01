@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Entities
 {
-    public class PalletLine : EntityBase
+    public class ProductPalletLine : EntityBase
     {
         public int ProductId { get; set; }
         public int PalletId { get; set; }

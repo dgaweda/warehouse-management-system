@@ -14,12 +14,15 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
         public PalletsProfile()
         {
             CreateMap<Pallet, API.Domain.Models.Pallet>()
+                .ForMember(x => x.PalletStatus, y => y.MapFrom(z => z.PalletStatus))
                 .ForMember(x => x.Barcode, y => y.MapFrom(z => z.Barcode))
-                .ForMember(x => x.Order, y => y.MapFrom(z => z.Order))
-                .ForMember(x => x.Departure, y => y.MapFrom(z => z.Departure))
-                .ForMember(x => x.Delivery, y => y.MapFrom(z => z.Invoice.Delivery))
-                .ForMember(x => x.Employee, y => y.MapFrom(z => z.Employee))
-                .ForMember(x => x.PalletStatus, y => y.MapFrom(z => z.PalletStatus));
+                .ForMember(x => x.OrderBarcode, y => y.MapFrom(z => z.Order != null ? z.Order.Barcode : "NO_ORDER"))
+                .ForMember(x => x.DepartureName, y => y.MapFrom(z => z.Departure != null ? z.Departure.Name : "NO_DEPARTURE"))
+                .ForMember(x => x.DeliveryName, y => y.MapFrom(z => z.Invoice.Delivery != null ? z.Invoice.Delivery.Name : "NO_DELIVERY"))
+                .ForMember(x => x.EmployeeName, y => y.MapFrom(src => src.Employee != null ? src.Employee.Name : "NO_EMPLOYEE"))
+                .ForMember(x => x.EmployeeLastName, y => y.MapFrom(src => src.Employee != null ? src.Employee.LastName : "NO_EMPLOYEE"))
+                .ForMember(x => x.Products, y => y.MapFrom(z => z.PalletsProducts.Select(x => new { x.Product.Name, x.Product.ExpirationDate, x.Product.Barcode, x.ProductAmount })));
+                
 
             CreateMap<RemovePalletRequest, Pallet>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.PalletId));

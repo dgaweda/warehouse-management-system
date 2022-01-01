@@ -38,6 +38,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(x => x.CurrentAmount, y => y.MapFrom(z => z.CurrentAmount));
 
             CreateMap<SetProductLocationRequest, Location>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.LocationId))
                 .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId))
                 .ForMember(dest => dest.CurrentAmount, opt => opt.MapFrom(src => src.Amount));
 

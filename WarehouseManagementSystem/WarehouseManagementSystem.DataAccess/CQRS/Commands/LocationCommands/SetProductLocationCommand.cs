@@ -31,7 +31,7 @@ namespace DataAccess.CQRS.Commands.ProductCommands
                 location.ProductId = Parameter.ProductId;
                 location.CurrentAmount += Parameter.CurrentAmount;
                 if (location.CurrentAmount > location.MaxAmount)
-                    throw new Exception("Ammount can't be higher than Max Amount of the location.");
+                    throw new Exception("Amount can't be higher than Max Amount of the location.");
             }
 
             return location;

@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Queries.PalletsProductsQueries
 {
-    public class GetProductsByPalletIdQuery : QueryBase<List<PalletLine>>
+    public class GetProductsByPalletIdQuery : QueryBase<List<ProductPalletLine>>
     {
-        private readonly IGetEntityHelper<PalletLine> _products;
+        private readonly IGetEntityHelper<ProductPalletLine> _products;
 
-        public GetProductsByPalletIdQuery(IGetEntityHelper<PalletLine> products)
+        public GetProductsByPalletIdQuery(IGetEntityHelper<ProductPalletLine> products)
         {
             _products = products;
         }
-        public override async Task<List<PalletLine>> Execute(WMSDatabaseContext context) => await _products.GetFilteredData(context);
+        public override async Task<List<ProductPalletLine>> Execute(WMSDatabaseContext context) => await _products.GetFilteredData(context);
     }
 }
