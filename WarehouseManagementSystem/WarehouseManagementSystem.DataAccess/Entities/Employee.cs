@@ -28,6 +28,7 @@ namespace DataAccess.Entities
         [Required]
         public int RoleId { get; set; }
 
+        public int? UserId { get; set; }
         public Seniority Seniority { get; set; }
 
         public Role Role { get; set; }
