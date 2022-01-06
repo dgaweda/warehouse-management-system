@@ -14,7 +14,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
         public SenioritiesProfile()
         {
             CreateMap<Seniority, API.Domain.Models.Seniority>()
-                .ForMember(x => x.EmployeeId, y => y.MapFrom(z => z.EmployeeId))
+                .ForMember(x => x.UserId, y => y.MapFrom(z => z.EmployeeId))
                 .ForMember(x => x.EmploymentDate, y => y.MapFrom(z => z.EmploymentDate))
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Employee.Name))
                 .ForMember(x => x.LastName, y => y.MapFrom(z => z.Employee.LastName))
@@ -23,11 +23,11 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
 
             CreateMap<AddSeniorityRequest, Seniority>()
                 .ForMember(x => x.EmploymentDate, y => y.MapFrom(z => z.EmploymentDate))
-                .ForMember(x => x.EmployeeId, y => y.MapFrom(z => z.EmployeeId));
+                .ForMember(x => x.EmployeeId, y => y.MapFrom(z => z.UserId));
 
             CreateMap<EditSeniorityRequest, Seniority>()
                 .ForMember(x => x.EmploymentDate, opt => opt.MapFrom(src => src.EmploymentDate))
-                .ForMember(x => x.EmployeeId, opt => opt.MapFrom(src => src.EmployeeId));
+                .ForMember(x => x.EmployeeId, opt => opt.MapFrom(src => src.UserId));
         }
     }
 }

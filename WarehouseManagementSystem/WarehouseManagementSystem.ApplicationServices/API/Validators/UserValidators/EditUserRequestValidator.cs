@@ -1,0 +1,32 @@
+﻿using DataAccess.Entities;
+using FluentValidation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Employee;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Validators.EmployeeValidators
+{
+    public class EditUserRequestValidator : AbstractValidator<EditUserRequest>
+    {
+        private readonly IValidatorHelper<User> _validator;
+
+        public EditUserRequestValidator(IValidatorHelper<User> validator)
+        {
+            _validator = validator;
+            RuleFor(x => x.Id).Must(_validator.CheckIfExist).WithMessage("Employee doesn't exists");
+            RuleFor(x => x.UserName).NotEmpty().WithMessage("Username must be specified.");
+            RuleFor(x => x.Password).NotEmpty().WithMessage("Password must be specified.");
+            RuleFor(x => x.UserName).MaximumLength(30).WithMessage("Username is too long. Max 30 characters.");
+            RuleFor(x => x.Email).NotEmpty().WithMessage("Email must be specified.");
+            RuleFor(x => x.Email).Must(_validator.CheckEmailFormat).WithMessage("Email is incorrect.");
+            RuleFor(x => x.Name).NotEmpty().WithMessage("Name must be specifed.");
+            RuleFor(x => x.LastName).NotEmpty().WithMessage("Lastname must be specified.");
+            RuleFor(x => x.PESEL).Length(11).WithMessage("PESEL is incorrect.");
+            RuleFor(x => x.Age).ExclusiveBetween(18, 99);
+            RuleFor(x => x.Age).NotEmpty().WithMessage("Age can't be empty");
+        }
+    }
+}

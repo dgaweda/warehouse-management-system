@@ -17,11 +17,11 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(dest => dest.PalletBarcode, opt => opt.MapFrom(src => src.Pallet.Barcode))
                 .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
                 .ForMember(dest => dest.ProductAmount, opt => opt.MapFrom(src => src.ProductAmount))
-                .ForMember(dest => dest.OrderBarcode, opt => opt.MapFrom(src => src.Pallet.Order != null ? src.Pallet.Order.Barcode : "NO_ORDER"))
-                .ForMember(dest => dest.DepartureName, opt => opt.MapFrom(src => src.Pallet.Departure != null ? src.Pallet.Departure.Name : "NO_DEPARTURE"))
-                .ForMember(dest => dest.InvoiceNumber, opt => opt.MapFrom(src => src.Pallet.Invoice != null ? src.Pallet.Invoice.InvoiceNumber : "NO_INVOICE"))
-                .ForMember(dest => dest.EmployeeName, opt => opt.MapFrom(src => src.Pallet.Employee != null ? src.Pallet.Employee.Name : "NO_EMPLOYEE"))
-                .ForMember(dest => dest.EmployeeLastName, opt => opt.MapFrom(src => src.Pallet.Employee != null ? src.Pallet.Employee.LastName : "NO_EMPLOYEE"));
+                .ForMember(dest => dest.OrderBarcode, opt => opt.MapFrom(src => src.Pallet.Order != null ? src.Pallet.Order.Barcode : string.Empty))
+                .ForMember(dest => dest.DepartureName, opt => opt.MapFrom(src => src.Pallet.Departure != null ? src.Pallet.Departure.Name : string.Empty))
+                .ForMember(dest => dest.InvoiceNumber, opt => opt.MapFrom(src => src.Pallet.Invoice != null ? src.Pallet.Invoice.InvoiceNumber : string.Empty))
+                .ForMember(dest => dest.UserFirstName, opt => opt.MapFrom(src => src.Pallet.User != null ? src.Pallet.User.Name : string.Empty))
+                .ForMember(dest => dest.UserLastName, opt => opt.MapFrom(src => src.Pallet.User != null ? src.Pallet.User.LastName : string.Empty));
 
 
             CreateMap<SetProductAmountRequest, ProductPalletLine>()

@@ -33,7 +33,7 @@ namespace warehouse_management_system.Controllers
                     .Select(x => new { property = x.Key, errors = x.Value.Errors }));
             }
 
-            var userName = User.FindFirstValue(ClaimTypes.Name);// TO DO
+            var userName = User.FindFirstValue(ClaimTypes.Name);
 
             var response = await _mediator.Send(request);
             _logger.LogInformation("Response Errors: \n" + response.Error);

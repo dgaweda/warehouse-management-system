@@ -15,8 +15,8 @@ namespace DataAccess.CQRS.Commands.PalletCommands
             if (Parameter.InvoiceId != null && Parameter.InvoiceId != 0)
                 pallet.InvoiceId = Parameter.InvoiceId;
 
-            if (Parameter.EmployeeId != null && Parameter.EmployeeId != 0)
-                pallet.EmployeeId = Parameter.EmployeeId;
+            if (Parameter.UserId != null && Parameter.UserId != 0)
+                pallet.UserId = Parameter.UserId;
         }
 
         public void SetPalletStatus(Pallet pallet)
@@ -33,7 +33,7 @@ namespace DataAccess.CQRS.Commands.PalletCommands
                 pallet.PalletStatus = Status.OPEN;
         }
 
-        private bool PalletIsDuringOrderPicking(Pallet pallet) => pallet.OrderId != null && pallet.EmployeeId != null && pallet.Order.OrderState == State.IN_PROGRESS;
+        private bool PalletIsDuringOrderPicking(Pallet pallet) => pallet.OrderId != null && pallet.UserId != null && pallet.Order.OrderState == State.IN_PROGRESS;
 
         private bool PalletWasSent(Pallet pallet) => pallet.DepartureId != null && pallet.Departure.State == StateType.CLOSED;
 

@@ -18,5 +18,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
         bool CheckIfDeliveryExist(string name);
         bool CheckIfDepartureNameIsUnique(string name);
         bool CheckIfDepartureNameExist(string name);
+        bool CheckEmailFormat(string email);
     }
 }

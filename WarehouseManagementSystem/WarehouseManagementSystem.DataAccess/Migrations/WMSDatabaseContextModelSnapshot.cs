@@ -71,51 +71,6 @@ namespace DataAccess.Migrations
                     b.ToTable("Departures");
                 });
 
-            modelBuilder.Entity("DataAccess.Entities.Employee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int")
-                        .HasColumnName("Wiek");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("Nazwisko");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("Imię");
-
-                    b.Property<string>("PESEL")
-                        .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
-
-                    b.ToTable("Employees");
-                });
-
             modelBuilder.Entity("DataAccess.Entities.Invoice", b =>
                 {
                     b.Property<int>("Id")
@@ -401,16 +356,46 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Age")
+                        .HasColumnType("int")
+                        .HasColumnName("Wiek");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Nazwisko");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Imię");
+
+                    b.Property<string>("PESEL")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)")
                         .HasColumnName("Hasło");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Salt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -420,22 +405,9 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
-                });
+                    b.HasIndex("RoleId");
 
-            modelBuilder.Entity("DataAccess.Entities.Employee", b =>
-                {
-                    b.HasOne("DataAccess.Entities.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DataAccess.Entities.User", null)
-                        .WithOne("Employee")
-                        .HasForeignKey("DataAccess.Entities.Employee", "UserId");
-
-                    b.Navigation("Role");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Invoice", b =>
@@ -483,7 +455,7 @@ namespace DataAccess.Migrations
                         .WithMany("Pallets")
                         .HasForeignKey("DepartureId");
 
-                    b.HasOne("DataAccess.Entities.Employee", "Employee")
+                    b.HasOne("DataAccess.Entities.User", "Employee")
                         .WithMany("Pallets")
                         .HasForeignKey("EmployeeId");
 
@@ -525,13 +497,24 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.Seniority", b =>
                 {
-                    b.HasOne("DataAccess.Entities.Employee", "Employee")
+                    b.HasOne("DataAccess.Entities.User", "Employee")
                         .WithOne("Seniority")
                         .HasForeignKey("DataAccess.Entities.Seniority", "EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("DataAccess.Entities.User", b =>
+                {
+                    b.HasOne("DataAccess.Entities.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Delivery", b =>
@@ -542,13 +525,6 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Entities.Departure", b =>
                 {
                     b.Navigation("Pallets");
-                });
-
-            modelBuilder.Entity("DataAccess.Entities.Employee", b =>
-                {
-                    b.Navigation("Pallets");
-
-                    b.Navigation("Seniority");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Invoice", b =>
@@ -577,7 +553,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.User", b =>
                 {
-                    b.Navigation("Employee");
+                    b.Navigation("Pallets");
+
+                    b.Navigation("Seniority");
                 });
 #pragma warning restore 612, 618
         }

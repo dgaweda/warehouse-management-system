@@ -1,9 +1,11 @@
-﻿using DataAccess;
+﻿using System;
+using DataAccess;
 using DataAccess.Entities;
 using DataAccess.Entities.EntityBases;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Net.Mail;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators
 {
@@ -148,6 +150,24 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
         public bool CheckIfDepartureNameExist(string name)
         {
             return string.IsNullOrEmpty(name) || _context.Departures.Any(x => x.Name.Contains(name));
+        }
+
+        /// <summary>
+        /// Sprawdza czy email jest poprawny
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public bool CheckEmailFormat(string email)
+        {
+            try
+            {
+                var mail = new MailAddress(email);
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
         }
     }
 }

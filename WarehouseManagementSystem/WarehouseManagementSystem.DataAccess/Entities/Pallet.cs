@@ -15,7 +15,7 @@ namespace DataAccess.Entities
         public int? OrderId { get; set; }
         public int? DepartureId { get; set; }
         public int? InvoiceId { get; set; }
-        public int? EmployeeId { get; set; }
+        public int? UserId { get; set; }
 
         [Column("Aktualny status palety")]
         public Status PalletStatus { get; set; }
@@ -31,8 +31,8 @@ namespace DataAccess.Entities
         [ForeignKey("OrderId")]
         public Order Order { get; set; }
 
-        [ForeignKey("EmployeeId")]
-        public Employee Employee { get; set; }
+        [ForeignKey("UserId")]
+        public User User { get; set; }
     }
 
     public enum Status

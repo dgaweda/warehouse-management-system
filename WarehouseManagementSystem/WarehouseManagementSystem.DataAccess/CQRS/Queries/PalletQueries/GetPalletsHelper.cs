@@ -13,8 +13,8 @@ namespace DataAccess.CQRS.Queries.PalletQueries
         public DateTime PickingEnd { get; set; }
         public string Provider { get; set; }
         public string DeliveryName { get; set; }
-        public string EmployeeName { get; set; }
-        public string EmployeeLastName { get; set; }
+        public string UserFirstName { get; set; }
+        public string UserLastName { get; set; }
         public string DepartureName { get; set; }
         public Status PalleStatus { get; set; }
         public DateTime DepartureCloseTime { get; set; }
@@ -26,7 +26,7 @@ namespace DataAccess.CQRS.Queries.PalletQueries
                 .Include(x => x.Departure)
                 .Include(x => x.Order)
                 .Include(x => x.Invoice.Delivery)
-                .Include(x => x.Employee)
+                .Include(x => x.User)
                 .Include(x => x.PalletsProducts)
                     .ThenInclude(x => x.Product)
                 .ToListAsync();
@@ -43,10 +43,10 @@ namespace DataAccess.CQRS.Queries.PalletQueries
             if (string.IsNullOrEmpty(DeliveryName))
                 pallets = SearchByDeliveryName(pallets);
 
-            if (string.IsNullOrEmpty(EmployeeName))
+            if (string.IsNullOrEmpty(UserFirstName))
                 pallets = SearchByEmployeeName(pallets);
 
-            if (string.IsNullOrEmpty(EmployeeLastName))
+            if (string.IsNullOrEmpty(UserLastName))
                 pallets = SearchByEmployeeLastName(pallets);
 
             if (string.IsNullOrEmpty(DepartureName))
@@ -77,8 +77,8 @@ namespace DataAccess.CQRS.Queries.PalletQueries
                 PickingEnd,
                 Provider,
                 DeliveryName, 
-                EmployeeName, 
-                EmployeeLastName,
+                UserFirstName, 
+                UserLastName,
                 DepartureName, 
                 DepartureCloseTime
             };
@@ -94,8 +94,8 @@ namespace DataAccess.CQRS.Queries.PalletQueries
         private List<Pallet> SearchByPickingEnd(List<Pallet> pallets) => pallets.Where(x => x.Order.PickingEnd == PickingEnd).ToList();
         private List<Pallet> SearchByProvider(List<Pallet> pallets) => pallets.Where(x => x.Invoice.Provider == Provider).ToList();
         private List<Pallet> SearchByDeliveryName(List<Pallet> pallets) => pallets.Where(x => x.Invoice.Delivery.Name == DeliveryName).ToList();
-        private List<Pallet> SearchByEmployeeName(List<Pallet> pallets) => pallets.Where(x => x.Employee.Name == EmployeeName).ToList();
-        private List<Pallet> SearchByEmployeeLastName(List<Pallet> pallets) => pallets.Where(x => x.Employee.LastName == EmployeeLastName).ToList();
+        private List<Pallet> SearchByEmployeeName(List<Pallet> pallets) => pallets.Where(x => x.User.Name == UserFirstName).ToList();
+        private List<Pallet> SearchByEmployeeLastName(List<Pallet> pallets) => pallets.Where(x => x.User.LastName == UserLastName).ToList();
         private List<Pallet> SearchByDepartureName(List<Pallet> pallets) => pallets.Where(x => x.Departure.Name == DepartureName).ToList();
         private List<Pallet> SearchByDepartureDate(List<Pallet> pallets) => pallets.Where(x => x.Departure.CloseTime == DepartureCloseTime).ToList();
     }

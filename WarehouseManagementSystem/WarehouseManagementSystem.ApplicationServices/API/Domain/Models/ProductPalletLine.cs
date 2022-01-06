@@ -14,7 +14,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
         public string OrderBarcode { get; set; }
         public string DepartureName { get; set; }
         public string InvoiceNumber { get; set; }
-        public string EmployeeName { get; set; }
-        public string EmployeeLastName { get; set; }
+        public string UserFirstName { get; set; }
+        public string UserLastName { get; set; }
     }
 }

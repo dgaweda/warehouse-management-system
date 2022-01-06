@@ -31,8 +31,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Seniorities
             var query = new GetSenioritiesHelper()
             {
                 EmploymentDate = request.EmploymentDate,
-                EmployeeLastName = request.EmployeeLastName,
-                EmployeeName = request.EmployeeName
+                UserLastName = request.UserLastName,
+                UserFirstName = request.UserFirstName
             };
             return new GetSenioritiesQuery(query);
         }

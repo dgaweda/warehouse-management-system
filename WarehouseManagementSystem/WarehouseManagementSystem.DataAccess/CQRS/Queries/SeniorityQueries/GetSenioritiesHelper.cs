@@ -11,8 +11,8 @@ namespace DataAccess.CQRS.Queries.SeniorityQueries
     public class GetSenioritiesHelper : IGetEntityHelper<Seniority>
     {
         public DateTime EmploymentDate { get; set; }
-        public string EmployeeName { get; set; }
-        public string EmployeeLastName { get; set; }
+        public string UserFirstName { get; set; }
+        public string UserLastName { get; set; }
 
         public async Task<List<Seniority>> GetFilteredData(WMSDatabaseContext context)
         {
@@ -23,11 +23,11 @@ namespace DataAccess.CQRS.Queries.SeniorityQueries
             if (PropertiesAreEmpty())
                 return seniorities;
 
-            if (!string.IsNullOrEmpty(EmployeeName))
-                seniorities = SearchByEmployeeName(seniorities);
+            if (!string.IsNullOrEmpty(UserFirstName))
+                seniorities = SearchByUserFirstName(seniorities);
 
-            if (!string.IsNullOrEmpty(EmployeeLastName))
-                seniorities = SearchByEmployeeLastName(seniorities);
+            if (!string.IsNullOrEmpty(UserLastName))
+                seniorities = SearchByUserLastName(seniorities);
 
             if (EmploymentDate > DateTime.MinValue)
                 seniorities = SearchByEmploymentDate(seniorities);
@@ -35,11 +35,11 @@ namespace DataAccess.CQRS.Queries.SeniorityQueries
             return seniorities;
         }
 
-        private List<Seniority> SearchByEmployeeName(List<Seniority> seniorities) => seniorities.Where(seniority => seniority.Employee.Name == EmployeeName).ToList();
+        private List<Seniority> SearchByUserFirstName(List<Seniority> seniorities) => seniorities.Where(seniority => seniority.Employee.Name == UserFirstName).ToList();
 
-        private List<Seniority> SearchByEmployeeLastName(List<Seniority> seniorities) => seniorities.Where(seniority => seniority.Employee.LastName == EmployeeLastName).ToList();
+        private List<Seniority> SearchByUserLastName(List<Seniority> seniorities) => seniorities.Where(seniority => seniority.Employee.LastName == UserLastName).ToList();
 
         private List<Seniority> SearchByEmploymentDate(List<Seniority> seniorities) => seniorities.Where(seniority => seniority.EmploymentDate > EmploymentDate).ToList();
-        public bool PropertiesAreEmpty() => string.IsNullOrEmpty(EmployeeName) && string.IsNullOrEmpty(EmployeeLastName) && EmploymentDate == DateTime.MinValue;
+        public bool PropertiesAreEmpty() => string.IsNullOrEmpty(UserFirstName) && string.IsNullOrEmpty(UserLastName) && EmploymentDate == DateTime.MinValue;
     }
 }

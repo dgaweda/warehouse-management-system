@@ -1,5 +1,4 @@
 ﻿using DataAccess;
-using DataAccess.CQRS.Queries.UserQueries;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -9,9 +8,14 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Net.Http.Headers;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Queries;
+using DataAccess.CQRS.Queries.EmployeeQueries;
+using DataAccess.CQRS.Queries.UsersQueries;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace warehouse_management_system.Authentication
 {
@@ -33,7 +37,7 @@ namespace warehouse_management_system.Authentication
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
             var endpoint = Context.GetEndpoint();
-            if (endpoint?.Metadata?.GetMetadata<IAllowAnonymous>() != null) // sprawdza czy jestemy w odpowiednim endpoincie
+            if (endpoint?.Metadata?.GetMetadata<IAllowAnonymous>() != null) // sprawdza czy endpoint ma flage AllowAnonymous
             {
                 return AuthenticateResult.NoResult();
             }
@@ -53,17 +57,18 @@ namespace warehouse_management_system.Authentication
                 var username = credentials[0];
                 var password = credentials[1];
 
-                var query = new GetUsersQuery()
+                var query = new GetUserQuery()
                 {
                     UserName = username
                 };
 
-                user = await _queryExecutor.Execute(query);
+                user = await Helper.GetUser(_queryExecutor, query);
 
-                if (user is null || user.Password != password)
+                if (user is null || !user.HasCorrectPassword(password))
                 {
                     return AuthenticateResult.Fail("Invalid username or password.");
                 }
+
             }
             catch
             {

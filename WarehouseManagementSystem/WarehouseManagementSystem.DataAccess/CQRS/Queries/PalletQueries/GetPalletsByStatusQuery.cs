@@ -17,7 +17,7 @@ namespace DataAccess.CQRS.Queries.PalletQueries
                 .Include(x => x.Departure)
                 .Include(x => x.Order)
                 .Include(x => x.Invoice.Delivery)
-                .Include(x => x.Employee)
+                .Include(x => x.User)
                 .Where(pallet => pallet.PalletStatus == PalletStatus).ToListAsync();
         }
     }

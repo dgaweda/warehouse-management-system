@@ -13,6 +13,6 @@ namespace DataAccess.Entities
         public DateTime EmploymentDate { get; set; }
         public int EmployeeId { get; set; }
 
-        public Employee Employee { get; set; }
+        public User Employee { get; set; }
     }
 }

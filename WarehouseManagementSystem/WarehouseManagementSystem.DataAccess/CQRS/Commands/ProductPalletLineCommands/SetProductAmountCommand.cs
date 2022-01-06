@@ -48,7 +48,7 @@ namespace DataAccess.CQRS.Commands.ProductsPalletsCommands
                 .Include(x => x.Pallet)
                     .ThenInclude(invoice => invoice.Invoice)
                 .Include(x => x.Pallet)
-                    .ThenInclude(employee => employee.Employee)
+                    .ThenInclude(x => x.User)
                 .FirstOrDefaultAsync(x => x.PalletId == Parameter.PalletId && x.ProductId == Parameter.ProductId);
         }
 

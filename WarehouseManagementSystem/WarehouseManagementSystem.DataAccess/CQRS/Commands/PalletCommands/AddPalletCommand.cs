@@ -26,8 +26,8 @@ namespace DataAccess.CQRS.Commands.PalletCommands
             if (Parameter.DepartureId == 0)
                 Parameter.DepartureId = null;
 
-            if (Parameter.EmployeeId == 0)
-                Parameter.EmployeeId = null;
+            if (Parameter.UserId == 0)
+                Parameter.UserId = null;
 
             if (Parameter.InvoiceId == 0)
                 Parameter.InvoiceId = null;

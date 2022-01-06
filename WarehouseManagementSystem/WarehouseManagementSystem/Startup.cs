@@ -48,7 +48,7 @@ namespace warehouse_management_system
 
             services.AddTransient<ICommandExecutor, CommandExecutor>();
 
-            services.AddAutoMapper(typeof(EmployeesProfile).Assembly); // This Line Enables AutoMapper to map all profiles without adding everyone of them.
+            services.AddAutoMapper(typeof(UsersProfile).Assembly); // This Line Enables AutoMapper to map all profiles without adding everyone of them.
                                                                        // It gets Assembly from one profile to get all the mappings.
             services.AddMediatR(typeof(ResponseBase<>));
 
