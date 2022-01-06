@@ -17,6 +17,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(dest => dest.LastName, options => options.MapFrom(src => src.Employee.LastName))
                 .ForMember(dest => dest.UserName, options => options.MapFrom(src => src.UserName))
                 .ForMember(dest => dest.RoleName, options => options.MapFrom(src => src.Employee.Role.Name));
+                
         }
     }
 }

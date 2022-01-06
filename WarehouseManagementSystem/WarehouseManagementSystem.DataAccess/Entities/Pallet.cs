@@ -1,5 +1,6 @@
 ﻿using DataAccess.Entities.EntityBases;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,12 +10,14 @@ namespace DataAccess.Entities
     {
         [Required]
         [MaxLength(10)]
+        [Column("Kod kreskowy")]
         public string Barcode { get; set; }
         public int? OrderId { get; set; }
         public int? DepartureId { get; set; }
         public int? InvoiceId { get; set; }
         public int? EmployeeId { get; set; }
 
+        [Column("Aktualny status palety")]
         public Status PalletStatus { get; set; }
 
         [ForeignKey("DepartureId")]

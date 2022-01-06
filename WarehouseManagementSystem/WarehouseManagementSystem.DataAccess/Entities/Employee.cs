@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
@@ -11,10 +13,12 @@ namespace DataAccess.Entities
     {
         [Required]
         [MaxLength(50)]
+        [Column("Imię")]
         public string Name { get; set; }
 
         [Required]
         [MaxLength(50)]
+        [Column("Nazwisko")]
         public string LastName { get; set; }
 
         [Required]
@@ -23,6 +27,7 @@ namespace DataAccess.Entities
 
         [Required]
         [Range(16, 99)]
+        [Column("Wiek")]
         public int Age { get; set; }
 
         [Required]

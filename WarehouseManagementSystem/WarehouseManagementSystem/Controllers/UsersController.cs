@@ -24,5 +24,10 @@ namespace warehouse_management_system.Controllers
         [HttpGet]
         [Route("All")]
         public Task<IActionResult> GetAll([FromQuery] GetUsersRequest request) => Handle<GetUsersRequest, GetUsersResponse>(request);
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("Create")]
+        public Task<IActionResult> Create([FromBody] CreateUserRequest request) => Handle<CreateUserRequest, CreateUserResponse>(request);
     }
 }
