@@ -1,6 +1,7 @@
 ﻿using DataAccess.Entities;
 using System.Threading.Tasks;
 using DataAccess.CQRS.Commands.UserCommands;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands
 {
@@ -11,7 +12,8 @@ namespace DataAccess.CQRS.Commands
             Parameter.HashPassword();
             await context.Users.AddAsync(Parameter);
             await context.SaveChangesAsync();
-            return Parameter;
+            var addedRecord = await context.Users.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
+            return addedRecord;
         }
     }
 }

@@ -19,41 +19,41 @@ namespace DataAccess.CQRS.Queries.EmployeeQueries
 
         public async Task<List<User>> GetFilteredData(WMSDatabaseContext context)
         {
-            var employees = await context.Users
+            var users = await context.Users
                 .Include(x => x.Role)
                 .Include(x => x.Seniority)
                 .ToListAsync();
 
             if (PropertiesAreEmpty())
-                return employees;
+                return users;
 
             if (UserId != 0 && !(UserId is null))
-                employees = SearchByEmployeeId(employees);
+                users = SearchByUserId(users);
 
             if (!string.IsNullOrEmpty(RoleName))
-                employees = SearchByRoleName(employees);
+                users = SearchByRoleName(users);
 
             if (!string.IsNullOrEmpty(PESEL))
-                employees = SearchByPESEL(employees);
+                users = SearchByPESEL(users);
 
             if (Age != 0)
-                employees = SearchByAge(employees);
+                users = SearchByAge(users);
 
             if (!string.IsNullOrEmpty(Name))
-                employees = SearchByName(employees);
+                users = SearchByName(users);
 
             if (!string.IsNullOrEmpty(LastName))
-                employees = SearchByLastName(employees);
+                users = SearchByLastName(users);
 
-            return employees;
+            return users;
         }
 
-        private List<User> SearchByEmployeeId(List<User> employees) => employees.Where(employee => employee.Id == UserId).ToList();
-        private List<User> SearchByRoleName(List<User> employees) => employees.Where(employee => employee.Role.Name.Contains(RoleName)).ToList();
-        private List<User> SearchByPESEL(List<User> employees) => employees.Where(employee => employee.PESEL == PESEL).ToList();
-        private List<User> SearchByAge(List<User> employees) => employees.Where(employee => employee.Age == Age).ToList();
-        private List<User> SearchByName(List<User> employees) => employees.Where(employee => employee.Name.Contains(Name)).ToList();
-        private List<User> SearchByLastName(List<User> employees) => employees.Where(employee => employee.LastName.Contains(LastName)).ToList();
+        private List<User> SearchByUserId(List<User> users) => users.Where(user => user.Id == UserId).ToList();
+        private List<User> SearchByRoleName(List<User> users) => users.Where(user => user.Role.Name.Contains(RoleName)).ToList();
+        private List<User> SearchByPESEL(List<User> users) => users.Where(user => user.PESEL == PESEL).ToList();
+        private List<User> SearchByAge(List<User> users) => users.Where(user => user.Age == Age).ToList();
+        private List<User> SearchByName(List<User> users) => users.Where(user => user.Name.Contains(Name)).ToList();
+        private List<User> SearchByLastName(List<User> users) => users.Where(user => user.LastName.Contains(LastName)).ToList();
         public bool PropertiesAreEmpty() => UserId == 0 && string.IsNullOrEmpty(RoleName) && string.IsNullOrEmpty(PESEL) && Age == 0 && string.IsNullOrEmpty(Name) && string.IsNullOrEmpty(LastName);
     }
 }

@@ -16,9 +16,7 @@ namespace DataAccess.Entities
         [Column("Nazwa użytkownika")]
         public string UserName { get; set; }
 
-        [MaxLength(30)]
         [Required]
-        [DataType(DataType.Password)]
         [Column("Hasło")]
         public string Password { get; set; }
 

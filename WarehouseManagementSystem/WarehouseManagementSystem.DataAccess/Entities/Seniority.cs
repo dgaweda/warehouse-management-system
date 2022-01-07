@@ -11,8 +11,8 @@ namespace DataAccess.Entities
         [Required]
         [Column("Data zatrudnienia", TypeName = "date")]
         public DateTime EmploymentDate { get; set; }
-        public int EmployeeId { get; set; }
+        public int UserId { get; set; }
 
-        public User Employee { get; set; }
+        public User User { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DataAccess.Entities;
+using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace DataAccess.CQRS.Commands.PalletCommands
 {
@@ -22,15 +23,15 @@ namespace DataAccess.CQRS.Commands.PalletCommands
         public void SetPalletStatus(Pallet pallet)
         {
             if (PalletIsDuringOrderPicking(pallet))
-                pallet.PalletStatus = Status.DURING_ORDER_PICKING;
+                pallet.PalletStatus = PalletEnum.Status.DURING_ORDER_PICKING;
             else if (PalletWasSent(pallet))
-                pallet.PalletStatus = Status.SENT;
+                pallet.PalletStatus = PalletEnum.Status.SENT;
             else if (PalletIsReadyForDeparture(pallet))
-                pallet.PalletStatus = Status.READY_FOR_DEPARTURE;
+                pallet.PalletStatus = PalletEnum.Status.READY_FOR_DEPARTURE;
             else if (PalletIsReadyToBeUnfolded(pallet))
-                pallet.PalletStatus = Status.READY_TO_BE_UNFOLDED;
+                pallet.PalletStatus = PalletEnum.Status.READY_TO_BE_UNFOLDED;
             else
-                pallet.PalletStatus = Status.OPEN;
+                pallet.PalletStatus = PalletEnum.Status.OPEN;
         }
 
         private bool PalletIsDuringOrderPicking(Pallet pallet) => pallet.OrderId != null && pallet.UserId != null && pallet.Order.OrderState == State.IN_PROGRESS;

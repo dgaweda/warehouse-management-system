@@ -49,7 +49,7 @@ namespace DataAccess.Repository
             return SaveChanges();
         }
 
-        private bool IsNull(T entity) => entity == null;
+        private static bool IsNull(T entity) => entity == null;
 
         private Task SaveChanges() => context.SaveChangesAsync();
     }

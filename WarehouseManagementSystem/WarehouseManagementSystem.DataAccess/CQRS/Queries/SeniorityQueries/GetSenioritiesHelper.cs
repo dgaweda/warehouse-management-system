@@ -17,7 +17,7 @@ namespace DataAccess.CQRS.Queries.SeniorityQueries
         public async Task<List<Seniority>> GetFilteredData(WMSDatabaseContext context)
         {
             var seniorities = await context.Seniorities
-                .Include(x => x.Employee)
+                .Include(x => x.User)
                 .ToListAsync();
 
             if (PropertiesAreEmpty())
@@ -35,9 +35,9 @@ namespace DataAccess.CQRS.Queries.SeniorityQueries
             return seniorities;
         }
 
-        private List<Seniority> SearchByUserFirstName(List<Seniority> seniorities) => seniorities.Where(seniority => seniority.Employee.Name == UserFirstName).ToList();
+        private List<Seniority> SearchByUserFirstName(List<Seniority> seniorities) => seniorities.Where(seniority => seniority.User.Name == UserFirstName).ToList();
 
-        private List<Seniority> SearchByUserLastName(List<Seniority> seniorities) => seniorities.Where(seniority => seniority.Employee.LastName == UserLastName).ToList();
+        private List<Seniority> SearchByUserLastName(List<Seniority> seniorities) => seniorities.Where(seniority => seniority.User.LastName == UserLastName).ToList();
 
         private List<Seniority> SearchByEmploymentDate(List<Seniority> seniorities) => seniorities.Where(seniority => seniority.EmploymentDate > EmploymentDate).ToList();
         public bool PropertiesAreEmpty() => string.IsNullOrEmpty(UserFirstName) && string.IsNullOrEmpty(UserLastName) && EmploymentDate == DateTime.MinValue;

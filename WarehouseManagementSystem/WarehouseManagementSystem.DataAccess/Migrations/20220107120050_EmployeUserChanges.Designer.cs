@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(WMSDatabaseContext))]
-    [Migration("20220106202042_ChangeEmployeeTableToUserTableWithNewProperties")]
-    partial class ChangeEmployeeTableToUserTableWithNewProperties
+    [Migration("20220107120050_EmployeUserChanges")]
+    partial class EmployeUserChanges
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -221,9 +221,6 @@ namespace DataAccess.Migrations
                     b.Property<int?>("DepartureId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EmployeeId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("InvoiceId")
                         .HasColumnType("int");
 
@@ -234,15 +231,18 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasColumnName("Aktualny status palety");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DepartureId");
 
-                    b.HasIndex("EmployeeId");
-
                     b.HasIndex("InvoiceId");
 
                     b.HasIndex("OrderId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Pallets");
                 });
@@ -336,16 +336,16 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("EmploymentDate")
                         .HasColumnType("date")
                         .HasColumnName("Data zatrudnienia");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId")
+                    b.HasIndex("UserId")
                         .IsUnique();
 
                     b.ToTable("Seniorities");
@@ -396,9 +396,6 @@ namespace DataAccess.Migrations
                     b.Property<string>("Salt")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -409,7 +406,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Invoice", b =>
@@ -457,10 +454,6 @@ namespace DataAccess.Migrations
                         .WithMany("Pallets")
                         .HasForeignKey("DepartureId");
 
-                    b.HasOne("DataAccess.Entities.User", "Employee")
-                        .WithMany("Pallets")
-                        .HasForeignKey("EmployeeId");
-
                     b.HasOne("DataAccess.Entities.Invoice", "Invoice")
                         .WithMany("Pallets")
                         .HasForeignKey("InvoiceId");
@@ -469,13 +462,17 @@ namespace DataAccess.Migrations
                         .WithMany("Pallets")
                         .HasForeignKey("OrderId");
 
-                    b.Navigation("Departure");
+                    b.HasOne("DataAccess.Entities.User", "User")
+                        .WithMany("Pallets")
+                        .HasForeignKey("UserId");
 
-                    b.Navigation("Employee");
+                    b.Navigation("Departure");
 
                     b.Navigation("Invoice");
 
                     b.Navigation("Order");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.ProductPalletLine", b =>
@@ -499,13 +496,13 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.Seniority", b =>
                 {
-                    b.HasOne("DataAccess.Entities.User", "Employee")
+                    b.HasOne("DataAccess.Entities.User", "User")
                         .WithOne("Seniority")
-                        .HasForeignKey("DataAccess.Entities.Seniority", "EmployeeId")
+                        .HasForeignKey("DataAccess.Entities.Seniority", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Employee");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.User", b =>

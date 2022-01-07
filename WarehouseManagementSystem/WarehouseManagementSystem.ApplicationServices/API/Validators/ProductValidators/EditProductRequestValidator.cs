@@ -16,6 +16,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductVa
         private readonly IValidatorHelper<Product> _validator;
         public EditProductRequestValidator(IValidatorHelper<Product> validator)
         {
+            _validator = validator;
             RuleFor(x => x.Id).Must(_validator.CheckIfExist).WithMessage("Can't edit product because it doesn't exists.");
             RuleFor(x => x.Id).GreaterThan(0);
 

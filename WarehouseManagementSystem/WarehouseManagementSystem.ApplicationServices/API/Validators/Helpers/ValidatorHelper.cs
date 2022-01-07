@@ -117,9 +117,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
         /// </summary>
         /// <param name="employeeId"></param>
         /// <returns></returns>
-        public bool CheckIfEmployeeIsNotHired(int employeeId)
+        public bool CheckIfEmployeeIsNotHired(int userId)
         {
-            return !_context.Seniorities.Any(x => x.EmployeeId == employeeId);
+            return !_context.Seniorities.Any(x => x.UserId == userId);
         }
 
         /// <summary>

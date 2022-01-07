@@ -7,11 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
+using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests
 {
     public class GetPalletsByStatusRequest : IRequest<GetPalletsByStatusResponse>
     {
-        public Status PalletStatus { get; set; }
+        public PalletEnum.Status PalletStatus { get; set; }
     }
 }

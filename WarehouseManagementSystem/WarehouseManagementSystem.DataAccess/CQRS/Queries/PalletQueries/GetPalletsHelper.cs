@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace DataAccess.CQRS.Queries.PalletQueries
 {
@@ -16,7 +17,7 @@ namespace DataAccess.CQRS.Queries.PalletQueries
         public string UserFirstName { get; set; }
         public string UserLastName { get; set; }
         public string DepartureName { get; set; }
-        public Status PalleStatus { get; set; }
+        public PalletEnum.Status PalletStatus { get; set; }
         public DateTime DepartureCloseTime { get; set; }
 
 
@@ -44,10 +45,10 @@ namespace DataAccess.CQRS.Queries.PalletQueries
                 pallets = SearchByDeliveryName(pallets);
 
             if (string.IsNullOrEmpty(UserFirstName))
-                pallets = SearchByEmployeeName(pallets);
+                pallets = SearchByUserFirstName(pallets);
 
             if (string.IsNullOrEmpty(UserLastName))
-                pallets = SearchByEmployeeLastName(pallets);
+                pallets = SearchByUserLastName(pallets);
 
             if (string.IsNullOrEmpty(DepartureName))
                 pallets = SearchByDepartureName(pallets);
@@ -94,8 +95,8 @@ namespace DataAccess.CQRS.Queries.PalletQueries
         private List<Pallet> SearchByPickingEnd(List<Pallet> pallets) => pallets.Where(x => x.Order.PickingEnd == PickingEnd).ToList();
         private List<Pallet> SearchByProvider(List<Pallet> pallets) => pallets.Where(x => x.Invoice.Provider == Provider).ToList();
         private List<Pallet> SearchByDeliveryName(List<Pallet> pallets) => pallets.Where(x => x.Invoice.Delivery.Name == DeliveryName).ToList();
-        private List<Pallet> SearchByEmployeeName(List<Pallet> pallets) => pallets.Where(x => x.User.Name == UserFirstName).ToList();
-        private List<Pallet> SearchByEmployeeLastName(List<Pallet> pallets) => pallets.Where(x => x.User.LastName == UserLastName).ToList();
+        private List<Pallet> SearchByUserFirstName(List<Pallet> pallets) => pallets.Where(x => x.User.Name == UserFirstName).ToList();
+        private List<Pallet> SearchByUserLastName(List<Pallet> pallets) => pallets.Where(x => x.User.LastName == UserLastName).ToList();
         private List<Pallet> SearchByDepartureName(List<Pallet> pallets) => pallets.Where(x => x.Departure.Name == DepartureName).ToList();
         private List<Pallet> SearchByDepartureDate(List<Pallet> pallets) => pallets.Where(x => x.Departure.CloseTime == DepartureCloseTime).ToList();
     }

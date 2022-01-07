@@ -16,7 +16,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.EmployeeV
         public GetUserRequestValidator(IValidatorHelper<User> validator)
         {
             _validator = validator;
-            RuleFor(x => x.UserId).Must(_validator.CheckIfExist).WithMessage("Employee doesn't exists");
+            RuleFor(x => x.UserId).Must(_validator.CheckIfExist).WithMessage("User doesn't exists");
         }
     }
 }

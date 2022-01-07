@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace DataAccess.Entities
 {
@@ -18,7 +19,7 @@ namespace DataAccess.Entities
         public int? UserId { get; set; }
 
         [Column("Aktualny status palety")]
-        public Status PalletStatus { get; set; }
+        public PalletEnum.Status PalletStatus { get; set; }
 
         [ForeignKey("DepartureId")]
         public Departure Departure { get; set; }
@@ -33,15 +34,5 @@ namespace DataAccess.Entities
 
         [ForeignKey("UserId")]
         public User User { get; set; }
-    }
-
-    public enum Status
-    {
-        OPEN,                   // After pallet add (default), when pallet is unfolded (no products on pallet), when no Ids are filled
-        DURING_ORDER_PICKING,   // when only OrderId and EmployeeId is filled and Order.State = In_Progress
-        READY_FOR_DEPARTURE,    // when OrderID, EmployeeID and DepartureID is filled and order.State = Ready_fro_departure
-        SENT,                   // when OrderID, EmployeeID and DepartureID is filled + DepartureState = CLOSED
-        READY_TO_BE_UNFOLDED,   // when only InvoiceId is filled
-        UNFOLDED                // when there is nor product on the pallet
     }
 }

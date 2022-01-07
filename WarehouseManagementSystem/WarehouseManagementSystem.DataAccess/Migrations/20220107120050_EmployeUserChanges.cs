@@ -2,7 +2,7 @@
 
 namespace DataAccess.Migrations
 {
-    public partial class ChangeEmployeeTableToUserTableWithNewProperties : Migration
+    public partial class EmployeUserChanges : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,17 +17,29 @@ namespace DataAccess.Migrations
             migrationBuilder.DropTable(
                 name: "Employees");
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Users",
-                table: "Users");
+            migrationBuilder.RenameColumn(
+                name: "EmployeeId",
+                table: "Seniorities",
+                newName: "UserId");
 
-            migrationBuilder.RenameTable(
-                name: "Users",
-                newName: "User");
+            migrationBuilder.RenameIndex(
+                name: "IX_Seniorities_EmployeeId",
+                table: "Seniorities",
+                newName: "IX_Seniorities_UserId");
+
+            migrationBuilder.RenameColumn(
+                name: "EmployeeId",
+                table: "Pallets",
+                newName: "UserId");
+
+            migrationBuilder.RenameIndex(
+                name: "IX_Pallets_EmployeeId",
+                table: "Pallets",
+                newName: "IX_Pallets_UserId");
 
             migrationBuilder.AddColumn<string>(
                 name: "Imię",
-                table: "User",
+                table: "Users",
                 type: "nvarchar(50)",
                 maxLength: 50,
                 nullable: false,
@@ -35,7 +47,7 @@ namespace DataAccess.Migrations
 
             migrationBuilder.AddColumn<string>(
                 name: "Nazwisko",
-                table: "User",
+                table: "Users",
                 type: "nvarchar(50)",
                 maxLength: 50,
                 nullable: false,
@@ -43,7 +55,7 @@ namespace DataAccess.Migrations
 
             migrationBuilder.AddColumn<string>(
                 name: "PESEL",
-                table: "User",
+                table: "Users",
                 type: "nvarchar(11)",
                 maxLength: 11,
                 nullable: false,
@@ -51,53 +63,42 @@ namespace DataAccess.Migrations
 
             migrationBuilder.AddColumn<int>(
                 name: "RoleId",
-                table: "User",
+                table: "Users",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
-
-            migrationBuilder.AddColumn<int>(
-                name: "UserId",
-                table: "User",
-                type: "int",
-                nullable: true);
 
             migrationBuilder.AddColumn<int>(
                 name: "Wiek",
-                table: "User",
+                table: "Users",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
 
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_User",
-                table: "User",
-                column: "Id");
-
             migrationBuilder.CreateIndex(
-                name: "IX_User_RoleId",
-                table: "User",
+                name: "IX_Users_RoleId",
+                table: "Users",
                 column: "RoleId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Pallets_User_EmployeeId",
+                name: "FK_Pallets_Users_UserId",
                 table: "Pallets",
-                column: "EmployeeId",
-                principalTable: "User",
+                column: "UserId",
+                principalTable: "Users",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Seniorities_User_EmployeeId",
+                name: "FK_Seniorities_Users_UserId",
                 table: "Seniorities",
-                column: "EmployeeId",
-                principalTable: "User",
+                column: "UserId",
+                principalTable: "Users",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_User_Roles_RoleId",
-                table: "User",
+                name: "FK_Users_Roles_RoleId",
+                table: "Users",
                 column: "RoleId",
                 principalTable: "Roles",
                 principalColumn: "Id",
@@ -107,57 +108,60 @@ namespace DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Pallets_User_EmployeeId",
+                name: "FK_Pallets_Users_UserId",
                 table: "Pallets");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Seniorities_User_EmployeeId",
+                name: "FK_Seniorities_Users_UserId",
                 table: "Seniorities");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_User_Roles_RoleId",
-                table: "User");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_User",
-                table: "User");
+                name: "FK_Users_Roles_RoleId",
+                table: "Users");
 
             migrationBuilder.DropIndex(
-                name: "IX_User_RoleId",
-                table: "User");
+                name: "IX_Users_RoleId",
+                table: "Users");
 
             migrationBuilder.DropColumn(
                 name: "Imię",
-                table: "User");
+                table: "Users");
 
             migrationBuilder.DropColumn(
                 name: "Nazwisko",
-                table: "User");
+                table: "Users");
 
             migrationBuilder.DropColumn(
                 name: "PESEL",
-                table: "User");
+                table: "Users");
 
             migrationBuilder.DropColumn(
                 name: "RoleId",
-                table: "User");
-
-            migrationBuilder.DropColumn(
-                name: "UserId",
-                table: "User");
+                table: "Users");
 
             migrationBuilder.DropColumn(
                 name: "Wiek",
-                table: "User");
+                table: "Users");
 
-            migrationBuilder.RenameTable(
-                name: "User",
-                newName: "Users");
+            migrationBuilder.RenameColumn(
+                name: "UserId",
+                table: "Seniorities",
+                newName: "EmployeeId");
 
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Users",
-                table: "Users",
-                column: "Id");
+            migrationBuilder.RenameIndex(
+                name: "IX_Seniorities_UserId",
+                table: "Seniorities",
+                newName: "IX_Seniorities_EmployeeId");
+
+            migrationBuilder.RenameColumn(
+                name: "UserId",
+                table: "Pallets",
+                newName: "EmployeeId");
+
+            migrationBuilder.RenameIndex(
+                name: "IX_Pallets_UserId",
+                table: "Pallets",
+                newName: "IX_Pallets_EmployeeId");
 
             migrationBuilder.CreateTable(
                 name: "Employees",
