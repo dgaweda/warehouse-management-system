@@ -169,5 +169,15 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
                 return false;
             }
         }
+
+        /// <summary>
+        /// Sprawdza czy nazwa użytkownika jest unikalna
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public bool CheckIfUserNameIsUnique(string username)
+        {
+            return !_context.Users.Any(x => x.UserName == username);
+        }
     }
 }

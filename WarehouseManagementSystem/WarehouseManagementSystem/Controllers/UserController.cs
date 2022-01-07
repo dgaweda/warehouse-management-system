@@ -12,6 +12,8 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Employee
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Employee;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using Microsoft.Extensions.Logging;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 
 namespace warehouse_management_system.Controllers
 {
@@ -26,12 +28,16 @@ namespace warehouse_management_system.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("Add")]
+        [Route("Register")]
         public async Task<IActionResult> AddUser([FromBody] AddUserRequest request) => await Handle<AddUserRequest, AddUserResponse>(request);
 
         [HttpGet]
-        [Route("Get")]
+        [Route("Login")]
         public async Task<IActionResult> GetUser([FromQuery] GetUserRequest request) => await Handle<GetUserRequest, GetUserResponse>(request);
+
+        [HttpGet]
+        [Route("Get")]
+        public async Task<IActionResult> GetUsers([FromQuery] GetUsersRequest request) => await Handle<GetUsersRequest, GetUsersResponse>(request);
 
         [HttpPut]
         [Route("Edit")]

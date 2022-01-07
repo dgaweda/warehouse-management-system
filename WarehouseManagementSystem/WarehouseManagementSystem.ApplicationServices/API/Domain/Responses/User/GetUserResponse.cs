@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User
 {
-    public class GetUserResponse : ResponseBase<List<Domain.Models.User>>
+    public class GetUserResponse : ResponseBase<Domain.Models.User>
     {
     }
 }

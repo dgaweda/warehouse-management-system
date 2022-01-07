@@ -12,26 +12,25 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Employees
 {
-    public class GetUserHandler :
-        QueryHandler<GetUserRequest, GetUserResponse, GetUsersQuery, List<User>, List<Domain.Models.User>>,
-        IRequestHandler<GetUserRequest, GetUserResponse>
+    public class GetUsersHandler :
+        QueryHandler<GetUsersRequest, GetUsersResponse, GetUsersQuery, List<User>, List<Domain.Models.User>>,
+        IRequestHandler<GetUsersRequest, GetUsersResponse>
     {
-        public GetUserHandler(IQueryExecutor queryExecutor, IMapper mapper) : base(mapper, queryExecutor)
+        public GetUsersHandler(IQueryExecutor queryExecutor, IMapper mapper) : base(mapper, queryExecutor)
         {
         }
 
-        public async Task<GetUserResponse> Handle(GetUserRequest request, CancellationToken cancellationToken)
+        public async Task<GetUsersResponse> Handle(GetUsersRequest request, CancellationToken cancellationToken)
         {
             var query = CreateQuery(request);
             var response = await PrepareResponse(query);
             return response;
         }
 
-        public override GetUsersQuery CreateQuery(GetUserRequest request)
+        public override GetUsersQuery CreateQuery(GetUsersRequest request)
         {
             var data = new GetUsersHelper()
             {
-
                 Age = request.Age,
                 UserId = request.UserId,
                 LastName = request.LastName,

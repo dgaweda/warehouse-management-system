@@ -9,7 +9,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.EmployeeValidators
 {
-    public class GetUserRequestValidator : AbstractValidator<GetUserRequest>
+    public class GetUserRequestValidator : AbstractValidator<GetUsersRequest>
     {
         private readonly IValidatorHelper<User> _validator;
 
