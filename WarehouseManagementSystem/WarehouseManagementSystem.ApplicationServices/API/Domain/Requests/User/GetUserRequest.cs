@@ -10,7 +10,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests
 {
     public class GetUserRequest : IRequest<GetUserResponse>
     {
-        public int? USerId { get; set; }
+        public int? UserId { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public string RoleName { get; set; }
