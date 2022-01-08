@@ -51,7 +51,7 @@ namespace warehouse_management_system
                 option =>
                 option.UseSqlServer(this.Configuration.GetConnectionString("WMSDatabaseContext")));
 
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<,>));
             services.AddScoped(typeof(IValidatorHelper<>), typeof(ValidatorHelper<>));
 
             services.AddControllers()

@@ -5,8 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class OrderLine : EntityBase
+    public class OrderLine : IEntityBase
     {
+        public int Id { get; set; }
         public int ProductId { get; set; }
 
         public int OrderId { get; set; }

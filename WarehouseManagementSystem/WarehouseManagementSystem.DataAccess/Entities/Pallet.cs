@@ -5,8 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class Pallet : EntityBase
+    public class Pallet : IEntityBase
     {
+        public int Id { get; set; }
+
         [Required]
         [MaxLength(10)]
         public string Barcode { get; set; }

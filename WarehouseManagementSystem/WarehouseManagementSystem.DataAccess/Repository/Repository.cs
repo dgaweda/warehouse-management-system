@@ -8,49 +8,59 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    public class Repository<T> : IRepository<T> where T : EntityBase
+    public class Repository<TEntity, TContext> : IRepository<TEntity> 
+        where TEntity : class, IEntityBase
+        where TContext : DbContext
     {
-        protected readonly WMSDatabaseContext context;
-        private readonly DbSet<T> entities;
+        protected readonly TContext _context;
+        private DbSet<TEntity> entities;
 
-        public Repository(WMSDatabaseContext context)
+        public Repository(TContext context)
         {
-            this.context = context;
-            entities = context.Set<T>();
+            _context = context;
         }
 
-        public Task Delete(int id)
+        public async Task<TEntity> Add(TEntity entity)
         {
-            T record = entities.SingleOrDefault(i => i.Id == id);
-
-            entities.Remove(record);
-            return SaveChanges();
+            _context.Set<TEntity>().Add(entity);
+            await _context.SaveChangesAsync();
+            return entity;
         }
 
-        public Task<List<T>> GetAll() => entities.ToListAsync();
-
-        public Task<T> GetById(int id) => entities.SingleOrDefaultAsync(i => i.Id == id);
-
-        public Task Insert(T entity)
+        public async Task<List<TEntity>> GetAll()
         {
-            if (IsNull(entity))
-                throw new ArgumentNullException();
-
-            entities.Add(entity);
-            return SaveChanges();
+            return await _context.Set<TEntity>().ToListAsync();
         }
 
-        public Task Update(T entity)
+        public async Task<TEntity> Get(int id)
         {
-            if(IsNull(entity))
-                throw new ArgumentNullException();
-
-            entities.Update(entity);
-            return SaveChanges();
+            return await _context.Set<TEntity>().SingleOrDefaultAsync(i => i.Id == id);
         }
 
-        private bool IsNull(T entity) => entity == null;
+        public async Task<TEntity> Delete(int id)
+        {
+            entities = _context.Set<TEntity>();
+            var entity = entities.SingleOrDefault(i => i.Id == id);
 
-        private Task SaveChanges() => context.SaveChangesAsync();
+            if (entity is null)
+            {
+                return entity;
+            }
+
+            entities.Remove(entity);
+            await _context.SaveChangesAsync();
+            return entity;
+        }
+
+        public async Task<TEntity> Update(TEntity entity)
+        {
+            var entityToDetach = _context.Set<TEntity>();
+
+            _context.Entry(entityToDetach).State = EntityState.Modified;
+            _context.Entry(entity).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
+            return entity;
+        }
     }
 }

@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Entities
 {
-    public class Invoice : EntityBase
+    public class Invoice : IEntityBase
     {
+        public int Id { get; set; }
+
         [Required]
         [MaxLength(50)]
         public string InvoiceNumber { get; set; }

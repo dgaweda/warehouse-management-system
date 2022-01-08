@@ -6,8 +6,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class Product : EntityBase
+    public class Product : IEntityBase
     {
+        public int Id { get; set; }
+
         [Required]
         [Column(TypeName = "date")]
         public DateTime ExpirationDate { get; set; }

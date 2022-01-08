@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators
 {
-    public class ValidatorHelper<TEntity> : IValidatorHelper<TEntity> where TEntity : EntityBase
+    public class ValidatorHelper<TEntity> : IValidatorHelper<TEntity> where TEntity : class, IEntityBase
     {
         private readonly WMSDatabaseContext _context;
         private readonly DbSet<TEntity> entity;

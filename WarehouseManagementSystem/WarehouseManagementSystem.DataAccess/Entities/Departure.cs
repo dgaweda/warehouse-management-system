@@ -6,8 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class Departure : EntityBase
+    public class Departure : IEntityBase
     {
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(50)]
