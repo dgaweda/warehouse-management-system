@@ -1,9 +1,11 @@
-﻿using DataAccess;
+﻿using System;
+using DataAccess;
 using DataAccess.Entities;
 using DataAccess.Entities.EntityBases;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Net.Mail;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators
 {
@@ -115,9 +117,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
         /// </summary>
         /// <param name="employeeId"></param>
         /// <returns></returns>
-        public bool CheckIfEmployeeIsNotHired(int employeeId)
+        public bool CheckIfEmployeeIsNotHired(int userId)
         {
-            return !_context.Seniorities.Any(x => x.EmployeeId == employeeId);
+            return !_context.Seniorities.Any(x => x.UserId == userId);
         }
 
         /// <summary>
@@ -148,6 +150,34 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
         public bool CheckIfDepartureNameExist(string name)
         {
             return string.IsNullOrEmpty(name) || _context.Departures.Any(x => x.Name.Contains(name));
+        }
+
+        /// <summary>
+        /// Sprawdza czy email jest poprawny
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public bool CheckEmailFormat(string email)
+        {
+            try
+            {
+                var mail = new MailAddress(email);
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Sprawdza czy nazwa użytkownika jest unikalna
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public bool CheckIfUserNameIsUnique(string username)
+        {
+            return !_context.Users.Any(x => x.UserName == username);
         }
     }
 }

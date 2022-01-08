@@ -23,6 +23,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.SenioritySe
 
         }
 
-        public Task<AddSeniorityResponse> Handle(AddSeniorityRequest request, CancellationToken cancellationToken) => PrepareResponse(request);
+        public async Task<AddSeniorityResponse> Handle(AddSeniorityRequest request, CancellationToken cancellationToken) => await PrepareResponse(request);
     }
 }

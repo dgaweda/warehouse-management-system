@@ -14,6 +14,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pall
         public int? OrderId { get; set; }
         public int? DepartureId { get; set; }
         public int? InvoiceId { get; set; }
-        public int? EmployeeId { get; set; }
+        public int? UserId { get; set; }
     }
 }

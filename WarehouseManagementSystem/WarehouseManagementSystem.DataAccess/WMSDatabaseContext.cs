@@ -10,7 +10,6 @@ namespace DataAccess
 
         }
 
-        public DbSet<Employee> Employees { get; set;  }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Seniority> Seniorities { get; set; }
         public DbSet<Pallet> Pallets { get; set; }

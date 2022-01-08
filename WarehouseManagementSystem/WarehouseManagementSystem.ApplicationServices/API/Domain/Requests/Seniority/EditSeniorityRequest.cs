@@ -12,6 +12,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seni
     {
         public int Id { get; set; }
         public DateTime EmploymentDate { get; set; }
-        public int EmployeeId { get; set; }
+        public int UserId { get; set; }
     }
 }

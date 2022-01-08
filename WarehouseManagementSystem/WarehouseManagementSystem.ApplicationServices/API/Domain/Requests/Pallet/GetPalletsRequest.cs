@@ -14,8 +14,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests
         public DateTime PickingEnd { get; set; }
         public string Provider { get; set; }
         public string DeliveryName { get; set; }
-        public string EmployeeName { get; set; }
-        public string EmployeeLastName { get; set; }
+        public string UserFirstName { get; set; }
+        public string UserLastName { get; set; }
         public string DepartureName { get; set; }
         public DateTime DepartureCloseTime { get; set; }
     }

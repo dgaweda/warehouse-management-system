@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace DataAccess.CQRS.Commands.ProductsPalletsCommands
 {
@@ -15,7 +16,7 @@ namespace DataAccess.CQRS.Commands.ProductsPalletsCommands
             var palletLine = await DecreaseProductAmount(context);
             
             if (await PalletIsEmpty(context))
-                palletLine.Pallet.PalletStatus = Status.UNFOLDED;
+                palletLine.Pallet.PalletStatus = PalletEnum.Status.UNFOLDED;
             
             await context.SaveChangesAsync();
             return palletLine;
@@ -48,7 +49,7 @@ namespace DataAccess.CQRS.Commands.ProductsPalletsCommands
                 .Include(x => x.Pallet)
                     .ThenInclude(invoice => invoice.Invoice)
                 .Include(x => x.Pallet)
-                    .ThenInclude(employee => employee.Employee)
+                    .ThenInclude(x => x.User)
                 .FirstOrDefaultAsync(x => x.PalletId == Parameter.PalletId && x.ProductId == Parameter.ProductId);
         }
 

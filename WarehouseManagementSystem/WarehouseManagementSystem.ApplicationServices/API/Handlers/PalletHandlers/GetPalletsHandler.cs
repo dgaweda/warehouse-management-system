@@ -35,8 +35,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletServi
                 DeliveryName = request.DeliveryName,
                 DepartureCloseTime = request.DepartureCloseTime,
                 DepartureName = request.DepartureName,
-                EmployeeLastName = request.EmployeeLastName,
-                EmployeeName = request.EmployeeName,
+                UserLastName = request.UserLastName,
+                UserFirstName = request.UserFirstName,
                 PickingEnd = request.PickingEnd,
                 Provider = request.Provider
             };

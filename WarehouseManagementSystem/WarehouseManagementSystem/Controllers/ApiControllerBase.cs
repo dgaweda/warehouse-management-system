@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
@@ -32,8 +33,11 @@ namespace warehouse_management_system.Controllers
                     .Select(x => new { property = x.Key, errors = x.Value.Errors }));
             }
 
+            var userName = User.FindFirstValue(ClaimTypes.Name);
+
             var response = await _mediator.Send(request);
             _logger.LogInformation("Response Errors: \n" + response.Error);
+
             return response.Error == null ? Ok(response) : ErrorResponse(response.Error);
         }
 

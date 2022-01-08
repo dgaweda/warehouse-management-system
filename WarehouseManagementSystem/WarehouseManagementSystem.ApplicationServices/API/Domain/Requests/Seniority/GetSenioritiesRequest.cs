@@ -11,8 +11,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests
     public class GetSenioritiesRequest : IRequest<GetSenioritiesResponse>
     {
         public DateTime EmploymentDate { get; set; }
-        public string EmployeeName { get; set; }
-        public string EmployeeLastName { get; set; }
+        public string UserFirstName { get; set; }
+        public string UserLastName { get; set; }
 
     }
 }
