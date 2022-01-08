@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
-namespace DataAccess.CQRS.Commands.UserCommands
+namespace DataAccess.CQRS.Helpers
 {
-    public static class Helper
+    public static class UserHelper
     {
         public static void HashPassword(this User user)
         {
@@ -29,7 +29,7 @@ namespace DataAccess.CQRS.Commands.UserCommands
             SetUserData(user, hashedPassword, salt);
         }
 
-        private static void SetUserData(User user, string password, byte[] salt)
+        public static void SetUserData(User user, string password, byte[] salt)
         {
             var saltString = Convert.ToBase64String(salt);
 

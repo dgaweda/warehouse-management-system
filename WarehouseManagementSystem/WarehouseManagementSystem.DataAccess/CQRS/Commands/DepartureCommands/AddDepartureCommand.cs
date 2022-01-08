@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands.DepartureCommands
 {
@@ -12,15 +13,9 @@ namespace DataAccess.CQRS.Commands.DepartureCommands
     {
         public override async Task<Departure> Execute(WMSDatabaseContext context)
         {
-            if (Parameter == null)
-                throw new ArgumentNullException();
-
             Parameter.OpeningTime = DateTime.Now;
-            await context.Departures.AddAsync(Parameter);
-            await context.SaveChangesAsync();
 
-            var addedRecord = await context.Departures.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
-            return addedRecord;
+            return await context.AddRecord(Parameter);
         }
     }
 }

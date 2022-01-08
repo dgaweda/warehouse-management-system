@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands
 {
@@ -15,10 +17,11 @@ namespace DataAccess.CQRS.Commands
         {
             var invoices = await context.Invoices.ToListAsync();
 
-            new SetInvoiceNumber().Set(invoices, Parameter);
-            await context.Invoices.AddAsync(Parameter);
-            await context.SaveChangesAsync();
-            return Parameter;
+            Parameter.InvoiceNumber = Parameter
+                .SetInvNumberId(invoices)
+                .SetInvNumber(Parameter);
+
+            return await context.AddRecord(Parameter);
         }
     }
 }
