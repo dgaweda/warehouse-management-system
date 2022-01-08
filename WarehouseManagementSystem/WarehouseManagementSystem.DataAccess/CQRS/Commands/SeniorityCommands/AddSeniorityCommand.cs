@@ -15,7 +15,7 @@ namespace DataAccess.CQRS.Commands.SeniorityCommands
             await context.Seniorities.AddAsync(Parameter);
             await context.SaveChangesAsync();
 
-            var addedRecord = await context.Seniorities.Include(x => x.Employee).FirstOrDefaultAsync(x => x.Id == Parameter.Id);
+            var addedRecord = await context.Seniorities.Include(x => x.User).FirstOrDefaultAsync(x => x.Id == Parameter.Id);
 
             return addedRecord;
         }

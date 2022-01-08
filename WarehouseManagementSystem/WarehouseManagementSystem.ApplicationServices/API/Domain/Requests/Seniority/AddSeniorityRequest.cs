@@ -11,6 +11,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seni
     public class AddSeniorityRequest : IRequest<AddSeniorityResponse>
     {
         public DateTime EmploymentDate { get; set; }
-        public int EmployeeId { get; set; }
+        public int UserId { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DataAccess.Entities.EntityBases;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -15,18 +16,20 @@ namespace DataAccess.Entities
 
         [Required]
         [MaxLength(50)]
+        [Column("Numer faktury")]
         public string InvoiceNumber { get; set; }
 
         [Required]
         [MaxLength(50)]
+        [Column("Nazwa dostawcy")]
         public string Provider { get; set; }
 
         [Required]
-        [Column(TypeName = "date")]
+        [Column("Data i godzina stworzenia faktury", TypeName = "date")]
         public DateTime CreationDate { get; set; }
 
         [Required]
-        [Column(TypeName = "smalldatetime")]
+        [Column("Data i godzina podpisania faktury", TypeName = "smalldatetime")]
         public DateTime ReceiptDateTime { get; set; }
 
         [Required]

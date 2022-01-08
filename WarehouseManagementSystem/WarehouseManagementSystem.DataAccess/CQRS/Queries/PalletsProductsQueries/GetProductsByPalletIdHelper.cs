@@ -34,7 +34,7 @@ namespace DataAccess.CQRS.Queries.PalletLineQueries
                 .Include(x => x.Pallet)
                     .ThenInclude(invoice => invoice.Invoice)
                 .Include(x => x.Pallet)
-                    .ThenInclude(employee => employee.Employee)
+                    .ThenInclude(employee => employee.User)
                 .ToListAsync();
         }
 

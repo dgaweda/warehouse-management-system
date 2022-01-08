@@ -1,10 +1,6 @@
-﻿using DataAccess.Entities.EntityBases;
-using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel;
+using DataAccess.Entities.EntityBases;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Entities
 {
@@ -14,6 +10,7 @@ namespace DataAccess.Entities
         public int ProductId { get; set; }
         public int PalletId { get; set; }
 
+        [Column("Ilość danego produktu na palecie")]
         public int ProductAmount { get; set; }
 
         [ForeignKey("PalletId")]

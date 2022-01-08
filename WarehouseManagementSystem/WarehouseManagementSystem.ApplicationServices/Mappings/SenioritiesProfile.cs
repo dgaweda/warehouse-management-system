@@ -14,20 +14,20 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
         public SenioritiesProfile()
         {
             CreateMap<Seniority, API.Domain.Models.Seniority>()
-                .ForMember(x => x.EmployeeId, y => y.MapFrom(z => z.EmployeeId))
+                .ForMember(x => x.UserId, y => y.MapFrom(z => z.UserId))
                 .ForMember(x => x.EmploymentDate, y => y.MapFrom(z => z.EmploymentDate))
-                .ForMember(x => x.Name, y => y.MapFrom(z => z.Employee.Name))
-                .ForMember(x => x.LastName, y => y.MapFrom(z => z.Employee.LastName))
+                .ForMember(x => x.Name, y => y.MapFrom(z => z.User.Name))
+                .ForMember(x => x.LastName, y => y.MapFrom(z => z.User.LastName))
                 .ForMember(dest => dest.EmploymentDuration, opt => opt.MapFrom(src =>
                     string.Format("{0} Year/s {1} Month/s)", (DateTime.Now - src.EmploymentDate).Days / 365, ((DateTime.Now - src.EmploymentDate).Days % 365) / 30)));
 
             CreateMap<AddSeniorityRequest, Seniority>()
                 .ForMember(x => x.EmploymentDate, y => y.MapFrom(z => z.EmploymentDate))
-                .ForMember(x => x.EmployeeId, y => y.MapFrom(z => z.EmployeeId));
+                .ForMember(x => x.UserId, y => y.MapFrom(z => z.UserId));
 
             CreateMap<EditSeniorityRequest, Seniority>()
                 .ForMember(x => x.EmploymentDate, opt => opt.MapFrom(src => src.EmploymentDate))
-                .ForMember(x => x.EmployeeId, opt => opt.MapFrom(src => src.EmployeeId));
+                .ForMember(x => x.UserId, opt => opt.MapFrom(src => src.UserId));
         }
     }
 }

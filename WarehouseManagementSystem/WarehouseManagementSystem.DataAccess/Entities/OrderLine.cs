@@ -1,5 +1,6 @@
 ﻿using DataAccess.Entities.EntityBases;
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,10 +15,11 @@ namespace DataAccess.Entities
 
         [Required]
         [Range(1, 999)]
+        [Column("Ilość")]
         public int Amount { get; set; }
 
         [DataType(DataType.Currency)]
-        [Column(TypeName = "decimal(5,2)")]
+        [Column("Cena", TypeName = "decimal(5,2)")]
         public decimal Price { get; set; }
 
         [ForeignKey("OrderId")]

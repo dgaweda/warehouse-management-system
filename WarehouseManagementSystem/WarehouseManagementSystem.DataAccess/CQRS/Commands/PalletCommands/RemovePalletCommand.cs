@@ -16,7 +16,7 @@ namespace DataAccess.CQRS.Commands.PalletCommands
                 .Include(x => x.Departure)
                 .Include(x => x.Order)
                 .Include(x => x.Invoice.Delivery)
-                .Include(x => x.Employee)
+                .Include(x => x.User)
                 .FirstOrDefaultAsync(x => x.Id == Parameter.Id);
 
             context.Remove(pallet);

@@ -35,9 +35,9 @@ namespace DataAccess.CQRS.Commands.PalletCommands
                 .Include(x => x.Departure)
                 .Include(x => x.Order)
                 .Include(x => x.Invoice.Delivery)
-                .Include(x => x.Employee)
-                .Include(x => x.Employee.Role)
-                .Include(x => x.Employee.Seniority)
+                .Include(x => x.User)
+                .Include(x => x.User.Role)
+                .Include(x => x.User.Seniority)
                 .FirstOrDefaultAsync(x => x.Id == Parameter.Id);
         }
     }

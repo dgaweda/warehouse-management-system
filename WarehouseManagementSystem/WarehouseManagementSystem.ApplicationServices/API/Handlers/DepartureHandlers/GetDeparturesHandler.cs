@@ -32,10 +32,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Departures
             return new GetDeparturesQuery(data);
         }
 
-        public Task<GetDeparturesResponse> Handle(GetDeparturesRequest request, CancellationToken cancellation)
+        public async Task<GetDeparturesResponse> Handle(GetDeparturesRequest request, CancellationToken cancellation)
         {
             var query = CreateQuery(request);
-            var response = PrepareResponse(query);
+            var response = await PrepareResponse(query);
             return response;
         }
     }

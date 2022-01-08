@@ -27,12 +27,14 @@ namespace DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Arrival")
-                        .HasColumnType("smalldatetime");
+                        .HasColumnType("smalldatetime")
+                        .HasColumnName("Data i godzina przyjazdu dostawy");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Nazwa dostawcy");
 
                     b.HasKey("Id");
 
@@ -47,64 +49,26 @@ namespace DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime?>("CloseTime")
-                        .HasColumnType("smalldatetime");
+                        .HasColumnType("smalldatetime")
+                        .HasColumnName("Czas zamknięcia wyjazdu");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Nazwa wyjazdu");
 
                     b.Property<DateTime>("OpeningTime")
-                        .HasColumnType("smalldatetime");
+                        .HasColumnType("smalldatetime")
+                        .HasColumnName("Czas otworzenia wyjazdu");
 
                     b.Property<int>("State")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Status wyjazdu");
 
                     b.HasKey("Id");
 
                     b.ToTable("Departures");
-                });
-
-            modelBuilder.Entity("DataAccess.Entities.Employee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("PESEL")
-                        .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
-
-                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Invoice", b =>
@@ -115,7 +79,8 @@ namespace DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("date");
+                        .HasColumnType("date")
+                        .HasColumnName("Data i godzina stworzenia faktury");
 
                     b.Property<int>("DeliveryId")
                         .HasColumnType("int");
@@ -123,15 +88,18 @@ namespace DataAccess.Migrations
                     b.Property<string>("InvoiceNumber")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Numer faktury");
 
                     b.Property<string>("Provider")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Nazwa dostawcy");
 
                     b.Property<DateTime>("ReceiptDateTime")
-                        .HasColumnType("smalldatetime");
+                        .HasColumnType("smalldatetime")
+                        .HasColumnName("Data i godzina podpisania faktury");
 
                     b.HasKey("Id");
 
@@ -148,21 +116,25 @@ namespace DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CurrentAmount")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Aktualna ilość");
 
                     b.Property<int>("MaxAmount")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Maksymalna ilość");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasColumnName("Nazwa lokalizacji");
 
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("Type")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Typ lokalizacji");
 
                     b.HasKey("Id");
 
@@ -181,16 +153,20 @@ namespace DataAccess.Migrations
                     b.Property<string>("Barcode")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasColumnName("Kod kreskowy");
 
                     b.Property<int>("OrderState")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Stan zamówienia");
 
                     b.Property<DateTime?>("PickingEnd")
-                        .HasColumnType("smalldatetime");
+                        .HasColumnType("smalldatetime")
+                        .HasColumnName("Czas zakończenia zamówienia");
 
                     b.Property<DateTime?>("PickingStart")
-                        .HasColumnType("smalldatetime");
+                        .HasColumnType("smalldatetime")
+                        .HasColumnName("Czas rozpoczęcia zamówienia");
 
                     b.HasKey("Id");
 
@@ -205,13 +181,15 @@ namespace DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Amount")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Ilość");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(5,2)")
+                        .HasColumnName("Cena");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -235,12 +213,10 @@ namespace DataAccess.Migrations
                     b.Property<string>("Barcode")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasColumnName("Kod kreskowy");
 
                     b.Property<int?>("DepartureId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<int?>("InvoiceId")
@@ -250,17 +226,21 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("PalletStatus")
+                        .HasColumnType("int")
+                        .HasColumnName("Aktualny status palety");
+
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DepartureId");
 
-                    b.HasIndex("EmployeeId");
-
                     b.HasIndex("InvoiceId");
 
                     b.HasIndex("OrderId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Pallets");
                 });
@@ -275,15 +255,18 @@ namespace DataAccess.Migrations
                     b.Property<string>("Barcode")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasColumnName("Kod kreskowy");
 
                     b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("date");
+                        .HasColumnType("date")
+                        .HasColumnName("Data ważności");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Nazwa produktu");
 
                     b.HasKey("Id");
 
@@ -301,7 +284,8 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("ProductAmount")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Ilość danego produktu na palecie");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -325,15 +309,18 @@ namespace DataAccess.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("Opis roli");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Nazwa roli");
 
                     b.Property<decimal>("Salary")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("Wynagrodzenie");
 
                     b.HasKey("Id");
 
@@ -347,15 +334,16 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("EmploymentDate")
-                        .HasColumnType("date");
+                        .HasColumnType("date")
+                        .HasColumnName("Data zatrudnienia");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId")
+                    b.HasIndex("UserId")
                         .IsUnique();
 
                     b.ToTable("Seniorities");
@@ -368,30 +356,54 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Age")
+                        .HasColumnType("int")
+                        .HasColumnName("Wiek");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Nazwisko");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Imię");
+
+                    b.Property<string>("PESEL")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
+
                     b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Hasło");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Salt")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("Nazwa użytkownika");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RoleId");
+
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("DataAccess.Entities.Employee", b =>
-                {
-                    b.HasOne("DataAccess.Entities.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DataAccess.Entities.User", null)
-                        .WithOne("Employee")
-                        .HasForeignKey("DataAccess.Entities.Employee", "UserId");
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Invoice", b =>
@@ -439,10 +451,6 @@ namespace DataAccess.Migrations
                         .WithMany("Pallets")
                         .HasForeignKey("DepartureId");
 
-                    b.HasOne("DataAccess.Entities.Employee", "Employee")
-                        .WithMany("Pallets")
-                        .HasForeignKey("EmployeeId");
-
                     b.HasOne("DataAccess.Entities.Invoice", "Invoice")
                         .WithMany("Pallets")
                         .HasForeignKey("InvoiceId");
@@ -451,13 +459,17 @@ namespace DataAccess.Migrations
                         .WithMany("Pallets")
                         .HasForeignKey("OrderId");
 
-                    b.Navigation("Departure");
+                    b.HasOne("DataAccess.Entities.User", "User")
+                        .WithMany("Pallets")
+                        .HasForeignKey("UserId");
 
-                    b.Navigation("Employee");
+                    b.Navigation("Departure");
 
                     b.Navigation("Invoice");
 
                     b.Navigation("Order");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.ProductPalletLine", b =>
@@ -481,13 +493,24 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.Seniority", b =>
                 {
-                    b.HasOne("DataAccess.Entities.Employee", "Employee")
+                    b.HasOne("DataAccess.Entities.User", "User")
                         .WithOne("Seniority")
-                        .HasForeignKey("DataAccess.Entities.Seniority", "EmployeeId")
+                        .HasForeignKey("DataAccess.Entities.Seniority", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Employee");
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DataAccess.Entities.User", b =>
+                {
+                    b.HasOne("DataAccess.Entities.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Delivery", b =>
@@ -498,13 +521,6 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Entities.Departure", b =>
                 {
                     b.Navigation("Pallets");
-                });
-
-            modelBuilder.Entity("DataAccess.Entities.Employee", b =>
-                {
-                    b.Navigation("Pallets");
-
-                    b.Navigation("Seniority");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Invoice", b =>
@@ -533,7 +549,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.User", b =>
                 {
-                    b.Navigation("Employee");
+                    b.Navigation("Pallets");
+
+                    b.Navigation("Seniority");
                 });
 #pragma warning restore 612, 618
         }
