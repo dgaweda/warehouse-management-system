@@ -1,0 +1,7 @@
+<input type="text" class="form-control" [(ngModel)]="userName" (keyup)="checkIfEmpty()">
+<p>{{ userName }}</p>
+<button class="btn btn-primary " [disabled]="isEmpty" (click)="clearInput()">Clear</button>
+<p *ngIf="isCleared; else noClear">Username was cleared!</p>
+<ng-template #noClear>
+    <p>Username is ready to clear.</p>
+</ng-template>
