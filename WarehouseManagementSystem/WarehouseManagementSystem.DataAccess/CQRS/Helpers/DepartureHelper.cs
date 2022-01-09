@@ -10,14 +10,12 @@ namespace DataAccess.CQRS.Helpers
 {
     public static class DepartureHelper
     {
-        public async static Task<Departure> SetState(this Departure departure, WMSDatabaseContext context)
+        public async static Task<Departure> SetState(this Departure departure)
         {
-            var departureToUpdate = await context.GetById<Departure>(departure.Id);
+            departure.State = departure.State;
+            departure.CloseTime = departure.State == StateType.CLOSED ? DateTime.Now : null;
 
-            departureToUpdate.State = departure.State;
-            departureToUpdate.CloseTime = departure.State == StateType.CLOSED ? DateTime.Now : null;
-
-            return departureToUpdate;
+            return departure;
         }
     }
 }

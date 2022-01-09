@@ -12,8 +12,8 @@ namespace DataAccess.CQRS.Commands
         {
             Parameter.HashPassword();
             await context.AddRecord(Parameter);
-            var addedRecord = await context.Users.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
-            return addedRecord;
+
+            return Parameter;
         }
     }
 }

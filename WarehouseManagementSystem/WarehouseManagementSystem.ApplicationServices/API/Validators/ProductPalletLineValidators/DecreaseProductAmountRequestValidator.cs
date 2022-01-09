@@ -10,10 +10,10 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Products
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductPalletLine
 {
-    public class SetProductAmountRequestValidator : AbstractValidator<SetProductAmountRequest>
+    public class DecreaseProductAmountRequestValidator : AbstractValidator<DecreaseProductAmountRequest>
     {
-        private readonly IValidatorHelper<Product> _validator;
-        public SetProductAmountRequestValidator(IValidatorHelper<Product> validator)
+        private readonly IValidatorHelper _validator;
+        public DecreaseProductAmountRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
             RuleFor(x => x.PalletId).NotEmpty().WithMessage("This field must be filled");

@@ -14,9 +14,11 @@ namespace DataAccess.CQRS.Commands.DepartureCommands
     {
         public override async Task<Departure> Execute(WMSDatabaseContext context)
         {
-            var departureToUpdate = await Parameter.SetState(context);
+            var departureToUpdate = await context.GetById<Departure>(Parameter.Id);
+            await departureToUpdate.SetState();
 
-            return await context.UpdateRecord(departureToUpdate);
+            await context.UpdateRecord(departureToUpdate);
+            return departureToUpdate;
         }
     }
 }

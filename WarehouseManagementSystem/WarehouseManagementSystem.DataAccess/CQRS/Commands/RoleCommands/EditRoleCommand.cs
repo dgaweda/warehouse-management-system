@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands.RoleCommands
 {
@@ -12,8 +13,7 @@ namespace DataAccess.CQRS.Commands.RoleCommands
     {
         public override async Task<Role> Execute(WMSDatabaseContext context)
         {
-            context.Entry(Parameter).State = EntityState.Modified;
-            await context.SaveChangesAsync();
+            await context.UpdateRecord(Parameter);
             return Parameter;
         }
     }

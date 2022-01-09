@@ -25,6 +25,6 @@ namespace warehouse_management_system.Controllers
     
         [HttpPatch]
         [Route("Set/ProductAmount")]
-        public Task<IActionResult> SetProductAmount([FromQuery] SetProductAmountRequest request) => Handle<SetProductAmountRequest, SetProductAmountResponse>(request);
+        public Task<IActionResult> DecreaseProductAmount([FromQuery] DecreaseProductAmountRequest request) => Handle<DecreaseProductAmountRequest, DecreaseProductAmountResponse>(request);
     }
 }

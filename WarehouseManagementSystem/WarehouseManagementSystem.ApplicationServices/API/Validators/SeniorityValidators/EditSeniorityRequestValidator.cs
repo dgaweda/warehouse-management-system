@@ -11,8 +11,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Seniority
 {
     public class EditSeniorityRequestValidator : AbstractValidator<EditSeniorityRequest>
     {
-        private readonly IValidatorHelper<DataAccess.Entities.Seniority> _validator;
-        public EditSeniorityRequestValidator(IValidatorHelper<DataAccess.Entities.Seniority> validator)
+        private readonly IValidatorHelper _validator;
+        public EditSeniorityRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
             RuleFor(x => x.EmploymentDate).GreaterThanOrEqualTo(DateTime.Now.Date).WithMessage($"EmploymentDate must be equal or greater than {DateTime.Now.Date}.");

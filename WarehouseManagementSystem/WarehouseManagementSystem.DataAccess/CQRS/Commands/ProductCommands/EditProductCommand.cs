@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace DataAccess.CQRS.Commands.DeliveryProductCommands
 {
@@ -16,23 +19,10 @@ namespace DataAccess.CQRS.Commands.DeliveryProductCommands
                 .Include(x => x.PalletLines)
                 .FirstOrDefaultAsync(x => x.Id == Parameter.Id);
 
-            SetProperties(product);
+            product.SetProperties(Parameter);
+            await context.UpdateRecord(product);
 
-            context.Entry(product).State = EntityState.Modified;
-            await context.SaveChangesAsync();
             return product;
-        }
-
-        private void SetProperties(Product product)
-        {
-            if (!string.IsNullOrEmpty(Parameter.Name))
-                product.Name = Parameter.Name;
-
-            if (!string.IsNullOrEmpty(Parameter.Barcode))
-                product.Barcode = Parameter.Barcode;
-
-            if (Parameter.ExpirationDate > DateTime.Now)
-                product.ExpirationDate = Parameter.ExpirationDate;
         }
     }
 }

@@ -12,18 +12,14 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
 {
     public class EditLocationCurrentAmountValidator : AbstractValidator<EditLocationCurrentAmountRequest>
     {
-        private IValidatorHelper<Location> _validator;
+        private IValidatorHelper _validator;
 
-        public EditLocationCurrentAmountValidator(IValidatorHelper<Location> validator)
+        public EditLocationCurrentAmountValidator(IValidatorHelper validator)
         {
             _validator = validator;
             RuleFor(x => x.Id)
-                .Must(_validator.CheckIfExist)
+                .Must(_validator.CheckIfExist<Location>)
                 .WithMessage("Location doesn't exists.");
-
-            RuleFor(x => x.CurrentAmount)
-                .GreaterThan(0)
-                .WithMessage(x => $"Current amount must be greater than {x.CurrentAmount}");
 
             RuleFor(x => x.CurrentAmount)
                 .LessThan(x => _validator.GetLocationMaxAmount(x.Id))

@@ -13,7 +13,8 @@ namespace DataAccess.CQRS.Commands.DeliveryCommands
     {
         public override async Task<Delivery> Execute(WMSDatabaseContext context)
         {
-            return await context.UpdateRecord(Parameter);
+            await context.UpdateRecord(Parameter);
+            return Parameter;
         }
     }
 }

@@ -9,12 +9,7 @@ namespace DataAccess.CQRS.Helpers
 {
     public static class InvoiceHelper
     {
-        public static string SetInvNumber(this int lp, Invoice Parameter)
-        {
-            return $"FV/{lp}/{Parameter.Provider}/{ Parameter.CreationDate.Day}/{Parameter.CreationDate.Month}/{Parameter.CreationDate.Year}";
-        }
-
-        public static int SetInvNumberId(this Invoice Parameter, List<Invoice> invoices)
+        public static void SetInvoiceNumber(this Invoice Parameter, List<Invoice> invoices)
         {
             var lp = 1;
             invoices.ForEach(invoice =>
@@ -22,7 +17,8 @@ namespace DataAccess.CQRS.Helpers
                 if (invoice.CreationDate.Date == Parameter.CreationDate.Date && invoice.Provider == Parameter.Provider)
                     lp++;
             });
-            return lp;
+            
+            Parameter.InvoiceNumber = $"FV/{lp}/{Parameter.Provider}/{ Parameter.CreationDate.Day}/{Parameter.CreationDate.Month}/{Parameter.CreationDate.Year}"; ;
         }
     }
 }

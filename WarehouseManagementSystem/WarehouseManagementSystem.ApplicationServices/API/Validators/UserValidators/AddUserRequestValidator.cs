@@ -14,8 +14,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.EmployeeV
     public class AddUserRequestValidator : AbstractValidator<AddUserRequest>
     {
         
-        private readonly IValidatorHelper<DataAccess.Entities.Role> _validator;
-        public AddUserRequestValidator(IValidatorHelper<DataAccess.Entities.Role> validator)
+        private readonly IValidatorHelper _validator;
+        public AddUserRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
             RuleFor(x => x.UserName).NotEmpty().WithMessage("Username must be specified.");

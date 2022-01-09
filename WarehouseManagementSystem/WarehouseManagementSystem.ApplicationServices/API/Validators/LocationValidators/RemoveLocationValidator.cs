@@ -3,6 +3,7 @@ using DataAccess.Entities;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,12 +13,13 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
 {
     public class RemoveLocationValidator : AbstractValidator<RemoveLocationRequest>
     {
-        private readonly IValidatorHelper<Location> _validator;
+        private readonly IValidatorHelper _validator;
 
-        public RemoveLocationValidator(IValidatorHelper<Location> validator)
+        public RemoveLocationValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.Id).Must(_validator.CheckIfExist).WithMessage("Location doesn't exists");
+            RuleFor(x => x.Id).Must(_validator.CheckIfExist<Location>).WithMessage("Location doesn't exists");
+            RuleFor(x => x.Id).Must(_validator.CheckLocationCurrentAmount).WithMessage("Location still have some products");
         }
     }
 }

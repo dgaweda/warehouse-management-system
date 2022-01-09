@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands
 {
@@ -13,11 +14,8 @@ namespace DataAccess.CQRS.Commands
 
         public override async Task<User> Execute(WMSDatabaseContext context)
         {
-            var employee = await context.Users.FirstOrDefaultAsync(employee => employee.Id == Parameter.Id);
-
-            context.Users.Remove(employee);
-            await context.SaveChangesAsync();
-            return employee;
+            var deletedUser = await context.DeleteRecord(Parameter);
+            return deletedUser;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace DataAccess.CQRS.Commands.DeliveryCommands
         public override async Task<Delivery> Execute(WMSDatabaseContext context)
         {
             var deliveries = await context.Deliveries.ToListAsync();
-            Parameter = Parameter
+            Parameter
                 .SetDeliveryNumber(deliveries)
                 .SetDeliveryName(Parameter);
 

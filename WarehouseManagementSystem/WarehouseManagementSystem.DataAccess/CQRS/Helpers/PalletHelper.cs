@@ -17,25 +17,27 @@ namespace DataAccess.CQRS.Helpers
             return await context.Pallets
                 .Include(x => x.Departure)
                 .Include(x => x.Order)
-                .Include(x => x.Invoice.Delivery)
+                .Include(x => x.Invoice)
+                    .ThenInclude(x => x.Delivery)
                 .Include(x => x.User)
-                .Include(x => x.User.Role)
-                .Include(x => x.User.Seniority)
+                    .ThenInclude(x => x.Role)
+                .Include(x => x.User)
+                    .ThenInclude(x => x.Seniority)
                 .FirstOrDefaultAsync(x => x.Id == PalletId);
         }
 
         public static void SetProperties(this Pallet pallet, Pallet Parameter)
         {
-            if (Parameter.OrderId != null && Parameter.OrderId != 0)
+            if (Parameter.OrderId != null)
                 pallet.OrderId = Parameter.OrderId;
 
-            if (Parameter.DepartureId != null && Parameter.DepartureId != 0)
+            if (Parameter.DepartureId != null)
                 pallet.DepartureId = Parameter.DepartureId;
 
-            if (Parameter.InvoiceId != null && Parameter.InvoiceId != 0)
+            if (Parameter.InvoiceId != null)
                 pallet.InvoiceId = Parameter.InvoiceId;
 
-            if (Parameter.UserId != null && Parameter.UserId != 0)
+                if (Parameter.UserId != null)
                 pallet.UserId = Parameter.UserId;
         }
 

@@ -11,12 +11,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.PalletVal
 {
     public class RemovePalletRequestValidator : AbstractValidator<RemovePalletRequest>
     {
-        readonly IValidatorHelper<Pallet> _validator;
+        readonly IValidatorHelper _validator;
 
-        public RemovePalletRequestValidator(IValidatorHelper<Pallet> validator)
+        public RemovePalletRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.PalletId).Must(_validator.CheckIfExist).WithMessage("Pallet not exist.");
+            RuleFor(x => x.PalletId).Must(_validator.CheckIfExist<Pallet>).WithMessage("Pallet not exist.");
         }
     }
 }

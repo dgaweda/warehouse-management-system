@@ -13,7 +13,8 @@ namespace DataAccess.CQRS.Commands.DepartureCommands
     {
         public override async Task<Departure> Execute(WMSDatabaseContext context)
         {
-            return await context.DeleteRecord(Parameter);
+            var deletedDeparture = await context.DeleteRecord(Parameter);
+            return deletedDeparture;
         }
     }
 }

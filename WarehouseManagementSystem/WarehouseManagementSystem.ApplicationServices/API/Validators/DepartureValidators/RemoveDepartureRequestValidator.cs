@@ -11,12 +11,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Departure
 {
     public class RemoveDepartureRequestValidator : AbstractValidator<RemoveDepartureRequest>
     {
-        private readonly IValidatorHelper<Departure> _validator;
+        private readonly IValidatorHelper _validator;
 
-        public RemoveDepartureRequestValidator(IValidatorHelper<Departure> validator)
+        public RemoveDepartureRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.DepartureId).Must(_validator.CheckIfExist).WithMessage("Departure doesn't exist");
+            RuleFor(x => x.DepartureId).Must(_validator.CheckIfExist<Departure>).WithMessage("Departure doesn't exist");
         }
     }
 }

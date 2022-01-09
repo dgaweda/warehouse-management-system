@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands.ProductCommands
 {
@@ -12,29 +14,16 @@ namespace DataAccess.CQRS.Commands.ProductCommands
     {
         public override async Task<Location> Execute(WMSDatabaseContext context)
         {
-            var location = await GetLocation(context);
+            var location = await context.Locations
+                .Include(x => x.Product)
+                .FirstOrDefaultAsync(x => x.Id == Parameter.Id); ;
 
-            location = SetProperties(location);
+            location.SetProductAmount(Parameter);
 
-            context.Entry(location).State = EntityState.Modified;
-            await context.SaveChangesAsync();
-
+            await context.UpdateRecord(location);
             return location;
         }
 
-        private async Task<Location> GetLocation(WMSDatabaseContext context) => await context.Locations.Include(x => x.Product).FirstOrDefaultAsync(x => x.Id == Parameter.Id);
 
-        private Location SetProperties(Location location)
-        {
-            if (Parameter.ProductId != 0)
-            {
-                location.ProductId = Parameter.ProductId;
-                location.CurrentAmount += Parameter.CurrentAmount;
-                if (location.CurrentAmount > location.MaxAmount)
-                    throw new Exception("Amount can't be higher than Max Amount of the location.");
-            }
-
-            return location;
-        }
     }
 }

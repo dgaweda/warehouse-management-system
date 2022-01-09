@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands
 {
@@ -12,13 +13,7 @@ namespace DataAccess.CQRS.Commands
     {
         public override async Task<User> Execute(WMSDatabaseContext context)
         {
-            if (Parameter == null)
-                throw new ArgumentNullException();
-
-            var invoices = await context.Invoices.ToListAsync();
-            
-            context.Entry(Parameter).State = EntityState.Modified;
-            await context.SaveChangesAsync();
+            await context.UpdateRecord(Parameter);
             var updatedRecord = await context.Users
                 .Include(x => x.Role)
                 .FirstOrDefaultAsync(user => user.Id == Parameter.Id);

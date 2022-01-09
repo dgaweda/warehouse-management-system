@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.PalletCommands
 {
@@ -11,26 +13,8 @@ namespace DataAccess.CQRS.Commands.PalletCommands
     {
         public override async Task<Pallet> Execute(WMSDatabaseContext context)
         {
-            SetNulls();
-
-            await context.AddAsync(Parameter);
-            await context.SaveChangesAsync();
+            await context.AddRecord(Parameter);
             return Parameter;
-        }
-
-        private void SetNulls()
-        {
-            if (Parameter.OrderId == 0)
-                Parameter.OrderId = null;
-
-            if (Parameter.DepartureId == 0)
-                Parameter.DepartureId = null;
-
-            if (Parameter.UserId == 0)
-                Parameter.UserId = null;
-
-            if (Parameter.InvoiceId == 0)
-                Parameter.InvoiceId = null;
         }
     }
 }

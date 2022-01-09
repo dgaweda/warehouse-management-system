@@ -56,7 +56,7 @@ namespace warehouse_management_system
                 option =>
                 option.UseSqlServer(this.Configuration.GetConnectionString("WMSDatabaseContext")));
 
-            services.AddScoped(typeof(IValidatorHelper<>), typeof(ValidatorHelper<>));
+            services.AddScoped(typeof(IValidatorHelper), typeof(ValidatorHelper));
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>

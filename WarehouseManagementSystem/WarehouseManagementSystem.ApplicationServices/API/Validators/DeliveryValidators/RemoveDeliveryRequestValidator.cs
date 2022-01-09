@@ -11,12 +11,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.DeliveryV
 {
     public class RemoveDeliveryRequestValidator : AbstractValidator<RemoveDeliveryRequest>
     {
-        private readonly IValidatorHelper<Delivery> _validator;
+        private readonly IValidatorHelper _validator;
 
-        public RemoveDeliveryRequestValidator(IValidatorHelper<Delivery> validator)
+        public RemoveDeliveryRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.DeliveryId).Must(_validator.CheckIfExist).WithMessage("Delivery doesn't exist.");
+            RuleFor(x => x.DeliveryId).Must(_validator.CheckIfExist<Delivery>).WithMessage("Delivery doesn't exist.");
         }
     }
 }

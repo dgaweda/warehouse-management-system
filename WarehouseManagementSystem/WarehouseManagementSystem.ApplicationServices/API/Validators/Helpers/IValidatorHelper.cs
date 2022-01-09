@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators
 {
-    public interface IValidatorHelper<TEntity>
+    public interface IValidatorHelper
     {
-        bool CheckIfExist(int? id);
-        bool CheckIfExist(int id);
+        bool CheckIfExist<TEntity>(int? id) where TEntity : class, IEntityBase;
+        bool CheckIfExist<TEntity>(int id) where TEntity : class, IEntityBase;
         bool CheckIfLocationNameIsNotTaken(string name);
         int GetLocationMaxAmount(int id);
         bool CheckIfProductIsOnPalletForUnfolding(int id);
@@ -20,5 +20,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
         bool CheckIfDepartureNameExist(string name);
         bool CheckEmailFormat(string email);
         bool CheckIfUserNameIsUnique(string username);
+        bool CheckLocationCurrentAmount(int id);
     }
 }

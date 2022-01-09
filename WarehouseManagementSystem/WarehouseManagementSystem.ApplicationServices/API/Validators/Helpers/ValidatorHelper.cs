@@ -9,15 +9,13 @@ using System.Net.Mail;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators
 {
-    public class ValidatorHelper<TEntity> : IValidatorHelper<TEntity> where TEntity : class, IEntityBase
+    public class ValidatorHelper : IValidatorHelper
     {
         private readonly WMSDatabaseContext _context;
-        private readonly DbSet<TEntity> entity;
 
         public ValidatorHelper(WMSDatabaseContext context)
         {
             _context = context;
-            entity = _context.Set<TEntity>();
         }
 
         /// <summary>
@@ -26,9 +24,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool CheckIfExist(int id)
+        public bool CheckIfExist<TEntity>(int? id)
+            where TEntity : class, IEntityBase
         {
-            return entity.Any(x => x.Id == id);
+            return (id != null && id != 0) && _context.Set<TEntity>().Any(x => x.Id == id);
         }
 
         /// <summary>
@@ -37,9 +36,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool CheckIfExist(int? id)
+        public bool CheckIfExist<TEntity>(int id) 
+            where TEntity : class, IEntityBase
         {
-            return id is null || entity.Any(x => x.Id == id);
+            return id != 0 && _context.Set<TEntity>().Any(x => x.Id == id);
         }
 
         /// <summary>
@@ -178,6 +178,17 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
         public bool CheckIfUserNameIsUnique(string username)
         {
             return !_context.Users.Any(x => x.UserName == username);
+        }
+
+        /// <summary>
+        /// Sprawdza czy na lokalizacji są jakieś produkty
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool CheckLocationCurrentAmount(int id)
+        {
+            var location = _context.Locations.SingleOrDefault(x => x.Id == id);
+            return location.CurrentAmount < 0 || location.CurrentAmount > location.MaxAmount;
         }
     }
 }

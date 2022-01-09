@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands.InvoiceCommands
 {
@@ -12,11 +13,8 @@ namespace DataAccess.CQRS.Commands.InvoiceCommands
     {
         public override async Task<Invoice> Execute(WMSDatabaseContext context)
         {
-            var invoice = await context.Invoices.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
-
-            context.Invoices.Remove(invoice);
-            await context.SaveChangesAsync();
-            return invoice;
+            var deletedInvoice = await context.DeleteRecord(Parameter);
+            return deletedInvoice;
         }
     }
 }

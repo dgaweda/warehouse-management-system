@@ -19,15 +19,13 @@ namespace DataAccess.CQRS.Helpers
     {
         public static class Repository
         {
-            public static async Task<TEntity> AddRecord<TEntity>(this WMSDatabaseContext context, TEntity entity)
+            public static async Task AddRecord<TEntity>(this WMSDatabaseContext context, TEntity entity)
                 where TEntity : class, IEntityBase
             {
                 var entities = context.Set<TEntity>();
 
                 await entities.AddAsync(entity);
                 await context.SaveChangesAsync();
-
-                return entity;
             }
 
             public static async Task<List<TEntity>> GetAll<TEntity>(this WMSDatabaseContext context)
@@ -57,19 +55,17 @@ namespace DataAccess.CQRS.Helpers
                 return entityToDelete;
             }
 
-            public static async Task<TEntity> UpdateRecord<TEntity>(this WMSDatabaseContext context, TEntity entity)
+            public static async Task UpdateRecord<TEntity>(this WMSDatabaseContext context, TEntity entity)
                 where TEntity : class, IEntityBase
             {
                 var entities = context.Set<TEntity>();
 
-                var entityToDetach = entities.FirstOrDefaultAsync(x => x.Id == entity.Id);
+                var entityToDetach = await entities.FirstOrDefaultAsync(x => x.Id == entity.Id);
 
                 context.Entry(entityToDetach).State = EntityState.Detached;
                 context.Entry(entity).State = EntityState.Modified;
 
                 await context.SaveChangesAsync();
-
-                return await entities.FirstOrDefaultAsync(x => x.Id == entity.Id);
             }
         }
     }

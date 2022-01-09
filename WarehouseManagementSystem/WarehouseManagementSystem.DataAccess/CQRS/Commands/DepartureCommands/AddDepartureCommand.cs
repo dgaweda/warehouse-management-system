@@ -15,7 +15,8 @@ namespace DataAccess.CQRS.Commands.DepartureCommands
         {
             Parameter.OpeningTime = DateTime.Now;
 
-            return await context.AddRecord(Parameter);
+            await context.AddRecord(Parameter);
+            return Parameter;
         }
     }
 }

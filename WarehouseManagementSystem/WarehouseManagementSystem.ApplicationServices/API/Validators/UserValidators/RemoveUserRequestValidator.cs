@@ -11,12 +11,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.EmployeeV
 {
     public class RemoveUserRequestValidator : AbstractValidator<RemoveUserRequest>
     {
-        private readonly IValidatorHelper<User> _validator;
+        private readonly IValidatorHelper _validator;
 
-        public RemoveUserRequestValidator(IValidatorHelper<User> validator)
+        public RemoveUserRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.UserId).Must(_validator.CheckIfExist).WithMessage("Employee doesn't exist");
+            RuleFor(x => x.UserId).Must(_validator.CheckIfExist<User>).WithMessage("Employee doesn't exist");
         }
     }
 }

@@ -11,9 +11,6 @@ namespace DataAccess.CQRS.Commands.DeliveryProductCommands
     {
         public override async Task<Product> Execute(WMSDatabaseContext context)
         {
-            if (Parameter == null)
-                throw new ArgumentNullException();
-
             await context.AddAsync(Parameter);
             await context.SaveChangesAsync();
             return Parameter;

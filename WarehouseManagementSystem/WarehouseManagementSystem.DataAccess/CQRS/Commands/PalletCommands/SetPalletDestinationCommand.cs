@@ -14,7 +14,7 @@ namespace DataAccess.CQRS.Commands.PalletCommands
             var pallet = await context.GetPalletBy(Parameter.Id);
 
             pallet.SetProperties(Parameter);
-            await context.UpdateRecord(Parameter);
+            await context.UpdateRecord(pallet);
 
             pallet = await context.GetPalletBy(Parameter.Id);
             pallet.SetStatus();

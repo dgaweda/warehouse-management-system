@@ -12,9 +12,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductVa
 {
     public class AddProductRequestValidator : AbstractValidator<AddProductRequest>
     {
-        private readonly IValidatorHelper<Product> _validator;
+        private readonly IValidatorHelper _validator;
 
-        public AddProductRequestValidator(IValidatorHelper<Product> validator)
+        public AddProductRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
             RuleFor(x => x.Barcode).Must(_validator.CheckIfProductBarcodeIsUnique).WithMessage(x => $"A product of barcode: {x.Barcode} already exists.");
