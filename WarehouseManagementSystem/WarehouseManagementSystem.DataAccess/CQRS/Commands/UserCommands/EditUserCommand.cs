@@ -14,6 +14,7 @@ namespace DataAccess.CQRS.Commands
         public override async Task<User> Execute(WMSDatabaseContext context)
         {
             await context.UpdateRecord(Parameter);
+
             var updatedRecord = await context.Users
                 .Include(x => x.Role)
                 .FirstOrDefaultAsync(user => user.Id == Parameter.Id);
