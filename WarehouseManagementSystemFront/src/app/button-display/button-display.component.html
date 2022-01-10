@@ -1,0 +1,7 @@
+<button class="btn btn-primary" (click)="displayDetails()">Display Details</button>
+<p *ngIf="isClicked">Secret password = tuna</p>
+<p 
+*ngFor="let logItem of log" 
+[ngStyle]="{backgroundColor: logItem % 5 === 0 ? 'blue' : 'transparent'}"
+[ngClass]="{'white-text': logItem % 5 === 0}">
+{{ logItem }}</p>
