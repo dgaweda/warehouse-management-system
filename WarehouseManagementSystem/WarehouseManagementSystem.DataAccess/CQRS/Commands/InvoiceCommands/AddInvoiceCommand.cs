@@ -13,7 +13,9 @@ namespace DataAccess.CQRS.Commands
             var invoices = await context.Invoices.ToListAsync();
             Parameter.SetInvoiceNumber(invoices);
 
-            return await context.AddRecord(Parameter);
+            await context.AddRecord(Parameter);
+
+            return Parameter;
         }
     }
 }

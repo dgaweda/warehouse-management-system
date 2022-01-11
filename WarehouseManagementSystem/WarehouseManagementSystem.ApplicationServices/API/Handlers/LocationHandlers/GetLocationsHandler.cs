@@ -30,12 +30,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.LocationSer
 
         public override GetLocationsQuery CreateQuery(GetLocationsRequest request)
         {
-            var dataFromRequest = new GetLocationsHelper()
+            return new GetLocationsQuery()
             {
                 LocationType = request.LocationType,
                 Name = request.Name
             };
-            return new GetLocationsQuery(dataFromRequest);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Security.Authentication.ExtendedProtection;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Entities.EntityBases;
@@ -66,6 +68,34 @@ namespace DataAccess.CQRS.Helpers
                 context.Entry(entity).State = EntityState.Modified;
 
                 await context.SaveChangesAsync();
+            }
+
+            public static bool PropertiesAreEmpty(this object obj)
+            {
+                var isEmpty = false;
+                var properties = obj.GetType().GetProperties();
+                foreach (var property in properties)
+                {
+                    var propType = property.PropertyType;
+
+                    switch (Type.GetTypeCode(propType.GetType()))
+                    {
+                        case TypeCode.Int32:
+                            isEmpty = Convert.ToInt32(property) == default;
+                            break;
+                        case TypeCode.Decimal:
+                            isEmpty = Convert.ToDecimal(property) == default;
+                            break;
+                        case TypeCode.DateTime:
+                            isEmpty = Convert.ToDateTime(property) == default;
+                            break;
+                        case TypeCode.String:
+                            isEmpty = string.IsNullOrEmpty(property.ToString());
+                            break;
+                    }
+                }
+
+                return isEmpty;
             }
         }
     }

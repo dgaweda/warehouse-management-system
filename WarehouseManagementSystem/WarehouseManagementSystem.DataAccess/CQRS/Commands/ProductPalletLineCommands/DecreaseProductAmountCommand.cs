@@ -15,11 +15,13 @@ namespace DataAccess.CQRS.Commands.ProductsPalletsCommands
     {
         public override async Task<ProductPalletLine> Execute(WMSDatabaseContext context)
         {
-            var productPalletLine = await context.GetPalletLine(Parameter);
+            var productPalletLines = await context.GetProductPalletLines();
+            var productPalletLine = productPalletLines
+                .FirstOrDefault(x => x.PalletId == Parameter.PalletId && x.ProductId == Parameter.ProductId);
 
             await productPalletLine.DecreaseProductAmount(Parameter);
 
-            if (productPalletLine.ProductAmount == 0)
+            if (productPalletLine.ProductAmount == default)
                 await context.DeleteRecord(productPalletLine);
 
             if (productPalletLine.ProductAmount < 0)

@@ -1,5 +1,7 @@
 ﻿using DataAccess.Entities;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DataAccess.CQRS.Helpers
 {
@@ -26,6 +28,14 @@ namespace DataAccess.CQRS.Helpers
 
             if (locationToEdit.CurrentAmount > locationToEdit.MaxAmount)
                 throw new Exception("Amount can't be higher than Max Amount of the location.");
+        }
+
+        public static List<Location> FilterByName(this List<Location> locations, string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return locations;
+
+            return locations.Where(x => x.Name.Contains(name)).ToList();
         }
     }
 }

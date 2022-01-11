@@ -20,5 +20,13 @@ namespace DataAccess.CQRS.Helpers
             
             Parameter.InvoiceNumber = $"FV/{lp}/{Parameter.Provider}/{ Parameter.CreationDate.Day}/{Parameter.CreationDate.Month}/{Parameter.CreationDate.Year}"; ;
         }
+
+        public static List<Invoice> FilterByInvoiceNumber(this List<Invoice> invoices, string InvoiceNumber)
+        {
+            if (string.IsNullOrEmpty(InvoiceNumber))
+                return invoices;
+
+            return invoices.Where(invoice => invoice.InvoiceNumber.Contains(InvoiceNumber.ToUpper())).ToList();
+        }
     }
 }

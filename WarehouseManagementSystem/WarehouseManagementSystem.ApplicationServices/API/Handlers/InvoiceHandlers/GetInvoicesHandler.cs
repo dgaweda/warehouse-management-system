@@ -30,11 +30,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.InvoiceServ
 
         public override GetInvoicesQuery CreateQuery(GetInvoicesRequest request)
         {
-            var data = new GetInvoicesHelper()
+            return new GetInvoicesQuery()
             {
                 InvoiceNumber = request.InvoiceNumber
             };
-            return new GetInvoicesQuery(data);
         }
 
     }

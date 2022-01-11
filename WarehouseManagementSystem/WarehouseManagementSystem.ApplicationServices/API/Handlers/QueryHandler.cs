@@ -41,7 +41,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 
         private static TResponse CreateResponse(TDomainModelList domainModel)
         {
-            return new() { Data = domainModel };
+            return new()
+            {
+                Data = domainModel
+            };
         }
 
         public abstract TQuery CreateQuery(TRequest request);

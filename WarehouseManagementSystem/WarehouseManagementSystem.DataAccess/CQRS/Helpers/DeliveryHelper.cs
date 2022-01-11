@@ -27,5 +27,13 @@ namespace DataAccess.CQRS.Helpers
             delivery.Name = $"DOSTAWA/{deliveryNumber}/DATA/{delivery.Arrival.Date.Day}/{delivery.Arrival.Date.Month}/{delivery.Arrival.Date.Year}";
             return delivery;
         }
+
+        public static List<Delivery> FilterByName(this List<Delivery> deliveries, string Name)
+        {
+            if (string.IsNullOrEmpty(Name))
+                return deliveries;
+
+            return deliveries.Where(delivery => delivery.Name.Contains(Name.ToUpper())).ToList();
+        }
     }
 }

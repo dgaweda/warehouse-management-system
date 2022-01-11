@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using DataAccess;
 using DataAccess.CQRS.Queries;
-using DataAccess.CQRS.Queries.EmployeeQueries;
 using DataAccess.Entities;
 using MediatR;
 using System.Collections.Generic;
@@ -29,7 +28,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Employees
 
         public override GetUsersQuery CreateQuery(GetUsersRequest request)
         {
-            var data = new GetUsersHelper()
+            return new GetUsersQuery()
             {
                 Age = request.Age,
                 UserId = request.UserId,
@@ -38,7 +37,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Employees
                 PESEL = request.PESEL,
                 RoleName = request.RoleName
             };
-            return new GetUsersQuery(data);
         }
     }
 }

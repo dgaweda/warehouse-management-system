@@ -1,20 +1,20 @@
-﻿using DataAccess.CQRS.Queries.EmployeeQueries;
+﻿using DataAccess.CQRS.Helpers;
 using DataAccess.Entities;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Queries.DeliveryQueries
 {
     public class GetDeliveriesQuery : QueryBase<List<Delivery>>
     {
-        private readonly IGetEntityHelper<Delivery> _delivery;
-        public GetDeliveriesQuery(IGetEntityHelper<Delivery> helper)
+        public string Name { get; set; }
+
+        public override async Task<List<Delivery>> Execute(WMSDatabaseContext context)
         {
-            _delivery = helper;
+            var deliveries = await context.Deliveries.ToListAsync();
+
+            return deliveries.FilterByName(Name);
         }
-        public override async Task<List<Delivery>> Execute(WMSDatabaseContext context) => await _delivery.GetFilteredData(context);
     }
 }

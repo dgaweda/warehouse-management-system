@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
@@ -11,16 +12,15 @@ namespace DataAccess.CQRS.Commands.PalletCommands
     {
         public override async Task<Pallet> Execute(WMSDatabaseContext context)
         {
-            var pallet = await context.GetPalletBy(Parameter.Id);
+            var pallet = await context.GetById<Pallet>(Parameter.Id);
 
             pallet.SetProperties(Parameter);
+            pallet.SetStatus();
+
             await context.UpdateRecord(pallet);
 
-            pallet = await context.GetPalletBy(Parameter.Id);
-            pallet.SetStatus();
-            await context.SaveChangesAsync();
-
-            return pallet;
+            var pallets = await context.GetPallets();
+            return pallets.FirstOrDefault(x => x.Id == Parameter.Id);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.InvoiceVa
             RuleFor(x => x.DeliveryId).Must(_validator.CheckIfExist<Delivery>).WithMessage("Delivery doesn't exists.");
             RuleFor(x => x.Provider).NotEmpty().WithMessage("Provider must be specified.");
             RuleFor(x => x.ReceiptDateTime.Date).LessThanOrEqualTo(DateTime.Now.Date);
-            RuleFor(x => x.CreationDate).LessThan(y => y.ReceiptDateTime).WithMessage("Creation date of invoice must be less than Receipt datetime.");
+            RuleFor(x => x.CreationDate.Date).LessThanOrEqualTo(y => y.ReceiptDateTime.Date).WithMessage("Creation date of invoice must be less than Receipt datetime.");
         }
     }
 }

@@ -12,19 +12,19 @@ namespace DataAccess.CQRS.Helpers
 {
     public static class ProductPalletLineHelper
     {
-        public static async Task<Entities.ProductPalletLine> GetPalletLine(this WMSDatabaseContext context, ProductPalletLine requestProductPalletLine)
+        public static async Task<List<ProductPalletLine>> GetProductPalletLines(this WMSDatabaseContext context)
         {
             return await context.ProductPalletLines
                 .Include(x => x.Product)
                 .Include(x => x.Pallet)
-                .ThenInclude(order => order.Order)
+                    .ThenInclude(pallet => pallet.Order)
                 .Include(x => x.Pallet)
-                .ThenInclude(departure => departure.Departure)
+                    .ThenInclude(pallet => pallet.Departure)
                 .Include(x => x.Pallet)
-                .ThenInclude(invoice => invoice.Invoice)
+                    .ThenInclude(pallet => pallet.Invoice)
                 .Include(x => x.Pallet)
-                .ThenInclude(x => x.User)
-                .FirstOrDefaultAsync(x => x.PalletId == requestProductPalletLine.PalletId && x.ProductId == requestProductPalletLine.ProductId);
+                    .ThenInclude(pallet => pallet.User)
+                .ToListAsync();
         }
 
         public static async Task DecreaseProductAmount(this ProductPalletLine productPalletLine, ProductPalletLine requestProductPalletLine)
@@ -35,6 +35,14 @@ namespace DataAccess.CQRS.Helpers
         public static void SetPalletStatus(this Pallet pallet)
         {
             pallet.PalletStatus = PalletEnum.Status.UNFOLDED;
+        }
+
+        public static List<ProductPalletLine> FilterByPalletId(this List<ProductPalletLine> palletLines, int palletId)
+        {
+            if (palletId == default)
+                return palletLines;
+
+            return palletLines.Where(x => x.PalletId == palletId).ToList();
         }
     }
 }

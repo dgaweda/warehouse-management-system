@@ -17,5 +17,21 @@ namespace DataAccess.CQRS.Helpers
 
             return departure;
         }
+
+        public static List<Departure> FilterByName(this List<Departure> departures, string Name)
+        {
+            if (string.IsNullOrEmpty(Name))
+                return departures;
+
+            return departures.Where(departure => departure.Name.Contains(Name)).ToList();
+        }
+
+        public static List<Departure> FilterByOpeningTime(this List<Departure> departures, DateTime OpeningTime)
+        {
+            if (OpeningTime == default)
+                return departures;
+
+            return departures.Where(departure => departure.OpeningTime == OpeningTime).ToList();
+        }
     }
 }

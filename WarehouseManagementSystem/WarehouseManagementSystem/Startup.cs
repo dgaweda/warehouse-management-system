@@ -42,9 +42,6 @@ namespace warehouse_management_system
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddSeniorityRequestValidator>());
 
             services.AddTransient<IQueryExecutor, QueryExecutor>();
-            services.AddScoped(typeof(IGetEntityHelper<Role>), typeof(GetRolesHelper));
-            services.AddTransient<IPalletPropertiesSetter, PalletPropertiesSetter>();
-            //services.AddScoped(typeof(ICommandHandler<,,,,>), typeof(CommandHandler<,,,,>));
 
             services.AddTransient<ICommandExecutor, CommandExecutor>();
 
