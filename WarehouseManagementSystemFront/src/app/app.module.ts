@@ -9,6 +9,7 @@ import { ServerComponent } from './server/server.component';
 import { ServersComponent } from './servers/servers.component';
 import { UserInputComponent } from './user-input/user-input.component';
 import { ButtonDisplayComponent } from './button-display/button-display.component';
+import { FullscreenButtonComponent } from './fullscreen-button/fullscreen-button.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ButtonDisplayComponent } from './button-display/button-display.componen
     ServerComponent,
     ServersComponent,
     UserInputComponent,
-    ButtonDisplayComponent
+    ButtonDisplayComponent,
+    FullscreenButtonComponent
   ],
   imports: [
     BrowserModule,

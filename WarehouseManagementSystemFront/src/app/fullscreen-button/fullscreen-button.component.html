@@ -1,0 +1,5 @@
+<p>fullscreen-button works!</p>
+<button class="btn btn-primary" (click)="setScreen()">
+    <i *ngIf="!isFullscreen" class="bi bi-arrows-fullscreen"></i>
+    <i *ngIf="isFullscreen" class="bi bi-fullscreen-exit"></i>
+</button>
