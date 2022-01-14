@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands.SeniorityCommands
 {
@@ -12,12 +13,9 @@ namespace DataAccess.CQRS.Commands.SeniorityCommands
     {
         public override async Task<Seniority> Execute(WMSDatabaseContext context)
         {
-            await context.Seniorities.AddAsync(Parameter);
-            await context.SaveChangesAsync();
+            await context.AddRecord(Parameter);
 
-            var addedRecord = await context.Seniorities.Include(x => x.User).FirstOrDefaultAsync(x => x.Id == Parameter.Id);
-
-            return addedRecord;
+            return Parameter;
         }
     }
 }

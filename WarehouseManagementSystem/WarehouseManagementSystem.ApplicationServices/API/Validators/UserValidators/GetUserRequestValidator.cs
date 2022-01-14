@@ -11,12 +11,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.EmployeeV
 {
     public class GetUserRequestValidator : AbstractValidator<GetUsersRequest>
     {
-        private readonly IValidatorHelper<User> _validator;
+        private readonly IValidatorHelper _validator;
 
-        public GetUserRequestValidator(IValidatorHelper<User> validator)
+        public GetUserRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.UserId).Must(_validator.CheckIfExist).WithMessage("User doesn't exists");
+            RuleFor(x => x.UserId).Must(_validator.CheckIfExist<User>).WithMessage("User doesn't exists");
         }
     }
 }

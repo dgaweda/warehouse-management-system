@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataAccess.CQRS.Helpers;
+using Microsoft.EntityFrameworkCore;
 using DataAccess.Entities;
 
 namespace DataAccess

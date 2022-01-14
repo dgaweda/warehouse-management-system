@@ -13,11 +13,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductVa
 {
     public class EditProductRequestValidator : AbstractValidator<EditProductRequest>
     {
-        private readonly IValidatorHelper<Product> _validator;
-        public EditProductRequestValidator(IValidatorHelper<Product> validator)
+        private readonly IValidatorHelper _validator;
+        public EditProductRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.Id).Must(_validator.CheckIfExist).WithMessage("Can't edit product because it doesn't exists.");
+            RuleFor(x => x.Id).Must(_validator.CheckIfExist<Product>).WithMessage("Can't edit product because it doesn't exists.");
             RuleFor(x => x.Id).GreaterThan(0);
 
             RuleFor(x => x.Name).NotEmpty().WithMessage("A product name can't be empty.");

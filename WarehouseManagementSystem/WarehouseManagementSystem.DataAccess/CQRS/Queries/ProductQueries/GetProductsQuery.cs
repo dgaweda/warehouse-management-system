@@ -4,17 +4,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Queries.DeliveryProductQueries
 {
     public class GetProductsQuery : QueryBase<List<Product>>
     {
-        private readonly IGetEntityHelper<Product> _deliveryProduct;
-        public GetProductsQuery(IGetEntityHelper<Product> deliveryProduct)
-        {
-            _deliveryProduct = deliveryProduct;
-        }
+        public string Name { get; set; }
+        public int Id { get; set; }
+        public string Barcode { get; set; }
 
-        public override async Task<List<Product>> Execute(WMSDatabaseContext context) => await _deliveryProduct.GetFilteredData(context);
+        public override async Task<List<Product>> Execute(WMSDatabaseContext context)
+        {
+            var products = await context.Products
+                .Include(x => x.PalletLines)
+                .ThenInclude(x => x.Pallet)
+                .ToListAsync();
+
+
+            return products
+                .FilterByName(Name)
+                .FilterByBarcode(Barcode)
+                .FilterById(Id);
+        }
     }
 }

@@ -6,8 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class Location : EntityBase
+    public class Location : IEntityBase
     {
+        public int Id { get; set; }
         public int? ProductId { get; set; }
 
         [Required]

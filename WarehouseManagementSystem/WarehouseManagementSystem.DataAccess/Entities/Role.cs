@@ -5,8 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class Role : EntityBase
+    public class Role : IEntityBase
     {
+        public int Id { get; set; }
+
         [Required]
         [MaxLength(50)]
         [Column("Nazwa roli")]

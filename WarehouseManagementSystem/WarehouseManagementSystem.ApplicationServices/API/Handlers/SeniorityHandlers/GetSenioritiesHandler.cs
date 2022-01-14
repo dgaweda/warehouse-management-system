@@ -28,13 +28,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Seniorities
 
         public override GetSenioritiesQuery CreateQuery(GetSenioritiesRequest request)
         {
-            var query = new GetSenioritiesHelper()
+            return new GetSenioritiesQuery()
             {
                 EmploymentDate = request.EmploymentDate,
                 UserLastName = request.UserLastName,
                 UserFirstName = request.UserFirstName
             };
-            return new GetSenioritiesQuery(query);
         }
     }
 }

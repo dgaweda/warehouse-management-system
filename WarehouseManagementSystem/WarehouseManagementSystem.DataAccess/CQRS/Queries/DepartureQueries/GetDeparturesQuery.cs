@@ -4,16 +4,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Queries.DepartureQueries
 {
     public class GetDeparturesQuery : QueryBase<List<Departure>>
     {
-        private readonly IGetEntityHelper<Departure> _departure;
-        public GetDeparturesQuery(IGetEntityHelper<Departure> departure)
+        public string Name { get; set; }
+        public DateTime OpeningTime { get; set; }
+        public StateType State { get; set; }
+
+        public override async Task<List<Departure>> Execute(WMSDatabaseContext context)
         {
-            _departure = departure;
+            var departures = await context.Departures
+                .Where(departure => departure.State == State)
+                .ToListAsync();
+
+            return departures
+                .FilterByName(Name)
+                .FilterByOpeningTime(OpeningTime);
         }
-        public override async Task<List<Departure>> Execute(WMSDatabaseContext context) => await _departure.GetFilteredData(context);
     }
 }

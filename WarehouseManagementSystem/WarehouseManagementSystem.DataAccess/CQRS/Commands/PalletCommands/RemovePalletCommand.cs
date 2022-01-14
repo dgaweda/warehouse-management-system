@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands.PalletCommands
 {
@@ -12,16 +14,8 @@ namespace DataAccess.CQRS.Commands.PalletCommands
     {
         public override async Task<Pallet> Execute(WMSDatabaseContext context)
         {
-            var pallet = await context.Pallets
-                .Include(x => x.Departure)
-                .Include(x => x.Order)
-                .Include(x => x.Invoice.Delivery)
-                .Include(x => x.User)
-                .FirstOrDefaultAsync(x => x.Id == Parameter.Id);
-
-            context.Remove(pallet);
-            await context.SaveChangesAsync();
-            return pallet;
+            var deletedPallet = await context.DeleteRecord(Parameter);
+            return deletedPallet;
         }
     }
 }

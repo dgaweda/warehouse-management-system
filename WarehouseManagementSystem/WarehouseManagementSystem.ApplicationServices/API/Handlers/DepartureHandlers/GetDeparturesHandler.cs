@@ -21,22 +21,21 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Departures
         {
         }
 
-        public override GetDeparturesQuery CreateQuery(GetDeparturesRequest request)
-        {
-            var data = new GetDeparturesHelper()
-            {
-                Name = request.Name,
-                OpeningTime = request.OpeningTime,
-                State = request.State
-            };
-            return new GetDeparturesQuery(data);
-        }
-
         public async Task<GetDeparturesResponse> Handle(GetDeparturesRequest request, CancellationToken cancellation)
         {
             var query = CreateQuery(request);
             var response = await PrepareResponse(query);
             return response;
+        }
+
+        public override GetDeparturesQuery CreateQuery(GetDeparturesRequest request)
+        {
+            return new GetDeparturesQuery()
+            {
+                Name = request.Name,
+                OpeningTime = request.OpeningTime,
+                State = request.State
+            };
         }
     }
 }

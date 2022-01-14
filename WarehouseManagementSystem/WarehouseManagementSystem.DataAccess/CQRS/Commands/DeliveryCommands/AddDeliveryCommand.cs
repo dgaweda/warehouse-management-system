@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands.DeliveryCommands
 {
@@ -13,12 +15,12 @@ namespace DataAccess.CQRS.Commands.DeliveryCommands
         public override async Task<Delivery> Execute(WMSDatabaseContext context)
         {
             var deliveries = await context.Deliveries.ToListAsync();
-            new SetDeliveryName(deliveries, Parameter);
+            Parameter
+                .SetDeliveryNumber(deliveries)
+                .SetDeliveryName(Parameter);
 
-            await context.AddAsync(Parameter);
-            await context.SaveChangesAsync();
+            await context.AddRecord(Parameter);
             return Parameter;
         }
-
     }
 }

@@ -42,9 +42,6 @@ namespace warehouse_management_system
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddSeniorityRequestValidator>());
 
             services.AddTransient<IQueryExecutor, QueryExecutor>();
-            services.AddScoped(typeof(IGetEntityHelper<Role>), typeof(GetRolesHelper));
-            services.AddTransient<IPalletPropertiesSetter, PalletPropertiesSetter>();
-            //services.AddScoped(typeof(ICommandHandler<,,,,>), typeof(CommandHandler<,,,,>));
 
             services.AddTransient<ICommandExecutor, CommandExecutor>();
 
@@ -56,8 +53,7 @@ namespace warehouse_management_system
                 option =>
                 option.UseSqlServer(this.Configuration.GetConnectionString("WMSDatabaseContext")));
 
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped(typeof(IValidatorHelper<>), typeof(ValidatorHelper<>));
+            services.AddScoped(typeof(IValidatorHelper), typeof(ValidatorHelper));
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>

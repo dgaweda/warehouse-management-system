@@ -11,18 +11,16 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.PalletVal
 {
     public class SetPalletDestinationRequestValidator : AbstractValidator<SetPalletDestinationRequest>
     {
-        readonly IValidatorHelper<Pallet> _palletValidatorHelper;
-        readonly IValidatorHelper<Departure> _validatorHelper;
+        readonly IValidatorHelper _validator;
 
-        public SetPalletDestinationRequestValidator(IValidatorHelper<Pallet> palletValidatorHelper, IValidatorHelper<Departure> validatorHelper)
+        public SetPalletDestinationRequestValidator(IValidatorHelper validator)
         {
-            _palletValidatorHelper = palletValidatorHelper;
-            _validatorHelper = validatorHelper;
-            RuleFor(x => x.Id).Must(_validatorHelper.CheckIfExist).WithMessage("Pallet of that Id not exist.");
-            RuleFor(x => x.OrderId).Must(_validatorHelper.CheckIfExist).WithMessage("Order not exist.");
-            RuleFor(x => x.DepartureId).Must(_validatorHelper.CheckIfExist).WithMessage("Departure not exist.");
-            RuleFor(x => x.InvoiceId).Must(_validatorHelper.CheckIfExist).WithMessage("Invoice not exist.");
-            RuleFor(x => x.UserId).Must(_validatorHelper.CheckIfExist).WithMessage("User not exist.");
+            _validator = validator;
+            RuleFor(x => x.Id).Must(_validator.CheckIfExist<Pallet>).WithMessage("Pallet of that Id not exist.");
+            RuleFor(x => x.OrderId).Must(_validator.CheckIfExist<Order>).WithMessage("Order not exist.");
+            RuleFor(x => x.DepartureId).Must(_validator.CheckIfExist<Departure>).WithMessage("Departure not exist.");
+            RuleFor(x => x.InvoiceId).Must(_validator.CheckIfExist<Invoice>).WithMessage("Invoice not exist.");
+            RuleFor(x => x.UserId).Must(_validator.CheckIfExist<User>).WithMessage("User not exist.");
         }
     }
 }

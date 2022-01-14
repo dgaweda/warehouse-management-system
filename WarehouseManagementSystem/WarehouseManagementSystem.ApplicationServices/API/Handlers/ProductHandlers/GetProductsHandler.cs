@@ -28,13 +28,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryPro
         }
         public override GetProductsQuery CreateQuery(GetProductsRequest request)
         {
-            var dataFromRequest = new GetProductsHelper()
+            return new GetProductsQuery()
             {
                 Barcode = request.Barcode,
                 Id = request.Id,
                 Name = request.Name
             };
-            return new GetProductsQuery(dataFromRequest);
         }
     }
 }

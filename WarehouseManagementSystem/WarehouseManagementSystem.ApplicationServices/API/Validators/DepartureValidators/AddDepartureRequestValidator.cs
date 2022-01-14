@@ -11,9 +11,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Departure
 {
     public class AddDepartureRequestValidator : AbstractValidator<AddDepartureRequest>
     {
-        private readonly IValidatorHelper<Departure> _validator;
+        private readonly IValidatorHelper _validator;
 
-        public AddDepartureRequestValidator(IValidatorHelper<Departure> validator)
+        public AddDepartureRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
             RuleFor(x => x.Name).Must(_validator.CheckIfDepartureNameIsUnique).WithMessage("Departure name must be unique.");

@@ -30,7 +30,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletServi
         }
         public override GetPalletsQuery CreateQuery(GetPalletsRequest request)
         {
-            var data = new GetPalletsHelper()
+            return new GetPalletsQuery()
             {
                 DeliveryName = request.DeliveryName,
                 DepartureCloseTime = request.DepartureCloseTime,
@@ -40,7 +40,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletServi
                 PickingEnd = request.PickingEnd,
                 Provider = request.Provider
             };
-            return new GetPalletsQuery(data);
         }
 
     }

@@ -24,7 +24,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(dest => dest.UserLastName, opt => opt.MapFrom(src => src.Pallet.User != null ? src.Pallet.User.LastName : string.Empty));
 
 
-            CreateMap<SetProductAmountRequest, ProductPalletLine>()
+            CreateMap<DecreaseProductAmountRequest, ProductPalletLine>()
                 .ForMember(dest => dest.PalletId, opt => opt.MapFrom(src => src.PalletId))
                 .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId))
                 .ForMember(dest => dest.ProductAmount, opt => opt.MapFrom(src => src.ProductAmount));

@@ -33,11 +33,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Deliveries
 
         public override GetDeliveriesQuery CreateQuery(GetDeliveriesRequest request)
         {
-            var data = new GetDeliveriesHelper()
+            return new GetDeliveriesQuery()
             {
                 Name = request.Name
             };
-            return new GetDeliveriesQuery(data);
         }
     }
 }

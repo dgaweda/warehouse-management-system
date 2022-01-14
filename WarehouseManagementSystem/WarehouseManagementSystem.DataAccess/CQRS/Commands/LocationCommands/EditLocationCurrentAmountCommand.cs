@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands.LocationCommands
 {
@@ -11,21 +13,10 @@ namespace DataAccess.CQRS.Commands.LocationCommands
         {
             var locationToEdit = await context.Locations.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
 
-            locationToEdit.CurrentAmount = SetCurrentAmount(locationToEdit);
-            context.Entry(locationToEdit).State = EntityState.Modified;
-
-            await context.SaveChangesAsync();
+            await context.UpdateRecord(locationToEdit);
             return locationToEdit;
         }
 
-        private int SetCurrentAmount(Location location)
-        {
-            if (Parameter.CurrentAmount < 0)
-                return 0;
-            else if (Parameter.CurrentAmount > location.MaxAmount)
-                throw new ArgumentException("Current amount can't be higher than Max Amount.");
-            else
-                return Parameter.CurrentAmount;
-        }
+        
     }
 }

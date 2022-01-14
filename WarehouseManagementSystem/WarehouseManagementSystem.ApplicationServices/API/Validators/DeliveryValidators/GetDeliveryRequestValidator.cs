@@ -11,9 +11,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.DeliveryV
 {
     public class GetDeliveryRequestValidator : AbstractValidator<GetDeliveriesRequest>
     {
-        private readonly IValidatorHelper<Delivery> _validator;
+        private readonly IValidatorHelper _validator;
 
-        public GetDeliveryRequestValidator(IValidatorHelper<Delivery> validator)
+        public GetDeliveryRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
             RuleFor(x => x.Name).Must(_validator.CheckIfDeliveryExist).WithMessage("Delivery doesn't exist.");

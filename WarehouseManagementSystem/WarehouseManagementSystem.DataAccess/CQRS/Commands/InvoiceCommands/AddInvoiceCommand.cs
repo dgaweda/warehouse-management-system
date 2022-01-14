@@ -1,10 +1,7 @@
-﻿using DataAccess.CQRS.Commands.InvoiceCommands;
+﻿using DataAccess.CQRS.Helpers;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
 using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Commands
@@ -14,10 +11,10 @@ namespace DataAccess.CQRS.Commands
         public override async Task<Invoice> Execute(WMSDatabaseContext context)
         {
             var invoices = await context.Invoices.ToListAsync();
+            Parameter.SetInvoiceNumber(invoices);
 
-            new SetInvoiceNumber().Set(invoices, Parameter);
-            await context.Invoices.AddAsync(Parameter);
-            await context.SaveChangesAsync();
+            await context.AddRecord(Parameter);
+
             return Parameter;
         }
     }

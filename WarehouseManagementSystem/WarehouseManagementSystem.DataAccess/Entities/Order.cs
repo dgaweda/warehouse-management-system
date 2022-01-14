@@ -7,8 +7,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class Order : EntityBase
+    public class Order : IEntityBase
     {
+        public int Id { get; set; }
         [Column("Stan zamówienia")]
         public State OrderState { get; set; }
 

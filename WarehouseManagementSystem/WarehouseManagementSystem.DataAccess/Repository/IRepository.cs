@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    public interface IRepository<T> where T : EntityBase
+    public interface IRepository<T> where T : class, IEntityBase
     {
         Task<List<T>> GetAll();
-        Task<T> GetById(int id);
-        Task Insert(T entity);
-        Task Update(T entity);
-        Task Delete(int id);
+        Task<T> Get(int id);
+        Task<T> Add(T entity);
+        Task<T> Update(T entity);
+        Task<T> Delete(int id);
     }
 }

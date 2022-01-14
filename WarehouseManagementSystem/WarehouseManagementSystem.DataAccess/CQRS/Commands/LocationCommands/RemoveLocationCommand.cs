@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands.LocationCommands
 {
@@ -12,15 +13,8 @@ namespace DataAccess.CQRS.Commands.LocationCommands
     {
         public override async Task<Location> Execute(WMSDatabaseContext context)
         {
-            var locationToRemove = await context.Locations.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
-
-            if (locationToRemove.CurrentAmount == 0)
-                context.Remove(locationToRemove);
-            else
-                throw new ArgumentException("Location can't be removed. There's still some products left.");
-
-            await context.SaveChangesAsync();
-            return locationToRemove;
+            var deletedLocation = await context.DeleteRecord(Parameter);
+            return deletedLocation;
         }
     }
 }

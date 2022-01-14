@@ -8,9 +8,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    [Index(nameof(RoleId), IsUnique = false)]
-    public class User : EntityBase
+    public class User : IEntityBase
     {
+        public int Id { get; set; }
+        
         [MaxLength(100)]
         [Required]
         [Column("Nazwa użytkownika")]

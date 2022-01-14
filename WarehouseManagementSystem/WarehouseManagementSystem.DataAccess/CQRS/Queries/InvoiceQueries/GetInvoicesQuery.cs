@@ -1,20 +1,22 @@
-﻿using DataAccess.CQRS.Queries.EmployeeQueries;
+﻿using DataAccess.CQRS.Helpers;
 using DataAccess.Entities;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Queries.InvoiceQueries
 {
     public class GetInvoicesQuery : QueryBase<List<Invoice>>
     {
-        private readonly IGetEntityHelper<Invoice> _invoice;
-        public GetInvoicesQuery(IGetEntityHelper<Invoice> helper)
+        public string InvoiceNumber { get; set; }
+
+        public override async Task<List<Invoice>> Execute(WMSDatabaseContext context)
         {
-            _invoice = helper;
+            var invoices = await context.Invoices
+                .Include(x => x.Delivery)
+                .ToListAsync();
+
+            return invoices.FilterByInvoiceNumber(InvoiceNumber);
         }
-        public override async Task<List<Invoice>> Execute(WMSDatabaseContext context) => await _invoice.GetFilteredData(context);
     }
 }

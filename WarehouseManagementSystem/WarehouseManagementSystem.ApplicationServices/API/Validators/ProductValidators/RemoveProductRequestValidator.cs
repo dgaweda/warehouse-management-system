@@ -12,11 +12,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductVa
 {
     public class RemoveProductRequestValidator : AbstractValidator<RemoveProductRequest>
     {
-        private readonly IValidatorHelper<Product> _validator;
-        public RemoveProductRequestValidator(IValidatorHelper<Product> validator)
+        private readonly IValidatorHelper _validator;
+        public RemoveProductRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.Id).Must(_validator.CheckIfExist).WithMessage(x => $"Product of ID: {x.Id} doesn't exists.");
+            RuleFor(x => x.Id).Must(_validator.CheckIfExist<Product>).WithMessage(x => $"Product of ID: {x.Id} doesn't exists.");
         }
     }
 }

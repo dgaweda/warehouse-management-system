@@ -8,49 +8,54 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    public class Repository<T> : IRepository<T> where T : EntityBase
+    public static class Repository
     {
-        protected readonly WMSDatabaseContext context;
-        private readonly DbSet<T> entities;
-
-        public Repository(WMSDatabaseContext context)
+        public static async Task<TEntity> Add<TEntity>(this WMSDatabaseContext context, TEntity entity)
+            where TEntity : class, IEntityBase
         {
-            this.context = context;
-            entities = context.Set<T>();
+            context.Set<TEntity>().Add(entity);
+            await context.SaveChangesAsync();
+            return entity;
         }
 
-        public Task Delete(int id)
+        public static async Task<List<TEntity>> GetAll<TEntity>(this WMSDatabaseContext context)
+            where TEntity : class, IEntityBase
         {
-            T record = entities.SingleOrDefault(i => i.Id == id);
-
-            entities.Remove(record);
-            return SaveChanges();
+            return await context.Set<TEntity>().ToListAsync();
         }
 
-        public Task<List<T>> GetAll() => entities.ToListAsync();
-
-        public Task<T> GetById(int id) => entities.SingleOrDefaultAsync(i => i.Id == id);
-
-        public Task Insert(T entity)
+        public static async Task<TEntity> Get<TEntity>(this WMSDatabaseContext context, int id)
+            where TEntity : class, IEntityBase
         {
-            if (IsNull(entity))
-                throw new ArgumentNullException();
-
-            entities.Add(entity);
-            return SaveChanges();
+            return await context.Set<TEntity>().SingleOrDefaultAsync(i => i.Id == id);
         }
 
-        public Task Update(T entity)
+        public static async Task<TEntity> Delete<TEntity>(this WMSDatabaseContext context, int id)
+            where TEntity : class, IEntityBase
         {
-            if(IsNull(entity))
-                throw new ArgumentNullException();
+            var entities = context.Set<TEntity>();
+            var entity = entities.SingleOrDefault(i => i.Id == id);
 
-            entities.Update(entity);
-            return SaveChanges();
+            if (entity is null)
+            {
+                return entity;
+            }
+
+            entities.Remove(entity);
+            await context.SaveChangesAsync();
+            return entity;
         }
 
-        private static bool IsNull(T entity) => entity == null;
+        public static async Task<TEntity> Update<TEntity>(this WMSDatabaseContext context, TEntity entity)
+            where TEntity : class, IEntityBase
+        {
+            var entityToDetach = context.Set<TEntity>();
 
-        private Task SaveChanges() => context.SaveChangesAsync();
+            context.Entry(entityToDetach).State = EntityState.Detached;
+            context.Entry(entity).State = EntityState.Modified;
+
+            await context.SaveChangesAsync();
+            return entity;
+        }
     }
 }

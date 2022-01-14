@@ -31,12 +31,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 
         public override GetRolesQuery CreateQuery(GetRolesRequest request)
         {
-            var data = new GetRolesHelper()
+            return new GetRolesQuery()
             {
                 RoleId = request.RoleId,
                 RoleName = request.RoleName
             };
-            return new GetRolesQuery(data);
         }
 
     }

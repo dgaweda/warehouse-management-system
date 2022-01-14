@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands.LocationCommands
 {
@@ -16,20 +18,12 @@ namespace DataAccess.CQRS.Commands.LocationCommands
                 .Include(x => x.Product)
                 .FirstOrDefaultAsync(x => x.Id == Parameter.Id);
 
-            SetLocationProperties(locationToEdit);
+            locationToEdit
+                .SetMaxAmount(Parameter)
+                .SetName(Parameter);
 
-            context.Entry(locationToEdit).State = EntityState.Modified;
-            await context.SaveChangesAsync();
+            await context.UpdateRecord(locationToEdit);
             return locationToEdit;
-        }
-
-        private void SetLocationProperties(Location location)
-        {
-            if (Parameter.MaxAmount != 0)
-                location.MaxAmount = Parameter.MaxAmount;
-
-            if (Parameter.Name != null)
-                location.Name = Parameter.Name;
         }
     }
 }

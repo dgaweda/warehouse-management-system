@@ -1,44 +1,26 @@
-﻿using DataAccess.Entities;
+﻿using System.Linq;
+using System.Reflection;
+using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers;
+using DataAccess.CQRS.Helpers.DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands.PalletCommands
 {
     public class SetPalletDestinationCommand : CommandBase<Pallet, Pallet>
     {
-        public IPalletPropertiesSetter Setter { get; set; }
-        public SetPalletDestinationCommand()
-        {
-            Setter = new PalletPropertiesSetter();
-        }
-
         public override async Task<Pallet> Execute(WMSDatabaseContext context)
         {
-            var pallet = await GetPallet(context);
+            var pallet = await context.GetById<Pallet>(Parameter.Id);
 
-            Setter.SetPalletProperties(pallet, Parameter);
+            pallet.SetProperties(Parameter);
+            pallet.SetStatus();
 
-            context.Entry(pallet).State = EntityState.Modified;
-            await context.SaveChangesAsync();
+            await context.UpdateRecord(pallet);
 
-            pallet = await GetPallet(context);
-
-            Setter.SetPalletStatus(pallet);
-            await context.SaveChangesAsync();
-
-            return pallet;
-        }
-
-        private async Task<Pallet> GetPallet(WMSDatabaseContext context)
-        {
-            return await context.Pallets
-                .Include(x => x.Departure)
-                .Include(x => x.Order)
-                .Include(x => x.Invoice.Delivery)
-                .Include(x => x.User)
-                .Include(x => x.User.Role)
-                .Include(x => x.User.Seniority)
-                .FirstOrDefaultAsync(x => x.Id == Parameter.Id);
+            var pallets = await context.GetPallets();
+            return pallets.FirstOrDefault(x => x.Id == Parameter.Id);
         }
     }
 }

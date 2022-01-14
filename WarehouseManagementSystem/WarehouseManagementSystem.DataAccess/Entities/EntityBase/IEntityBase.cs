@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Entities.EntityBases
 {
-    public abstract class EntityBase
+    public interface IEntityBase
     {
         [Key]
-        public int Id { get; set; }
+        int Id { get; set; }
     }
 }

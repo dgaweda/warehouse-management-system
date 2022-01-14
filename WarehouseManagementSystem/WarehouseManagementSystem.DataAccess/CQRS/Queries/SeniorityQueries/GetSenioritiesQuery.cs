@@ -4,18 +4,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Queries.SeniorityQueries
 {
     public class GetSenioritiesQuery : QueryBase<List<Seniority>>
     {
-        private readonly IGetEntityHelper<Seniority> _seniority;
+        public DateTime EmploymentDate { get; set; }
+        public string UserFirstName { get; set; }
+        public string UserLastName { get; set; }
 
-        public GetSenioritiesQuery(IGetEntityHelper<Seniority> seniority)
-        {
-            _seniority = seniority;
+        public override async Task<List<Seniority>> Execute(WMSDatabaseContext context)
+        { 
+            var seniorities = await context.Seniorities
+                .Include(x => x.User)
+                .ToListAsync();
+
+            return seniorities
+                .FilterByUserFirstName(UserFirstName)
+                .FilterByUserLastName(UserLastName)
+                .FilterByEmploymentDate(EmploymentDate);
         }
-
-        public override async Task<List<Seniority>> Execute(WMSDatabaseContext context) => await _seniority.GetFilteredData(context);
     }
 }

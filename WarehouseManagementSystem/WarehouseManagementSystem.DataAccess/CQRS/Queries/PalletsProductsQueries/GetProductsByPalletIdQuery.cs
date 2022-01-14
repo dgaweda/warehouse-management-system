@@ -1,21 +1,19 @@
-﻿using DataAccess.CQRS.Queries.PalletLineQueries;
+﻿using DataAccess.CQRS.Helpers;
 using DataAccess.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Queries.PalletsProductsQueries
 {
     public class GetProductsByPalletIdQuery : QueryBase<List<ProductPalletLine>>
     {
-        private readonly IGetEntityHelper<ProductPalletLine> _products;
+        public int PalletId { get; set; }
 
-        public GetProductsByPalletIdQuery(IGetEntityHelper<ProductPalletLine> products)
+        public override async Task<List<ProductPalletLine>> Execute(WMSDatabaseContext context)
         {
-            _products = products;
+            var productPalletLines = await context.GetProductPalletLines();
+
+            return productPalletLines.FilterByPalletId(PalletId);
         }
-        public override async Task<List<ProductPalletLine>> Execute(WMSDatabaseContext context) => await _products.GetFilteredData(context);
     }
 }
