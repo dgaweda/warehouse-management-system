@@ -8,7 +8,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Locatio
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location
 {
-    public class RemoveLocationRequest : IRequest<RemoveLocationResponse>
+    public class RemoveLocationRequest : UserRequestBase, IRequest<RemoveLocationResponse>
     {
         public int Id { get; set; }
     }

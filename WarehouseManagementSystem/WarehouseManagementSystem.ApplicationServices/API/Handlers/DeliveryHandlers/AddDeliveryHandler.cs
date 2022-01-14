@@ -5,8 +5,10 @@ using DataAccess.CQRS.Commands.DeliveryCommands;
 using DataAccess.Entities;
 using MediatR;
 using System;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Delivery;
 
@@ -20,6 +22,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliverySer
         {
         }
 
-        public async Task<AddDeliveryResponse> Handle(AddDeliveryRequest request, CancellationToken cancellationToken) => await PrepareResponse(request);   
-    }
+        public async Task<AddDeliveryResponse> Handle(AddDeliveryRequest request, CancellationToken cancellationToken) => await PrepareResponse(request);
+        }
 }

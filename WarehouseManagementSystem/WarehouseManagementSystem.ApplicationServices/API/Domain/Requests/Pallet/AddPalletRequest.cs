@@ -8,7 +8,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet
 {
-    public class AddPalletRequest : IRequest<AddPalletResponse>
+    public class AddPalletRequest : UserRequestBase, IRequest<AddPalletResponse>
     {
         public string Barcode { get; set; }
         public int? OrderId { get; set; }

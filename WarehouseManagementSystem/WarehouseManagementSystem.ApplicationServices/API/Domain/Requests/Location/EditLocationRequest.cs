@@ -8,7 +8,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Locatio
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location
 {
-    public class EditLocationRequest : IRequest<EditLocationResponse>
+    public class EditLocationRequest : UserRequestBase, IRequest<EditLocationResponse>
     {
         public int Id { get; set; }
         public int? MaxAmount { get; set; }

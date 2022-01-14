@@ -8,7 +8,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Locatio
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location
 {
-    public class AddLocationRequest : IRequest<AddLocationResponse>
+    public class AddLocationRequest : UserRequestBase, IRequest<AddLocationResponse>
     {
         public int? ProductId { get; set; }
         public DataAccess.Entities.Type LocationType { get; set; }

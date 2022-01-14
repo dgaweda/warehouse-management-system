@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
@@ -19,6 +20,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
         : ICommandHandler<TRequest, TResponse, TDomainModel> 
         where TResponse : ResponseBase<TDomainModel>, new()
         where TCommand : CommandBase<TEntity, TEntity>, new()
+        where TRequest : UserRequestBase
     {
         private readonly IMapper _mapper;
         private readonly ICommandExecutor _commandExecutor;

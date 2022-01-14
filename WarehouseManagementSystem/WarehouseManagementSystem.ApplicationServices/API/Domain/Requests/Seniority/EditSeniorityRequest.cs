@@ -8,7 +8,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Seniori
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seniority
 {
-    public class EditSeniorityRequest : IRequest<EditSeniorityResponse>
+    public class EditSeniorityRequest : UserRequestBase, IRequest<EditSeniorityResponse>
     {
         public int Id { get; set; }
         public DateTime EmploymentDate { get; set; }

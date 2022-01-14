@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Security.Authentication.ExtendedProtection;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.Entities;
 using DataAccess.Entities.EntityBases;
 using DataAccess.Migrations;
 
@@ -28,12 +29,6 @@ namespace DataAccess.CQRS.Helpers
 
                 await entities.AddAsync(entity);
                 await context.SaveChangesAsync();
-            }
-
-            public static async Task<List<TEntity>> GetAll<TEntity>(this WMSDatabaseContext context)
-                where TEntity : class, IEntityBase
-            {
-                return await context.Set<TEntity>().ToListAsync();
             }
 
             public static async Task<TEntity> GetById<TEntity>(this WMSDatabaseContext context, int Id)
@@ -68,34 +63,6 @@ namespace DataAccess.CQRS.Helpers
                 context.Entry(entity).State = EntityState.Modified;
 
                 await context.SaveChangesAsync();
-            }
-
-            public static bool PropertiesAreEmpty(this object obj)
-            {
-                var isEmpty = false;
-                var properties = obj.GetType().GetProperties();
-                foreach (var property in properties)
-                {
-                    var propType = property.PropertyType;
-
-                    switch (Type.GetTypeCode(propType.GetType()))
-                    {
-                        case TypeCode.Int32:
-                            isEmpty = Convert.ToInt32(property) == default;
-                            break;
-                        case TypeCode.Decimal:
-                            isEmpty = Convert.ToDecimal(property) == default;
-                            break;
-                        case TypeCode.DateTime:
-                            isEmpty = Convert.ToDateTime(property) == default;
-                            break;
-                        case TypeCode.String:
-                            isEmpty = string.IsNullOrEmpty(property.ToString());
-                            break;
-                    }
-                }
-
-                return isEmpty;
             }
         }
     }

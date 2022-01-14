@@ -8,7 +8,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departu
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Departure
 {
-    public class RemoveDepartureRequest : IRequest<RemoveDepartureResponse>
+    public class RemoveDepartureRequest : UserRequestBase, IRequest<RemoveDepartureResponse>
     {
         public int DepartureId { get; set; }
     }

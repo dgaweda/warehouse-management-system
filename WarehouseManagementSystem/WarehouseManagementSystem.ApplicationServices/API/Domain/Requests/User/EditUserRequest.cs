@@ -3,7 +3,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Employe
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Employee
 {
-    public class EditUserRequest : IRequest<EditUserResponse>
+    public class EditUserRequest : UserRequestBase, IRequest<EditUserResponse>
     {
         public int Id { get; set; }
         public string Password { get; set; }

@@ -8,7 +8,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Invoice
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Invoice
 {
-    public class GetInvoicesRequest : IRequest<GetInvoicesResponse>
+    public class GetInvoicesRequest : UserRequestBase, IRequest<GetInvoicesResponse>
     {
         public string InvoiceNumber { get; set; }
     }

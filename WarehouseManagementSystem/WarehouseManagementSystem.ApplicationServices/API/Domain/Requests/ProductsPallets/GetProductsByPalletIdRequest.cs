@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets
 {
-    public class GetProductsByPalletIdRequest : IRequest<GetProductsByPalletIdResponse>
+    public class GetProductsByPalletIdRequest : UserRequestBase, IRequest<GetProductsByPalletIdResponse>
     {
         public int PalletId { get; set; }
     }
