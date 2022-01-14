@@ -10,5 +10,6 @@
   - CQRS Pattern <br/>
   - Fluent Validation <br/>
   - Extension Methods <br/>
+  - Basic Authentication <br />
  <br/><br/>
 <h2> Dariusz Gawęda 2021
