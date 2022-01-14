@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seniority;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
@@ -12,6 +13,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Seniori
 
 namespace warehouse_management_system.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class SeniorityController : ApiControllerBase<SeniorityController>

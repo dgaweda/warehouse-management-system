@@ -6,11 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.ProductsPallets;
 
 namespace warehouse_management_system.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductPalletLineController : ApiControllerBase<ProductPalletLineController>

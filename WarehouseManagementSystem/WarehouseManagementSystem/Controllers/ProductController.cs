@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.DeliveryProduct;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets;
@@ -10,6 +11,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 
 namespace warehouse_management_system.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class ProductController : ApiControllerBase<ProductController>
