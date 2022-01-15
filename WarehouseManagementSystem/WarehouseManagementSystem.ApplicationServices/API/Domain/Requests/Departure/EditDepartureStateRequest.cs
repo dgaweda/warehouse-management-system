@@ -9,7 +9,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departu
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Departure
 {
-    public class EditDepartureStateRequest : UserRequestBase, IRequest<EditDepartureStateResponse>
+    public class EditDepartureStateRequest : IRequest<EditDepartureStateResponse>
     {
         public int Id { get; set; }
         public StateType State { get; set; }

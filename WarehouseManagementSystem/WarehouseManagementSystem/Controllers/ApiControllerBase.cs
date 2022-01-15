@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Queries.UsersQueries;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
@@ -24,7 +25,7 @@ namespace warehouse_management_system.Controllers
         }
 
         protected async Task<IActionResult> Handle<TRequest, TResponse>(TRequest request)
-            where TRequest : UserRequestBase, IRequest<TResponse>
+            where TRequest : IRequest<TResponse>
             where TResponse : ErrorResponseBase
         {
             _logger.LogInformation("Handling Request: \n" + typeof(TRequest).Name);
@@ -34,9 +35,6 @@ namespace warehouse_management_system.Controllers
                     ModelState.Where(x => x.Value.Errors.Any())
                     .Select(x => new { property = x.Key, errors = x.Value.Errors }));
             }
-
-            var userRole = User.FindFirstValue(ClaimTypes.Role);
-            request.RoleName = userRole;
 
             var response = await _mediator.Send(request);
             _logger.LogInformation("Response Errors: \n" + response.Error);
@@ -63,12 +61,6 @@ namespace warehouse_management_system.Controllers
                 ErrorType.TooManyRequests => HttpStatusCode.TooManyRequests,
                 _ => HttpStatusCode.BadRequest,
             };
-        }
-
-        private static int ParseStringToInt(string userId)
-        {
-            var success = int.TryParse(userId, out var id);
-            return success ? id : throw new InvalidOperationException();
         }
     }
 }

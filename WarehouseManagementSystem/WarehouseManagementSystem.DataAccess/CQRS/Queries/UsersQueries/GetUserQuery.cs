@@ -16,6 +16,7 @@ namespace DataAccess.CQRS.Queries.UsersQueries
             return await context.Users
                 .Include(x => x.Seniority)
                 .Include(x => x.Role)
+                .Include(x => x.Pallets)
                 .FirstOrDefaultAsync(x => x.UserName.Equals(UserName));
         }
 

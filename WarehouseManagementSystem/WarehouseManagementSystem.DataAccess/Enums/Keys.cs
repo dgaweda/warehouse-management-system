@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Enums
 {
-    public static class PalletEnum
+    public static class Keys
     {
-        public enum Status
+        public enum PalletStatus
         {
             [Description("Otwarta")]
             OPEN,                   // After pallet add (default), when pallet is unfolded (no products on pallet), when no Ids are filled
@@ -28,6 +28,21 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Enums
 
             [Description("Rozłożona")]
             UNFOLDED                // when there is nor product on the pallet
+        }
+        
+        public enum Role
+        {
+            [Description("Zbieracz")]
+            COLLECTOR = 5,
+
+            [Description("Magazynier")]
+            WAREHOUSEMAN = 11,
+            
+            [Description("Kierownik")]
+            MANAGER = 4,
+
+            [Description("Admin")]
+            GENERAL_ADMIN = 9
         }
     }
 }

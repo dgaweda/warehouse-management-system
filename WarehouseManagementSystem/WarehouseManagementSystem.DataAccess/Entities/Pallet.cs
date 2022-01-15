@@ -21,7 +21,7 @@ namespace DataAccess.Entities
         public int? UserId { get; set; }
 
         [Column("Aktualny status palety")]
-        public PalletEnum.Status PalletStatus { get; set; }
+        public Keys.PalletStatus PalletStatus { get; set; }
 
         [ForeignKey("DepartureId")]
         public Departure Departure { get; set; }

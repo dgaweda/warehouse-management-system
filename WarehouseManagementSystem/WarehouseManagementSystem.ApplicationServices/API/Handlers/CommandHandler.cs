@@ -20,7 +20,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
         : ICommandHandler<TRequest, TResponse, TDomainModel> 
         where TResponse : ResponseBase<TDomainModel>, new()
         where TCommand : CommandBase<TEntity, TEntity>, new()
-        where TRequest : UserRequestBase
     {
         private readonly IMapper _mapper;
         private readonly ICommandExecutor _commandExecutor;

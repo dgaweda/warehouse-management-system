@@ -4,7 +4,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.DeliveryProduct
 {
-    public class AddProductRequest : UserRequestBase, IRequest<AddProductResponse>
+    public class AddProductRequest : IRequest<AddProductResponse>
     {
         public string Name { get; set; }
         public DateTime ExpirationDate { get; set; }

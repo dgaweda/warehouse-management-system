@@ -4,7 +4,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Invoice
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Invoice
 {
-    public class AddInvoiceRequest : UserRequestBase, IRequest<AddInvoiceResponse>
+    public class AddInvoiceRequest : IRequest<AddInvoiceResponse>
     {
         public string Provider { get; set; }
         public DateTime CreationDate { get; set; }

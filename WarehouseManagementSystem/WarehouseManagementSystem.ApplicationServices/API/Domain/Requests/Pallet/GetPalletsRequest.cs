@@ -9,7 +9,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests
 {
-    public class GetPalletsRequest : UserRequestBase, IRequest<GetPalletsResponse>
+    public class GetPalletsRequest : IRequest<GetPalletsResponse>
     {
         public DateTime PickingEnd { get; set; }
         public string Provider { get; set; }

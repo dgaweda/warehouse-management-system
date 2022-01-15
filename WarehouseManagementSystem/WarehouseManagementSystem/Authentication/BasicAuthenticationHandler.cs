@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Net.Http.Headers;
+using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -49,7 +50,6 @@ namespace warehouse_management_system.Authentication
                 var authHeader = AuthenticationHeaderValue.Parse(Request.Headers[AuthorizationHeader]);
                 var credentialBytes = Convert.FromBase64String(authHeader.Parameter);
                 var credentials = Encoding.UTF8.GetString(credentialBytes).Split(new[] { ':' }, 2);
-                // rozdziela username:password -> username = [0], password = [1]
                 var username = credentials[0];
                 var password = credentials[1];
 
@@ -75,7 +75,7 @@ namespace warehouse_management_system.Authentication
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Role, user.Role.Name)
+                new Claim(ClaimTypes.Role, user.Role.Id.ToString()),
             };
 
             var identity = new ClaimsIdentity(claims, Scheme.Name);

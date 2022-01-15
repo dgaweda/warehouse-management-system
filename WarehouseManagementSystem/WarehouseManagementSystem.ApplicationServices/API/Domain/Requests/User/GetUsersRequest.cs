@@ -8,7 +8,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests
 {
-    public class GetUsersRequest : UserRequestBase, IRequest<GetUsersResponse>
+    public class GetUsersRequest : IRequest<GetUsersResponse>
     {
         public int UserId { get; set; }
         public string RoleName { get; set; }
