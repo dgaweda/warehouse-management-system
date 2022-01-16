@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using DataAccess.CQRS.Helpers;
 using DataAccess.CQRS.Helpers.DataAccess.Repository;
-using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands
 {

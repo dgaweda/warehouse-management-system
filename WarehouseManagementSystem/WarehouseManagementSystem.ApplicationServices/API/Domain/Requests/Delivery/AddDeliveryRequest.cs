@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using System;
-using DataAccess;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Delivery;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery

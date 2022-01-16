@@ -1,10 +1,5 @@
 using DataAccess;
 using DataAccess.CQRS;
-using DataAccess.CQRS.Commands.PalletCommands;
-using DataAccess.CQRS.Queries;
-using DataAccess.CQRS.Queries.RoleQueries;
-using DataAccess.Entities;
-using DataAccess.Repository;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
@@ -44,6 +39,8 @@ namespace warehouse_management_system
             services.AddTransient<IQueryExecutor, QueryExecutor>();
 
             services.AddTransient<ICommandExecutor, CommandExecutor>();
+
+            services.AddTransient<IPrivilegesService, PrivilegesService>();
 
             services.AddAutoMapper(typeof(UsersProfile).Assembly); // This Line Enables AutoMapper to map all profiles without adding everyone of them.
                                                                        // It gets Assembly from one profile to get all the mappings.

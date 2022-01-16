@@ -1,11 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using warehouse_management_system.Authentication;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seniority;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
@@ -18,7 +16,7 @@ namespace warehouse_management_system.Controllers
     [ApiController]
     public class SeniorityController : ApiControllerBase<SeniorityController>
     {
-        public SeniorityController(IMediator mediator, ILogger<SeniorityController> logger) : base(mediator, logger)
+        public SeniorityController(IMediator mediator, ILogger<SeniorityController> logger, IPrivilegesService privileges) : base(mediator, logger, privileges)
         {
         }
 

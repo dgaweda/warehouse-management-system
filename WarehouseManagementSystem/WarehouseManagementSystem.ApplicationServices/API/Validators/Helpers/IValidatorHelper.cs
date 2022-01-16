@@ -1,5 +1,4 @@
 ﻿using DataAccess.Entities.EntityBases;
-using Microsoft.EntityFrameworkCore;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators
 {

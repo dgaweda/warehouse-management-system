@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using warehouse_management_system.Authentication;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Invoice;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Invoice;
 
@@ -13,7 +14,7 @@ namespace warehouse_management_system.Controllers
     [ApiController]
     public class InvoiceController : ApiControllerBase<InvoiceController>
     {
-        public InvoiceController(IMediator mediator, ILogger<InvoiceController> logger) : base(mediator, logger)
+        public InvoiceController(IMediator mediator, ILogger<InvoiceController> logger, IPrivilegesService privileges) : base(mediator, logger, privileges)
         {
 
         }

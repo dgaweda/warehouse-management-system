@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using DataAccess.Entities.EntityBases;
+﻿using DataAccess.Entities.EntityBases;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities

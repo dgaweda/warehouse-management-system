@@ -1,21 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Security.Authentication.ExtendedProtection;
-using System.Text;
-using System.Threading.Tasks;
-using DataAccess.Entities;
-using DataAccess.Entities.EntityBases;
-using DataAccess.Migrations;
+﻿using DataAccess.Entities.EntityBases;
 
 namespace DataAccess.CQRS.Helpers
 {
     using Microsoft.EntityFrameworkCore;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     namespace DataAccess.Repository

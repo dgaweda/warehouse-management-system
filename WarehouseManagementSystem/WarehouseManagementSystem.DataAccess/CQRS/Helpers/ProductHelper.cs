@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataAccess.Entities;
-using Microsoft.VisualBasic.CompilerServices;
 
 namespace DataAccess.CQRS.Helpers
 {

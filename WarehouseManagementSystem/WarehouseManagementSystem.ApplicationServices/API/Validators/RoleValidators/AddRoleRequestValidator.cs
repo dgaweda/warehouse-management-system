@@ -1,6 +1,4 @@
-﻿using DataAccess;
-using FluentValidation;
-using System.Linq;
+﻿using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Role;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Role

@@ -1,7 +1,5 @@
-﻿using DataAccess;
-using DataAccess.Entities;
+﻿using DataAccess.Entities;
 using FluentValidation;
-using System.Linq;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationValidators

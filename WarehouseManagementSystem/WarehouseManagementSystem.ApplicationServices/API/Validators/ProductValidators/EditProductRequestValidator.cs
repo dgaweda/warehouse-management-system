@@ -1,12 +1,6 @@
-﻿using DataAccess;
-using DataAccess.Entities;
+﻿using DataAccess.Entities;
 using FluentValidation;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.DeliveryProduct;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductValidators

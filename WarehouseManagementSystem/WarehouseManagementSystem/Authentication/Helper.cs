@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using DataAccess;
-using DataAccess.CQRS.Queries;
 using DataAccess.CQRS.Queries.UsersQueries;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;

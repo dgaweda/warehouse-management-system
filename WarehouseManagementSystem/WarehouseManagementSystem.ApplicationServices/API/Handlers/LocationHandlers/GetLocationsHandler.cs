@@ -2,9 +2,7 @@
 using DataAccess;
 using DataAccess.CQRS.Queries.LocationQueries;
 using DataAccess.Entities;
-using DataAccess.Repository;
 using MediatR;
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
