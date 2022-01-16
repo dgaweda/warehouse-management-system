@@ -57,7 +57,7 @@ namespace warehouse_management_system.Authentication
                     UserName = username
                 };
 
-                user = await Helper.GetUser(_queryExecutor, query);
+                user = await BasicAuthenticationHelper.GetUser(_queryExecutor, query);
 
                 if (user is null || !user.HasCorrectPassword(password))
                 {

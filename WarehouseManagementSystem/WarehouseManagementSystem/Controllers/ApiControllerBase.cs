@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using warehouse_management_system.Authentication;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 
@@ -24,7 +25,7 @@ namespace warehouse_management_system.Controllers
         }
 
         protected async Task<IActionResult> Handle<TRequest, TResponse>(TRequest request)
-            where TRequest : IRequest<TResponse>
+            where TRequest : CurrentUserContext, IRequest<TResponse>
             where TResponse : ErrorResponseBase
         {
             _logger.LogInformation("Handling Request: \n" + typeof(TRequest).Name);
@@ -34,9 +35,8 @@ namespace warehouse_management_system.Controllers
                     ModelState.Where(x => x.Value.Errors.Any())
                     .Select(x => new { property = x.Key, errors = x.Value.Errors }));
             }
-
-            _privileges.SetUserPrivileges(User);
             
+            request.CurrentUser = _privileges.SetUserPrivileges(User);
             var response = await _mediator.Send(request);
             _logger.LogInformation("Response Errors: \n" + response.Error);
 

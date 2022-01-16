@@ -3,7 +3,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests
 {
-    public class GetProductsRequest : IRequest<GetProductsResponse>
+    public class GetProductsRequest : CurrentUserContext, IRequest<GetProductsResponse>
     {
         public string Name { get; set; }
         public int Id { get; set; }

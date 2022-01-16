@@ -7,9 +7,8 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace warehouse_management_system.Authentication
 {
-    public static class Helper
+    public static class BasicAuthenticationHelper
     {
-
         public static bool HasCorrectPassword(this User user, string password)
         {
             var hashedPassword = password.Hash(user);

@@ -3,7 +3,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests
 {
-    public class GetUsersRequest : IRequest<GetUsersResponse>
+    public class GetUsersRequest : CurrentUserContext, IRequest<GetUsersResponse>
     {
         public int UserId { get; set; }
         public string RoleName { get; set; }

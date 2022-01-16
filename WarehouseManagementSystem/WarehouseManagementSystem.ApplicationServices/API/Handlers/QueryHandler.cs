@@ -41,7 +41,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
         {
             return new()
             {
-                Data = domainModel
+                Data = domainModel,
             };
         }
 

@@ -31,7 +31,7 @@ namespace DataAccess.CQRS.Helpers
 
         public static void SetPalletStatus(this Pallet pallet)
         {
-            pallet.PalletStatus = Keys.PalletStatus.UNFOLDED;
+            pallet.PalletStatus = PalletStatus.UNFOLDED;
         }
 
         public static List<ProductPalletLine> FilterByPalletId(this List<ProductPalletLine> palletLines, int palletId)

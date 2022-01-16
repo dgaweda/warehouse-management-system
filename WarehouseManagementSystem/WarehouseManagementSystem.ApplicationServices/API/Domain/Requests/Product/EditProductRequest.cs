@@ -4,7 +4,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.DeliveryProduct
 {
-    public class EditProductRequest : IRequest<EditProductResponse>
+    public class EditProductRequest : CurrentUserContext, IRequest<EditProductResponse>
     {
         public int Id { get; set; }
         public string Name { get; set; }

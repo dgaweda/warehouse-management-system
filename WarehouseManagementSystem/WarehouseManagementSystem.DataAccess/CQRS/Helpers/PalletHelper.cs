@@ -42,15 +42,15 @@ namespace DataAccess.CQRS.Helpers
         public static void SetStatus(this Pallet pallet)
         {
             if (PalletIsDuringOrderPicking(pallet))
-                pallet.PalletStatus = Keys.PalletStatus.DURING_ORDER_PICKING;
+                pallet.PalletStatus = PalletStatus.DURING_ORDER_PICKING;
             else if (PalletWasSent(pallet))
-                pallet.PalletStatus = Keys.PalletStatus.SENT;
+                pallet.PalletStatus = PalletStatus.SENT;
             else if (PalletIsReadyForDeparture(pallet))
-                pallet.PalletStatus = Keys.PalletStatus.READY_FOR_DEPARTURE;
+                pallet.PalletStatus = PalletStatus.READY_FOR_DEPARTURE;
             else if (PalletIsReadyToBeUnfolded(pallet))
-                pallet.PalletStatus = Keys.PalletStatus.READY_TO_BE_UNFOLDED;
+                pallet.PalletStatus = PalletStatus.READY_TO_BE_UNFOLDED;
             else
-                pallet.PalletStatus = Keys.PalletStatus.OPEN;
+                pallet.PalletStatus = PalletStatus.OPEN;
         }
 
         private static bool PalletIsDuringOrderPicking(Pallet pallet)

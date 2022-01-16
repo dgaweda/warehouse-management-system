@@ -4,7 +4,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery
 {
-    public class EditDeliveryRequest :  IRequest<EditDeliveryResponse>
+    public class EditDeliveryRequest :  CurrentUserContext, IRequest<EditDeliveryResponse>
     {
         public int Id { get; set; }
         public DateTime Arrival { get; set; }

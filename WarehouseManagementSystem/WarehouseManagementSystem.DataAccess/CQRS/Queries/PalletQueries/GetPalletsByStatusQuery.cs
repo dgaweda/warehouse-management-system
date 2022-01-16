@@ -9,7 +9,7 @@ namespace DataAccess.CQRS.Queries.PalletQueries
 {
     public class GetPalletsByStatusQuery : QueryBase<List<Pallet>>
     {
-        public Keys.PalletStatus PalletStatus { get; set; }
+        public PalletStatus PalletStatus { get; set; }
 
         public override async Task<List<Pallet>> Execute(WMSDatabaseContext context)
         {
