@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+@import "/WmsAngularApp/node_modules/bootstrap/scss/variables";
+@import "/WmsAngularApp/node_modules/bootstrap/scss/functions";
+
+$primary: red;
+$secondary: blue;
+
+$theme-colors: (
+    "primary": $primary,
+    "secondary": $secondary
+);
