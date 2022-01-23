@@ -1,0 +1,19 @@
+*{
+    font-size:min(1.7vw, 18px);
+    font-size:min(1.7vh, 18px);
+}
+footer{
+    height:3vh;
+}
+
+.filled {
+    fill: black;
+}
+    .red{
+        fill: red;
+    }
+
+.responsive {
+    width:clamp(14px, 3vw ,19px);
+    height:clamp(14px, 3vh ,19px);
+}

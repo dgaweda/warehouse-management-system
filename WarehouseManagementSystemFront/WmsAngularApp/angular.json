@@ -35,9 +35,6 @@
               "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "/WmsAngularApp/src/sass"
-              ]
             },
             "scripts": []
           },
