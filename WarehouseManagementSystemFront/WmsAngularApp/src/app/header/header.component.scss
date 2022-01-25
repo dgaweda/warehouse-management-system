@@ -1,3 +1,15 @@
 header{
     height: 10vh;
 }
+.col-md-1 {
+    min-width:10%;
+}
+
+h2 {
+    font-size:clamp(25px, 4vw, 36px);
+}
+
+.logo {
+    width:clamp(70px, 7vw ,100px);
+    height:clamp(50px, 9.5vh ,100px);
+}

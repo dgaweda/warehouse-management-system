@@ -5,26 +5,20 @@ $primary: #337DEF;
 $secondary: #F49F1C;
 $danger: #f1535373;
 $warning: #fffb00a2;
-$main: #e2d810;
-$gray: #e7e5e563;
+$main: #6d9add73;
+$info: grey;
 
 $theme-colors: (
     "primary": $primary,
     "secondary": $secondary,
     "danger": $danger,
     "warning": $warning,
-    "main": $main,
-    "gray": $gray
+    "info": $info
 ); 
 
 @import "bootstrap";
 
 body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    height: 100vh;
-    background-color: hsla(244, 88%, 50%, 0.226);
-}
-
-.page-height{
-    height:97vh;
+    background-color: rgb(223, 219, 219);
 }

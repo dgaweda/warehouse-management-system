@@ -1,19 +1,22 @@
+$secondary: #F49F1C;
+
 *{
-    font-size:min(1.7vw, 18px);
-    font-size:min(1.7vh, 18px);
+    font-size:min(1.7vw, 19px);
 }
 footer{
-    height:3vh;
+    height:5vh;
 }
 
 .filled {
     fill: black;
-}
-    .red{
+
+    &.red {
         fill: red;
     }
+}
+    
 
 .responsive {
-    width:clamp(14px, 3vw ,19px);
-    height:clamp(14px, 3vh ,19px);
+    width:clamp(12px, 4vw ,22px);
+    height:clamp(12px, 4vh ,22px);
 }
