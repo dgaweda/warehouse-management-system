@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  logoPath: string | undefined;
+  logoPath: string;
 
   constructor() {
     this.logoPath = 'assets/wms-logo.png';

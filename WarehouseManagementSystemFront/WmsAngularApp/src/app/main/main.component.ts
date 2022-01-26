@@ -6,7 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  constructor() { }
+  breadCrumbIcoPath: string;
+
+  constructor() {
+    this.breadCrumbIcoPath = 'assets/breadcrumb-separator.png';
+  }
 
   ngOnInit(): void {
   }

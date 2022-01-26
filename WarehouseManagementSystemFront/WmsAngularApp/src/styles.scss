@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-
+$breadcrumb-divider: quote(">");
 
 $primary: #337DEF;
 $secondary: #F49F1C;
@@ -21,4 +21,14 @@ $theme-colors: (
 body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: rgb(223, 219, 219);
+    margin: 0 auto;
+}
+
+h6{
+    font-style: italic;
+    color: rgb(43, 42, 42);;
+}
+
+a {
+    
 }
