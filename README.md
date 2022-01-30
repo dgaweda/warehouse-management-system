@@ -12,4 +12,13 @@
   - Extension Methods <br/>
   - Basic Authentication <br />
  <br/><br/>
-<h2> Dariusz Gawęda 2021
+ <h2> FrontEnd </h2>
+ <hr />
+ - Angular 13
+ - Bootstrap 5.1
+ - TypeScript 4.4
+
+<h2> Ver Control </h2>
+ <hr />
+ - Git Extensions
+<h2> Dariusz Gawęda 2021/ 2022
