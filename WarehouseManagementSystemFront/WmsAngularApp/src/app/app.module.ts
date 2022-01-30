@@ -9,7 +9,9 @@ import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
 import { FooterComponent } from './footer/footer.component';
 import { BreadcrumbComponent } from './main/breadcrumb/breadcrumb.component';
-import { LoginPanelComponent } from './main/login-panel/login-panel.component';
+import { LoginPanelComponent } from './main/login/login-panel.component';
+import { OrderListComponent } from './main/order-list/order-list.component';
+import { UserDetailsComponent } from './main/user-details/user-details.component';
 
 @NgModule({
   declarations: [		
@@ -18,7 +20,9 @@ import { LoginPanelComponent } from './main/login-panel/login-panel.component';
     MainComponent,
     FooterComponent,
     BreadcrumbComponent,
-    LoginPanelComponent
+    LoginPanelComponent,
+    OrderListComponent,
+    UserDetailsComponent
    ],
   imports: [
     BrowserModule,
