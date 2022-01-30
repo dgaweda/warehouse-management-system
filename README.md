@@ -14,11 +14,11 @@
  <br/><br/>
  <h2> FrontEnd </h2>
  <hr />
- - Angular 13
- - Bootstrap 5.1
- - TypeScript 4.4
+ - Angular 13 <br/>
+ - Bootstrap 5.1 <br/>
+ - TypeScript 4.4 <br/>
 
-<h2> Ver Control </h2>
+<h2> Ver Control </h2> 
  <hr />
- - Git Extensions
+ - Git Extensions <br/>
 <h2> Dariusz Gawęda 2021/ 2022
