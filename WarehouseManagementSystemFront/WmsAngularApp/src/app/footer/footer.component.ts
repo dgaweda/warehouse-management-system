@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as feather from 'feather-icons';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-footer',
@@ -7,7 +8,8 @@ import * as feather from 'feather-icons';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     feather.replace();
