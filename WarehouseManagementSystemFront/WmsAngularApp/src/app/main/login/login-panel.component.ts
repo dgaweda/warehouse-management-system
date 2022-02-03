@@ -15,13 +15,9 @@ export class LoginPanelComponent implements OnInit {
       login: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
     });
-   }
-
-  ngOnInit() {
   }
 
-  checkValidation(): void {
-    
+  ngOnInit() {
   }
 
   onSubmit(): void {
