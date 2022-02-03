@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -44,15 +42,15 @@ namespace DataAccess.CQRS.Helpers
         public static void SetStatus(this Pallet pallet)
         {
             if (PalletIsDuringOrderPicking(pallet))
-                pallet.PalletStatus = PalletEnum.Status.DURING_ORDER_PICKING;
+                pallet.PalletStatus = PalletStatus.DURING_ORDER_PICKING;
             else if (PalletWasSent(pallet))
-                pallet.PalletStatus = PalletEnum.Status.SENT;
+                pallet.PalletStatus = PalletStatus.SENT;
             else if (PalletIsReadyForDeparture(pallet))
-                pallet.PalletStatus = PalletEnum.Status.READY_FOR_DEPARTURE;
+                pallet.PalletStatus = PalletStatus.READY_FOR_DEPARTURE;
             else if (PalletIsReadyToBeUnfolded(pallet))
-                pallet.PalletStatus = PalletEnum.Status.READY_TO_BE_UNFOLDED;
+                pallet.PalletStatus = PalletStatus.READY_TO_BE_UNFOLDED;
             else
-                pallet.PalletStatus = PalletEnum.Status.OPEN;
+                pallet.PalletStatus = PalletStatus.OPEN;
         }
 
         private static bool PalletIsDuringOrderPicking(Pallet pallet)

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +31,7 @@ namespace DataAccess.CQRS.Helpers
 
         public static void SetPalletStatus(this Pallet pallet)
         {
-            pallet.PalletStatus = PalletEnum.Status.UNFOLDED;
+            pallet.PalletStatus = PalletStatus.UNFOLDED;
         }
 
         public static List<ProductPalletLine> FilterByPalletId(this List<ProductPalletLine> palletLines, int palletId)

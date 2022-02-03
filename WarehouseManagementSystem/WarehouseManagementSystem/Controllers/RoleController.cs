@@ -1,14 +1,9 @@
-﻿using DataAccess.Entities;
-using DataAccess.Repository;
-using MediatR;
-using Microsoft.AspNetCore.Http;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using warehouse_management_system.Authentication;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Role;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role;
@@ -20,7 +15,7 @@ namespace warehouse_management_system.Controllers
     [ApiController]
     public class RoleController : ApiControllerBase<RoleController>
     {
-        public RoleController(IMediator mediator, ILogger<RoleController> logger) : base(mediator, logger)
+        public RoleController(IMediator mediator, ILogger<RoleController> logger, IPrivilegesService privileges) : base(mediator, logger, privileges)
         {
         }
 

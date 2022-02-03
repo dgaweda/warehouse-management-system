@@ -49,7 +49,6 @@ namespace warehouse_management_system.Authentication
                 var authHeader = AuthenticationHeaderValue.Parse(Request.Headers[AuthorizationHeader]);
                 var credentialBytes = Convert.FromBase64String(authHeader.Parameter);
                 var credentials = Encoding.UTF8.GetString(credentialBytes).Split(new[] { ':' }, 2);
-                // rozdziela username:password -> username = [0], password = [1]
                 var username = credentials[0];
                 var password = credentials[1];
 
@@ -58,7 +57,7 @@ namespace warehouse_management_system.Authentication
                     UserName = username
                 };
 
-                user = await Helper.GetUser(_queryExecutor, query);
+                user = await BasicAuthenticationHelper.GetUser(_queryExecutor, query);
 
                 if (user is null || !user.HasCorrectPassword(password))
                 {
@@ -74,7 +73,8 @@ namespace warehouse_management_system.Authentication
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.UserName)
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Role, user.Role.Id.ToString()),
             };
 
             var identity = new ClaimsIdentity(claims, Scheme.Name);

@@ -1,13 +1,5 @@
 ﻿using AutoMapper;
-using DataAccess.CQRS.Commands.DeliveryCommands;
-using DataAccess.CQRS.Queries.DeliveryQueries;
 using DataAccess.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings

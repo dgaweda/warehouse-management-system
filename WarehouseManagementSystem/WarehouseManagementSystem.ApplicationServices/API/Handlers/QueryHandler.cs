@@ -3,8 +3,6 @@ using DataAccess;
 using DataAccess.CQRS.Queries;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
-using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
@@ -43,7 +41,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
         {
             return new()
             {
-                Data = domainModel
+                Data = domainModel,
             };
         }
 

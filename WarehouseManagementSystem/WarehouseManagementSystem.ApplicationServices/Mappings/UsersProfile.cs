@@ -1,15 +1,7 @@
 ﻿using AutoMapper;
 using DataAccess.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Routing.Constraints;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Employee;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings
 {
@@ -33,7 +25,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(dest => dest.UserName, options => options.MapFrom(src => src.UserName))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
-                .ForMember(dest => dest.Role, opt => opt.MapFrom(src => (RoleEnum.Roles) src.RoleId));
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.RoleId));
 
             CreateMap<EditUserRequest, User>()
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))

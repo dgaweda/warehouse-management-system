@@ -1,9 +1,6 @@
 ﻿using System;
 using DataAccess;
-using DataAccess.Entities;
 using DataAccess.Entities.EntityBases;
-using FluentValidation;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Net.Mail;
 

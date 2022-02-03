@@ -1,9 +1,4 @@
-﻿using DataAccess.Repository;
-using DataAccess.Entities;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -12,6 +7,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Employee
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Employee;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using Microsoft.Extensions.Logging;
+using warehouse_management_system.Authentication;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 
@@ -22,7 +18,7 @@ namespace warehouse_management_system.Controllers
     [Route("[controller]")]
     public class UserController : ApiControllerBase<UserController>
     {
-        public UserController(IMediator mediator, ILogger<UserController> logger) : base(mediator, logger)
+        public UserController(IMediator mediator, ILogger<UserController> logger, IPrivilegesService privileges) : base(mediator, logger, privileges)
         {
         }
 
