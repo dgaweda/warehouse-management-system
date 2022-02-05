@@ -10,28 +10,17 @@ namespace warehouse_management_system.Authentication
 {
     public class PrivilegesService : IPrivilegesService
     {
-        public ClaimsIdentity SetUserPrivileges(ClaimsPrincipal claimsPrincipal)
+        public void SetUserPrivileges(ClaimsPrincipal claimsPrincipal)
         {
             var role = ParseUserRoleToEnum(claimsPrincipal);
-            List<Claim> claims;
-            
-            switch (role)
+            var claims = role switch
             {
-                case RoleKey.GENERAL_ADMIN:
-                    claims = SetGeneralAdminPrivileges();
-                    break;
-                case RoleKey.MANAGER:
-                    claims = SetManagerPrivileges();
-                    break;
-                case RoleKey.WAREHOUSEMAN:
-                    claims = SetWarehouseManPrivileges();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            var user = AddUserClaims(claims, claimsPrincipal);
-            
-            return user;
+                RoleKey.GENERAL_ADMIN => SetGeneralAdminPrivileges(),
+                RoleKey.MANAGER => SetManagerPrivileges(),
+                RoleKey.WAREHOUSEMAN => SetWarehouseManPrivileges(),
+                _ => throw new ArgumentOutOfRangeException()
+            };
+            AddUserClaims(claims, claimsPrincipal);
         }
         
         private static RoleKey ParseUserRoleToEnum(ClaimsPrincipal user)
@@ -45,11 +34,9 @@ namespace warehouse_management_system.Authentication
             throw new InvalidOperationException("Parse Error");
         }
 
-        private static ClaimsIdentity AddUserClaims(IEnumerable<Claim> claims, ClaimsPrincipal claimsPrincipal)
+        private static void AddUserClaims(IEnumerable<Claim> claims, ClaimsPrincipal claimsPrincipal)
         {
-            var currentUser = claimsPrincipal.Identities.First();
-            currentUser.AddClaims(claims);
-            return currentUser;
+            claimsPrincipal.Identities.First().AddClaims(claims);
         }
         
         private List<Claim> SetWarehouseManPrivileges()
@@ -113,10 +100,9 @@ namespace warehouse_management_system.Authentication
             return claims;
         }
 
-        private static Claim AddClaim(Privilege claim)
+        private static Claim AddClaim(Privilege claimName)
         {
-            var claimName = Enum.GetName(claim);
-            return new Claim("Privileges", claimName);
+            return new Claim("Privileges", Privileges.Get(claimName));
         }
     }
 }

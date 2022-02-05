@@ -1,7 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
 using DataAccess;
 using DataAccess.CQRS.Queries;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
@@ -13,6 +15,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
     {
         private readonly IMapper _mapper;
         private readonly IQueryExecutor _queryExecutor;
+        
         protected QueryHandler(IMapper mapper, IQueryExecutor queryExecutor)
         {
             _mapper = mapper;
@@ -21,30 +24,13 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 
         public async Task<TResponse> PrepareResponse(TQuery query)
         {
-            var entityModel = await GetQueryResult(query);
-            var domainModel = MapDomainModelBy(entityModel);
-            var response = CreateResponse(domainModel);
-            return response;
-        }
-
-        private async Task<TEntityList> GetQueryResult(TQuery query)
-        {
-            return await _queryExecutor.Execute(query);
-        }
-
-        private TDomainModelList MapDomainModelBy(TEntityList entityModel)
-        {
-            return _mapper.Map<TDomainModelList>(entityModel);
-        }
-
-        private static TResponse CreateResponse(TDomainModelList domainModel)
-        {
-            return new()
+            var entityModel = await _queryExecutor.Execute(query);
+            var domainModel = _mapper.Map<TDomainModelList>(entityModel);
+            return new TResponse()
             {
-                Data = domainModel,
+                Data = domainModel
             };
         }
-
         public abstract TQuery CreateQuery(TRequest request);
     }
 }

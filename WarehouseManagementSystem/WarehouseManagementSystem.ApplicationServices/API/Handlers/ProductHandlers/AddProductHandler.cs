@@ -6,6 +6,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.DeliveryProduct;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.DeliveryProduct;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryProductService

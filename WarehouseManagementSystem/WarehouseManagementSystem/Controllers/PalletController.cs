@@ -16,7 +16,8 @@ namespace warehouse_management_system.Controllers
     [ApiController]
     public class PalletController : ApiControllerBase<PalletController>
     {
-        public PalletController(IMediator mediator, ILogger<PalletController> logger, IPrivilegesService privileges) : base(mediator, logger, privileges)
+        public PalletController(IMediator mediator, ILogger<PalletController> logger, IPrivilegesService privileges) 
+            : base(mediator, logger)
         {
         }
 

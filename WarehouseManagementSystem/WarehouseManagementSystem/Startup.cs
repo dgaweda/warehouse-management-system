@@ -5,7 +5,6 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,11 +30,11 @@ namespace warehouse_management_system
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSpaStaticFiles(cfg =>
-            {
-                cfg.RootPath = "ClientApp/dist";
-            });
-            
+            // services.AddSpaStaticFiles(cfg =>
+            // {
+            //     cfg.RootPath = "ClientApp/dist";
+            // });
+            //
             services.AddAuthentication("BasicAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
@@ -52,6 +51,8 @@ namespace warehouse_management_system
                                                                        // It gets Assembly from one profile to get all the mappings.
             services.AddMediatR(typeof(ResponseBase<>));
 
+            services.AddHttpContextAccessor();
+
             services.AddDbContext<WMSDatabaseContext>(
                 option =>
                 option.UseSqlServer(this.Configuration.GetConnectionString("WMSDatabaseContext")));
@@ -67,33 +68,33 @@ namespace warehouse_management_system
                      };
                      options.SerializerSettings.Converters.Add(dateConverter);
                  });
-
-            // services.AddSwaggerGen(c =>
-            // {
-            //     c.SwaggerDoc("v1", new OpenApiInfo { Title = "warehouse_management_system", Version = "v1" });
-            // });
+            
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "warehouse_management_system", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseStaticFiles();
-            if (!env.IsDevelopment())
-            {
-                app.UseSpaStaticFiles();
-            }
+            //app.UseStaticFiles();
+            // if (!env.IsDevelopment())
+            // {
+            //     app.UseSpaStaticFiles();
+            // }
 
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "ClientApp";
+            // app.UseSpa(spa =>
+            // {
+            //     spa.Options.SourcePath = "ClientApp";
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
-                    // app.UseDeveloperExceptionPage();
-                    // app.UseSwagger();
-                    // app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "warehouse_management_system v1"));
+                    //spa.UseAngularCliServer(npmScript: "start");
+                    app.UseDeveloperExceptionPage();
+                    app.UseSwagger();
+                    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "warehouse_management_system v1"));
                 }
-            });
+            // });
 
 
 

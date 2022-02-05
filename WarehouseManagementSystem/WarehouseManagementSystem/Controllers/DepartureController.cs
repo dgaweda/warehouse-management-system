@@ -16,7 +16,8 @@ namespace warehouse_management_system.Controllers
     [ApiController]
     public class DepartureController : ApiControllerBase<DepartureController>
     {
-        public DepartureController(IMediator mediator, ILogger<DepartureController> logger, IPrivilegesService privileges) : base(mediator, logger, privileges)
+        public DepartureController(IMediator mediator, ILogger<DepartureController> logger, IPrivilegesService privileges) 
+            : base(mediator, logger)
         {
         }
 

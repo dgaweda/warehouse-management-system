@@ -16,7 +16,8 @@ namespace warehouse_management_system.Controllers
     [ApiController]
     public class SeniorityController : ApiControllerBase<SeniorityController>
     {
-        public SeniorityController(IMediator mediator, ILogger<SeniorityController> logger, IPrivilegesService privileges) : base(mediator, logger, privileges)
+        public SeniorityController(IMediator mediator, ILogger<SeniorityController> logger, IPrivilegesService privileges) 
+            : base(mediator, logger)
         {
         }
 

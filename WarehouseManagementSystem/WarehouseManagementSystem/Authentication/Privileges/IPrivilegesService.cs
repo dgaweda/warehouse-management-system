@@ -4,6 +4,6 @@ namespace warehouse_management_system.Authentication
 {
     public interface IPrivilegesService
     {
-        ClaimsIdentity SetUserPrivileges(ClaimsPrincipal user);
+        void SetUserPrivileges(ClaimsPrincipal claimsPrincipal);
     }
 }

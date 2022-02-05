@@ -7,7 +7,6 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Employee
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Employee;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using Microsoft.Extensions.Logging;
-using warehouse_management_system.Authentication;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 
@@ -18,7 +17,8 @@ namespace warehouse_management_system.Controllers
     [Route("[controller]")]
     public class UserController : ApiControllerBase<UserController>
     {
-        public UserController(IMediator mediator, ILogger<UserController> logger, IPrivilegesService privileges) : base(mediator, logger, privileges)
+        public UserController(IMediator mediator, ILogger<UserController> logger) 
+            : base(mediator, logger)
         {
         }
 
@@ -28,8 +28,8 @@ namespace warehouse_management_system.Controllers
         public async Task<IActionResult> AddUser([FromBody] AddUserRequest request) => await Handle<AddUserRequest, AddUserResponse>(request);
 
         [HttpGet]
-        [Route("Login")]
-        public async Task<IActionResult> GetUser([FromQuery] GetUserRequest request) => await Handle<GetUserRequest, GetUserResponse>(request);
+        [Route("CurrentUser")]
+        public async Task<IActionResult> GetCurrentUser([FromQuery] GetUserRequest request) => await Handle<GetUserRequest, GetUserResponse>(request);
 
         [HttpGet]
         [Route("Get")]

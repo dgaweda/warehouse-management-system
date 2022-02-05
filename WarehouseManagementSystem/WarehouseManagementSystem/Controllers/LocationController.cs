@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using warehouse_management_system.Authentication;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
@@ -19,7 +18,8 @@ namespace warehouse_management_system.Controllers
     public class LocationController : ApiControllerBase<LocationController>
     {
 
-        public LocationController(IMediator mediator, ILogger<LocationController> logger, IPrivilegesService privileges) : base(mediator, logger, privileges)
+        public LocationController(IMediator mediator, ILogger<LocationController> logger) 
+            : base(mediator, logger)
         {
         }
 

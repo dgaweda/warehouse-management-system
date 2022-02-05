@@ -19,14 +19,17 @@ namespace warehouse_management_system.Authentication
     {
         private readonly IQueryExecutor _queryExecutor;
         private const string AuthorizationHeader = "Authorization";
+        private readonly IPrivilegesService _privilegesService;
 
         public BasicAuthenticationHandler(
+            IPrivilegesService privilegesService,
             IQueryExecutor queryExecutor,
             IOptionsMonitor<AuthenticationSchemeOptions> options,
             ILoggerFactory loggerFactory, UrlEncoder encoder,
             ISystemClock clock)
             : base(options, loggerFactory, encoder, clock)
         {
+            _privilegesService = privilegesService;
             _queryExecutor = queryExecutor;
         }
 
@@ -79,8 +82,9 @@ namespace warehouse_management_system.Authentication
 
             var identity = new ClaimsIdentity(claims, Scheme.Name);
             var principal = new ClaimsPrincipal(identity);
+            _privilegesService.SetUserPrivileges(principal);
+            
             var ticket = new AuthenticationTicket(principal, Scheme.Name);
-
             return AuthenticateResult.Success(ticket);
         }
     }

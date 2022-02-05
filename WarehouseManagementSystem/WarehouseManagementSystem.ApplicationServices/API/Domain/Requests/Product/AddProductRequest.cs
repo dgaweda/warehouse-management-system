@@ -1,8 +1,8 @@
-﻿using MediatR;
-using System;
+﻿using System;
+using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.DeliveryProduct;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.DeliveryProduct
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product
 {
     public class AddProductRequest : CurrentUserContext, IRequest<AddProductResponse>
     {

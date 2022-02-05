@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using System;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.DeliveryProduct;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductValidators
 {

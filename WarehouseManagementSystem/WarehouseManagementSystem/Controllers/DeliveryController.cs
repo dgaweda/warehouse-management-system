@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using warehouse_management_system.Authentication;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Delivery;
@@ -16,7 +15,7 @@ namespace warehouse_management_system.Controllers
     [ApiController]
     public class DeliveryController : ApiControllerBase<DeliveryController>
     {
-        public DeliveryController(IMediator mediator, ILogger<DeliveryController> logger, IPrivilegesService privileges) : base(mediator, logger, privileges)
+        public DeliveryController(IMediator mediator, ILogger<DeliveryController> logger) : base(mediator, logger)
         {
         }
 
