@@ -20,7 +20,7 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("All")]
+        [Route("all")]
         public Task<IActionResult> GetAllOrders([FromQuery] GetOrdersRequest request) => Handle<GetOrdersRequest, GetOrdersResponse>(request);
     }
 }

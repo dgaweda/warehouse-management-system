@@ -21,26 +21,25 @@ namespace warehouse_management_system.Controllers
             : base(mediator, logger)
         {
         }
-
-        [AllowAnonymous]
+        
         [HttpPost]
-        [Route("Register")]
+        [Route("register")]
         public async Task<IActionResult> AddUser([FromBody] AddUserRequest request) => await Handle<AddUserRequest, AddUserResponse>(request);
 
         [HttpGet]
-        [Route("CurrentUser")]
+        [Route("current")]
         public async Task<IActionResult> GetCurrentUser([FromQuery] GetUserRequest request) => await Handle<GetUserRequest, GetUserResponse>(request);
 
         [HttpGet]
-        [Route("Get")]
+        [Route("")]
         public async Task<IActionResult> GetUsers([FromQuery] GetUsersRequest request) => await Handle<GetUsersRequest, GetUsersResponse>(request);
 
         [HttpPut]
-        [Route("Edit")]
+        [Route("edit")]
         public async Task<IActionResult> EditUser([FromBody] EditUserRequest request) => await Handle<EditUserRequest, EditUserResponse>(request);
 
         [HttpDelete]
-        [Route("Remove")]
+        [Route("remove")]
         public async Task<IActionResult> RemoveUser([FromQuery] RemoveUserRequest request) => await Handle<RemoveUserRequest, RemoveUserResponse>(request);
     }
 }

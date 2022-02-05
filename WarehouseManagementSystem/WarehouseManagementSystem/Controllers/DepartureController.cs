@@ -22,19 +22,19 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("Get")]
+        [Route("get")]
         public async Task<IActionResult> GetDepartures([FromQuery] GetDeparturesRequest request) => await Handle<GetDeparturesRequest, GetDeparturesResponse>(request);
 
         [HttpPost]
-        [Route("Add")]
+        [Route("add")]
         public async Task<IActionResult> AddDeparture([FromBody] AddDepartureRequest request) => await Handle<AddDepartureRequest, AddDepartureResponse>(request);
 
         [HttpPatch]
-        [Route("Edit")]
+        [Route("edit")]
         public async Task<IActionResult> EditDepartureState([FromQuery] EditDepartureStateRequest request) => await Handle<EditDepartureStateRequest, EditDepartureStateResponse>(request);
 
         [HttpDelete]
-        [Route("Remove")]
+        [Route("remove")]
         public async Task<IActionResult> RemoveDeparture([FromBody] RemoveDepartureRequest request) => await Handle<RemoveDepartureRequest, RemoveDepartureResponse>(request);
     }
 }

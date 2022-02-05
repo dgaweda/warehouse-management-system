@@ -9,7 +9,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 namespace warehouse_management_system.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ProductPalletLineController : ApiControllerBase<ProductPalletLineController>
     {
@@ -19,11 +19,11 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("Get/Products/PalletID")]
+        [Route("products/{request.PalletId}")]
         public Task<IActionResult> GetProductsByPalletId([FromQuery] GetProductsByPalletIdRequest request) => Handle<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse>(request);
     
         [HttpPatch]
-        [Route("Set/ProductAmount")]
+        [Route("set/productAmount")]
         public Task<IActionResult> DecreaseProductAmount([FromQuery] DecreaseProductAmountRequest request) => Handle<DecreaseProductAmountRequest, DecreaseProductAmountResponse>(request);
     }
 }

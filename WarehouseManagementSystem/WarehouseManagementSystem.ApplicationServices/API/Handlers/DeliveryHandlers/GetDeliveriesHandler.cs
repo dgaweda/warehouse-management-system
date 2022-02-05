@@ -20,7 +20,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHan
         : QueryHandler<GetDeliveriesRequest, GetDeliveriesResponse, GetDeliveriesQuery, List<Delivery>, List<Domain.Models.Delivery>>, 
         IRequestHandler<GetDeliveriesRequest, GetDeliveriesResponse>
     {
-        private IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         public GetDeliveriesHandler(IMapper mapper, IQueryExecutor queryExecutor, IHttpContextAccessor httpContextAccessor) 
             : base(mapper, queryExecutor)
         {

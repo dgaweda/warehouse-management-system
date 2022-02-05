@@ -5,6 +5,7 @@ using DataAccess.CQRS.Queries;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {

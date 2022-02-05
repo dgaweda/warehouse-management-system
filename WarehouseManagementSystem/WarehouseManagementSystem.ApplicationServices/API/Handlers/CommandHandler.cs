@@ -22,20 +22,16 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 
         public async Task<TResponse> PrepareResponse(TRequest request)
         {
-            var mappedEntityWithRequestData = Map(request);
-            var command = CreateCommand(mappedEntityWithRequestData);
-            var entityModel = await Execute(command);
-            var domainModel = MapDomainModel(entityModel);
-            var response = CreateResponse(domainModel);
-            return response;
+            var mappedEntityWithRequestData = _mapper.Map<TEntity>(request);
+            var command = new TCommand() { Parameter = mappedEntityWithRequestData };
+            
+            var entityModel = await _commandExecutor.Execute(command);
+            var domainModel = _mapper.Map<TDomainModel>(entityModel);
+            return new TResponse()
+            {
+                Data = domainModel
+            };
         }
-        private TEntity Map(TRequest request) => _mapper.Map<TEntity>(request);
-
-        private static TCommand CreateCommand(TEntity entityWithRequestData) => new() { Parameter = entityWithRequestData };
-
-        private async Task<TEntity> Execute(TCommand command) => await _commandExecutor.Execute(command);
-
-        private TDomainModel MapDomainModel(TEntity entityModel) => _mapper.Map<TDomainModel>(entityModel);
 
         private static TResponse CreateResponse(TDomainModel domainModel) => new() { Data = domainModel };
     }
