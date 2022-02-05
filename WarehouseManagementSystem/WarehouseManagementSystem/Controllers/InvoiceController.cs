@@ -20,19 +20,19 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("get")]
+        [Route("Get/")]
         public Task<IActionResult> GetInvoices([FromQuery] GetInvoicesRequest request) => Handle<GetInvoicesRequest, GetInvoicesResponse>(request);
 
         [HttpPost]
-        [Route("add")]
+        [Route("Add/")]
         public Task<IActionResult> AddInvoice([FromBody] AddInvoiceRequest request) => Handle<AddInvoiceRequest, AddInvoiceResponse>(request);
 
         [HttpDelete]
-        [Route("remove")]
+        [Route("Remove/")]
         public Task<IActionResult> RemoveInvoice([FromQuery] RemoveInvoiceRequest request) => Handle<RemoveInvoiceRequest, RemoveInvoiceResponse>(request);
 
         [HttpPut]
-        [Route("edit")]
+        [Route("Edit/")]
         public Task<IActionResult> EditInvoice([FromBody] EditInvoiceRequest request) => Handle<EditInvoiceRequest, EditInvoiceResponse>(request);
     }
 }

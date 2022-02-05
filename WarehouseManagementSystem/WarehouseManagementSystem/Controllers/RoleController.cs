@@ -21,20 +21,20 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpPost]
-        [Route("add")]
+        [Route("Add/")]
         public Task<IActionResult> AddRole([FromBody] AddRoleRequest request) => Handle<AddRoleRequest, AddRoleResponse>(request);
 
         [HttpGet]
-        [Route("get")]
+        [Route("Get/")]
         public Task<IActionResult> GetRoles([FromQuery] GetRolesRequest request) => Handle<GetRolesRequest, GetRolesResponse>(request);
 
         [HttpPut]
-        [Route("edit")]
+        [Route("Edit/")]
         public Task<IActionResult> EditRole([FromBody] EditRoleRequest request) => Handle<EditRoleRequest, EditRoleResponse>(request);
 
 
         [HttpDelete]
-        [Route("delete")]
+        [Route("Delete/")]
         public Task<IActionResult> RemoveRole([FromBody] RemoveRoleRequest request) => Handle<RemoveRoleRequest, RemoveRoleResponse>(request);
     }
 }

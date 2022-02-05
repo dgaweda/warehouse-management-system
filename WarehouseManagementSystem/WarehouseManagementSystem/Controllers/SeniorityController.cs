@@ -22,15 +22,15 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("all")]
+        [Route("All/")]
         public Task<IActionResult> GetSeniorities([FromQuery] GetSenioritiesRequest request) => Handle<GetSenioritiesRequest, GetSenioritiesResponse>(request);
 
         [HttpPost]
-        [Route("add")]
+        [Route("Add/")]
         public Task<IActionResult> AddSeniority([FromBody] AddSeniorityRequest request) => Handle<AddSeniorityRequest, AddSeniorityResponse>(request);
 
         [HttpPut]
-        [Route("edit")]
+        [Route("Edit/")]
         public Task<IActionResult> EditSeniority([FromBody] EditSeniorityRequest request) => Handle<EditSeniorityRequest, EditSeniorityResponse>(request);
     }
 }

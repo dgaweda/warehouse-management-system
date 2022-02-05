@@ -19,19 +19,19 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("get")]
+        [Route("Get/")]
         public async Task<IActionResult> GetDeliveries([FromQuery] GetDeliveriesRequest request) => await Handle<GetDeliveriesRequest, GetDeliveriesResponse>(request);
 
         [HttpPost]
-        [Route("add")]
+        [Route("Add/")]
         public async Task<IActionResult> AddDelivery([FromBody] AddDeliveryRequest request) => await Handle<AddDeliveryRequest, AddDeliveryResponse>(request);
 
         [HttpDelete]
-        [Route("remove")]
+        [Route("Remove/")]
         public async Task<IActionResult> RemoveDelivery([FromQuery] RemoveDeliveryRequest request) => await Handle<RemoveDeliveryRequest, RemoveDeliveryResponse>(request);
 
         [HttpPut]
-        [Route("edit")]
+        [Route("Edit/")]
         public async Task<IActionResult> EditDelivery([FromBody] EditDeliveryRequest request) => await Handle<EditDeliveryRequest, EditDeliveryResponse>(request);
     }
 }

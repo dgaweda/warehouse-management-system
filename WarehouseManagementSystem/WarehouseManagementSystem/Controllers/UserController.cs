@@ -23,23 +23,23 @@ namespace warehouse_management_system.Controllers
         }
         
         [HttpPost]
-        [Route("register")]
+        [Route("Register/")]
         public async Task<IActionResult> AddUser([FromBody] AddUserRequest request) => await Handle<AddUserRequest, AddUserResponse>(request);
 
         [HttpGet]
-        [Route("current")]
+        [Route("Current/")]
         public async Task<IActionResult> GetCurrentUser([FromQuery] GetUserRequest request) => await Handle<GetUserRequest, GetUserResponse>(request);
 
         [HttpGet]
-        [Route("")]
+        [Route("Get/")]
         public async Task<IActionResult> GetUsers([FromQuery] GetUsersRequest request) => await Handle<GetUsersRequest, GetUsersResponse>(request);
 
         [HttpPut]
-        [Route("edit")]
+        [Route("Edit/")]
         public async Task<IActionResult> EditUser([FromBody] EditUserRequest request) => await Handle<EditUserRequest, EditUserResponse>(request);
 
         [HttpDelete]
-        [Route("remove")]
+        [Route("Remove/")]
         public async Task<IActionResult> RemoveUser([FromQuery] RemoveUserRequest request) => await Handle<RemoveUserRequest, RemoveUserResponse>(request);
     }
 }

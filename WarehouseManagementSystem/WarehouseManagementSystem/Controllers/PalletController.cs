@@ -22,23 +22,23 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("get")]
+        [Route("Get/")]
         public Task<IActionResult> Get([FromQuery] GetPalletsRequest request) => Handle<GetPalletsRequest, GetPalletsResponse>(request);
         
         [HttpGet]
-        [Route("get/status/{request.PalletStatus}")]
+        [Route("Get/Status/")]
         public Task<IActionResult> GetByStatus([FromQuery] GetPalletsByStatusRequest request) => Handle<GetPalletsByStatusRequest, GetPalletsByStatusResponse>(request);
 
         [HttpDelete]
-        [Route("remove/{request.PalletId}")]
+        [Route("Remove/")]
         public Task<IActionResult> Remove([FromQuery] RemovePalletRequest request) => Handle<RemovePalletRequest, RemovePalletResponse>(request);
 
         [HttpPost]
-        [Route("add")]
+        [Route("Add/")]
         public Task<IActionResult> Add([FromBody] AddPalletRequest request) => Handle<AddPalletRequest, AddPalletResponse>(request);
 
         [HttpPatch]
-        [Route("edit/{request.Id}")]
+        [Route("Edit/")]
         public Task<IActionResult> SetPalletDestination([FromBody] SetPalletDestinationRequest request) =>  Handle<SetPalletDestinationRequest, SetPalletDestinationResponse>(request);
     }
 }

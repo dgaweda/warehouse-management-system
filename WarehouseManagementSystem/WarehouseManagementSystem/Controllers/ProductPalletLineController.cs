@@ -19,11 +19,11 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("products/{request.PalletId}")]
+        [Route("Products/")]
         public Task<IActionResult> GetProductsByPalletId([FromQuery] GetProductsByPalletIdRequest request) => Handle<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse>(request);
     
         [HttpPatch]
-        [Route("set/productAmount")]
+        [Route("Set/ProductAmount/")]
         public Task<IActionResult> DecreaseProductAmount([FromQuery] DecreaseProductAmountRequest request) => Handle<DecreaseProductAmountRequest, DecreaseProductAmountResponse>(request);
     }
 }
