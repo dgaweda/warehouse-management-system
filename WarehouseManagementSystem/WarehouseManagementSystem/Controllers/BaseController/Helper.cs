@@ -1,6 +1,10 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Security.Claims;
+using DataAccess.Migrations;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 
@@ -26,8 +30,9 @@ namespace warehouse_management_system.Controllers.BaseController
             };
         }
 
-        public static bool IsPermitted(this ClaimsPrincipal user, string requestName)
+        public static bool IsPermitted<TRequest>(this ClaimsPrincipal user, TRequest request)
         {
+            var requestName = typeof(TRequest).Name;
             var privilegeName = TrimRequestName(requestName);
             return user.HasClaim(x => x.Type.Equals(Privileges) && x.Value.Equals(privilegeName));
         }

@@ -8,7 +8,7 @@
 
         public const string NotAuthenticated = "NOT_AUTHENTICATED";
 
-        public const string Unauthorized = "UNAUTHROIZED";
+        public const string Unauthorized = "UNAUTHORIZED";
 
         public const string MethodNotAllowed = "METHOD_NOT_ALLOWED";
 
