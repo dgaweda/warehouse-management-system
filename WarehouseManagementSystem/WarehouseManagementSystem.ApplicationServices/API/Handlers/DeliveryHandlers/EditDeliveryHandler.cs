@@ -1,14 +1,14 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.DeliveryCommands;
 using DataAccess.Entities;
 using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Delivery;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryService
+namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHandlers
 {
     public class EditDeliveryHandler
         : CommandHandler<EditDeliveryRequest, EditDeliveryResponse, Delivery, Domain.Models.Delivery, EditDeliveryCommand>,

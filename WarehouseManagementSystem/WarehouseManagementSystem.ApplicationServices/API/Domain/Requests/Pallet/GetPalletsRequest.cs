@@ -1,10 +1,10 @@
-﻿using MediatR;
-using System;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+﻿using System;
+using MediatR;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet
 {
-    public class GetPalletsRequest : CurrentUserContext, IRequest<GetPalletsResponse>
+    public class GetPalletsRequest : IRequest<GetPalletsResponse>
     {
         public DateTime PickingEnd { get; set; }
         public string Provider { get; set; }

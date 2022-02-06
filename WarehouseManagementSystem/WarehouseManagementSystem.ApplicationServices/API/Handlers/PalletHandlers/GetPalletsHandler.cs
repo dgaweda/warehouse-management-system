@@ -1,15 +1,15 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using DataAccess;
 using DataAccess.CQRS.Queries.PalletQueries;
 using DataAccess.Entities;
 using MediatR;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletService
+namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandlers
 {
     public class GetPalletsHandler : 
         QueryHandler<GetPalletsRequest, GetPalletsResponse, GetPalletsQuery, List<Pallet>, List<Domain.Models.Pallet>>,

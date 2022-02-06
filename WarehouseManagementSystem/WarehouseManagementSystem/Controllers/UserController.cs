@@ -2,11 +2,8 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Employee;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Employee;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using Microsoft.Extensions.Logging;
+using warehouse_management_system.Controllers.BaseController;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 
@@ -27,8 +24,8 @@ namespace warehouse_management_system.Controllers
         public async Task<IActionResult> AddUser([FromBody] AddUserRequest request) => await Handle<AddUserRequest, AddUserResponse>(request);
 
         [HttpGet]
-        [Route("Current/")]
-        public async Task<IActionResult> GetCurrentUser([FromQuery] GetUserRequest request) => await Handle<GetUserRequest, GetUserResponse>(request);
+        [Route("Details/")]
+        public async Task<IActionResult> GetUserDetails([FromQuery] GetUserRequest request) => await Handle<GetUserRequest, GetUserResponse>(request);
 
         [HttpGet]
         [Route("Get/")]

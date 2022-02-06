@@ -1,15 +1,15 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using DataAccess;
 using DataAccess.CQRS.Queries.InvoiceQueries;
 using DataAccess.Entities;
 using MediatR;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Invoice;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Invoice;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.InvoiceService
+namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.InvoiceHandlers
 {
     public class GetInvoicesHandler : 
         QueryHandler<GetInvoicesRequest, GetInvoicesResponse, GetInvoicesQuery, List<Invoice> , List<Domain.Models.Invoice>>,

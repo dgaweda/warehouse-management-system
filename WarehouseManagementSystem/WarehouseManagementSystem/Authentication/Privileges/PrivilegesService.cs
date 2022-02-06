@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using DataAccess.Entities.EntityBases;
 using WarehouseManagementSystem.ApplicationServices.API.Enums;
 using static System.Int32;
 
@@ -103,6 +104,72 @@ namespace warehouse_management_system.Authentication
         private static Claim AddClaim(Privilege claimName)
         {
             return new Claim("Privileges", Privileges.Get(claimName));
+        }
+
+        public static string GetClaimName(Privilege claimName)
+        {
+            return Privileges.Get(claimName);
+        }
+
+        public static List<string> GetWarehouseManPrivileges()
+        {
+            return new()
+            {
+                GetClaimName(Privilege.ADD_PALLET),
+                GetClaimName(Privilege.ADD_INVOICE),
+                GetClaimName(Privilege.ADD_PRODUCT),
+                GetClaimName(Privilege.GET_PALLETS),
+                GetClaimName(Privilege.ADD_DELIVERY),
+                GetClaimName(Privilege.ADD_LOCATION),
+                GetClaimName(Privilege.EDIT_INVOICE),
+                GetClaimName(Privilege.EDIT_PRODUCT),
+                GetClaimName(Privilege.GET_INVOICES),
+                GetClaimName(Privilege.GET_LOCATIONS),
+                GetClaimName(Privilege.GET_PRODUCTS),
+                GetClaimName(Privilege.ADD_DEPARTURE),
+                GetClaimName(Privilege.EDIT_DELIVERY),
+                GetClaimName(Privilege.EDIT_LOCATION),
+                GetClaimName(Privilege.GET_DEPARTURES),
+                GetClaimName(Privilege.REMOVE_PALLET),
+                GetClaimName(Privilege.EDIT_DEPARTURE),
+                GetClaimName(Privilege.GET_DELIVERIES),
+                GetClaimName(Privilege.REMOVE_PRODUCT),
+                GetClaimName(Privilege.REMOVE_DELIVERY),
+                GetClaimName(Privilege.REMOVE_LOCATION),
+                GetClaimName(Privilege.REMOVE_DEPARTURE),
+                GetClaimName(Privilege.GET_PALLETS_BY_STATUS),
+                GetClaimName(Privilege.SET_PRODUCT_LOCATION),
+                GetClaimName(Privilege.SET_PALLET_DESTINATION),
+                GetClaimName(Privilege.DECREASE_PRODUCT_AMOUNT),
+                GetClaimName(Privilege.GET_PRODUCTS_BY_PALLET_ID),
+                GetClaimName(Privilege.EDIT_LOCATION_CURRENT_AMOUNT)
+            };
+        }
+        
+        public static List<string> GetManagerPrivileges()
+        {
+            var claims = GetWarehouseManPrivileges();
+            claims.Add(GetClaimName(Privilege.REMOVE_INVOICE));
+            claims.Add(GetClaimName(Privilege.GET_ROLES));
+            claims.Add(GetClaimName(Privilege.REMOVE_INVOICE));
+            claims.Add(GetClaimName(Privilege.ADD_SENIORITY));
+            claims.Add(GetClaimName(Privilege.EDIT_SENIORITY)); 
+            claims.Add(GetClaimName(Privilege.GET_SENIORITIES));
+            claims.Add(GetClaimName(Privilege.GET_USERS));
+            claims.Add(GetClaimName(Privilege.EDIT_USER));
+            claims.Add(GetClaimName(Privilege.ADD_USER));
+            claims.Add(GetClaimName(Privilege.REMOVE_INVOICE));
+            return claims;
+        }
+        
+        public static List<string> GetGeneralAdminPrivileges()
+        {
+            var claims = GetManagerPrivileges();
+            claims.Add(GetClaimName(Privilege.ADD_ROLE));
+            claims.Add(GetClaimName(Privilege.EDIT_ROLE));
+            claims.Add(GetClaimName(Privilege.REMOVE_ROLE));
+            claims.Add(GetClaimName(Privilege.REMOVE_USER));
+            return claims;
         }
     }
 }

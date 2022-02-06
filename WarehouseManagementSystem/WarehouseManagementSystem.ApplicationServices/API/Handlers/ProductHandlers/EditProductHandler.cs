@@ -1,14 +1,14 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.DeliveryProductCommands;
 using DataAccess.Entities;
 using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.DeliveryProduct;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.DeliveryProduct;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryProductService
+namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductHandlers
 {
     public class EditProductHandler :
         CommandHandler<EditProductRequest, EditProductResponse, Product, Domain.Models.Product, EditProductCommand>,

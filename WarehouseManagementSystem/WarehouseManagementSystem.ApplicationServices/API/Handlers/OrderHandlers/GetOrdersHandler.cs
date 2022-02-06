@@ -1,13 +1,12 @@
-﻿using AutoMapper;
-using MediatR;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
+using AutoMapper;
+using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Order;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.Orders
+namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.OrderHandlers
 {
     public class GetOrdersHandler : IRequestHandler<GetOrdersRequest, GetOrdersResponse>
     {

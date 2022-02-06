@@ -1,15 +1,15 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using DataAccess;
 using DataAccess.CQRS.Queries.LocationQueries;
 using DataAccess.Entities;
 using MediatR;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.LocationService
+namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.LocationHandlers
 {
     public class GetLocationsHandler :
         QueryHandler<GetLocationsRequest, GetLocationsResponse, GetLocationsQuery, List<Location>, List<Domain.Models.Location>>,

@@ -2,6 +2,7 @@
 using FluentValidation;
 using System;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Invoice;
+using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.InvoiceValidators
 {

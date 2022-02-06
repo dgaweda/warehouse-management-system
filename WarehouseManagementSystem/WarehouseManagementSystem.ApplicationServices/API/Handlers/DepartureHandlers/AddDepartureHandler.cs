@@ -1,14 +1,14 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.DepartureCommands;
 using DataAccess.Entities;
 using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Departure;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departure;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureService
+namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHandlers
 {
     public class AddDepartureHandler :
         CommandHandler<AddDepartureRequest, AddDepartureResponse, Departure, Domain.Models.Departure, AddDepartureCommand>,

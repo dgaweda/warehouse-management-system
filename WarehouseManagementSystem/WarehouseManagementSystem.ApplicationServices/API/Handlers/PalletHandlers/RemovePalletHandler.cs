@@ -1,14 +1,14 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.PalletCommands;
 using DataAccess.Entities;
 using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletService
+namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandlers
 {
     public class RemovePalletHandler :
         CommandHandler<RemovePalletRequest, RemovePalletResponse, Pallet, Domain.Models.Pallet, RemovePalletCommand>,

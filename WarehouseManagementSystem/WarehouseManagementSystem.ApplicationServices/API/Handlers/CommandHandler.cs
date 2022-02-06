@@ -22,8 +22,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 
         public async Task<TResponse> PrepareResponse(TRequest request)
         {
-            var mappedEntityWithRequestData = _mapper.Map<TEntity>(request);
-            var command = new TCommand() { Parameter = mappedEntityWithRequestData };
+            var entityData = _mapper.Map<TEntity>(request);
+            var command = new TCommand() { Parameter = entityData };
             
             var entityModel = await _commandExecutor.Execute(command);
             var domainModel = _mapper.Map<TDomainModel>(entityModel);
@@ -32,7 +32,5 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
                 Data = domainModel
             };
         }
-
-        private static TResponse CreateResponse(TDomainModel domainModel) => new() { Data = domainModel };
     }
 }

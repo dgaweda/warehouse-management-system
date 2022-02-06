@@ -3,7 +3,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Role
 {
-    public class EditRoleRequest : CurrentUserContext, IRequest<EditRoleResponse>
+    public class EditRoleRequest : IRequest<EditRoleResponse>
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -1,17 +1,17 @@
-﻿using AutoMapper;
-using DataAccess;
-using DataAccess.CQRS.Queries.PalletsProductsQueries;
-using DataAccess.Entities;
-using MediatR;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
+using DataAccess;
+using DataAccess.CQRS.Queries.PalletsProductsQueries;
+using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.ProductsPallets;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletsProductsHandlers
+namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductPalletLine
 {
     public class GetProductByPalletIdHandler :
-        QueryHandler<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse, GetProductsByPalletIdQuery, List<ProductPalletLine>, List<Domain.Models.ProductPalletLine>>,
+        QueryHandler<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse, GetProductsByPalletIdQuery, List<DataAccess.Entities.ProductPalletLine>, List<Domain.Models.ProductPalletLine>>,
         IRequestHandler<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse>
     {
         public GetProductByPalletIdHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)

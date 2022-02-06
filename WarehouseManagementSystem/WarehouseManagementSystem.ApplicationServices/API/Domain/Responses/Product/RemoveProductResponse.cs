@@ -1,4 +1,4 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.DeliveryProduct
+﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 {
     public class RemoveProductResponse : ResponseBase<Domain.Models.Product>
     {

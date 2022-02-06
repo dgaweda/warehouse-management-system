@@ -5,8 +5,9 @@ using DataAccess.Entities;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.LocationHandlers
 {

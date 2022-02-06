@@ -1,6 +1,7 @@
 ﻿using DataAccess.Entities;
 using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
+using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationValidators
 {

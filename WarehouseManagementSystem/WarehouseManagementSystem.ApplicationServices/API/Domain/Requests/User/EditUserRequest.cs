@@ -1,10 +1,10 @@
 ﻿using MediatR;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Employee;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Employee
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User
 {
-    public class EditUserRequest : CurrentUserContext, IRequest<EditUserResponse>
+    public class EditUserRequest : IRequest<EditUserResponse>
     {
         public int Id { get; set; }
         public string Password { get; set; }

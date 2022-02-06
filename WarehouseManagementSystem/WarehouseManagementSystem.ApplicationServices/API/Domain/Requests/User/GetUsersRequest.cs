@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User
 {
-    public class GetUsersRequest : CurrentUserContext, IRequest<GetUsersResponse>
+    public class GetUsersRequest : IRequest<GetUsersResponse>
     {
         public int UserId { get; set; }
         public string RoleName { get; set; }

@@ -3,7 +3,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departu
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Departure
 {
-    public class RemoveDepartureRequest :  CurrentUserContext, IRequest<RemoveDepartureResponse>
+    public class RemoveDepartureRequest : IRequest<RemoveDepartureResponse>
     {
         public int DepartureId { get; set; }
     }

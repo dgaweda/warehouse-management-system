@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using System.Text.RegularExpressions;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
+using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 using Product = DataAccess.Entities.Product;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationValidators

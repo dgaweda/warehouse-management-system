@@ -1,14 +1,15 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using DataAccess;
 using DataAccess.CQRS.Queries.RoleQueries;
 using DataAccess.Entities;
 using MediatR;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using WarehouseManagementSystem.ApplicationServices.API.Domain;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Role;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
+namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.RoleHandlers
 {
     public class GetRolesHandler : 
         QueryHandler<GetRolesRequest, GetRolesResponse, GetRolesQuery, List<Role>, List<Domain.Models.Role>>,

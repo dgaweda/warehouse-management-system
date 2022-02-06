@@ -1,6 +1,7 @@
 ﻿using DataAccess.Entities;
 using FluentValidation;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.DeliveryProduct;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
+using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductValidators
 {

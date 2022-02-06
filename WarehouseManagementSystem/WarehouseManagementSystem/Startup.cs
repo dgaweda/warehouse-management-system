@@ -1,5 +1,7 @@
+using System;
 using DataAccess;
 using DataAccess.CQRS;
+using DataAccess.Entities;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
@@ -12,8 +14,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using warehouse_management_system.Authentication;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
+using WarehouseManagementSystem.ApplicationServices.API.Enums;
 using WarehouseManagementSystem.ApplicationServices.API.Validators;
-using WarehouseManagementSystem.ApplicationServices.API.Validators.Seniority;
+using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
+using WarehouseManagementSystem.ApplicationServices.API.Validators.SeniorityValidators;
 using WarehouseManagementSystem.ApplicationServices.Mappings;
 
 namespace warehouse_management_system
@@ -68,7 +72,15 @@ namespace warehouse_management_system
                      };
                      options.SerializerSettings.Converters.Add(dateConverter);
                  });
-            
+            // services.AddAuthorization(options =>
+            // {
+            //     options.AddPolicy(Enum.GetName(RoleKey.WAREHOUSEMAN),
+            //         policy => policy.RequireClaim("Privileges", PrivilegesService.GetWarehouseManPrivileges()));
+            //     options.AddPolicy(Enum.GetName(RoleKey.GENERAL_ADMIN),
+            //         policy => policy.RequireClaim("Privileges", PrivilegesService.GetGeneralAdminPrivileges()));
+            //     options.AddPolicy(Enum.GetName(RoleKey.GENERAL_ADMIN),
+            //         policy => policy.RequireClaim("Privileges", PrivilegesService.GetManagerPrivileges()));
+            // });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "warehouse_management_system", Version = "v1" });

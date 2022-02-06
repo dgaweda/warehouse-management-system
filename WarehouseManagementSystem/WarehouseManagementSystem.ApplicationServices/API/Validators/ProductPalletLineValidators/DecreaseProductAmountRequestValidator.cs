@@ -1,7 +1,8 @@
 ﻿using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets;
+using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductPalletLine
+namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductPalletLineValidators
 {
     public class DecreaseProductAmountRequestValidator : AbstractValidator<DecreaseProductAmountRequest>
     {

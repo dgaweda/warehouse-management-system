@@ -4,7 +4,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Seniori
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seniority
 {
-    public class AddSeniorityRequest : CurrentUserContext, IRequest<AddSeniorityResponse>
+    public class AddSeniorityRequest : IRequest<AddSeniorityResponse>
     {
         public DateTime EmploymentDate { get; set; }
         public int UserId { get; set; }

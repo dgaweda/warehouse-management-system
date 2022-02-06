@@ -32,6 +32,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
                 Data = domainModel
             };
         }
+        
         public abstract TQuery CreateQuery(TRequest request);
     }
 }

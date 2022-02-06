@@ -3,7 +3,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Locatio
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location
 {
-    public class RemoveLocationRequest : CurrentUserContext, IRequest<RemoveLocationResponse>
+    public class RemoveLocationRequest : IRequest<RemoveLocationResponse>
     {
         public int Id { get; set; }
     }

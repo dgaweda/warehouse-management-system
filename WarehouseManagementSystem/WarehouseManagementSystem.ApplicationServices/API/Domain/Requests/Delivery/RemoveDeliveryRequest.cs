@@ -3,7 +3,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery
 {
-    public class RemoveDeliveryRequest : CurrentUserContext, IRequest<RemoveDeliveryResponse>
+    public class RemoveDeliveryRequest : IRequest<RemoveDeliveryResponse>
     {
         public int DeliveryId { get; set; }
     }

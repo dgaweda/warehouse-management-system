@@ -3,7 +3,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet
 {
-    public class SetPalletDestinationRequest : CurrentUserContext, IRequest<SetPalletDestinationResponse>
+    public class SetPalletDestinationRequest : IRequest<SetPalletDestinationResponse>
     {
         public int Id { get; set; }
         public int? OrderId { get; set; }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DataAccess.Entities;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Employee;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings
 {

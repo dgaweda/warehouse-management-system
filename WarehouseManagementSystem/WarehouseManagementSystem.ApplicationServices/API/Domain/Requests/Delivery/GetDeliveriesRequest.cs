@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Delivery;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery
 {
-    public class GetDeliveriesRequest : CurrentUserContext, IRequest<GetDeliveriesResponse>
+    public class GetDeliveriesRequest : IRequest<GetDeliveriesResponse>
     {
         public string Name { get; set; }
     }

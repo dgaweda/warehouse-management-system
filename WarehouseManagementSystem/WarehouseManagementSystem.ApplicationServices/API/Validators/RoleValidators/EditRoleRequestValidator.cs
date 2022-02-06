@@ -1,7 +1,8 @@
 ﻿using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Role;
+using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Role
+namespace WarehouseManagementSystem.ApplicationServices.API.Validators.RoleValidators
 {
     public class EditRoleRequestValidator : AbstractValidator<EditRoleRequest>
     {

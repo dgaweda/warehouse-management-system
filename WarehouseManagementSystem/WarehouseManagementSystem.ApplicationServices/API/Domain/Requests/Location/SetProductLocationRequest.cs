@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location
 {
-    public class SetProductLocationRequest : CurrentUserContext, IRequest<SetProductLocationResponse>
+    public class SetProductLocationRequest : IRequest<SetProductLocationResponse>
     {
         public int LocationId { get; set; }
         public int ProductId { get; set; }

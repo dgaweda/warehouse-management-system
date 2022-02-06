@@ -1,8 +1,9 @@
-﻿using FluentValidation;
-using System;
+﻿using System;
+using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seniority;
+using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Seniority
+namespace WarehouseManagementSystem.ApplicationServices.API.Validators.SeniorityValidators
 {
     public class AddSeniorityRequestValidator : AbstractValidator<AddSeniorityRequest>
     {

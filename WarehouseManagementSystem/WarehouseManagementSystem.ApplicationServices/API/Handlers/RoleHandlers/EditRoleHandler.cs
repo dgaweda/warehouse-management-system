@@ -1,14 +1,14 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.RoleCommands;
 using DataAccess.Entities;
 using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Role;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.RoleService
+namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.RoleHandlers
 {
     public class EditRoleHandler :
         CommandHandler<EditRoleRequest, EditRoleResponse, Role, Domain.Models.Role, EditRoleCommand>,

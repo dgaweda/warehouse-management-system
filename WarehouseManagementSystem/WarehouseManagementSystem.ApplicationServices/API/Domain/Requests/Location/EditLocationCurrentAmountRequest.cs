@@ -3,7 +3,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Locatio
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location
 {
-    public class EditLocationCurrentAmountRequest : CurrentUserContext, IRequest<EditLocationCurrentAmountResponse>
+    public class EditLocationCurrentAmountRequest : IRequest<EditLocationCurrentAmountResponse>
     {
         public int Id { get; set; }
         public int CurrentAmount { get; set; }

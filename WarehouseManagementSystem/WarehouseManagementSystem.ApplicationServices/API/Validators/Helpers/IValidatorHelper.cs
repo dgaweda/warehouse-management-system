@@ -1,6 +1,6 @@
 ﻿using DataAccess.Entities.EntityBases;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Validators
+namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
 {
     public interface IValidatorHelper
     {

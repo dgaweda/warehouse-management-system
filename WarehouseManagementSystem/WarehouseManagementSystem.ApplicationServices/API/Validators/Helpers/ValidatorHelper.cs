@@ -1,10 +1,10 @@
 ﻿using System;
-using DataAccess;
-using DataAccess.Entities.EntityBases;
 using System.Linq;
 using System.Net.Mail;
+using DataAccess;
+using DataAccess.Entities.EntityBases;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Validators
+namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
 {
     public class ValidatorHelper : IValidatorHelper
     {

@@ -1,17 +1,16 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.ProductsPalletsCommands;
-using DataAccess.Entities;
 using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.ProductsPallets;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletsProductsHandlers
+namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductPalletLine
 {
     public class DecreaseProductAmountHandler :
-        CommandHandler<DecreaseProductAmountRequest, DecreaseProductAmountResponse, ProductPalletLine, Domain.Models.ProductPalletLine, DecreaseProductAmountCommand>,
+        CommandHandler<DecreaseProductAmountRequest, DecreaseProductAmountResponse, DataAccess.Entities.ProductPalletLine, Domain.Models.ProductPalletLine, DecreaseProductAmountCommand>,
         IRequestHandler<DecreaseProductAmountRequest, DecreaseProductAmountResponse>
     {
         public DecreaseProductAmountHandler(IMapper mapper, ICommandExecutor commandExecutor) : base(mapper, commandExecutor)

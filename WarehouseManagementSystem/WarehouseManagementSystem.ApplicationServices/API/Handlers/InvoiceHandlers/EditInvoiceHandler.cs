@@ -1,14 +1,14 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.InvoiceCommands;
 using DataAccess.Entities;
 using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Invoice;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Invoice;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.InvoiceService
+namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.InvoiceHandlers
 {
     public class EditInvoiceHandler
         : CommandHandler<EditInvoiceRequest, EditInvoiceResponse, Invoice, Domain.Models.Invoice, EditInvoiceCommand>,

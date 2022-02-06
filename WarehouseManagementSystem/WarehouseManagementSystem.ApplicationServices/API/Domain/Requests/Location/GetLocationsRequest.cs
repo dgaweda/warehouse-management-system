@@ -1,12 +1,11 @@
 ﻿using MediatR;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location
 {
-    public class GetLocationsRequest : CurrentUserContext, IRequest<GetLocationsResponse>
+    public class GetLocationsRequest : IRequest<GetLocationsResponse>
     {
         public string Name { get; set; }
         public DataAccess.Entities.Type LocationType { get; set; }
-
     }
 }

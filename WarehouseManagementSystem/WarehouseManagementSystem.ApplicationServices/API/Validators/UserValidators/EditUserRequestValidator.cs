@@ -1,8 +1,9 @@
 ﻿using DataAccess.Entities;
 using FluentValidation;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Employee;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
+using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Validators.EmployeeValidators
+namespace WarehouseManagementSystem.ApplicationServices.API.Validators.UserValidators
 {
     public class EditUserRequestValidator : AbstractValidator<EditUserRequest>
     {

@@ -1,4 +1,4 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
+﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location
 {
     public class SetProductLocationResponse : ResponseBase<Domain.Models.Location>
     {
