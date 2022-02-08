@@ -7,10 +7,10 @@ import { userModel } from "src/models/user.model";
     providedIn: 'root'
 })
 export class apiUrlService {
-    private http: HttpClient;
+    private httpClient: HttpClient;
 
-    constructor(private httpClient: HttpClient) {
-        this.http = httpClient;
+    constructor(private http: HttpClient) {
+        this.httpClient = http;
     }
 
     registerUser(user: userModel): any {
