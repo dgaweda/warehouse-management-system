@@ -78,7 +78,8 @@
               "browserTarget": "WmsAngularApp:build:production"
             },
             "development": {
-              "browserTarget": "WmsAngularApp:build:development"
+              "browserTarget": "WmsAngularApp:build:development",
+              "proxyConfig": "src/config/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
