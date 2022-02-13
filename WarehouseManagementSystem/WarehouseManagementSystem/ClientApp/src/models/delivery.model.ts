@@ -1,4 +1,5 @@
-export interface deliveryModel {
-    arrival: string;
-    name: string;
+export interface DeliveryModel {
+    id?: number;
+    arrival?: string;
+    name?: string;
 }

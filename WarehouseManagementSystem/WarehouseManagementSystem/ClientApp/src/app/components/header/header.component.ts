@@ -10,7 +10,6 @@ export class HeaderComponent implements OnInit {
 
   constructor() {
     this.logoPath = 'assets/wms-logo.png';
-    console.log(process.env);
   }
 
   ngOnInit() {

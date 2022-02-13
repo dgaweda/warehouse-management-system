@@ -1,7 +1,8 @@
-export interface invoiceModel {
-    invoiceNumber: string;
-    provider: string;
-    invoiceDate: string;
-    invoiceReceiptDate: string;
-    deliveryName: string;
+export interface InvoiceModel {
+    id: number;
+    invoiceNumber?: string;
+    provider?: string;
+    creationDateTime?: string;
+    receiptDateTime?: string;
+    deliveryId?: string;
 }

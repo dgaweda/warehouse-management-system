@@ -1,4 +1,5 @@
 export interface palletModel {
+    id: number;
     palletStatus: string;
     barcode: string;
     orderBarcode: string;

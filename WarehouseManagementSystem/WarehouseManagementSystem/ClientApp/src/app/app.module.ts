@@ -12,6 +12,8 @@ import { LoginPanelComponent } from './components/main/login/login-panel.compone
 import { OrderListComponent } from './components/main/order-list/order-list.component';
 import { UserDetailsComponent } from './components/main/user-details/user-details.component';
 import { UserOptionsComponent } from './components/header/user-options/user-options.component';
+import { DeliveryComponent } from './components/main/delivery-component/delivery-component.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [		
@@ -22,14 +24,16 @@ import { UserOptionsComponent } from './components/header/user-options/user-opti
     LoginPanelComponent,
     OrderListComponent,
     UserDetailsComponent,
-    UserOptionsComponent
+    UserOptionsComponent,
+    DeliveryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
