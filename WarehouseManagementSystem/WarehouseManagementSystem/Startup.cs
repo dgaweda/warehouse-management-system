@@ -34,15 +34,10 @@ namespace warehouse_management_system
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.AddSpaStaticFiles(cfg =>
-            // {
-            //     cfg.RootPath = "ClientApp/dist";
-            // });
-            //
-            // services.AddAuthentication("BasicAuthentication") 
-            //     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+            services.AddAuthentication("BasicAuthentication")
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
             services.AddCors();
-            
             services.AddMvcCore()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddSeniorityRequestValidator>());
 
@@ -52,27 +47,28 @@ namespace warehouse_management_system
 
             services.AddTransient<IPrivilegesService, PrivilegesService>();
 
-            services.AddAutoMapper(typeof(UsersProfile).Assembly); // This Line Enables AutoMapper to map all profiles without adding everyone of them.
-                                                                       // It gets Assembly from one profile to get all the mappings.
+            services.AddAutoMapper(typeof(UsersProfile)
+                .Assembly); // This Line Enables AutoMapper to map all profiles without adding everyone of them.
+            // It gets Assembly from one profile to get all the mappings.
             services.AddMediatR(typeof(ResponseBase<>));
 
             services.AddHttpContextAccessor();
 
             services.AddDbContext<WMSDatabaseContext>(
                 option =>
-                option.UseSqlServer(this.Configuration.GetConnectionString("WMSDatabaseContext")));
+                    option.UseSqlServer(this.Configuration.GetConnectionString("WMSDatabaseContext")));
 
             services.AddScoped(typeof(IValidatorHelper), typeof(ValidatorHelper));
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
-                 {
-                     var dateConverter = new Newtonsoft.Json.Converters.IsoDateTimeConverter
-                     {
-                         DateTimeFormat = "dd'.'MM'.'yyyy HH:mm:ss"
-                     };
-                     options.SerializerSettings.Converters.Add(dateConverter);
-                 });
+                {
+                    var dateConverter = new Newtonsoft.Json.Converters.IsoDateTimeConverter
+                    {
+                        DateTimeFormat = "dd'.'MM'.'yyyy HH:mm:ss"
+                    };
+                    options.SerializerSettings.Converters.Add(dateConverter);
+                });
             // services.AddAuthorization(options =>
             // {
             //     options.AddPolicy(Enum.GetName(RoleKey.WAREHOUSEMAN),
@@ -98,13 +94,13 @@ namespace warehouse_management_system
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "warehouse_management_system v1"));
             }
 
-            
             app.UseCors(
                 options => options.AllowAnyOrigin()
             );
-
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

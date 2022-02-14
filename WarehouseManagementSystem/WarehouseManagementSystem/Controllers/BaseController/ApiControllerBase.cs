@@ -26,18 +26,18 @@ namespace warehouse_management_system.Controllers.BaseController
             where TResponse : ErrorResponseBase
         {
             _logger.LogInformation("Handling Request: \n" + typeof(TRequest).Name);
-            // if (!ModelState.IsValid)
-            // {
-            //     return BadRequest(
-            //         ModelState.Where(x => x.Value.Errors.Any())
-            //             .Select(x => new { property = x.Key, errors = x.Value.Errors }));
-            // }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(
+                    ModelState.Where(x => x.Value.Errors.Any())
+                        .Select(x => new { property = x.Key, errors = x.Value.Errors }));
+            }
             
-            // if (User.IsPermitted(request))
-            // {
+            if (User.IsPermitted(request))
+            {
                 var response = await _mediator.Send(request);
                 return response.Error is null ? Ok(response) : ErrorResponse(response.Error);
-            //}
+            }
 
             return ErrorResponse(new ErrorModel(ErrorType.Unauthorized));
         }
