@@ -39,9 +39,10 @@ namespace warehouse_management_system
             //     cfg.RootPath = "ClientApp/dist";
             // });
             //
-            services.AddAuthentication("BasicAuthentication")
-                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
-
+            // services.AddAuthentication("BasicAuthentication") 
+            //     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+            services.AddCors();
+            
             services.AddMvcCore()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddSeniorityRequestValidator>());
 
@@ -90,31 +91,20 @@ namespace warehouse_management_system
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //app.UseStaticFiles();
-            // if (!env.IsDevelopment())
-            // {
-            //     app.UseSpaStaticFiles();
-            // }
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "warehouse_management_system v1"));
+            }
 
-            // app.UseSpa(spa =>
-            // {
-            //     spa.Options.SourcePath = "ClientApp";
-                if (env.IsDevelopment())
-                {
-                    //spa.UseAngularCliServer(npmScript: "start");
-                    app.UseDeveloperExceptionPage();
-                    app.UseSwagger();
-                    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "warehouse_management_system v1"));
-                }
-            // });
+            
+            app.UseCors(
+                options => options.AllowAnyOrigin()
+            );
 
-
-
-
-        app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

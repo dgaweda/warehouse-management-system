@@ -9,7 +9,6 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 
 namespace warehouse_management_system.Controllers
 {
-    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class DeliveryController : ApiControllerBase<DeliveryController>

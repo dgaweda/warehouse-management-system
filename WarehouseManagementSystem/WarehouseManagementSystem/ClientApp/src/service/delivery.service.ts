@@ -1,4 +1,4 @@
-import { HttpClient} from "@angular/common/http";
+import { HttpClient, HttpHeaderResponse, HttpHeaders} from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Injectable } from "@angular/core";
 import { DeliveryApiUrl } from "src/api/apiUrl";
@@ -14,16 +14,16 @@ export class DeliveryService {
 
     constructor(private httpClient: HttpClient){
         this.http = httpClient;
+        this.getDeliveries('');
     }
 
     getDeliveries(name: string): Observable<DeliveryModel> {
         let filter = '';
         if(name !== '') {
             filter = '?Name=' + name;
-        }
-        
-        console.log(`URL: ${this.apiUrl + DeliveryApiUrl.getDelivery + filter}`);
-        return this.http.get<DeliveryModel>(this.apiUrl + DeliveryApiUrl.getDelivery);
+        }    
+
+        return this.http.get<DeliveryModel>('https://localhost:44388/Delivery/Get');
     }
 
     addDelivery(delivery: DeliveryModel): any {
