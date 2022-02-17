@@ -1,0 +1,18 @@
+<div class="row input-group-text">
+  <button type="button" class="btn btn-primary" (click)="getDeliveries()"></button>
+  <table class="table" *ngIf="deliveries.length > 0">
+    <thead>
+      <tr>
+        <th>Czas przybycia dostawy</th>
+        <th>Nazwa dostawy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let delivery of deliveries" >
+        <td>{{ delivery.name }}</td>
+        <td>{{ delivery.arrival }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

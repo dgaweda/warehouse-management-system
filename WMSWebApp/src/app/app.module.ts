@@ -8,23 +8,21 @@ import { AppComponent } from './components/app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MainComponent } from './components/main/main.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { LoginPanelComponent } from './components/main/login/login-panel.component';
-import { OrderListComponent } from './components/main/order-list/order-list.component';
-import { UserDetailsComponent } from './components/main/user-details/user-details.component';
-import { UserOptionsComponent } from './components/header/user-options/user-options.component';
-import { DeliveryComponent } from './components/main/delivery-component/delivery-component.component';
+import { LoginComponent } from './components/main/login/login.component';
+import { DeliveryComponent } from './components/main/delivery/delivery.component';
 import { HttpClientModule } from '@angular/common/http';
+import { UserDetailsComponent } from "./components/main/user/details/user.details.component";
+import { NavbuttonComponent } from "./components/header/navbutton/navbutton.component";
 
 @NgModule({
-  declarations: [		
+  declarations: [
     AppComponent,
     HeaderComponent,
     MainComponent,
     FooterComponent,
-    LoginPanelComponent,
-    OrderListComponent,
+    LoginComponent,
     UserDetailsComponent,
-    UserOptionsComponent,
+    NavbuttonComponent,
     DeliveryComponent
   ],
   imports: [

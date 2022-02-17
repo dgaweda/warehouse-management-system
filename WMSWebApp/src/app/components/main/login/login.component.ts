@@ -4,10 +4,10 @@ import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-panel',
-  templateUrl: './login-panel.component.html',
-  styleUrls: ['./login-panel.component.scss']
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class LoginPanelComponent implements OnInit {
+export class LoginComponent implements OnInit {
   loginForm : FormGroup;
 
   constructor() {
