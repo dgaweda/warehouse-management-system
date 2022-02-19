@@ -1,10 +1,11 @@
 <div class="row input-group-text">
-  <button type="button" class="btn btn-primary" (click)="getDeliveries()"></button>
+  <button type="button" class="btn btn-primary col-md-3" (click)="getDeliveries(name.value)">Get deliveries</button>
+  <input type="text" class="col-md-3 m-3" #name>
   <table class="table" *ngIf="deliveries.length > 0">
     <thead>
       <tr>
-        <th>Czas przybycia dostawy</th>
         <th>Nazwa dostawy</th>
+        <th>Czas przybycia dostawy</th>
       </tr>
     </thead>
     <tbody>

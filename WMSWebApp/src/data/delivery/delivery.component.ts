@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DeliveryModel } from 'src/app/models/delivery.model';
-import { DeliveryService} from 'src/app/service/delivery.service';
+import { DeliveryModel } from 'src/models/delivery.model';
+import { DeliveryService} from 'src/service/delivery.service';
 
 @Component({
   selector: 'app-delivery',
@@ -21,11 +21,8 @@ export class DeliveryComponent implements OnInit {
   }
 
   getDeliveries(name?: string): void {
-    this.deliveryService.getDeliveries(name).subscribe(
-      (data: DeliveryModel[]) =>
-          
-    );
-    console.log(`${this.deliveries} Length ${this.deliveries.length}`, this.deliveries);
+    this.deliveryService.getDeliveries(name).subscribe((deliveries: any) => {
+      this.deliveries = deliveries['data'];
+    });
   }
-
 }

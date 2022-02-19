@@ -1,5 +1,5 @@
 export enum DeliveryApiUrl {
-    getDelivery = '/Delivery/Get',
+    getDeliveries = '/Delivery/Get',
     addDelivery = '/Delivery/Add',
     removeDelivery = '/Delivery/Remove',
     editDelivery = '/Delivery/Edit'
@@ -19,7 +19,7 @@ export enum InvoiceApiUrl {
     editInvoice = '/Invoice/Edit'
 }
 
-export enum LocationApiUrl {
+export enum Location {
     getLocation = '/Location/Get',
     addLocation = '/Location/Add',
     editLocation = '/Location/Edit',
