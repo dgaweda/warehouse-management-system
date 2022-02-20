@@ -4,7 +4,7 @@ $primary: #337DEF;
 $secondary: #F49F1C;
 $danger: #f1535373;
 $warning: #fffb00a2;
-$main: #6d9add73;
+$main: #6D9ADD73;
 $info: grey;
 
 $theme-colors: (
@@ -12,10 +12,11 @@ $theme-colors: (
     "secondary": $secondary,
     "danger": $danger,
     "warning": $warning,
-    "info": $info
+    "info": $info,
+    "main": $main
 );
 
-@import "bootstrap";
+@import "~bootstrap/scss/bootstrap";
 
 body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

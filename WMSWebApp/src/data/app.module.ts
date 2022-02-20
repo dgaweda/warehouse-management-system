@@ -12,7 +12,7 @@ import { DeliveryComponent } from './delivery/delivery.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserDetailsComponent } from "./user/details/user.details.component";
 import { NavbuttonComponent } from "../layout/header/navbutton/navbutton.component";
-import {MainComponent} from "../layout/main/main.component";
+import { MainComponent } from "../layout/main/main.component";
 
 @NgModule({
   declarations: [
