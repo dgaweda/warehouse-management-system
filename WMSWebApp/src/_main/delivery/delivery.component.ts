@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DeliveryModel } from 'src/models/delivery.model';
-import { DeliveryService} from 'src/service/delivery.service';
+import { DeliveryModel } from 'src/_main/_models/delivery.model';
+import { DeliveryService} from 'src/_main/_service/delivery.service';
 
 @Component({
   selector: 'app-delivery',

@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { userModel } from "src/models/user.model";
+import { User } from "src/_main/_models/user.model";
 
 @Injectable({
     providedIn: 'root'
@@ -13,9 +13,9 @@ export class apiUrlService {
         this.httpClient = http;
     }
 
-    registerUser(user: userModel): any {
-        const body = environment.apiUrl + 'User/Register';
-        console.log(body);
-        return this.http.post(body, user);
+    registerUser(user: User): any {
+        const url = environment.apiUrl + 'User/Register';
+        console.log(url);
+        return this.http.post(url, user);
     }
 }
