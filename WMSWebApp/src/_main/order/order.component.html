@@ -1,0 +1,17 @@
+<table class="table" *ngIf="orders.length > 0">
+  <thead>
+  <tr>
+    <th *ngFor="let header of headers">
+      {{ header }}
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let order of orders; let i = index" [attr.data-index]="i">
+    <td>{{ i }}</td>
+    <td>{{ order.barcode }}</td>
+    <td>{{ order.orderState }}</td>
+    <td>{{ order.linesCount }}</td>
+  </tr>
+  </tbody>
+</table>

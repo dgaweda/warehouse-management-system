@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace DataAccess.Entities
 {
@@ -10,7 +11,7 @@ namespace DataAccess.Entities
     {
         public int Id { get; set; }
         [Column("Stan zamówienia")]
-        public State OrderState { get; set; }
+        public OrderState OrderState { get; set; }
 
         [Required]
         [MaxLength(10)]
@@ -25,13 +26,5 @@ namespace DataAccess.Entities
 
         public List<OrderLine> OrderLines { get; set; }
         public List<Pallet> Pallets { get; set; }
-    }
-
-    public enum State
-    {
-        RECEIVED,
-        IN_PROGRESS,
-        READY_FOR_DEPARTURE,
-        SENT
     }
 }

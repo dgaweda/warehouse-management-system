@@ -71,7 +71,8 @@ namespace warehouse_management_system.Authentication
                 AddClaim(Privilege.SET_PALLET_DESTINATION),
                 AddClaim(Privilege.DECREASE_PRODUCT_AMOUNT),
                 AddClaim(Privilege.GET_PRODUCTS_BY_PALLET_ID),
-                AddClaim(Privilege.EDIT_LOCATION_CURRENT_AMOUNT)
+                AddClaim(Privilege.EDIT_LOCATION_CURRENT_AMOUNT),
+                AddClaim(Privilege.GET_ORDERS)
             };
         }
 
@@ -142,7 +143,8 @@ namespace warehouse_management_system.Authentication
                 GetClaimName(Privilege.SET_PALLET_DESTINATION),
                 GetClaimName(Privilege.DECREASE_PRODUCT_AMOUNT),
                 GetClaimName(Privilege.GET_PRODUCTS_BY_PALLET_ID),
-                GetClaimName(Privilege.EDIT_LOCATION_CURRENT_AMOUNT)
+                GetClaimName(Privilege.EDIT_LOCATION_CURRENT_AMOUNT),
+                GetClaimName(Privilege.GET_ORDERS)
             };
         }
         

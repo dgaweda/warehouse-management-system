@@ -1,25 +1,39 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using DataAccess;
+using DataAccess.CQRS.Queries.OrderQueries;
+using DataAccess.Entities;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Order;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.OrderHandlers
 {
-    public class GetOrdersHandler : IRequestHandler<GetOrdersRequest, GetOrdersResponse>
+    public class GetOrdersHandler :
+        QueryHandler<GetOrdersRequest, GetOrdersResponse, GetOrdersQuery, List<Order>, List<Domain.Models.Order>>,
+        IRequestHandler<GetOrdersRequest, GetOrdersResponse>
     {
-        private readonly IMapper mapper;
-
-        public GetOrdersHandler(IMapper mapper)
+        public GetOrdersHandler(IMapper mapper, IQueryExecutor queryExecutor)
+            :base(mapper, queryExecutor)
         {
-            this.mapper = mapper;
         }
 
         public async Task<GetOrdersResponse> Handle(GetOrdersRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var query = CreateQuery(request);
+            var response = await PrepareResponse(query);
+            return response;
+        }
+
+        public override GetOrdersQuery CreateQuery(GetOrdersRequest request)
+        {
+            return new GetOrdersQuery()
+            {
+                Id = request.Id
+            };
         }
     }
 }

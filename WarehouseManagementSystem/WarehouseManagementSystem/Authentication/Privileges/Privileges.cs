@@ -53,7 +53,8 @@ namespace warehouse_management_system.Authentication
                 { Privilege.ADD_USER, "AddUser" },
                 { Privilege.EDIT_USER, "EditUser" },
                 { Privilege.GET_USERS, "GetUsers" },
-                { Privilege.REMOVE_USER, "RemoveUser" }
+                { Privilege.REMOVE_USER, "RemoveUser" },
+                { Privilege.GET_ORDERS, "GetOrders" },
             };
         }
     }
@@ -109,5 +110,7 @@ namespace warehouse_management_system.Authentication
         EDIT_USER,
         GET_USERS,
         REMOVE_USER,
+        
+        GET_ORDERS
     }
 }

@@ -1,11 +1,12 @@
 ﻿using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location;
+using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location
 {
     public class GetLocationsRequest : IRequest<GetLocationsResponse>
     {
         public string Name { get; set; }
-        public DataAccess.Entities.Type LocationType { get; set; }
+        public LocationType LocationType { get; set; }
     }
 }

@@ -19,11 +19,15 @@ export enum InvoiceApiUrl {
     editInvoice = '/Invoice/Edit'
 }
 
-export enum Location {
+export enum LocationApiUrl {
     getLocation = '/Location/Get',
     addLocation = '/Location/Add',
     editLocation = '/Location/Edit',
     changeLocationCurrentAmount = '/Location/Edit/CurrentAmount',
     setLocation = '/Location/Set',
     removeLocation = '/Location/Remove'
+}
+
+export enum OrderApiUrl {
+  getOrders = '/Order/Get'
 }

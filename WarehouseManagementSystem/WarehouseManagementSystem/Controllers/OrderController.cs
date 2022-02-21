@@ -22,7 +22,11 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("All/")]
-        public Task<IActionResult> GetAllOrders([FromQuery] GetOrdersRequest request) => Handle<GetOrdersRequest, GetOrdersResponse>(request);
+        [Route("Get/")]
+        public Task<IActionResult> GetOrders([FromQuery] GetOrdersRequest request) => Handle<GetOrdersRequest, GetOrdersResponse>(request);
+        
+        // [HttpPost]
+        // [Route("Add/")]
+        // public Task<IActionResult> AddOrder([FromBody] AddOrderRequest request) => Handle<AddOrderRequest, AddOrderRequest>(request);
     }
 }

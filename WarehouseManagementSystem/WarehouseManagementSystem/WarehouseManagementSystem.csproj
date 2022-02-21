@@ -30,10 +30,6 @@
       <ProjectReference Include="..\WarehouseManagementSystem.DataAccess\WarehouseManagementSystem.DataAccess.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="ClientApp" />
-    </ItemGroup>
-
     <PropertyGroup>
         <SpaRoot>ClientApp\</SpaRoot>
         <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>

@@ -10,7 +10,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
         public LocationsProfile()
         {
             CreateMap<Location, API.Domain.Models.Location>()
-                .ForMember(x => x.Type, y => y.MapFrom(z => z.Type))
+                .ForMember(x => x.Type, y => y.MapFrom(z => z.LocationType))
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
                 .ForMember(x => x.CurrentAmount, y => y.MapFrom(z => z.CurrentAmount))
                 .ForMember(x => x.MaxAmount, y => y.MapFrom(z => z.MaxAmount))
@@ -18,7 +18,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
 
             CreateMap<AddLocationRequest, Location>()
                 .ForMember(x => x.ProductId, y => y.MapFrom(z => z.ProductId))
-                .ForMember(x => x.Type, y => y.MapFrom(z => z.LocationType))
+                .ForMember(x => x.LocationType, y => y.MapFrom(z => z.LocationType))
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
                 .ForMember(x => x.MaxAmount, y => y.MapFrom(z => z.MaxAmount));
 

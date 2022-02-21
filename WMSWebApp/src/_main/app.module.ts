@@ -14,6 +14,7 @@ import { UserDetailsComponent } from "./user/details/user.details.component";
 import { NavbuttonComponent } from "./layout/header/navbutton/navbutton.component";
 import { MainComponent } from "./layout/main/main.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     LoginComponent,
     UserDetailsComponent,
     NavbuttonComponent,
-    DeliveryComponent
+    DeliveryComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

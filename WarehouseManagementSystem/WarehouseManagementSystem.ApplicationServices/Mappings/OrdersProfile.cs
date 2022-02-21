@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using DataAccess.Entities;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings
@@ -8,10 +9,11 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
         public OrdersProfile()
         {
             CreateMap<Order, API.Domain.Models.Order>()
-                .ForMember(x => x.State, y => y.MapFrom(z => z.OrderState))
+                .ForMember(x => x.OrderState, y => y.MapFrom(z => z.OrderState))
                 .ForMember(x => x.Barcode, y => y.MapFrom(z => z.Barcode))
                 .ForMember(x => x.PickingStart, y => y.MapFrom(z => z.PickingStart))
-                .ForMember(x => x.PickingEnd, y => y.MapFrom(z => z.PickingEnd));
+                .ForMember(x => x.PickingEnd, y => y.MapFrom(z => z.PickingEnd))
+                .ForMember(x => x.LinesCount, y => y.MapFrom(z => z.OrderLines.Count));
         }
     }
 }

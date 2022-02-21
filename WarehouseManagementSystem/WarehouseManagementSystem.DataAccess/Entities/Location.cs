@@ -1,6 +1,7 @@
 ﻿using DataAccess.Entities.EntityBases;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace DataAccess.Entities
 {
@@ -11,7 +12,7 @@ namespace DataAccess.Entities
 
         [Required]
         [Column("Typ lokalizacji")]
-        public Type Type { get; set; }
+        public LocationType LocationType { get; set; }
 
         [Required]
         [MaxLength(10)]
@@ -31,12 +32,5 @@ namespace DataAccess.Entities
 
         [ForeignKey("ProductId")]
         public Product Product { get; set; }
-    }
-
-    public enum Type
-    {
-        NORMAL,
-        SHORT_DATE,
-        FRIDGE
     }
 }

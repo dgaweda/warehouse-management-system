@@ -41,33 +41,33 @@ namespace DataAccess.CQRS.Helpers
 
         public static void SetStatus(this Pallet pallet)
         {
-            if (PalletIsDuringOrderPicking(pallet))
+            if (pallet.IsDuringOrderPicking())
                 pallet.PalletStatus = PalletStatus.DURING_ORDER_PICKING;
-            else if (PalletWasSent(pallet))
+            else if (pallet.WasSent())
                 pallet.PalletStatus = PalletStatus.SENT;
-            else if (PalletIsReadyForDeparture(pallet))
+            else if (pallet.IsReadyForDeparture())
                 pallet.PalletStatus = PalletStatus.READY_FOR_DEPARTURE;
-            else if (PalletIsReadyToBeUnfolded(pallet))
+            else if (pallet.IsReadyToBeUnfolded())
                 pallet.PalletStatus = PalletStatus.READY_TO_BE_UNFOLDED;
             else
                 pallet.PalletStatus = PalletStatus.OPEN;
         }
 
-        private static bool PalletIsDuringOrderPicking(Pallet pallet)
+        private static bool IsDuringOrderPicking(this Pallet pallet)
         {
-            return pallet.OrderId != null && pallet.UserId != null && pallet.Order.OrderState == State.IN_PROGRESS;
+            return pallet.OrderId != null && pallet.UserId != null && pallet.Order.OrderState == OrderState.IN_PROGRESS;
         }
 
-        private static bool PalletWasSent(Pallet pallet)
+        private static bool WasSent(this Pallet pallet)
         {
             return pallet.DepartureId != null && pallet.Departure.State == StateType.CLOSED;
         }
 
-        private static bool PalletIsReadyForDeparture(Pallet pallet) {
-            return pallet.OrderId != null && pallet.Order.OrderState == State.READY_FOR_DEPARTURE;
+        private static bool IsReadyForDeparture(this Pallet pallet) {
+            return pallet.OrderId != null && pallet.Order.OrderState == OrderState.READY_FOR_DEPARTURE;
         }
 
-        private static bool PalletIsReadyToBeUnfolded(Pallet pallet) {
+        private static bool IsReadyToBeUnfolded(this Pallet pallet) {
             return pallet.InvoiceId != null;
         }
 

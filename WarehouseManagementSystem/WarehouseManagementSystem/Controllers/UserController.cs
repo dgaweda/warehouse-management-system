@@ -18,9 +18,9 @@ namespace warehouse_management_system.Controllers
             : base(mediator, logger)
         {
         }
-        
+
         [HttpPost]
-        [Route("Register/")]
+        [Route("Add/")]
         public async Task<IActionResult> AddUser([FromBody] AddUserRequest request) => await Handle<AddUserRequest, AddUserResponse>(request);
 
         [HttpGet]
