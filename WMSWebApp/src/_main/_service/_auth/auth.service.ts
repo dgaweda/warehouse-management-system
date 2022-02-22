@@ -7,34 +7,25 @@ import {environment} from "../../../environments/environment";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
-  private currentUser: string;
+  private currentUser: string | null;
   private userSubject: BehaviorSubject<User>;
-
-  public user: Observable<User | null>
 
   constructor(private router: Router, private http: HttpClient) {
     this.currentUser = this.getUserFromLocalStorage();
-    console.log('DUPA');
-    this.userSubject = new BehaviorSubject<User>(JSON.parse(this.currentUser));
-    this.user = this.userSubject.asObservable();
+    this.userSubject = this.setUserSubject();
   }
 
-  public get userValue(): User | null {
+  get userValue(): User {
     return this.userSubject.value;
   }
 
   login(username: string, password: string): any {
-    const headers = new HttpHeaders();
-    const base64Credentials = window.btoa(`${username}:${password}`);
-    headers.append(`Authorization`, `Basic ${base64Credentials}`);
-    console.log(`base64: ${base64Credentials}`);
-    return this.http.post<any>(environment.apiUrl + '/Order/Get', {username, password}, {headers: headers})
-      .pipe(map(user => {
-        user.authdata = window.btoa(`${username}:${password}`);
-        console.log(`AuthData:${user.authdata}`);
-        localStorage.setItem('user', JSON.stringify(user));
-        this.userSubject.next(user);
-        return user;
+    const headers = this.setAuthorizationHeader(username, password);
+    return this.http.get<any>(environment.apiUrl + '/Order/Get', {headers: headers})
+      .pipe(
+        map(user => {
+          console.log(`user: ${user}`, user);
+          localStorage.setItem('user', JSON.stringify(user));
       }))
   }
 
@@ -44,12 +35,27 @@ export class AuthenticationService {
     this.router.navigate(['/login']);
   }
 
-  private getUserFromLocalStorage(): string {
-    const userData = localStorage.getItem('user');
-    if(userData){
-      return userData;
+  private setUserSubject(): BehaviorSubject<any> {
+    const localStorageUser = this.currentUser;
+    if(localStorageUser) {
+      return new BehaviorSubject<User>(JSON.parse(localStorageUser))
     }
-    // TO DO
-    return 'No user in local storage';
+    return new BehaviorSubject<null>(null);
   }
+
+  private getUserFromLocalStorage(): string | null{
+    const userAuthData = localStorage.getItem('user');
+    if(userAuthData){
+      return userAuthData;
+    }
+    return null;
+  }
+
+  private setAuthorizationHeader(username: string, password: string): HttpHeaders {
+    const headers = new HttpHeaders();
+    const base64Credentials = window.btoa(`${username}:${password}`);
+    headers.append(`Authorization`, `Basic ${base64Credentials}`);
+    return headers;
+  }
+
 }

@@ -4,17 +4,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Queries.UsersQueries
 {
-    public class GetUserQuery : QueryBase<User>
+    public class AuthenticateUserQuery : QueryBase<User>
     {
-        public string UserName { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
         public override async Task<User> Execute(WMSDatabaseContext context)
         {
-            return await context.Users
+            var user = await context.Users
                 .Include(x => x.Seniority)
                 .Include(x => x.Role)
                 .Include(x => x.Pallets)
-                .FirstOrDefaultAsync(x => x.UserName.Equals(UserName));
+                .FirstOrDefaultAsync(x => x.UserName.Equals(Username));
+            user.Password = HashPass
         }
-
     }
 }

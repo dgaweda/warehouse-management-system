@@ -14,18 +14,29 @@ namespace warehouse_management_system.Controllers
     [Route("[controller]")]
     public class UserController : ApiControllerBase<UserController>
     {
+        private readonly IMediator _mediator;
         public UserController(IMediator mediator, ILogger<UserController> logger) 
             : base(mediator, logger)
         {
+            _mediator = mediator;
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("Authenticate/")]
+        public async Task<IActionResult> AuthenticateUser([FromBody] AuthenticateUserRequest request)
+        {
+            var response = await _mediator.Send(request);
+            
+        }
+        
         [HttpPost]
         [Route("Add/")]
         public async Task<IActionResult> AddUser([FromBody] AddUserRequest request) => await Handle<AddUserRequest, AddUserResponse>(request);
 
         [HttpGet]
         [Route("Details/")]
-        public async Task<IActionResult> GetUserDetails([FromQuery] GetUserRequest request) => await Handle<GetUserRequest, GetUserResponse>(request);
+        public async Task<IActionResult> GetUserDetails([FromQuery] AuthenticateUserRequest request) => await Handle<AuthenticateUserRequest, GetUserResponse>(request);
 
         [HttpGet]
         [Route("Get/")]

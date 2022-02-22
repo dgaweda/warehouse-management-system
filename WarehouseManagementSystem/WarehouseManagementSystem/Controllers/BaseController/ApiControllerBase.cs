@@ -41,8 +41,8 @@ namespace warehouse_management_system.Controllers.BaseController
 
             return ErrorResponse(new ErrorModel(ErrorType.Unauthorized));
         }
-        
-        private IActionResult ErrorResponse(ErrorModel errorModel)
+
+        protected IActionResult ErrorResponse(ErrorModel errorModel)
         {
             var httpCode = errorModel.Error.GetHttpStatusCode();
             return StatusCode((int)httpCode, errorModel);

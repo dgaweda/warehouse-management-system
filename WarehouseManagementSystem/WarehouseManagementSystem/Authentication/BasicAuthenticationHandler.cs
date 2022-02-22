@@ -55,18 +55,18 @@ namespace warehouse_management_system.Authentication
                 var username = credentials[0];
                 var password = credentials[1];
 
-                var query = new GetUserQuery()
+                var query = new AuthenticateUserQuery()
                 {
-                    UserName = username
+                    Username = username,
+                    Password = password
                 };
 
-                user = await BasicAuthenticationHelper.GetUser(_queryExecutor, query);
+                user = await _queryExecutor.Execute(query);
 
-                if (user is null || !user.HasCorrectPassword(password))
+                if (user is null)
                 {
                     return AuthenticateResult.Fail("Invalid username or password.");
                 }
-
             }
             catch
             {

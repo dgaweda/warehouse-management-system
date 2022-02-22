@@ -14,7 +14,6 @@ export class LoginComponent {
   loginForm : FormGroup;
   loading: boolean;
   submitted: boolean;
-  returnUrl: string;
   error: string;
 
   constructor(
@@ -33,8 +32,6 @@ export class LoginComponent {
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
     });
-
-    this.returnUrl = this.route.snapshot.queryParams[`returnUrl`] || '/';
   }
 
   get formData() {
@@ -52,7 +49,7 @@ export class LoginComponent {
       .pipe(first())
       .subscribe(
         () => {
-          this.router.navigate([this.returnUrl]);
+          this.router.navigate(['/deliveries']);
         },
         (error: string) => {
           this.error = error;
