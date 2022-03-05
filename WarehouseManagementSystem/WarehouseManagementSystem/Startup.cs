@@ -1,7 +1,6 @@
-using System;
+
 using DataAccess;
 using DataAccess.CQRS;
-using DataAccess.Entities;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
@@ -14,8 +13,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using warehouse_management_system.Authentication;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
-using WarehouseManagementSystem.ApplicationServices.API.Validators;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.SeniorityValidators;
 using WarehouseManagementSystem.ApplicationServices.Mappings;

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
@@ -26,6 +27,13 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
         public async Task<TResponse> PrepareResponse(TQuery query)
         {
             var entityModel = await _queryExecutor.Execute(query);
+            if (entityModel is null)
+            {
+                return new TResponse()
+                {
+                    Error = new ErrorModel(ErrorType.NotFound)
+                };
+            }
             var domainModel = _mapper.Map<TDomainModelList>(entityModel);
             return new TResponse()
             {

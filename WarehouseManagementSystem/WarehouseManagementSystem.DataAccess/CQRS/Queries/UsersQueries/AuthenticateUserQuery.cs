@@ -1,8 +1,10 @@
 ﻿using System.Threading.Tasks;
+using DataAccess.CQRS.Helpers;
+using DataAccess.CQRS.Queries;
 using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.CQRS.Queries.UsersQueries
+namespace DataAccess.AuthenticateUserService
 {
     public class AuthenticateUserQuery : QueryBase<User>
     {
@@ -15,7 +17,12 @@ namespace DataAccess.CQRS.Queries.UsersQueries
                 .Include(x => x.Role)
                 .Include(x => x.Pallets)
                 .FirstOrDefaultAsync(x => x.UserName.Equals(Username));
-            user.Password = HashPass
+            
+            if (user != null && user.HasCorrectPassword(Password))
+            {
+                return user;
+            }
+            return null;
         }
     }
 }

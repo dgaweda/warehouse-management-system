@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
@@ -33,13 +34,13 @@ namespace warehouse_management_system.Controllers.BaseController
                         .Select(x => new { property = x.Key, errors = x.Value.Errors }));
             }
             
-            if (User.IsPermitted(request))
+            if (User.IsPermitted(request) || User.IsAuthenticating(request))
             {
                 var response = await _mediator.Send(request);
                 return response.Error is null ? Ok(response) : ErrorResponse(response.Error);
             }
 
-            return ErrorResponse(new ErrorModel(ErrorType.Unauthorized));
+            return ErrorResponse(new ErrorModel(ErrorType.Forbidden));
         }
 
         protected IActionResult ErrorResponse(ErrorModel errorModel)

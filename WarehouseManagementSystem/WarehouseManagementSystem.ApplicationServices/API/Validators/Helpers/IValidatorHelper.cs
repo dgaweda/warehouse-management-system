@@ -18,7 +18,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
         bool CheckIfDepartureNameIsUnique(string name);
         bool CheckIfDepartureNameExist(string name);
         bool CheckEmailFormat(string email);
-        bool CheckIfUserNameIsUnique(string username);
+        bool CheckIfUsernameIsUnique(string username);
         bool CheckLocationCurrentAmount(int id);
+
+        bool CheckIfUsernameExist(string username);
     }
 }

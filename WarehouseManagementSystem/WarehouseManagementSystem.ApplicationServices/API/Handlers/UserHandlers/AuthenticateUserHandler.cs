@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using DataAccess;
-using DataAccess.CQRS.Queries.UsersQueries;
+using DataAccess.AuthenticateUserService;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
@@ -16,8 +16,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandler
     {
         public AuthenticateUserHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
         {
-
         }
+        
         public async Task<AuthenticateUserResponse> Handle(AuthenticateUserRequest request, CancellationToken cancellationToken)
         {
             var query = CreateQuery(request);

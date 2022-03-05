@@ -1,5 +1,4 @@
 ﻿using DataAccess;
-using DataAccess.CQRS.Queries.UsersQueries;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -12,6 +11,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using DataAccess.AuthenticateUserService;
 
 namespace warehouse_management_system.Authentication
 {

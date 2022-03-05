@@ -21,23 +21,31 @@ namespace warehouse_management_system.Controllers.BaseController
             {
                 ErrorType.NotFound => HttpStatusCode.NotFound,
                 ErrorType.InternalServerError => HttpStatusCode.InternalServerError,
-                ErrorType.Unauthorized => HttpStatusCode.Unauthorized,
+                ErrorType.Forbidden => HttpStatusCode.Forbidden,
                 ErrorType.RequestTooLarge => HttpStatusCode.RequestEntityTooLarge,
                 ErrorType.UnsupportedMediaType => HttpStatusCode.UnsupportedMediaType,
                 ErrorType.MethodNotAllowed => HttpStatusCode.MethodNotAllowed,
                 ErrorType.TooManyRequests => HttpStatusCode.TooManyRequests,
+                ErrorType.NotAuthenticated => HttpStatusCode.Unauthorized,
                 _ => HttpStatusCode.BadRequest,
             };
+        }
+
+        public static bool IsAuthenticating<TRequest>(this ClaimsPrincipal user, TRequest request)
+        {
+            var requestName = typeof(TRequest).Name;
+            var isAuthenticating = requestName.Equals("AuthenticateUserRequest");
+            return isAuthenticating;
         }
 
         public static bool IsPermitted<TRequest>(this ClaimsPrincipal user, TRequest request)
         {
             var requestName = typeof(TRequest).Name;
-            var privilegeName = TrimRequestName(requestName);
+            var privilegeName = requestName.TrimRequestName();
             return user.HasClaim(x => x.Type.Equals(Privileges) && x.Value.Equals(privilegeName));
         }
 
-        private static string TrimRequestName(string requestName)
+        private static string TrimRequestName(this string requestName)
         {
             var privilegeName = requestName.Replace(Request, "");
             return privilegeName;

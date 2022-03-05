@@ -172,9 +172,14 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public bool CheckIfUserNameIsUnique(string username)
+        public bool CheckIfUsernameIsUnique(string username)
         {
             return !_context.Users.Any(x => x.UserName == username);
+        }
+
+        public bool CheckIfUsernameExist(string username)
+        {
+            return !CheckIfUsernameIsUnique(username);
         }
 
         /// <summary>
