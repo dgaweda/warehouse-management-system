@@ -1,9 +1,10 @@
 import {Injectable} from "@angular/core";
-import {BehaviorSubject, map, Observable} from "rxjs";
+import {BehaviorSubject, map, Observable, pipe} from "rxjs";
 import {User} from "../../_models/user.model";
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
+import {UserApiUrl} from "../../api/apiUrl.service";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
@@ -20,8 +21,14 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string): any {
-    const headers = this.setAuthorizationHeader(username, password);
-    return this.http.get<any>(environment.apiUrl + '/Order/Get', {headers: headers})
+    const header = new HttpHeaders();
+    header.append('Content-Type', 'application/json; charset=UTF-8');
+    return this.http.post(`${environment.apiUrl}${UserApiUrl.login}`, {
+        Username: username,
+        Password: password
+      }, {
+        headers: header
+      })
       .pipe(
         map(user => {
           console.log(`user: ${user}`, user);

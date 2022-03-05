@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaderResponse, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { DeliveryApiUrl } from "src/_main/api/apiUrl";
+import { DeliveryApiUrl } from "src/_main/api/apiUrl.service";
 import { DeliveryModel } from "src/_main/_models/delivery.model";
 import { Observable} from "rxjs";
 import {environment} from "../../environments/environment";

@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Order} from "../_models/order.model";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
-import {OrderApiUrl} from "../api/apiUrl";
+import {OrderApiUrl} from "../api/apiUrl.service";
 import {AuthenticationService} from "./_auth/auth.service";
 
 @Injectable({

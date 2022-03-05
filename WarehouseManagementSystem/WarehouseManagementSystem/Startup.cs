@@ -92,7 +92,11 @@ namespace warehouse_management_system
             }
 
             app.UseCors(
-                options => options.AllowAnyOrigin()
+                options =>
+                {
+                    options.AllowAnyOrigin();
+                    options.AllowAnyHeader();
+                }
             );
             app.UseHttpsRedirection();
             app.UseRouting();
