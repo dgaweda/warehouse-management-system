@@ -6,5 +6,6 @@
         <li *ngFor="let page of pages">
           <a ngbDropdownItem class="dropdown-item text-uppercase text-secondary fw-bold" routerLink="{{ page.route }}">{{ page.name }}</a>
         </li>
+          <a ngbDropdownItem class="dropdown-item text-uppercase text-secondary fw-bold" (click)="logout()" routerLink="/login">WYLOGUJ</a>
       </ul>
 </div>

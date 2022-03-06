@@ -5,52 +5,25 @@ import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {UserApiUrl} from "../../api/apiUrl.service";
+import {getLocaleCurrencyName} from "@angular/common";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
-  private currentUser: string | null;
-  private userSubject: BehaviorSubject<User>;
+  private userSubject: BehaviorSubject<User | null>;
 
   constructor(private router: Router, private http: HttpClient) {
-    this.currentUser = this.getUserFromLocalStorage();
     this.userSubject = this.setUserSubject();
   }
 
-  get userValue(): User {
-    return this.userSubject.value;
-  }
-
-  login(username: string, password: string): any {
-    const header = new HttpHeaders();
-    header.append('Content-Type', 'application/json; charset=UTF-8');
-    return this.http.post(`${environment.apiUrl}${UserApiUrl.login}`, {
-        Username: username,
-        Password: password
-      }, {
-        headers: header
-      })
-      .pipe(
-        map(user => {
-          console.log(`user: ${user}`, user);
-          localStorage.setItem('user', JSON.stringify(user));
-      }))
-  }
-
-  logout(): void {
-    localStorage.removeItem('user');
-    this.userSubject.complete();
-    this.router.navigate(['/login']);
-  }
-
   private setUserSubject(): BehaviorSubject<any> {
-    const localStorageUser = this.currentUser;
+    const localStorageUser = AuthenticationService.getUserFromLocalStorage();
     if(localStorageUser) {
       return new BehaviorSubject<User>(JSON.parse(localStorageUser))
     }
     return new BehaviorSubject<null>(null);
   }
 
-  private getUserFromLocalStorage(): string | null{
+  private static getUserFromLocalStorage(): string | null{
     const userAuthData = localStorage.getItem('user');
     if(userAuthData){
       return userAuthData;
@@ -58,11 +31,35 @@ export class AuthenticationService {
     return null;
   }
 
-  private setAuthorizationHeader(username: string, password: string): HttpHeaders {
-    const headers = new HttpHeaders();
-    const base64Credentials = window.btoa(`${username}:${password}`);
-    headers.append(`Authorization`, `Basic ${base64Credentials}`);
-    return headers;
+  get currentUser(): any{
+    return this.userSubject.value;
   }
 
+  login(username: string, password: string): any {
+    const header = new HttpHeaders();
+    header.append('Content-Type', 'application/json; charset=UTF-8');
+    return this.http.post<any>(`${environment.apiUrl}${UserApiUrl.login}`, {
+        Username: username,
+        Password: password
+      }, {
+        headers: header
+      }).pipe(
+        map(user => {
+          const currentUser = user['data'];
+          console.log(password);
+          currentUser.authData = window.btoa(`${currentUser.userName}:${password}`);
+          const localStorageUserData = {
+            authData: currentUser.authData
+          };
+          localStorage.setItem('user', JSON.stringify(localStorageUserData));
+          this.userSubject = this.setUserSubject();
+          this.router.navigate(['/delivery']);
+      }));
+  }
+
+  logout(): void {
+    localStorage.removeItem('user');
+    this.userSubject.next(null);
+    this.router.navigate(['/login']);
+  }
 }

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {Page} from "../../../_models/page.model";
+import {AuthenticationService} from "../../../_service/_auth/auth.service";
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +9,8 @@ import {Page} from "../../../_models/page.model";
 })
 export class NavbuttonComponent {
   pages: Page[];
-  constructor() {
+
+  constructor(private authenticationService: AuthenticationService) {
     this.pages = [];
     this.setPages();
     console.log(this.pages);
@@ -16,10 +18,14 @@ export class NavbuttonComponent {
 
   private setPages(): void {
     const pagesArray = [
-      {route: '/', name: 'Początek'},
-      {route: '/login', name: 'Logowanie'},
-      {route: '/delivery', name: 'Dostawy'},
+      {route: '/', name: 'początek'},
+      {route: '/delivery', name: 'dostawy'},
+      {route: '/order', name: 'zamówienia'},
     ];
     this.pages.push(...pagesArray);
+  }
+
+  logout(): void {
+    this.authenticationService.logout();
   }
 }

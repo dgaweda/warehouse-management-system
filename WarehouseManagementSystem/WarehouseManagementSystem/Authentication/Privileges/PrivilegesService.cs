@@ -40,9 +40,9 @@ namespace warehouse_management_system.Authentication
             claimsPrincipal.Identities.First().AddClaims(claims);
         }
         
-        private List<Claim> SetWarehouseManPrivileges()
+        private static List<Claim> SetWarehouseManPrivileges()
         {
-            return new()
+            return new List<Claim>
             {
                 AddClaim(Privilege.ADD_PALLET),
                 AddClaim(Privilege.ADD_INVOICE),

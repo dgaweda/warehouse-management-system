@@ -10,7 +10,7 @@ import {first} from "rxjs";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent{
   loginForm : FormGroup;
   loading: boolean;
   submitted: boolean;
@@ -24,8 +24,9 @@ export class LoginComponent {
     this.loading = false;
     this.submitted = false;
     this.error = '';
-    if(this.authenticationService.userValue) {
-      this.router.navigate(['/']);
+    if(this.authenticationService.currentUser) {
+      console.log(`IM in Login componennt and chacking for user in cache memory.`);
+      this.router.navigate(['/delivery']);
     }
 
     this.loginForm = new FormGroup({
@@ -46,10 +47,11 @@ export class LoginComponent {
 
     this.loading = true;
     this.authenticationService.login(this.formData.username, this.formData.password)
-      .pipe(first())
       .subscribe(
         () => {
-          this.router.navigate(['/deliveries']);
+          console.log('Zalogowany');
+          this.router.navigate(['/delivery']);
+          this.loading = false;
         },
         (error: string) => {
           this.error = error;

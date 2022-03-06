@@ -8,5 +8,5 @@ export interface User {
     lastName?: string;
     pesel?: string;
     age?: number;
-    authdata: string;
+    authData?: string;
 }

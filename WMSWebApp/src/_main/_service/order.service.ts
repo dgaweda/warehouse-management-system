@@ -20,7 +20,7 @@ export class OrderService {
     if(id){
       params = params.set('Id', id);
     }
-    const user = this.authenticationService.userValue;
+    const user = this.authenticationService.currentUser;
     const url = environment.apiUrl + OrderApiUrl.getOrders;
     return this.http.get<Order[]>(url, {params: params});
   }
