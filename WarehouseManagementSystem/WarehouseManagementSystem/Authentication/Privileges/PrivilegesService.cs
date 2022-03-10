@@ -19,6 +19,7 @@ namespace warehouse_management_system.Authentication
                 RoleKey.GENERAL_ADMIN => SetGeneralAdminPrivileges(),
                 RoleKey.MANAGER => SetManagerPrivileges(),
                 RoleKey.WAREHOUSEMAN => SetWarehouseManPrivileges(),
+                RoleKey.COLLECTOR => SetCollectorPrivileges(),
                 _ => throw new ArgumentOutOfRangeException()
             };
             AddUserClaims(claims, claimsPrincipal);
@@ -100,6 +101,17 @@ namespace warehouse_management_system.Authentication
             claims.Add(AddClaim(Privilege.REMOVE_ROLE));
             claims.Add(AddClaim(Privilege.REMOVE_USER));
             return claims;
+        }
+
+        private List<Claim> SetCollectorPrivileges()
+        {
+            return new List<Claim>()
+            {
+                AddClaim(Privilege.GET_ORDERS),
+                AddClaim(Privilege.GET_PRODUCTS),
+                AddClaim(Privilege.ADD_PALLET),
+                AddClaim(Privilege.GET_PALLETS)
+            };
         }
 
         private static Claim AddClaim(Privilege claimName)

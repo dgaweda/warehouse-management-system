@@ -17,8 +17,6 @@ export class DeliveryComponent {
    }
 
   getDeliveries(name?: string): void {
-    this.deliveryService.getDeliveries(name).subscribe((deliveries: any) => {
-      this.deliveries = deliveries['data'];
-    });
+    this.deliveries = this.deliveryService.getDeliveries(name);
   }
 }

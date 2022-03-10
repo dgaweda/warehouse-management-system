@@ -1,6 +1,6 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {Page} from "../../../_models/page.model";
-import {AuthenticationService} from "../../../_service/_auth/auth.service";
+import {Page} from "../../../_main/_models/page.model";
+import {AuthenticationService} from "../../../_main/_service/_auth/auth.service";
 
 @Component({
   selector: 'app-navbar',

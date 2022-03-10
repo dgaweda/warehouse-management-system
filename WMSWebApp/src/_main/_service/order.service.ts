@@ -3,8 +3,8 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Order} from "../_models/order.model";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
-import {OrderApiUrl} from "../api/apiUrl.service";
 import {AuthenticationService} from "./_auth/auth.service";
+import {orderApiUrl} from "../_api/api.service";
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class OrderService {
       params = params.set('Id', id);
     }
     const user = this.authenticationService.currentUser;
-    const url = environment.apiUrl + OrderApiUrl.getOrders;
+    const url = environment.apiUrl + orderApiUrl.getOrders;
     return this.http.get<Order[]>(url, {params: params});
   }
 }

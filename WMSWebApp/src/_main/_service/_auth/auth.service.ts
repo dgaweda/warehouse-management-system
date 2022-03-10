@@ -1,11 +1,10 @@
 import {Injectable} from "@angular/core";
-import {BehaviorSubject, map, Observable, pipe} from "rxjs";
+import {BehaviorSubject, map} from "rxjs";
 import {User} from "../../_models/user.model";
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {UserApiUrl} from "../../api/apiUrl.service";
-import {getLocaleCurrencyName} from "@angular/common";
+import {userApiUrl} from "../../_api/api.service";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
@@ -38,7 +37,7 @@ export class AuthenticationService {
   login(username: string, password: string): any {
     const header = new HttpHeaders();
     header.append('Content-Type', 'application/json; charset=UTF-8');
-    return this.http.post<any>(`${environment.apiUrl}${UserApiUrl.login}`, {
+    return this.http.post<any>(`${environment.apiUrl}${userApiUrl.login}`, {
         Username: username,
         Password: password
       }, {
@@ -51,6 +50,7 @@ export class AuthenticationService {
           const localStorageUserData = {
             authData: currentUser.authData
           };
+
           localStorage.setItem('user', JSON.stringify(localStorageUserData));
           this.userSubject = this.setUserSubject();
           this.router.navigate(['/delivery']);

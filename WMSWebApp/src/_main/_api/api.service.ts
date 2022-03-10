@@ -1,30 +1,31 @@
-import { HttpClient } from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { User } from "src/_main/_models/user.model";
+import {Observable} from "rxjs";
+import {SharedService} from "../_service/shared.service";
 
-export enum DeliveryApiUrl {
+export enum deliveryApiUrl {
   getDeliveries = '/Delivery/Get',
   addDelivery = '/Delivery/Add',
   removeDelivery = '/Delivery/Remove',
   editDelivery = '/Delivery/Edit'
 }
 
-export enum DepartureApiUrl {
+export enum departureApiUrl {
   getDeparture = '/Departure/Get',
   addDeparture = '/Departure/Add',
   editDeparture = '/Departure/Edit',
   removeDeparture = '/Departure/Remove'
 }
 
-export enum InvoiceApiUrl {
+export enum invoiceApiUrl {
   getInvoice = '/Invoice/Get',
   addInvoice = '/Invoice/Add',
   removeInvoice = '/Invoice/Remove',
   editInvoice = '/Invoice/Edit'
 }
 
-export enum LocationApiUrl {
+export enum locationApiUrl {
   getLocation = '/Location/Get',
   addLocation = '/Location/Add',
   editLocation = '/Location/Edit',
@@ -33,27 +34,27 @@ export enum LocationApiUrl {
   removeLocation = '/Location/Remove'
 }
 
-export enum OrderApiUrl {
+export enum orderApiUrl {
   getOrders = '/Order/Get'
 }
 
-export enum UserApiUrl {
+export enum userApiUrl {
   login = '/User/Login'
 }
 
 @Injectable({
     providedIn: 'root'
 })
-export class apiUrlService {
-    private httpClient: HttpClient;
+export class ApiService {
+  basicHeaders: HttpHeaders;
 
-    constructor(private http: HttpClient) {
-        this.httpClient = http;
-    }
+  constructor(private httpClient: HttpClient, private sharedService: SharedService) {
+    this.basicHeaders = this.sharedService.getBasicHeaders();
+  }
 
-    registerUser(user: User): any {
-        const url = environment.apiUrl + 'User/Register';
-        console.log(url);
-        return this.http.post(url, user);
-    }
+  getDeliveries(httpParams: HttpParams): Observable<any> {
+    return this.httpClient.get(`${environment.apiUrl}${deliveryApiUrl.getDeliveries}`, {headers: this.basicHeaders, params: httpParams});
+  }
+
+
 }
