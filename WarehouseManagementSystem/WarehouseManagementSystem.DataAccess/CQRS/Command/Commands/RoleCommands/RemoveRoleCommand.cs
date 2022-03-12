@@ -1,6 +1,7 @@
 ﻿using DataAccess.Entities;
 using System.Threading.Tasks;
 using DataAccess.CQRS.Helpers.DataAccess.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.RoleCommands
 {
@@ -8,8 +9,9 @@ namespace DataAccess.CQRS.Commands.RoleCommands
     {
         public override async Task<Role> Execute(WMSDatabaseContext context)
         {
-            var deletedRecord = await context.DeleteRecord(Parameter);
-            return deletedRecord;
+            var role = await context.Roles.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
+            await context.DeleteRecord(Parameter);
+            return role;
         }
     }
 }

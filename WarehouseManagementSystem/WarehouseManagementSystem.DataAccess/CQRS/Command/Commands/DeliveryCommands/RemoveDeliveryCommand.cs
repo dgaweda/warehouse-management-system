@@ -1,6 +1,7 @@
 ﻿using DataAccess.Entities;
 using System.Threading.Tasks;
 using DataAccess.CQRS.Helpers.DataAccess.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.DeliveryCommands
 {
@@ -8,8 +9,9 @@ namespace DataAccess.CQRS.Commands.DeliveryCommands
     {
         public override async Task<Delivery> Execute(WMSDatabaseContext context)
         {
-            var deletedDelivery = await context.DeleteRecord(Parameter);
-            return deletedDelivery;
+            await context.DeleteRecord(Parameter);
+            var delivery = await context.Deliveries.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
+            return delivery;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DataAccess.Entities;
 using System.Threading.Tasks;
 using DataAccess.CQRS.Helpers.DataAccess.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.InvoiceCommands
 {
@@ -8,8 +9,9 @@ namespace DataAccess.CQRS.Commands.InvoiceCommands
     {
         public override async Task<Invoice> Execute(WMSDatabaseContext context)
         {
-            var deletedInvoice = await context.DeleteRecord(Parameter);
-            return deletedInvoice;
+            var invoice = await context.Invoices.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
+            await context.DeleteRecord(Parameter);
+            return invoice;
         }
     }
 }

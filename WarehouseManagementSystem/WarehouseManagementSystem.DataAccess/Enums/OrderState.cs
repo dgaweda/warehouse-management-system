@@ -5,6 +5,7 @@
         RECEIVED,
         IN_PROGRESS,
         READY_FOR_DEPARTURE,
-        SENT
+        SENT,
+        CANCELED
     }
 }

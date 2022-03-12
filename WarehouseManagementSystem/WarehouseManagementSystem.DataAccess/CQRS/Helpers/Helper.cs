@@ -18,13 +18,13 @@ namespace DataAccess.CQRS.Helpers
                 await context.SaveChangesAsync();
             }
 
-            public static async Task<TEntity> GetById<TEntity>(this WMSDatabaseContext context, int Id)
+            public static async Task<TEntity> GetById<TEntity>(this WMSDatabaseContext context, int id)
                 where TEntity : class, IEntityBase
             {
-                return await context.Set<TEntity>().FirstOrDefaultAsync(i => i.Id == Id);
+                return await context.Set<TEntity>().FirstOrDefaultAsync(i => i.Id == id);
             }
 
-            public static async Task<TEntity> DeleteRecord<TEntity>(this WMSDatabaseContext context, TEntity entity)
+            public static async Task DeleteRecord<TEntity>(this WMSDatabaseContext context, TEntity entity)
                 where TEntity : class, IEntityBase
             {
                 var entities = context.Set<TEntity>();
@@ -35,8 +35,6 @@ namespace DataAccess.CQRS.Helpers
                     entities.Remove(entityToDelete);
                     await context.SaveChangesAsync();
                 }
-
-                return entityToDelete;
             }
 
             public static async Task UpdateRecord<TEntity>(this WMSDatabaseContext context, TEntity entity)

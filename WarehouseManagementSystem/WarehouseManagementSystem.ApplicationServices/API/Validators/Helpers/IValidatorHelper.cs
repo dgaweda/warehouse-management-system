@@ -20,7 +20,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
         bool CheckEmailFormat(string email);
         bool CheckIfUsernameIsUnique(string username);
         bool CheckLocationCurrentAmount(int id);
-
         bool CheckIfUsernameExist(string username);
+        bool CheckIfOrderBarcodeIsUnique(string barcode);
     }
 }

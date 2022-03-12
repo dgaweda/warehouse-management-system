@@ -25,8 +25,16 @@ namespace warehouse_management_system.Controllers
         [Route("Get/")]
         public Task<IActionResult> GetOrders([FromQuery] GetOrdersRequest request) => Handle<GetOrdersRequest, GetOrdersResponse>(request);
         
-        // [HttpPost]
-        // [Route("Add/")]
-        // public Task<IActionResult> AddOrder([FromBody] AddOrderRequest request) => Handle<AddOrderRequest, AddOrderRequest>(request);
+        [HttpPost]   
+        [Route("Add/")]
+        public Task<IActionResult> AddOrder([FromBody] AddOrderRequest request) => Handle<AddOrderRequest, AddOrderResponse>(request);
+        
+        [HttpPut]   
+        [Route("Edit/")]
+        public Task<IActionResult> EditOrder([FromBody] EditOrderRequest request) => Handle<EditOrderRequest, EditOrderResponse>(request);
+        
+        [HttpDelete]   
+        [Route("Remove/")]
+        public Task<IActionResult> RemoveOrder([FromBody] RemoveOrderRequest request) => Handle<RemoveOrderRequest, RemoveOrderResponse>(request);
     }
 }
