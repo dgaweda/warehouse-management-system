@@ -16,6 +16,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.OrderVali
                 .WithMessage("Numer zamówienia nie może być pusty");
             RuleFor(x => x.Barcode).MaximumLength(10)
                 .WithMessage("Numer zamówienia nie może mieć więcej niż 10 znaków.");
+            RuleFor(x => x.OrderLines).NotEmpty()
+                .WithMessage("Zamówienie nie może być puste.");
         }
     }
 }

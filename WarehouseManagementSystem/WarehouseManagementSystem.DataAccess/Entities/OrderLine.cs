@@ -1,6 +1,7 @@
 ﻿using DataAccess.Entities.EntityBases;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace DataAccess.Entities
 {
@@ -19,10 +20,10 @@ namespace DataAccess.Entities
         [DataType(DataType.Currency)]
         [Column("Cena", TypeName = "decimal(5,2)")]
         public decimal Price { get; set; }
-
+        
         [ForeignKey("OrderId")]
         public Order Order { get; set; }
-
+        
         [ForeignKey("ProductId")]
         public Product Product { get; set; }
     }

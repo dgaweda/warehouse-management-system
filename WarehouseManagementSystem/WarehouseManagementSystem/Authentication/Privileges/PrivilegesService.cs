@@ -91,6 +91,7 @@ namespace warehouse_management_system.Authentication
             claims.Add(AddClaim(Privilege.ADD_USER));
             claims.Add(AddClaim(Privilege.REMOVE_INVOICE));
             claims.Add(AddClaim(Privilege.ADD_ORDER));
+            claims.Add(AddClaim(Privilege.ADD_ORDERLINE));
             claims.Add(AddClaim(Privilege.EDIT_ORDER));
             claims.Add(AddClaim(Privilege.REMOVE_ORDER));
             return claims;

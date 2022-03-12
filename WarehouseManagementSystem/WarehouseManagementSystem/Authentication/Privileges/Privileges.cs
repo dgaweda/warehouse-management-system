@@ -58,7 +58,8 @@ namespace warehouse_management_system.Authentication
                 { Privilege.GET_ORDERS, "GetOrders" },
                 { Privilege.ADD_ORDER, "AddOrder" },
                 { Privilege.EDIT_ORDER, "EditOrder" },
-                { Privilege.REMOVE_ORDER, "RemoveOrder" }
+                { Privilege.REMOVE_ORDER, "RemoveOrder" },
+                {Privilege.ADD_ORDERLINE, "AddOrderLine"}
             };
         }
     }
@@ -118,6 +119,8 @@ namespace warehouse_management_system.Authentication
         GET_ORDERS,
         ADD_ORDER,
         EDIT_ORDER,
-        REMOVE_ORDER
+        REMOVE_ORDER,
+        
+        ADD_ORDERLINE
     }
 }
