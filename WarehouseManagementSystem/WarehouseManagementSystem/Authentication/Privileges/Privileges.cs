@@ -10,7 +10,8 @@ namespace warehouse_management_system.Authentication
             var privileges = Get();
             return privileges.GetValueOrDefault(key);
         }
-        public static Dictionary<Privilege, string> Get()
+
+        private static Dictionary<Privilege, string> Get()
         {
             return new Dictionary<Privilege, string>()
             {
@@ -54,11 +55,14 @@ namespace warehouse_management_system.Authentication
                 { Privilege.EDIT_USER, "EditUser" },
                 { Privilege.GET_USERS, "GetUsers" },
                 { Privilege.REMOVE_USER, "RemoveUser" },
-                { Privilege.GET_ORDERS, "GetOrders" }
+                { Privilege.GET_ORDERS, "GetOrders" },
+                { Privilege.ADD_ORDER, "AddOrder" },
+                { Privilege.EDIT_ORDER, "EditOrder" },
+                { Privilege.REMOVE_ORDER, "RemoveOrder" }
             };
         }
     }
-    
+
     public enum Privilege
     {
         ADD_DELIVERY,
@@ -112,6 +116,8 @@ namespace warehouse_management_system.Authentication
         REMOVE_USER,
         
         GET_ORDERS,
-        AUTHENTICATE
+        ADD_ORDER,
+        EDIT_ORDER,
+        REMOVE_ORDER
     }
 }

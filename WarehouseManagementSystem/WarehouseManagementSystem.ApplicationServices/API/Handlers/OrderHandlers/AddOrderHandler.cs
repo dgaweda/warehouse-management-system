@@ -14,7 +14,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.OrderHandle
         CommandHandler<AddOrderRequest, AddOrderResponse, Order, Domain.Models.Order, AddOrderCommand>,
         IRequestHandler<AddOrderRequest, AddOrderResponse>
     {
-        protected AddOrderHandler(IMapper mapper, ICommandExecutor commandExecutor) : base(mapper, commandExecutor)
+        public AddOrderHandler(IMapper mapper, ICommandExecutor commandExecutor) : base(mapper, commandExecutor)
         {
         }
 

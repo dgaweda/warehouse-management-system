@@ -14,7 +14,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.OrderHandle
         CommandHandler<RemoveOrderRequest, RemoveOrderResponse, Order, Domain.Models.Order, RemoveOrderCommand>,
         IRequestHandler<RemoveOrderRequest, RemoveOrderResponse>
     {
-        protected RemoveOrderHandler(IMapper mapper, ICommandExecutor commandExecutor) : base(mapper, commandExecutor)
+        public RemoveOrderHandler(IMapper mapper, ICommandExecutor commandExecutor) : base(mapper, commandExecutor)
         {
         }
 
