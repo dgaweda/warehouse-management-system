@@ -22,13 +22,13 @@ export class SharedService {
     console.log(`CurrentUSer: ${this.currentUser}`, this.currentUser);
   }
 
+  getBasicHeaders(): HttpHeaders {
+    return this.headers;
+  }
+
   private setBasicHeaders(): void {
     console.log('CurrentUserData', this.currentUser);
     this.headers = this.headers.set('Authorization', `Basic ${this.currentUser.authData}`);
     this.headers = this.headers.set('Content-Type', 'application/json; charset=UTF-8')
-  }
-
-  getBasicHeaders(): HttpHeaders {
-    return this.headers;
   }
 }

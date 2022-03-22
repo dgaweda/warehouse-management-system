@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Order} from "../_models/order.model";
-import {Observable} from "rxjs";
 import {OrderService} from "../_service/order.service";
 
 export enum Headers {
@@ -33,8 +32,9 @@ export class OrderComponent implements OnInit {
   }
 
   getOrders(id?: number): void {
-    this.orderService.getOrders(id).subscribe((orders: any) => {
-      this.orders = orders['data'];
-    });
+    this.orderService.getOrders(id)
+      .subscribe((order: Order[]) => {
+        this.orders = order;
+      });
   }
 }

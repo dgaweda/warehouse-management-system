@@ -1,4 +1,7 @@
-export interface User {
+import {ErrorMessage} from "./error.message.model";
+
+export interface User extends ErrorMessage {
+  data: {
     id: number;
     userName: string;
     password: string;
@@ -9,4 +12,5 @@ export interface User {
     pesel?: string;
     age?: number;
     authData?: string;
+  }
 }

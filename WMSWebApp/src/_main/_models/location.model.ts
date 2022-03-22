@@ -1,4 +1,7 @@
-export interface locationModel {
+import {ErrorMessage} from "./error.message.model";
+
+export interface Location extends ErrorMessage   {
+  data: {
     id: number;
     type?: string;
     name?: string;
@@ -7,4 +10,5 @@ export interface locationModel {
     productName?: string;
     palletId?: number;
     productId?: number;
+  }
 }

@@ -1,7 +1,7 @@
 <div class="row input-group-text">
   <button type="button" class="btn btn-primary col-md-3" (click)="getDeliveries(name.value)">Get deliveries</button>
   <input type="text" class="col-md-3 m-3" #name>
-  <table class="table" *ngIf="deliveries.length > 0">
+  <table class="table" *ngIf="deliveries">
     <thead>
       <tr>
         <th>Nazwa dostawy</th>
@@ -10,10 +10,15 @@
     </thead>
     <tbody>
       <tr *ngFor="let delivery of deliveries" >
-        <td>{{ delivery.name }}</td>
-        <td>{{ delivery.arrival }}</td>
+        <td>{{ delivery.data.name }}</td>
+        <td>{{ delivery.data.arrival }}</td>
       </tr>
     </tbody>
   </table>
+
+  <div class="container">
+    <img class="image" #image src="assets/test.jpg" alt="test" (load)="initImage(image)">
+    <button (click)="rotateImage(image)">Rotate</button>
+  </div>
 </div>
 

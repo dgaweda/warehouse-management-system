@@ -9,9 +9,9 @@
   <tbody>
   <tr *ngFor="let order of orders; let i = index" [attr.data-index]="i">
     <td>{{ i }}</td>
-    <td>{{ order.barcode }}</td>
-    <td>{{ order.orderState }}</td>
-    <td>{{ order.linesCount }}</td>
+    <td>{{ order.data.barcode }}</td>
+    <td>{{ order.data.orderState }}</td>
+    <td>{{ order.data.linesCount }}</td>
   </tr>
   </tbody>
 </table>
