@@ -3,7 +3,6 @@ import {FormGroup, FormControl, FormBuilder} from '@angular/forms';
 import { Validators } from '@angular/forms';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthenticationService} from "../_service/_auth/auth.service";
-import {first} from "rxjs";
 
 @Component({
   selector: 'app-login-panel',
@@ -46,7 +45,7 @@ export class LoginComponent{
     }
 
     this.loading = true;
-    this.authenticationService.login(this.formData.username, this.formData.password)
+    this.authenticationService.login2(this.formData.username, this.formData.password)
       .subscribe(
         () => {
           console.log('Zalogowany');

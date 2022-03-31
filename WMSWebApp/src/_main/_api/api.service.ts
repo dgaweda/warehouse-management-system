@@ -52,25 +52,12 @@ export interface RequestData {
     providedIn: 'root'
 })
 export class ApiService {
-  basicHeaders: HttpHeaders;
-
-  constructor(private httpClient: HttpClient, private sharedService: SharedService) {
-    this.basicHeaders = this.sharedService.getBasicHeaders();
-    console.log(this.basicHeaders);
+  constructor(private httpClient: HttpClient) {
   }
 
-  setRequestData(httpParams?: HttpParams): RequestData {
-    return {
-      headers: this.basicHeaders,
-      params: httpParams
-    }
-  }
 
-  getDeliveries(httpParams: HttpParams): Observable<any> {
-    return this.httpClient.get(`${environment.apiUrl}${DeliveryApiUrl.getDeliveries}`, this.setRequestData(httpParams));
-  }
 
   getOrders(httpParams: HttpParams): Observable<Order[]> {
-    return this.httpClient.get<Order[]>(`${environment.apiUrl}${OrderApiUrl.getOrders}`, this.setRequestData(httpParams))
+    return this.httpClient.get<Order[]>(`${environment.apiUrl}${OrderApiUrl.getOrders}`, { params: httpParams })
   }
 }

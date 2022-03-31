@@ -1,3 +1,24 @@
 .image {
   transition:transform .2s;
 }
+
+.sticky-buttons {
+  z-index: 9999;
+  position:fixed;
+  width:50%;
+  background: beige;
+  bottom:25px;
+  left:25%;
+  padding:10px;
+}
+
+.container {
+  position: absolute;
+  left: 0;
+  top:0;
+  bottom: 0;
+  right: 0;
+  height:100%;
+  width:100%;
+  overflow: hidden;
+}
