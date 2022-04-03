@@ -2,7 +2,6 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import {Observable} from "rxjs";
-import {SharedService} from "../_service/shared.service";
 import {Order} from "../_models/order.model";
 
 export enum DeliveryApiUrl {
@@ -43,19 +42,12 @@ export enum userApiUrl {
   login = '/User/Login'
 }
 
-export interface RequestData {
-  headers?: HttpHeaders,
-  params?: HttpParams
-}
-
 @Injectable({
     providedIn: 'root'
 })
 export class ApiService {
   constructor(private httpClient: HttpClient) {
   }
-
-
 
   getOrders(httpParams: HttpParams): Observable<Order[]> {
     return this.httpClient.get<Order[]>(`${environment.apiUrl}${OrderApiUrl.getOrders}`, { params: httpParams })

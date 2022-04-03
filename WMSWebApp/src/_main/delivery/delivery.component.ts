@@ -3,7 +3,7 @@ import { Delivery } from 'src/_main/_models/delivery.model';
 import { DeliveryService} from 'src/_main/_service/delivery.service';
 import panzoom, {PanZoom} from "panzoom";
 import { HttpParams } from '@angular/common/http';
-import {ApiService} from "../_api/api.service";
+import {ApiService} from "../_shared/api.service";
 
 @Component({
   selector: 'app-delivery',
@@ -17,9 +17,10 @@ export class DeliveryComponent {
     public deliveryService: DeliveryService,
   ) {
     this.deliveries = [];
-    deliveryService.deliveries$.subscribe((delivery: any) => {
-      console.log(delivery);
-      this.deliveries = Object.assign(this.deliveries, delivery.data);
+
+    deliveryService.deliveries.subscribe((delivery: any) => {
+      this.deliveries = delivery.data;
+      console.log(`deliveries:`, this.deliveries);
     });
    }
 }

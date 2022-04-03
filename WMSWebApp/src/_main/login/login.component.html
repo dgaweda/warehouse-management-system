@@ -1,6 +1,7 @@
 
 <form [formGroup]="loginForm" class="container-sm h-75 w-75" (ngSubmit)="onSubmit()">
   <div class="container-md border mt-5 p-3">
+    <div *ngIf="error" class="alert alert-danger mt-3 mb-0" >{{ error }}</div>
     <h6>Login:</h6>
     <div class="row m-auto">
       <input formControlName="username" id="username" type="text" class="p-2">
@@ -15,7 +16,6 @@
         Zaloguj
       </button>
     </div>
-    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{ error }}</div>
   </div>
 </form>
 

@@ -116,5 +116,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
         {
             return !_context.Orders.Any(x => x.Barcode.Equals(barcode));
         }
+        
+        
     }
 }

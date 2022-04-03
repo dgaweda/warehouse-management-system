@@ -2,8 +2,8 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Order} from "../_models/order.model";
 import {Observable} from "rxjs";
-import {AuthenticationService} from "./_auth/auth.service";
-import {ApiService} from "../_api/api.service";
+import {AuthenticationService} from "../_auth/auth.service";
+import {ApiService} from "../_shared/api.service";
 
 @Injectable({
   providedIn: 'root'

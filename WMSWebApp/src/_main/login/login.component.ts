@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormControl, FormBuilder} from '@angular/forms';
+import {animate, style, transition, trigger } from '@angular/animations';
+import { Component } from '@angular/core';
+import {FormGroup, FormControl} from '@angular/forms';
 import { Validators } from '@angular/forms';
 import {ActivatedRoute, Router} from "@angular/router";
-import {AuthenticationService} from "../_service/_auth/auth.service";
+import {AuthenticationService} from "../_auth/auth.service";
 
 @Component({
   selector: 'app-login-panel',
@@ -24,7 +25,6 @@ export class LoginComponent{
     this.submitted = false;
     this.error = '';
     if(this.authenticationService.currentUser) {
-      console.log(`IM in Login componennt and chacking for user in cache memory.`);
       this.router.navigate(['/delivery']);
     }
 
@@ -45,15 +45,14 @@ export class LoginComponent{
     }
 
     this.loading = true;
-    this.authenticationService.login2(this.formData.username, this.formData.password)
+    this.authenticationService.login(this.formData.username, this.formData.password)
       .subscribe(
         () => {
-          console.log('Zalogowany');
-          this.router.navigate(['/delivery']);
+          this.router.navigate(['/order']);
           this.loading = false;
         },
-        (error: string) => {
-          this.error = error;
+        () => {
+          this.error = `Nieprawdiłowy login lub hasło.`;
           this.loading = false;
         });
   }

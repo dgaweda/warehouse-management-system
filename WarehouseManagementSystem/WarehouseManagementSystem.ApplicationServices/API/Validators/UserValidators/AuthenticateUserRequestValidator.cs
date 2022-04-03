@@ -13,6 +13,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.UserValid
             RuleFor(x => x.Username).NotEmpty().WithMessage("Username must be specified.");
             RuleFor(x => x.Password).NotEmpty().WithMessage("Password must be specified.");
             RuleFor(x => x.Username).Must(_validator.CheckIfUsernameExist).WithMessage("User of that username doesn't exist.");
+            
         }
     }
 }

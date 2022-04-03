@@ -15,8 +15,8 @@ import { NavbuttonComponent } from "../layout/header/navbutton/navbutton.compone
 import { MainComponent } from "../layout/main/main.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { OrderComponent } from './order/order.component';
-import {BasicAuthInterceptor} from "./_service/_auth/auth.interceptor";
-import { ErrorInterceptor } from './_service/_auth/error.interceptor';
+import {BasicAuthInterceptor} from "./_auth/auth.interceptor";
+import { ErrorInterceptor } from './_auth/error.interceptor';
 
 @NgModule({
   declarations: [
