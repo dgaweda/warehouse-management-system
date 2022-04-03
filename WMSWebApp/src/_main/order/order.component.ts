@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Order} from "../_models/order.model";
 import {OrderService} from "../_service/order.service";
+import { OrderState} from "../_models/order.model";
 
 export enum Headers {
   Lp = 'Lp.',
@@ -18,7 +19,8 @@ export class OrderComponent implements OnInit {
   headers: string[];
   orders: Order[];
 
-  constructor(private orderService: OrderService) {
+  constructor(
+    private orderService: OrderService) {
     this.headers = [
       Headers.Lp,
       Headers.Barcode,
@@ -32,8 +34,11 @@ export class OrderComponent implements OnInit {
     })
   }
 
+  setStatus(state: string): string {
+    return OrderState[state as keyof typeof OrderState];
+  }
+
   ngOnInit(): void {
     this.orderService.getOrders();
   }
-
 }

@@ -7,10 +7,10 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let order of orders;let i = index;">
+  <tr #orderRow *ngFor="let order of orders;let i = index;">
     <td>{{ i+1 }}</td>
     <td>{{ order.barcode }}</td>
-    <td>{{ order.orderState }}</td>
+    <td>{{ setStatus(order.orderState, orderRow) }}</td>
     <td>{{ order.linesCount }}</td>
   </tr>
   </tbody>
