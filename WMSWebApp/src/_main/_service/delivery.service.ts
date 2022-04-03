@@ -18,23 +18,13 @@ export class DeliveryService {
     this.deliveries = new BehaviorSubject<Delivery[]>([]);
   }
 
-  setHttpParam(key: string, value: any): HttpParams {
-    let params = new HttpParams();
-    if(value) {
-      params = params.set(key, value);
-    }
-    return params;
-  }
-
   getDeliveries(name?: string): void {
 
-    const param = this.setHttpParam('Name', name);
+    const param = this.apiService.createHttpParam('Name', name);
     console.log(param);
     this.httpClient.get<Delivery[]>(`${environment.apiUrl}${DeliveryApiUrl.getDeliveries}`, { params: param })
       .subscribe((response: Delivery[]) => {
-        console.log(`response:`, response);
         this.deliveries.next(response);
-        console.log(this.deliveries.getValue());
       });
   }
 }

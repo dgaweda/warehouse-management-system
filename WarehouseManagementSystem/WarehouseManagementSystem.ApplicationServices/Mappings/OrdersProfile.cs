@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using AutoMapper;
 using DataAccess.Entities;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Order;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;
+using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings
 {
@@ -11,7 +13,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
         public OrdersProfile()
         {
             CreateMap<Order, API.Domain.Models.Order>()
-                .ForMember(x => x.OrderState, y => y.MapFrom(z => z.OrderState))
+                .ForMember(x => x.OrderState, y => y.MapFrom(z => Enum.GetName(z.OrderState)))
                 .ForMember(x => x.Barcode, y => y.MapFrom(z => z.Barcode))
                 .ForMember(x => x.PickingStart, y => y.MapFrom(z => z.PickingStart))
                 .ForMember(x => x.PickingEnd, y => y.MapFrom(z => z.PickingEnd))

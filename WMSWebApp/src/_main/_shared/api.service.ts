@@ -46,10 +46,12 @@ export enum userApiUrl {
     providedIn: 'root'
 })
 export class ApiService {
-  constructor(private httpClient: HttpClient) {
-  }
 
-  getOrders(httpParams: HttpParams): Observable<Order[]> {
-    return this.httpClient.get<Order[]>(`${environment.apiUrl}${OrderApiUrl.getOrders}`, { params: httpParams })
+  createHttpParam(key: string, value: any): HttpParams {
+    let params = new HttpParams();
+    if(value) {
+      params = params.set(key, value);
+    }
+    return params;
   }
 }

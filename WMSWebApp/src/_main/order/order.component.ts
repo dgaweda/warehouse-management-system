@@ -3,6 +3,7 @@ import {Order} from "../_models/order.model";
 import {OrderService} from "../_service/order.service";
 
 export enum Headers {
+  Lp = 'Lp.',
   OrderState = 'Stan zamówienia',
   Barcode = 'Kod kreskowy',
   LinesCount = 'Ilość linii'
@@ -14,27 +15,25 @@ export enum Headers {
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
-  lp: number;
   headers: string[];
   orders: Order[];
+
   constructor(private orderService: OrderService) {
     this.headers = [
-      Headers.OrderState,
+      Headers.Lp,
       Headers.Barcode,
+      Headers.OrderState,
       Headers.LinesCount
     ];
     this.orders = [];
-    this.lp = 1;
+
+    this.orderService.orders.subscribe((order: any) => {
+      this.orders = order.data;
+    })
   }
 
-  ngOnInit() {
-    this.getOrders();
+  ngOnInit(): void {
+    this.orderService.getOrders();
   }
 
-  getOrders(id?: number): void {
-    this.orderService.getOrders(id)
-      .subscribe((order: Order[]) => {
-        this.orders = order;
-      });
-  }
 }

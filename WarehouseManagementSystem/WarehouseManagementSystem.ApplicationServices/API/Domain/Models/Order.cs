@@ -7,7 +7,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
     public class Order
     {
         public List<OrderLine> OrderLines { get; set; }
-        public OrderState OrderState { get; set; }
+        public string OrderState { get; set; }
         public string Barcode { get; set; }
         public DateTime? PickingStart { get; set; }
         public DateTime? PickingEnd { get; set; }
