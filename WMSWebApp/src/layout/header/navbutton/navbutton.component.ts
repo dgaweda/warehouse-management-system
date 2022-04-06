@@ -18,9 +18,13 @@ export class NavbuttonComponent {
 
   private setPages(): void {
     const pagesArray = [
-      {route: '/', name: 'początek'},
-      {route: '/delivery', name: 'dostawy'},
       {route: '/order', name: 'zamówienia'},
+      {route: '/delivery', name: 'dostawy'},
+      {route: '/departure', name: 'wyjazdy'},
+      {route: '/invoice', name: 'faktury'},
+      {route: '/location', name: 'lokacje'},
+      {route: '/pallet', name: 'palety'},
+      {route: '/products', name: 'produkty'},
     ];
     this.pages.push(...pagesArray);
   }

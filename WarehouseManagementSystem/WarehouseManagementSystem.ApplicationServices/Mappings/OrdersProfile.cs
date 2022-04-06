@@ -3,8 +3,6 @@ using System.Linq;
 using AutoMapper;
 using DataAccess.Entities;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Order;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings
 {

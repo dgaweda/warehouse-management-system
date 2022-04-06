@@ -1,9 +1,10 @@
-<table class="table" *ngIf="orders">
+<table class="table my-3" *ngIf="orders">
   <thead>
   <tr>
     <th *ngFor="let header of headers">
       {{ header }}
     </th>
+    <th></th>
   </tr>
   </thead>
   <tbody>
@@ -12,6 +13,11 @@
     <td>{{ order.barcode }}</td>
     <td>{{ setStatus(order.orderState, orderRow) }}</td>
     <td>{{ order.linesCount }}</td>
+    <td style="width: 3rem;">
+      <div class="row m-0">
+        <button class="btn-primary download--button" type="button" [disabled]="!isReceived" (click)="addOrderToQueue(order)">POBIERZ</button>
+      </div>
+    </td>
   </tr>
   </tbody>
 </table>

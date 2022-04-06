@@ -3,7 +3,7 @@ import { Delivery } from 'src/_main/_models/delivery.model';
 import { DeliveryService} from 'src/_main/_service/delivery.service';
 import panzoom, {PanZoom} from "panzoom";
 import { HttpParams } from '@angular/common/http';
-import {ApiService} from "../_shared/api.service";
+import {ApiService} from "../../_shared/api.service";
 
 @Component({
   selector: 'app-delivery',

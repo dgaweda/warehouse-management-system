@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
+$success: #e9f6df;
 $primary: #337DEF;
 $secondary: #F49F1C;
 $danger: #f1535373;
@@ -13,7 +14,8 @@ $theme-colors: (
     "danger": $danger,
     "warning": $warning,
     "info": $info,
-    "main": $main
+    "main": $main,
+    "success": $success
 );
 
 @import "~bootstrap/scss/bootstrap";
@@ -49,11 +51,37 @@ input:focus {
 
   td {
     font-weight: bold;
-    color: $info;
+    color: black;
+    border: 1px solid rgba(128, 128, 128, 0.45);
+    text-align: center;
+    vertical-align: middle !important;
   }
 
   th {
     border:1px solid $info;
     font-style: italic;
+    text-align: center;
+    background: #bdbbbb;
+  }
+}
+
+.download--button {
+  padding: 10px 15px 10px 15px;
+  margin: 0 auto;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #F49F1C;
+  width: fit-content;
+  border: 0;
+
+  &:hover, &:active {
+    color:white;
+    background: #1c93f4;
+  }
+
+  &:disabled {
+    background: grey;
+    opacity:0.7;
+    color: white;
   }
 }
