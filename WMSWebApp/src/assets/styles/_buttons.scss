@@ -1,0 +1,20 @@
+.download--button {
+  padding: 10px 15px 10px 15px;
+  margin: 0 auto;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #F49F1C;
+  width: fit-content;
+  border: 0;
+
+  &:hover, &:active {
+    color:white;
+    background: #1c93f4;
+  }
+
+  &:disabled {
+    background: grey;
+    opacity:0.7;
+    color: white;
+  }
+}

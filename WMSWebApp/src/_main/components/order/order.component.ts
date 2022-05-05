@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Order, OrderStateColor} from "../../_models/order.model";
 import {OrderService} from "../../_service/order.service";
 import { OrderState} from "../../_models/order.model";
+import {ResponseBody} from "../../_shared/responseBody.model";
 
 export enum Headers {
   Lp = 'Lp.',
@@ -17,30 +18,33 @@ export enum Headers {
 })
 export class OrderComponent implements OnInit {
   headers: string[];
-  orders: Order[];
+  orders: ResponseBody<Order[]>;
   isReceived: boolean;
   orderQueue: Order[];
 
 
   constructor(
     private orderService: OrderService) {
+    this.orders = {};
+    this.orderQueue = [];
+    this.isReceived = false;
+  }
+
+  ngOnInit(): void {
+    this.getOrders();
     this.headers = [
       Headers.Lp,
       Headers.Barcode,
       Headers.OrderState,
       Headers.LinesCount
     ];
-    this.orders = [];
-    this.orderQueue = [];
-    this.isReceived = false;
   }
 
-  ngOnInit(): void {
-    this.orderService.orders.subscribe((order: any) => {
-      this.orders = order.data;
-    })
-
-    this.orderService.getOrders();
+  getOrders(id?: number): void {
+    this.orderService.getOrders(id)
+      .subscribe((order: ResponseBody<Order[]>) => {
+        this.orders = order;
+      })
   }
 
   setStatus(state: string, orderRow: HTMLElement): string {

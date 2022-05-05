@@ -1,15 +1,25 @@
+<ngb-toast
+  class="toast-container"
+  [delay]="7000"
+  *ngIf="deliveries.error">
+  <ul *ngFor="let error of deliveries.error">
+    <li>{{ error }}</li>
+  </ul>
+</ngb-toast>
 <div class="row input-group-text">
-  <button type="button" class="btn btn-primary col-md-3" (click)="deliveryService.getDeliveries(name.value)">Get deliveries</button>
+  <button type="button" class="btn btn-primary col-md-3" (click)="getDeliveries(name.value)">Get deliveries</button>
   <input type="text" class="col-md-3 m-3" #name>
-  <table class="table" *ngIf="deliveries">
+  <table class="table table-striped" *ngIf="deliveries">
     <thead>
       <tr>
+        <th>Lp.</th>
         <th>Nazwa dostawy</th>
         <th>Czas przybycia dostawy</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let delivery of deliveries" >
+      <tr *ngFor="let delivery of deliveries.data; let i = index">
+        <td>{{ i + 1 }}</td>
         <td>{{ delivery.name }}</td>
         <td>{{ delivery.arrival }}</td>
       </tr>

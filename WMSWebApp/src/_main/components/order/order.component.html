@@ -1,14 +1,14 @@
-<table class="table my-3" *ngIf="orders">
+<table class="table table-striped" *ngIf="orders">
   <thead>
   <tr>
-    <th *ngFor="let header of headers">
+    <th scope="col" *ngFor="let header of headers">
       {{ header }}
     </th>
     <th></th>
   </tr>
   </thead>
   <tbody>
-  <tr #orderRow *ngFor="let order of orders;let i = index;">
+  <tr #orderRow *ngFor="let order of orders.data;let i = index;">
     <td>{{ i+1 }}</td>
     <td>{{ order.barcode }}</td>
     <td>{{ setStatus(order.orderState, orderRow) }}</td>

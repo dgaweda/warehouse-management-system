@@ -45,7 +45,7 @@ export enum userApiUrl {
 @Injectable({
     providedIn: 'root'
 })
-export class ApiService {
+export class ApiUrlService {
 
   createHttpParam(key: string, value: any): HttpParams {
     let params = new HttpParams();
