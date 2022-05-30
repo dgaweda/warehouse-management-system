@@ -14,7 +14,7 @@ export class DeliveryComponent implements OnInit {
   deliveries: ResponseBody<Delivery[]>;
 
   constructor(private deliveryService: DeliveryService) {
-    this.deliveries = {};
+    this.deliveries = {data: []};
   }
 
   ngOnInit(): void {

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {Order, OrderStateColor} from "../../_models/order.model";
 import {OrderService} from "../../_service/order.service";
 import { OrderState} from "../../_models/order.model";
 import {ResponseBody} from "../../_shared/responseBody.model";
+import { HttpErrorResponse } from '@angular/common/http';
 
 export enum Headers {
   Lp = 'Lp.',
@@ -21,11 +22,13 @@ export class OrderComponent implements OnInit {
   orders: ResponseBody<Order[]>;
   isReceived: boolean;
   orderQueue: Order[];
+  OrderState = OrderState;
 
 
   constructor(
-    private orderService: OrderService) {
-    this.orders = {};
+    public orderService: OrderService
+  ) {
+    this.orders = {data: []};
     this.orderQueue = [];
     this.isReceived = false;
   }
@@ -42,21 +45,26 @@ export class OrderComponent implements OnInit {
 
   getOrders(id?: number): void {
     this.orderService.getOrders(id)
-      .subscribe((order: ResponseBody<Order[]>) => {
-        this.orders = order;
-      })
+      .subscribe(
+        (orders: ResponseBody<Order[]>) => {
+          this.orders = orders;
+          this.orders.data.forEach((order: Order) => order.readableOrderState = this.orderService.getReadableOrderStatus(order.orderState))
+        },
+        (error: HttpErrorResponse) => {
+          this.orders.error = error.error.errors.Name
+        }
+      );
   }
 
-  setStatus(state: string, orderRow: HTMLElement): string {
-    orderRow.style.background = OrderStateColor[state as keyof typeof OrderStateColor];
-    const translatedState = OrderState[state as keyof typeof OrderState];
-    this.isReceived = OrderState.RECEIVED === translatedState;
-    return translatedState;
-  }
-
-  addOrderToQueue(order: Order): void {
-    console.log(order);
+  addOrderToQueue(order: Order, orderRow: HTMLElement): void {
+    this.setOrderStatus(OrderState.IN_PROGRESS, order, orderRow);
     this.orderQueue.push(order);
-    console.log(this.orderQueue);
+  }
+
+  setOrderStatus(status: string, order: Order, orderRow: HTMLElement): void {
+    const orderStateKey = this.orderService.getOrderStateKeyByValue(status);
+    order.orderState = orderStateKey;
+    order.readableOrderState = status;
+    orderRow.style.background = this.orderService.getOrderRowStatusColor(orderStateKey);
   }
 }

@@ -1,8 +1,5 @@
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpParams} from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { environment } from "src/environments/environment";
-import {Observable} from "rxjs";
-import {Order} from "../_models/order.model";
 
 export enum DeliveryApiUrl {
   getDeliveries = '/Delivery/Get',
