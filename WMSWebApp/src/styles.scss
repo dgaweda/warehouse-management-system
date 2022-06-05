@@ -3,7 +3,7 @@
 $success: #e9f6df;
 $primary: #337DEF;
 $secondary: #F49F1C;
-$danger: #f1535373;
+$danger: rgba(239, 19, 19, 0.55);
 $warning: #fffb00a2;
 $main: #6D9ADD73;
 $info: grey;
@@ -19,69 +19,11 @@ $theme-colors: (
 );
 
 @import "~bootstrap/scss/bootstrap";
+@import "./assets/styles/_table.scss";
+@import "./assets/styles/_global.scss";
+@import "./assets/styles/_buttons.scss";
+@import "./assets/styles/_list.scss";
+@import "./assets/styles/_xng-components.scss";
 
-body {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: rgb(223, 219, 219);
-    margin: 0 auto;
-}
-
-h6{
-    margin-top:20px;
-    font-style: italic;
-    font-weight: bold;
-    color: rgb(43, 42, 42);
-}
-
-p {
-    font-size:min(2.4vw, 19px);
-}
-
-input:focus {
-  background: #e1e6ef;
-}
-.table>:not(:first-child) {
-
-}
-
-.table {
-  &>:not(:first-child) {
-    border-top: 1px solid $info;
-  }
-
-  td {
-    font-weight: bold;
-    color: black;
-    border: 1px solid rgba(128, 128, 128, 0.45);
-    text-align: center;
-    vertical-align: middle !important;
-  }
-
-  th {
-    border:1px solid $info;
-    font-style: italic;
-    text-align: center;
-    background: #bdbbbb;
-  }
-}
-
-.download--button {
-  padding: 10px 15px 10px 15px;
-  margin: 0 auto;
-  border-radius: 8px;
-  font-weight: bold;
-  color: #F49F1C;
-  width: fit-content;
-  border: 0;
-
-  &:hover, &:active {
-    color:white;
-    background: #1c93f4;
-  }
-
-  &:disabled {
-    background: grey;
-    opacity:0.7;
-    color: white;
-  }
-}
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

@@ -1,30 +1,23 @@
-import {HttpClient, HttpParams } from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import {ApiService, DeliveryApiUrl} from "../_shared/api.service";
+import {ApiUrlService, DeliveryApiUrl} from "../_shared/apiUrl.service";
 import {environment} from "../../environments/environment";
-import {BehaviorSubject, Observable } from "rxjs";
 import { Delivery } from "../_models/delivery.model";
+import {ResponseBody} from "../_shared/responseBody.model";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeliveryService {
-  deliveries: BehaviorSubject<Delivery[]>;
 
   constructor(
-    private apiService: ApiService,
+    private apiService: ApiUrlService,
     private httpClient: HttpClient
-  ) {
-    this.deliveries = new BehaviorSubject<Delivery[]>([]);
-  }
+  ) {}
 
-  getDeliveries(name?: string): void {
-
-    const param = this.apiService.createHttpParam('Name', name);
-    console.log(param);
-    this.httpClient.get<Delivery[]>(`${environment.apiUrl}${DeliveryApiUrl.getDeliveries}`, { params: param })
-      .subscribe((response: Delivery[]) => {
-        this.deliveries.next(response);
-      });
+  getDeliveries(deliveryName?: string): Observable<ResponseBody<Delivery[]>> {
+    const name = this.apiService.createHttpParam('Name', deliveryName);
+    return this.httpClient.get<ResponseBody<Delivery[]>>(`${environment.apiUrl}${DeliveryApiUrl.getDeliveries}`, {params: name});
   }
 }

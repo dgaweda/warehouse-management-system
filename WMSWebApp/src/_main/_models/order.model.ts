@@ -20,4 +20,5 @@ export interface Order extends ErrorMessage {
   orderState: string;
   barcode: string;
   linesCount: number;
+  readableOrderState?: string;
 }

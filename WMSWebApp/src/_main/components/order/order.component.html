@@ -1,21 +1,30 @@
-<table class="table my-3" *ngIf="orders">
+<ngb-toast
+  class="toast-container"
+  [delay]="7000"
+  *ngIf="orders.error">
+  <ul *ngFor="let error of orders.error">
+    <li>{{ error }}</li>
+  </ul>
+</ngb-toast>
+
+<table class="table table-striped" *ngIf="orders">
   <thead>
   <tr>
-    <th *ngFor="let header of headers">
+    <th scope="col" *ngFor="let header of headers">
       {{ header }}
     </th>
     <th></th>
   </tr>
   </thead>
   <tbody>
-  <tr #orderRow *ngFor="let order of orders;let i = index;">
+  <tr #orderRow *ngFor="let order of orders.data;let i = index;" [style.background-color]="orderService.getOrderRowStatusColor(order.orderState ?? '')">
     <td>{{ i+1 }}</td>
     <td>{{ order.barcode }}</td>
-    <td>{{ setStatus(order.orderState, orderRow) }}</td>
+    <td>{{ order.readableOrderState }}</td>
     <td>{{ order.linesCount }}</td>
     <td style="width: 3rem;">
       <div class="row m-0">
-        <button class="btn-primary download--button" type="button" [disabled]="!isReceived" (click)="addOrderToQueue(order)">POBIERZ</button>
+        <button class="btn-primary download--button text-white" type="button" [disabled]="OrderState.RECEIVED !== order.readableOrderState" (click)="addOrderToQueue(order, orderRow)">POBIERZ</button>
       </div>
     </td>
   </tr>

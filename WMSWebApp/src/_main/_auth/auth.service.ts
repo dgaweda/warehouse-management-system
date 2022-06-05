@@ -4,7 +4,7 @@ import {User} from "../_models/user.model";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {userApiUrl} from "../_shared/api.service";
+import {userApiUrl} from "../_shared/apiUrl.service";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
