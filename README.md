@@ -11,6 +11,7 @@
   - Fluent Validation <br/>
   - Extension Methods <br/>
   - Basic Authentication <br />
+  - BCrypt
  <br/><br/>
  <h2> FrontEnd </h2>
  <hr />
