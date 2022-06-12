@@ -5,14 +5,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from '../layout/header/header.component';
-import { FooterComponent } from '../layout/footer/footer.component';
+import { HeaderComponent } from './components/layout/header/header.component';
+import { FooterComponent } from './components/layout/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { DeliveryComponent } from './components/delivery/delivery.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserDetailsComponent } from "./components/user/details/user.details.component";
-import { NavbuttonComponent } from "../layout/header/navbutton/navbutton.component";
-import { MainComponent } from "../layout/main/main.component";
+import { MainComponent } from "./components/layout/main/main.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { OrderComponent } from './components/order/order.component';
 import {BasicAuthInterceptor} from "./_auth/auth.interceptor";
@@ -26,7 +25,6 @@ import { ErrorInterceptor } from './_auth/error.interceptor';
     FooterComponent,
     LoginComponent,
     UserDetailsComponent,
-    NavbuttonComponent,
     DeliveryComponent,
     OrderComponent
   ],
