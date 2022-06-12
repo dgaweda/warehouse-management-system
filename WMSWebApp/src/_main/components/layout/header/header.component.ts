@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Page} from "../../../_models/page.model";
-import {AuthenticationService} from "../../../_auth/auth.service";
+import {Page} from "../../../models/page.model";
+import {AuthenticationService} from "../../../auth/auth.service";
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

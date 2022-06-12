@@ -14,8 +14,8 @@ import { UserDetailsComponent } from "./components/user/details/user.details.com
 import { MainComponent } from "./components/layout/main/main.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { OrderComponent } from './components/order/order.component';
-import {BasicAuthInterceptor} from "./_auth/auth.interceptor";
-import { ErrorInterceptor } from './_auth/error.interceptor';
+import {BasicAuthInterceptor} from "./auth/auth.interceptor";
+import { ErrorInterceptor } from './auth/error.interceptor';
 
 @NgModule({
   declarations: [

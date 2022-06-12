@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
 import { Validators } from '@angular/forms';
 import {ActivatedRoute, Router} from "@angular/router";
-import {AuthenticationService} from "../../_auth/auth.service";
+import {AuthenticationService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-login-panel',

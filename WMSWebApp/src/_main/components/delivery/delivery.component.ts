@@ -1,9 +1,9 @@
 import {HttpErrorResponse, HttpResponseBase } from '@angular/common/http';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
-import {Delivery} from 'src/_main/_models/delivery.model';
-import {DeliveryService} from 'src/_main/_service/delivery.service';
-import {ResponseBody} from "../../_shared/responseBody.model";
+import {Delivery} from 'src/_main/models/delivery.model';
+import {DeliveryService} from 'src/_main/service/delivery.service';
+import {ResponseBody} from "../../shared/responseBody.model";
 
 @Component({
   selector: 'app-delivery',

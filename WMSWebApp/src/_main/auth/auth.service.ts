@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject, map} from "rxjs";
-import {User} from "../_models/user.model";
+import {User} from "../models/user.model";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {userApiUrl} from "../_shared/apiUrl.service";
+import {userApiUrl} from "../shared/apiUrl.service";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {

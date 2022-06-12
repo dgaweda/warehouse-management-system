@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {Order, OrderStateColor} from "../../_models/order.model";
-import {OrderService} from "../../_service/order.service";
-import { OrderState} from "../../_models/order.model";
-import {ResponseBody} from "../../_shared/responseBody.model";
+import {Order, OrderStateColor} from "../../models/order.model";
+import {OrderService} from "../../service/order.service";
+import { OrderState} from "../../models/order.model";
+import {ResponseBody} from "../../shared/responseBody.model";
 import { HttpErrorResponse } from '@angular/common/http';
-import {UserService} from "../../_service/user.service";
-import {AuthenticationService} from "../../_auth/auth.service";
-import {Roles} from "../../_models/role.model";
+import {UserService} from "../../service/user.service";
+import {AuthenticationService} from "../../auth/auth.service";
+import {Roles} from "../../models/role.model";
 
 export enum Headers {
   Lp = 'Lp.',
