@@ -1,0 +1,10 @@
+<div class="row m-0">
+  <ul ngbNav class="nav-tabs col-md-11 justify-content-start">
+    <li [ngbNavItem]="page.route" *ngFor="let page of pages">
+      <a ngbNavLink [routerLink]="page.route">{{ page.name }}</a>
+    </li>
+  </ul>
+  <div class="nav-tabs col-md-1 d-md-grid p-0">
+    <button class="btn btn-primary logout--button " (click)="logout()">Wyloguj</button>
+  </div>
+</div>

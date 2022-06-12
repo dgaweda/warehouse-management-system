@@ -1,4 +1,3 @@
-import {animate, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
 import { Validators } from '@angular/forms';

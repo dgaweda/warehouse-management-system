@@ -16,7 +16,7 @@ namespace DataAccess.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.11")
+                .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("DataAccess.Entities.Delivery", b =>
@@ -119,6 +119,10 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasColumnName("Aktualna ilość");
 
+                    b.Property<int>("LocationType")
+                        .HasColumnType("int")
+                        .HasColumnName("Typ lokalizacji");
+
                     b.Property<int>("MaxAmount")
                         .HasColumnType("int")
                         .HasColumnName("Maksymalna ilość");
@@ -131,10 +135,6 @@ namespace DataAccess.Migrations
 
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int")
-                        .HasColumnName("Typ lokalizacji");
 
                     b.HasKey("Id");
 
@@ -389,9 +389,6 @@ namespace DataAccess.Migrations
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Salt")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
