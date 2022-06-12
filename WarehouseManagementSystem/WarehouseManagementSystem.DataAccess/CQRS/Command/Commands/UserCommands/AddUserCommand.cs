@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using DataAccess.CQRS.Helpers;
+﻿using System.Threading.Tasks;
 using DataAccess.CQRS.Helpers.DataAccess.Repository;
 using DataAccess.Entities;
 
@@ -10,9 +8,7 @@ namespace DataAccess.CQRS.Commands
     {
         public override async Task<User> Execute(WMSDatabaseContext context)
         {
-            var (password, saltBytes) = Parameter.HashPassword(Parameter.Password);
-            Parameter.Password = password;
-            Parameter.Salt = Convert.ToBase64String(saltBytes);
+            Parameter.Password = BCrypt.Net.BCrypt.HashPassword(Parameter.Password);
             await context.AddRecord(Parameter);
 
             return Parameter;

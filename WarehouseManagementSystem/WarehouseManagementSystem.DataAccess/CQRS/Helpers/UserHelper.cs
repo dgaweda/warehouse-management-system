@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using DataAccess.Entities;
-using DataAccess.Migrations;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Protocols;
 
 namespace DataAccess.CQRS.Helpers
 {
@@ -38,35 +38,6 @@ namespace DataAccess.CQRS.Helpers
         public static List<User> FilterByLastName(this List<User> users, string lastName)
         {
             return string.IsNullOrEmpty(lastName) ? users : users.Where(user => user.LastName.Contains(lastName)).ToList();
-        }
-        
-        public static bool HasCorrectPassword(this User user, string password)
-        {
-            var passwordData = user.HashPassword(password);
-            return user.Password.Equals(passwordData.Password);
-        }
-
-        public static (string Password, byte[] saltBytes) HashPassword(this User user, string password)
-        {
-            var saltBytes = new byte[128 / 8];
-            if (string.IsNullOrEmpty(user.Salt))
-            {
-                RandomNumberGenerator.Create().GetBytes(saltBytes); // Fill saltBytes Array by random numbers
-            }
-            else
-            {
-                saltBytes = Convert.FromBase64String(user.Salt);
-            }
-
-            password = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: password,
-                salt: saltBytes,
-                prf: KeyDerivationPrf.HMACSHA1,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8)
-            );
-
-            return (password, saltBytes);
         }
     }
 }

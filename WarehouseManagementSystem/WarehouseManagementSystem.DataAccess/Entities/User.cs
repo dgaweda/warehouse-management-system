@@ -18,8 +18,6 @@ namespace DataAccess.Entities
         [Column("Hasło")]
         public string Password { get; set; }
 
-        public string Salt { get; set; }
-
         [MaxLength(100)]
         [Required]
         [DataType(DataType.EmailAddress)]

@@ -2,6 +2,7 @@
 using DataAccess.CQRS;
 using DataAccess.CQRS.Commands;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
@@ -23,7 +24,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
         public async Task<TResponse> PrepareResponse(TRequest request)
         {
             var entityData = _mapper.Map<TEntity>(request);
-            var command = new TCommand() { Parameter = entityData };
+            var command = new TCommand()
+            {
+                Parameter = entityData
+            };
             
             var entityModel = await _commandExecutor.Execute(command);
             var domainModel = _mapper.Map<TDomainModel>(entityModel);

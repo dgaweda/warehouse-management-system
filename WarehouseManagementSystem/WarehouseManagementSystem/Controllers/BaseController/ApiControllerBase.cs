@@ -2,10 +2,8 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Diagnostics;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 
@@ -34,7 +32,7 @@ namespace warehouse_management_system.Controllers.BaseController
                         .Select(x => new { property = x.Key, errors = x.Value.Errors }));
             }
             
-            if (User.IsPermitted(request) || User.IsAuthenticating(request))
+            if (User.IsPermitted(request) || request.IsAuthenticateUserRequest())
             {
                 var response = await _mediator.Send(request);
                 return response.Error is null ? Ok(response) : ErrorResponse(response.Error);

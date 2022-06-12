@@ -32,7 +32,10 @@ export enum LocationApiUrl {
 }
 
 export enum OrderApiUrl {
-  getOrders = '/Order/Get'
+  getOrders = '/Order/Get',
+  deleteOrder = '/Order/Remove',
+  editOrder = '/Order/Edit',
+  addOrder = '/Order/Add'
 }
 
 export enum userApiUrl {

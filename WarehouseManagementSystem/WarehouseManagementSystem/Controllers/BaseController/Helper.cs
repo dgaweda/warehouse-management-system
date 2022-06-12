@@ -1,11 +1,5 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Security.Claims;
-using DataAccess.Migrations;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 
 namespace warehouse_management_system.Controllers.BaseController
@@ -31,24 +25,20 @@ namespace warehouse_management_system.Controllers.BaseController
             };
         }
 
-        public static bool IsAuthenticating<TRequest>(this ClaimsPrincipal user, TRequest request)
+        public static bool IsAuthenticateUserRequest<TRequest>(this TRequest request)
         {
-            var requestName = typeof(TRequest).Name;
-            var isAuthenticating = requestName.Equals("AuthenticateUserRequest");
-            return isAuthenticating;
+            return request.GetRequestName().Equals("AuthenticateUser");
         }
 
         public static bool IsPermitted<TRequest>(this ClaimsPrincipal user, TRequest request)
         {
-            var requestName = typeof(TRequest).Name;
-            var privilegeName = requestName.TrimRequestName();
-            return user.HasClaim(x => x.Type.Equals(Privileges) && x.Value.Equals(privilegeName));
+            var privilege = request.GetRequestName();
+            return user.HasClaim(x => x.Type.Equals(Privileges) && x.Value.Equals(privilege));
         }
-
-        private static string TrimRequestName(this string requestName)
+        
+        private static string GetRequestName<TRequest>(this TRequest request)
         {
-            var privilegeName = requestName.Replace(Request, "");
-            return privilegeName;
+            return typeof(TRequest).Name.Replace(Request, "");
         }
     }
 }
