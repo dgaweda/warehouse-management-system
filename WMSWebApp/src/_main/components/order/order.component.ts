@@ -4,11 +4,14 @@ import {OrderService} from "../../_service/order.service";
 import { OrderState} from "../../_models/order.model";
 import {ResponseBody} from "../../_shared/responseBody.model";
 import { HttpErrorResponse } from '@angular/common/http';
+import {UserService} from "../../_service/user.service";
+import {AuthenticationService} from "../../_auth/auth.service";
+import {Roles} from "../../_models/role.model";
 
 export enum Headers {
   Lp = 'Lp.',
   OrderState = 'Stan zamówienia',
-  Barcode = 'Kod kreskowy',
+  Barcode = 'Numer zamówienia',
   LinesCount = 'Ilość linii'
 }
 
@@ -18,19 +21,24 @@ export enum Headers {
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
-  headers: string[];
-  orders: ResponseBody<Order[]>;
-  isReceived: boolean;
-  orderQueue: Order[];
   OrderState = OrderState;
 
+  headers: string[];
+
+  orders: ResponseBody<Order[]>;
+  orderQueue: Order[];
+
+  isReceived: boolean;
+  isAdmin: boolean;
 
   constructor(
-    public orderService: OrderService
+    public orderService: OrderService,
+    private authService: AuthenticationService
   ) {
     this.orders = {data: []};
     this.orderQueue = [];
     this.isReceived = false;
+    this.isAdmin = this.authService.currentUser.roleKey === Roles.ADMIN;
   }
 
   ngOnInit(): void {
@@ -48,7 +56,7 @@ export class OrderComponent implements OnInit {
       .subscribe(
         (orders: ResponseBody<Order[]>) => {
           this.orders = orders;
-          this.orders.data.forEach((order: Order) => order.readableOrderState = this.orderService.getReadableOrderStatus(order.orderState))
+          this.orders.data.forEach((order: Order) => order.readableOrderState = this.orderService.getOrderStateValue(order.orderState))
         },
         (error: HttpErrorResponse) => {
           this.orders.error = error.error.errors.Name

@@ -26,7 +26,7 @@ namespace warehouse_management_system
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public static IConfiguration Configuration { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -53,7 +53,7 @@ namespace warehouse_management_system
 
             services.AddDbContext<WMSDatabaseContext>(
                 option =>
-                    option.UseSqlServer(this.Configuration.GetConnectionString("WMSDatabaseContext")));
+                    option.UseSqlServer(Configuration.GetConnectionString("WMSDatabaseContext")));
 
             services.AddScoped(typeof(IValidatorHelper), typeof(ValidatorHelper));
 

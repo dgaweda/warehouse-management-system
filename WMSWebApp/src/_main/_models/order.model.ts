@@ -1,4 +1,5 @@
 import {ErrorMessage} from "./error.message.model";
+import {OrderLine} from "./orderLine.model";
 
 export enum OrderState {
   RECEIVED = 'OTRZYMANE',
@@ -21,4 +22,18 @@ export interface Order extends ErrorMessage {
   barcode: string;
   linesCount: number;
   readableOrderState?: string;
+  pickingStart?: string;
+  pickingEnd?: string;
+  orderLines: OrderLine[];
+}
+
+export interface EditOrderRequest {
+  id: number,
+  barcode: string;
+  orderState: string;
+}
+
+export interface AddOrderRequest {
+  barcode: string;
+  orderLines: OrderLine[];
 }

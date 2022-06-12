@@ -8,17 +8,18 @@ import {userApiUrl} from "../_shared/apiUrl.service";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
-  private userSubject: BehaviorSubject<User | null>;
+  private userSubject$: BehaviorSubject<User | null>;
 
   constructor(
     private router: Router,
     private http: HttpClient,
   ) {
-    this.userSubject = this.getUserSubject();
+    this.userSubject$ = this.getUserSubject();
+    console.log(`User:`, this.userSubject$.value);
   }
 
   get currentUser(): User {
-    return this.userSubject.value as User;
+    return this.userSubject$.value as User;
   }
 
   private getUserSubject(): BehaviorSubject<User | null> {
@@ -43,17 +44,16 @@ export class AuthenticationService {
       Password: password
     }).pipe(
       map((user: User) => {
-        console.log(`user error`, user.error);
         user.authData = window.btoa(username + ':' + password);
         localStorage.setItem('user', JSON.stringify(user));
-        this.userSubject.next(user);
+        this.userSubject$.next(user);
         return user;
       }));
   }
 
   logout(): void {
     localStorage.removeItem('user');
-    this.userSubject.next(null);
+    this.userSubject$.next(null);
     this.router.navigate(['/login']);
   }
 }

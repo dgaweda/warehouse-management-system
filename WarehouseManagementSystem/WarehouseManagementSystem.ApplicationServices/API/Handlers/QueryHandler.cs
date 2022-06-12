@@ -3,7 +3,6 @@ using AutoMapper;
 using DataAccess;
 using DataAccess.CQRS.Queries;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;

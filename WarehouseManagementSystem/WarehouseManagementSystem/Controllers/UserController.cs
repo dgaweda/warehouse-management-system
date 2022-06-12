@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using MediatR;
@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using warehouse_management_system.Controllers.BaseController;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 
 namespace warehouse_management_system.Controllers
@@ -26,15 +25,14 @@ namespace warehouse_management_system.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("Login/")]
-        public async Task<IActionResult> AuthenticateUser([FromBody] AuthenticateUserRequest request) =>
-            await Handle<AuthenticateUserRequest, AuthenticateUserResponse>(request);
+        public async Task<IActionResult> AuthenticateUser([FromBody] AuthenticateUserRequest request) => await Handle<AuthenticateUserRequest, AuthenticateUserResponse>(request);
 
-        [Authorize]
+        [AllowAnonymous]
         [HttpPost]
         [Route("Add/")]
         public async Task<IActionResult> AddUser([FromBody] AddUserRequest request) => await Handle<AddUserRequest, AddUserResponse>(request);
 
-        [Authorize]
+            [Authorize]
         [HttpGet]
         [Route("Get/")]
         public async Task<IActionResult> GetUsers([FromQuery] GetUsersRequest request) => await Handle<GetUsersRequest, GetUsersResponse>(request);
