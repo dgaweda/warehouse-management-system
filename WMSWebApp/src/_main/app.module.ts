@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/layout/header/header.component';
-import { FooterComponent } from './components/layout/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { DeliveryComponent } from './components/delivery/delivery.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -16,17 +15,18 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { OrderComponent } from './components/order/order.component';
 import {BasicAuthInterceptor} from "./auth/auth.interceptor";
 import { ErrorInterceptor } from './auth/error.interceptor';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MainComponent,
-    FooterComponent,
     LoginComponent,
     UserDetailsComponent,
     DeliveryComponent,
-    OrderComponent
+    OrderComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

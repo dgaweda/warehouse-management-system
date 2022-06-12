@@ -1,5 +1,5 @@
 import { ProductPalletLine } from "./productPalletLine.model";
-import { ErrorMessage } from "./error.message.model";
+import { ErrorMessage } from "../shared/models/error.message.model";
 
 export interface Product extends ErrorMessage {
     id: number;

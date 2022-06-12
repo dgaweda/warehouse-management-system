@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {Order, OrderStateColor} from "../../models/order.model";
 import {OrderService} from "../../service/order.service";
 import { OrderState} from "../../models/order.model";
-import {ResponseBody} from "../../shared/responseBody.model";
+import {ResponseBody} from "../../shared/models/responseBody.model";
 import { HttpErrorResponse } from '@angular/common/http';
 import {UserService} from "../../service/user.service";
 import {AuthenticationService} from "../../auth/auth.service";

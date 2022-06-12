@@ -1,4 +1,4 @@
-import {ErrorMessage} from "./error.message.model";
+import {ErrorMessage} from "../shared/models/error.message.model";
 import {OrderLine} from "./orderLine.model";
 
 export enum OrderState {

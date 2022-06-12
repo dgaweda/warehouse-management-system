@@ -1,4 +1,4 @@
-import {ErrorMessage} from "./error.message.model";
+import {ErrorMessage} from "../shared/models/error.message.model";
 
 export interface Location extends ErrorMessage {
   id: number;

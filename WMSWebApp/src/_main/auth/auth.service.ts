@@ -4,7 +4,7 @@ import {User} from "../models/user.model";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {userApiUrl} from "../shared/apiUrl.service";
+import {userApiUrl} from "../shared/service/apiUrl.service";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
@@ -15,7 +15,6 @@ export class AuthenticationService {
     private http: HttpClient,
   ) {
     this.userSubject$ = this.getUserSubject();
-    console.log(`User:`, this.userSubject$.value);
   }
 
   get currentUser(): User {
