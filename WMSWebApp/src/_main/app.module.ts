@@ -39,7 +39,8 @@ import { HomeComponent } from './components/home/home.component';
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: Config, useValue: environment}
   ],
   bootstrap: [AppComponent]
 })

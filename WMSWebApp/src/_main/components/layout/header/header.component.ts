@@ -1,8 +1,10 @@
-import {Component, OnDestroy, OnInit } from '@angular/core';
-import {DefaultPages, LoginPage, Page} from "../../../shared/models/page.model";
+
+import {Component, OnInit } from '@angular/core';
 import {AuthenticationService} from "../../../auth/auth.service";
-import { NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import {Config} from "../../../shared/models/config.model";
+import {Page} from "../../../shared/models/page.model";
 
 @Component({
   selector: 'app-header',
@@ -25,11 +27,26 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.pipe(
       filter((e: any): e is NavigationEnd  => e instanceof NavigationEnd)
-    ).subscribe((e: NavigationEnd) => {
-      if(e.url.includes('login')) {
-
-      }
+    ).subscribe((e: NavigationEnd) => { 
       this.pages = e.url.includes('login') ? LoginPage : DefaultPages;
+      this.showLogoutButton = e.url.includes('home');
+    });
+
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    private config: Config
+  )
+  {
+    this.pages = [];
+    this.showLogoutButton = false;
+  }
+
+  ngOnInit(): void {
+    this.router.events.pipe(
+      filter((e: any): e is NavigationEnd  => e instanceof NavigationEnd)
+    ).subscribe((e: NavigationEnd) => {
+      this.pages = e.url.includes('login') ? this.config.NavigationConfig.loginPage : this.config.NavigationConfig.mainPages;
       this.showLogoutButton = e.url.includes('home');
     });
   }

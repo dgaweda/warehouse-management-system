@@ -2,9 +2,10 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {AddOrderRequest, EditOrderRequest, Order, OrderState, OrderStateColor} from "../models/order.model";
 import {BehaviorSubject, Observable} from "rxjs";
-import {ApiUrlService, OrderApiUrl} from "../shared/service/apiUrl.service";
 import { environment } from "src/environments/environment";
 import {ResponseBody} from "../shared/models/responseBody.model";
+import {ApiService} from "../shared/service/api.service";
+import {Config} from "../shared/models/config.model";
 
 @Injectable({
   providedIn: 'root'
@@ -14,27 +15,28 @@ export class OrderService {
 
   constructor(
     private httpClient: HttpClient,
-    private apiUrlService: ApiUrlService
+    private apiService: ApiService,
+    private config: Config
   ) {
     this.order$ = new BehaviorSubject<Order[]>([]);
   }
 
   getOrders(id?: number): Observable<ResponseBody<Order[]>> {
-    const httpParam = this.apiUrlService.createHttpParam('Id', id);
-    return this.httpClient.get<ResponseBody<Order[]>>(`${environment.apiUrl}${OrderApiUrl.getOrders}`, { params: httpParam });
+    const httpParam = this.apiService.createHttpParam('Id', id);
+    return this.httpClient.get<ResponseBody<Order[]>>(`${this.config.baseApiUrl}${this.config.OrderApi.getOrders}`, { params: httpParam });
   }
 
   removeOrder(id: number): Observable<ResponseBody<Order>> {
-    const httpParam = this.apiUrlService.createHttpParam('Id', id);
-    return this.httpClient.delete<ResponseBody<Order>>(`${environment.apiUrl}${OrderApiUrl.deleteOrder}`, { params : httpParam});
+    const httpParam = this.apiService.createHttpParam('Id', id);
+    return this.httpClient.delete<ResponseBody<Order>>(`${this.config.baseApiUrl}${this.config.OrderApi.deleteOrder}`, { params : httpParam});
   }
 
   editOrder(body: EditOrderRequest): Observable<ResponseBody<Order>> {
-    return this.httpClient.put<ResponseBody<Order>>(`${environment.apiUrl}${OrderApiUrl.editOrder}`, body);
+    return this.httpClient.put<ResponseBody<Order>>(`${this.config.baseApiUrl}${this.config.OrderApi.editOrder}`, body);
   }
 
   addOrder(order: AddOrderRequest): Observable<ResponseBody<Order>> {
-    return this.httpClient.post<ResponseBody<Order>>(`${environment.apiUrl}${OrderApiUrl.addOrder}`, order);
+    return this.httpClient.post<ResponseBody<Order>>(`${this.config.baseApiUrl}${this.config.OrderApi.addOrder}`, order);
   }
 
   getOrderStateValue(state: string): string {
