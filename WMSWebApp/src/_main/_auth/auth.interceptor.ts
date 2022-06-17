@@ -9,6 +9,7 @@ export class BasicAuthInterceptor implements HttpInterceptor {
 
   constructor(private authService: AuthenticationService) {
   }
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const currentUser = this.authService.currentUser;
     const headers = new HttpHeaders({

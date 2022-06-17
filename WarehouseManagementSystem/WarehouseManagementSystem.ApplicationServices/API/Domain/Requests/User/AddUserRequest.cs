@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 using WarehouseManagementSystem.ApplicationServices.API.Enums;
 

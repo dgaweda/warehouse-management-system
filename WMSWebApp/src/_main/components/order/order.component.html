@@ -22,9 +22,14 @@
     <td>{{ order.barcode }}</td>
     <td>{{ order.readableOrderState }}</td>
     <td>{{ order.linesCount }}</td>
-    <td style="width: 3rem;">
-      <div class="row m-0">
+    <td>
+      <div class="row m-1">
         <button class="btn-primary download--button text-white" type="button" [disabled]="OrderState.RECEIVED !== order.readableOrderState" (click)="addOrderToQueue(order, orderRow)">POBIERZ</button>
+      </div>
+    </td>
+    <td [hidden]="!isAdmin">
+      <div class="row m-1">
+        <button class="btn-primary download--button text-white text-uppercase" type="button" (click)="addOrderToQueue(order, orderRow)">usuń</button>
       </div>
     </td>
   </tr>

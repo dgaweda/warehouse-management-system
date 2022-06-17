@@ -5,7 +5,7 @@ export interface User extends ErrorMessage {
   userName: string;
   password: string;
   email?: string;
-  roleKey?: string;
+  roleKey: string | number;
   name?: string;
   lastName?: string;
   pesel?: string;
