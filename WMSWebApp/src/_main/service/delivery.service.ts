@@ -1,9 +1,9 @@
 import {HttpClient} from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import {ApiUrlService, DeliveryApiUrl} from "../_shared/apiUrl.service";
+import {ApiUrlService, DeliveryApiUrl} from "../shared/service/apiUrl.service";
 import {environment} from "../../environments/environment";
-import { Delivery } from "../_models/delivery.model";
-import {ResponseBody} from "../_shared/responseBody.model";
+import { Delivery } from "../models/delivery.model";
+import {ResponseBody} from "../shared/models/responseBody.model";
 import { Observable } from "rxjs";
 
 @Injectable({

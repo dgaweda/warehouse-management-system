@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {AddOrderRequest, EditOrderRequest, Order, OrderState, OrderStateColor} from "../_models/order.model";
+import {AddOrderRequest, EditOrderRequest, Order, OrderState, OrderStateColor} from "../models/order.model";
 import {BehaviorSubject, Observable} from "rxjs";
-import {ApiUrlService, OrderApiUrl} from "../_shared/apiUrl.service";
+import {ApiUrlService, OrderApiUrl} from "../shared/service/apiUrl.service";
 import { environment } from "src/environments/environment";
-import {ResponseBody} from "../_shared/responseBody.model";
+import {ResponseBody} from "../shared/models/responseBody.model";
 
 @Injectable({
   providedIn: 'root'

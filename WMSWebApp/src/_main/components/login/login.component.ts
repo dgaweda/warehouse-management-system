@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
 import { Validators } from '@angular/forms';
 import {ActivatedRoute, Router} from "@angular/router";
-import {AuthenticationService} from "../../_auth/auth.service";
+import {AuthenticationService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-login-panel',
@@ -24,7 +24,7 @@ export class LoginComponent{
     this.submitted = false;
     this.error = '';
     if(this.authenticationService.currentUser) {
-      this.router.navigate(['/delivery']);
+      this.router.navigate(['/home']);
     }
 
     this.loginForm = new FormGroup({
@@ -47,7 +47,7 @@ export class LoginComponent{
     this.authenticationService.login(this.formData.username, this.formData.password)
       .subscribe(
         () => {
-          this.router.navigate(['/order']);
+          this.router.navigate(['/home']);
           this.loading = false;
         },
         () => {
