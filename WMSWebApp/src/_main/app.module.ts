@@ -14,8 +14,16 @@ import { UserDetailsComponent } from "./components/user/details/user.details.com
 import { MainComponent } from "./components/layout/main/main.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { OrderComponent } from './components/order/order.component';
+<<<<<<< Updated upstream
 import {BasicAuthInterceptor} from "./_auth/auth.interceptor";
 import { ErrorInterceptor } from './_auth/error.interceptor';
+=======
+import {BasicAuthInterceptor} from "./auth/auth.interceptor";
+import { ErrorInterceptor } from './auth/error.interceptor';
+import { HomeComponent } from './components/home/home.component';
+import {Config} from "./shared/models/config.model";
+import {environment} from "../environments/environment";
+>>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
@@ -39,7 +47,8 @@ import { ErrorInterceptor } from './_auth/error.interceptor';
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: Config, useValue: environment}
   ],
   bootstrap: [AppComponent]
 })
