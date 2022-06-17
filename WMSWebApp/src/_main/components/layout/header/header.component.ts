@@ -1,4 +1,3 @@
-
 import {Component, OnInit } from '@angular/core';
 import {AuthenticationService} from "../../../auth/auth.service";
 import { NavigationEnd, Router } from '@angular/router';
@@ -14,23 +13,6 @@ import {Page} from "../../../shared/models/page.model";
 export class HeaderComponent implements OnInit {
   pages: Page[] = [];
   showLogoutButton: boolean = false;
-
-  constructor(
-    private authenticationService: AuthenticationService,
-    private router: Router
-  )
-  {
-    this.pages = [];
-    this.showLogoutButton = false;
-  }
-
-  ngOnInit(): void {
-    this.router.events.pipe(
-      filter((e: any): e is NavigationEnd  => e instanceof NavigationEnd)
-    ).subscribe((e: NavigationEnd) => { 
-      this.pages = e.url.includes('login') ? LoginPage : DefaultPages;
-      this.showLogoutButton = e.url.includes('home');
-    });
 
   constructor(
     private authenticationService: AuthenticationService,

@@ -49,7 +49,7 @@ class Environment implements Config {
       { route: '/order', name: 'Zamówienia' },
       { route: '/delivery', name: 'Dostawy' }
     ],
-    loginPage: { route: '/login', name: 'Logowanie' }
+    loginPage: [{ route: '/login', name: 'Logowanie' }]
   };
 }
 

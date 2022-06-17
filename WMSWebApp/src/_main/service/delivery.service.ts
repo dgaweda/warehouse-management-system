@@ -1,11 +1,10 @@
 import {HttpClient} from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import {environment} from "../../environments/environment";
-import { Delivery } from "../models/delivery.model";
 import {ResponseBody} from "../shared/models/responseBody.model";
 import { Observable } from "rxjs";
-import {ApiService} from "../shared/service/api.service";
 import {Config} from "../shared/models/config.model";
+import {ApiService} from "../_shared/api.service";
+import {Delivery} from "../models/delivery.model";
 
 @Injectable({
   providedIn: 'root'

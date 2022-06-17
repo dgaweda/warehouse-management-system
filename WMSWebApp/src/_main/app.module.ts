@@ -14,8 +14,10 @@ import { MainComponent } from "./components/layout/main/main.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { OrderComponent } from './components/order/order.component';
 import {BasicAuthInterceptor} from "./auth/auth.interceptor";
-import { ErrorInterceptor } from './auth/error.interceptor';
 import { HomeComponent } from './components/home/home.component';
+import {Config} from "./shared/models/config.model";
+import {environment} from "../environments/environment";
+import {ErrorInterceptor} from "./auth/error.interceptor";
 
 @NgModule({
   declarations: [

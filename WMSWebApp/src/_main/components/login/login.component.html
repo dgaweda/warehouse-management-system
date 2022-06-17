@@ -1,5 +1,5 @@
 
-<form [formGroup]="loginForm" class="container-sm h-75 w-75" (ngSubmit)="onSubmit()">
+<form [formGroup]="loginForm" class="container-sm h-75 w-50" (submit)="onSubmit()">
   <div class="container-md border mt-5 p-3">
     <div *ngIf="error" class="alert alert-danger mt-3 mb-0" >{{ error }}</div>
     <h6>Login:</h6>

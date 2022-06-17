@@ -2,10 +2,9 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {AddOrderRequest, EditOrderRequest, Order, OrderState, OrderStateColor} from "../models/order.model";
 import {BehaviorSubject, Observable} from "rxjs";
-import { environment } from "src/environments/environment";
 import {ResponseBody} from "../shared/models/responseBody.model";
-import {ApiService} from "../shared/service/api.service";
 import {Config} from "../shared/models/config.model";
+import {ApiService} from "../_shared/api.service";
 
 @Injectable({
   providedIn: 'root'

@@ -44,7 +44,7 @@ export abstract class Config {
 
   NavigationConfig: {
     mainPages: Page[];
-    loginPage: Page;
+    loginPage: Page[];
   };
 }
 
