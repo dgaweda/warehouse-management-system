@@ -1,14 +1,10 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject, map} from "rxjs";
-import {User} from "../_models/user.model";
+import {User} from "../models/user.model";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
-<<<<<<< Updated upstream:WMSWebApp/src/_main/_auth/auth.service.ts
 import {environment} from "../../environments/environment";
-import {userApiUrl} from "../_shared/apiUrl.service";
-=======
 import {Config} from "../shared/models/config.model";
->>>>>>> Stashed changes:WMSWebApp/src/_main/auth/auth.service.ts
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
@@ -20,7 +16,6 @@ export class AuthenticationService {
     private config: Config
   ) {
     this.userSubject$ = this.getUserSubject();
-    console.log(`User:`, this.userSubject$.value);
   }
 
   get currentUser(): User {
