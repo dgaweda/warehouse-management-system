@@ -4,7 +4,7 @@ import {AddOrderRequest, EditOrderRequest, Order, OrderState, OrderStateColor} f
 import {BehaviorSubject, Observable} from "rxjs";
 import {ResponseBody} from "../shared/models/responseBody.model";
 import {Config} from "../shared/models/config.model";
-import {ApiService} from "../_shared/api.service";
+import {ApiService} from "../shared/service/api.service";
 
 @Injectable({
   providedIn: 'root'

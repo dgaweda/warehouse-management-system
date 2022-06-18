@@ -20,7 +20,9 @@ export class BasicAuthInterceptor implements HttpInterceptor {
 
     const isApiUrl = request.url.startsWith(this.config.baseApiUrl);
     if(currentUser && isApiUrl) {
-      request = request.clone({headers})
+      request = request.clone(
+        { headers }
+      )
     }
 
     return next.handle(request);

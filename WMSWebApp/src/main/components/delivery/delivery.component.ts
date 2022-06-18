@@ -1,7 +1,7 @@
 import {HttpErrorResponse, HttpResponseBase } from '@angular/common/http';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
-import {DeliveryService} from 'src/_main/service/delivery.service';
+import {DeliveryService} from 'src/main/service/delivery.service';
 import {ResponseBody} from "../../shared/models/responseBody.model";
 import {Delivery} from "../../models/delivery.model";
 
@@ -13,7 +13,7 @@ import {Delivery} from "../../models/delivery.model";
 export class DeliveryComponent implements OnInit {
   deliveries: ResponseBody<Delivery[]>;
 
-  constructor(private deliveryService: DeliveryService, private router: Router) {
+  constructor(private deliveryService: DeliveryService) {
     this.deliveries = {data: []};
   }
 
@@ -27,8 +27,8 @@ export class DeliveryComponent implements OnInit {
         (delivery: ResponseBody<Delivery[]>) => {
         this.deliveries = delivery;
       },
-        (error: HttpErrorResponse) => {
-          this.deliveries.error = error.error.errors.Name;
+        (response: HttpErrorResponse) => {
+          this.deliveries.error = response.error.errors.Name;
         }
       )
   }

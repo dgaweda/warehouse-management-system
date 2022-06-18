@@ -12,3 +12,8 @@ export interface User extends ErrorMessage {
   age?: number;
   authData?: string;
 }
+
+export interface AuthenticateUser {
+  username: string;
+  password: string;
+}

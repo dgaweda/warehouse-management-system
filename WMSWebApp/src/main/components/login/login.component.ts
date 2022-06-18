@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
 import { Validators } from '@angular/forms';
 import {ActivatedRoute, Router} from "@angular/router";
+import { filter } from 'rxjs';
 import {AuthenticationService} from "../../auth/auth.service";
+import {AuthenticateUser, User} from "../../models/user.model";
 
 @Component({
   selector: 'app-login-panel',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent{
+export class LoginComponent {
   loginForm : FormGroup;
   loading: boolean;
   submitted: boolean;
@@ -44,13 +46,14 @@ export class LoginComponent{
     }
 
     this.loading = true;
-    this.authenticationService.login(this.formData.username, this.formData.password)
+    this.authenticationService.login(this.formData)
       .subscribe(
         () => {
           this.router.navigate(['/home']);
           this.loading = false;
         },
-        () => {
+        error => {
+          console.error(error);
           this.error = `Nieprawdiłowy login lub hasło.`;
           this.loading = false;
         });

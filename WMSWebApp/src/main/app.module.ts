@@ -18,6 +18,7 @@ import { HomeComponent } from './components/home/home.component';
 import {Config} from "./shared/models/config.model";
 import {environment} from "../environments/environment";
 import {ErrorInterceptor} from "./auth/error.interceptor";
+import { DxButtonModule } from 'devextreme-angular';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {ErrorInterceptor} from "./auth/error.interceptor";
   imports: [
     BrowserModule,
     AppRoutingModule,
+    DxButtonModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

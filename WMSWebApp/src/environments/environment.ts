@@ -2,39 +2,40 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import {Config} from "../_main/shared/models/config.model";
+import {Config} from "../main/shared/models/config.model";
 
 class Environment implements Config {
   production: false;
-    baseApiUrl: "https://localhost:44388";
-    UserApi: {
-      login: '/User/Login'
+    baseApiUrl = 'https://localhost:44388';
+    UserApi = {
+      login: '/User/Login',
+      getUser: '/User/Get'
     };
-    OrderApi: {
+    OrderApi = {
       getOrders: '/Order/Get',
       deleteOrder: '/Order/Remove',
       editOrder: '/Order/Edit',
       addOrder: '/Order/Add'
     };
-    DeliveryApi: {
+    DeliveryApi = {
       getDeliveries: '/Delivery/Get',
       addDelivery: '/Delivery/Add',
       removeDelivery: '/Delivery/Remove',
       editDelivery: '/Delivery/Edit'
     };
-    DepartureApi: {
+    DepartureApi = {
       getDeparture: '/Departure/Get',
       addDeparture: '/Departure/Add',
       editDeparture: '/Departure/Edit',
       removeDeparture: '/Departure/Remove'
     };
-    InvoiceApi: {
+    InvoiceApi = {
       getInvoice: '/Invoice/Get',
       addInvoice: '/Invoice/Add',
       removeInvoice: '/Invoice/Remove',
       editInvoice: '/Invoice/Edit'
     };
-    LocationApi: {
+    LocationApi = {
       getLocation: '/Location/Get',
       addLocation: '/Location/Add',
       editLocation: '/Location/Edit',
@@ -43,13 +44,13 @@ class Environment implements Config {
       removeLocation: '/Location/Remove'
     };
 
-  NavigationConfig = {
-    mainPages: [
-      { route: '/home', name: 'Strona Główna' },
-      { route: '/order', name: 'Zamówienia' },
-      { route: '/delivery', name: 'Dostawy' }
-    ],
-    loginPage: [{ route: '/login', name: 'Logowanie' }]
+    NavigationConfig = {
+      mainPages: [
+        { route: '/home', name: 'Strona Główna' },
+        { route: '/order', name: 'Zamówienia' },
+        { route: '/delivery', name: 'Dostawy' }
+      ],
+      loginPage: [{ route: '/login', name: 'Logowanie' }]
   };
 }
 
