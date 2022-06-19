@@ -32,7 +32,7 @@ namespace warehouse_management_system.Controllers
         [Route("Add/")]
         public async Task<IActionResult> AddUser([FromBody] AddUserRequest request) => await Handle<AddUserRequest, AddUserResponse>(request);
 
-            [Authorize]
+        [Authorize]
         [HttpGet]
         [Route("Get/")]
         public async Task<IActionResult> GetUsers([FromQuery] GetUsersRequest request) => await Handle<GetUsersRequest, GetUsersResponse>(request);

@@ -20,6 +20,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.Age));
 
             CreateMap<User, API.Domain.Models.User>()
+                .ForMember(dest => dest.Id, options => options.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Name, options => options.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
                 .ForMember(dest => dest.UserName, options => options.MapFrom(src => src.UserName))

@@ -2,7 +2,6 @@
 using DataAccess.CQRS;
 using DataAccess.CQRS.Commands;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
