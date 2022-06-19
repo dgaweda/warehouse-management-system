@@ -2,6 +2,7 @@ import {Page} from "./page.model";
 
 export abstract class Config {
   production: boolean;
+  secretKey: string;
   baseApiUrl: string;
   UserApi: {
     login: string;

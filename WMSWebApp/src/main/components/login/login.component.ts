@@ -5,13 +5,14 @@ import {ActivatedRoute, Router} from "@angular/router";
 import { filter } from 'rxjs';
 import {AuthenticationService} from "../../auth/auth.service";
 import {AuthenticateUser, User} from "../../models/user.model";
+import {BaseComponent} from "../base.component";
 
 @Component({
   selector: 'app-login-panel',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent extends BaseComponent {
   loginForm : FormGroup;
   loading: boolean;
   submitted: boolean;
@@ -22,6 +23,7 @@ export class LoginComponent {
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
+    super();
     this.loading = false;
     this.submitted = false;
     this.error = '';
@@ -46,7 +48,8 @@ export class LoginComponent {
     }
 
     this.loading = true;
-    this.authenticationService.login(this.formData)
+    this.addSubscription(
+      this.authenticationService.login(this.formData)
       .subscribe(
         () => {
           this.router.navigate(['/home']);
@@ -56,6 +59,7 @@ export class LoginComponent {
           console.error(error);
           this.error = `Nieprawdiłowy login lub hasło.`;
           this.loading = false;
-        });
+        })
+    );
   }
 }

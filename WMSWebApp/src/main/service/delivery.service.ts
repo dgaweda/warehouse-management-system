@@ -18,7 +18,7 @@ export class DeliveryService {
   ) {}
 
   getDeliveries(deliveryName?: string): Observable<ResponseBody<Delivery[]>> {
-    const name = this.apiService.createHttpParam('Name', deliveryName);
+    const name = this.apiService.createHttpParams([{key: 'Name', value: deliveryName}]);
     return this.httpClient.get<ResponseBody<Delivery[]>>(`${this.config.baseApiUrl}${this.config.DeliveryApi.getDeliveries}`, {params: name});
   }
 }

@@ -5,37 +5,39 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {ResponseBody} from "../shared/models/responseBody.model";
 import {Config} from "../shared/models/config.model";
 import {ApiService} from "../shared/service/api.service";
+import {BaseService} from "./base.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class OrderService {
+export class OrderService extends BaseService {
   private order$: BehaviorSubject<Order[]>;
 
   constructor(
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private apiService: ApiService,
     private config: Config
   ) {
+    super(http, config);
     this.order$ = new BehaviorSubject<Order[]>([]);
   }
 
   getOrders(id?: number): Observable<ResponseBody<Order[]>> {
-    const httpParam = this.apiService.createHttpParam('Id', id);
-    return this.httpClient.get<ResponseBody<Order[]>>(`${this.config.baseApiUrl}${this.config.OrderApi.getOrders}`, { params: httpParam });
+    const httpParam = this.apiService.createHttpParams([{key: 'Id',value: id}]);
+    return this.get<ResponseBody<Order[]>>(this.cfg.OrderApi.getOrders, httpParam);
   }
 
   removeOrder(id: number): Observable<ResponseBody<Order>> {
-    const httpParam = this.apiService.createHttpParam('Id', id);
-    return this.httpClient.delete<ResponseBody<Order>>(`${this.config.baseApiUrl}${this.config.OrderApi.deleteOrder}`, { params : httpParam});
+    const httpParams = this.apiService.createHttpParams([{key: 'Id',value: id}]);
+    return this.delete<ResponseBody<Order>>(this.config.OrderApi.deleteOrder, httpParams);
   }
 
   editOrder(body: EditOrderRequest): Observable<ResponseBody<Order>> {
-    return this.httpClient.put<ResponseBody<Order>>(`${this.config.baseApiUrl}${this.config.OrderApi.editOrder}`, body);
+    return this.put<ResponseBody<Order>>(this.config.OrderApi.editOrder, body);
   }
 
   addOrder(order: AddOrderRequest): Observable<ResponseBody<Order>> {
-    return this.httpClient.post<ResponseBody<Order>>(`${this.config.baseApiUrl}${this.config.OrderApi.addOrder}`, order);
+    return this.post<ResponseBody<Order>>(this.config.OrderApi.addOrder, order);
   }
 
   getOrderStateValue(state: string): string {

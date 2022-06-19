@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import {UserService} from "../../service/user.service";
 import {AuthenticationService} from "../../auth/auth.service";
 import {Roles} from "../../models/role.model";
+import {BaseComponent} from "../base.component";
 
 export enum Headers {
   Lp = 'Lp.',
@@ -20,7 +21,7 @@ export enum Headers {
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss']
 })
-export class OrderComponent implements OnInit {
+export class OrderComponent extends BaseComponent implements OnInit {
   OrderState = OrderState;
 
   headers: string[];
@@ -35,6 +36,7 @@ export class OrderComponent implements OnInit {
     public orderService: OrderService,
     private authService: AuthenticationService
   ) {
+    super();
     this.orders = {data: []};
     this.orderQueue = [];
     this.isReceived = false;
@@ -52,7 +54,7 @@ export class OrderComponent implements OnInit {
   }
 
   getOrders(id?: number): void {
-    this.orderService.getOrders(id)
+    this.addSubscription(this.orderService.getOrders(id)
       .subscribe(
         (orders: ResponseBody<Order[]>) => {
           this.orders = orders;
@@ -61,7 +63,8 @@ export class OrderComponent implements OnInit {
         (error: HttpErrorResponse) => {
           this.orders.error = error.error.errors.Name
         }
-      );
+      )
+    );
   }
 
   addOrderToQueue(order: Order, orderRow: HTMLElement): void {

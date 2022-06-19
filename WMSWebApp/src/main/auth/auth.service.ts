@@ -1,23 +1,24 @@
 import {Injectable} from "@angular/core";
-import {BehaviorSubject, map, Observable, tap} from "rxjs";
+import {BehaviorSubject, map, Observable } from "rxjs";
 import {User} from "../models/user.model";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {Config} from "../shared/models/config.model";
 import {AuthenticationData} from "../shared/models/authentication.model";
-import {UserService} from "../service/user.service";
 import {ResponseBody} from "../shared/models/responseBody.model";
+import * as CryptoJS from 'crypto-js';
+import {BaseService} from "../service/base.service";
 
 @Injectable({providedIn: 'root'})
-export class AuthenticationService {
+export class AuthenticationService extends BaseService{
   private userSubject$: BehaviorSubject<User | null>;
 
   constructor(
     private router: Router,
     private http: HttpClient,
-    private config: Config,
-    private userService: UserService
+    private config: Config
   ) {
+    super(http, config);
     this.userSubject$ = this.getUserSubject();
   }
 
@@ -26,12 +27,9 @@ export class AuthenticationService {
   }
 
   login(authData: AuthenticationData): Observable<ResponseBody<User>> {
-    return this.http.post<ResponseBody<User>>(`${this.config.baseApiUrl}${this.config.UserApi.login}`, authData).pipe(
+    return this.post<ResponseBody<User>>(this.config.UserApi.login, authData).pipe(
       map((user: ResponseBody<User>) => {
-        console.log(`User`, user);
-        if(!localStorage.getItem('userId')){
-          localStorage.setItem('userId', `${user.data.id}`);
-        }
+        localStorage.setItem('user', this.codeUserData(user.data));
         this.userSubject$.next(user.data);
         return user;
         })
@@ -45,16 +43,32 @@ export class AuthenticationService {
   }
 
   private getUserSubject(): BehaviorSubject<User | null> {
-    const userId = localStorage.getItem('userId');
-    if (userId) {
-      console.log(userId);
-      this.userService.getUser(Number(userId)).pipe(
-        map((user: User) => {
-          console.log(user);
-          return new BehaviorSubject<User>(user); // fix authent
-        })
-      );
+    const userData = localStorage.getItem('user');
+    if(userData) {
+      return new BehaviorSubject<User | null>(this.decodeUserData(userData));
     }
     return new BehaviorSubject<User | null>(null);
+  }
+
+  private codeUserData(userData: User): any {
+    try {
+      const data = CryptoJS.AES.encrypt(JSON.stringify(userData), this.config.secretKey).toString();
+      console.log(data);
+      return data
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  private decodeUserData(userData: string): any {
+    try {
+      const data = CryptoJS.AES.decrypt(userData, this.config.secretKey).toString(CryptoJS.enc.Utf8);
+      if(data) {
+        return JSON.parse(data);
+      }
+      return userData;
+    } catch (e) {
+      console.error(e);
+    }
   }
 }
