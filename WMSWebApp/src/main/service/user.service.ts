@@ -14,6 +14,6 @@ export class UserService extends BaseService {
 
   getUsers(id?: number): Observable<User> {
     const httpParams = this.apiService.createHttpParams([{key: 'id', value: id}]);
-    return this.get<User>(this.cfg.UserApi.getUser, httpParams);
+    return this.get<User>(this.config.UserApi.getUser, httpParams);
   }
 }

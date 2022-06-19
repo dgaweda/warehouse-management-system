@@ -8,9 +8,8 @@ export class ApiService {
 
   createHttpParams(requestParams: RequestParam[]): HttpParams {
     let params = new HttpParams();
-    requestParams.forEach((param: RequestParam) => {
-      params = params.append(param.key, <string>param.value);
-    })
+    requestParams.filter((param: RequestParam) => param.value)
+      .forEach((param: RequestParam) => params = params.append(param.key, <string>param.value));
 
     return params;
   }

@@ -3,7 +3,7 @@ import {Config} from "../shared/models/config.model";
 import { Observable } from "rxjs";
 
 export class BaseService {
-  constructor(private httpClient: HttpClient, protected cfg: Config) {
+  constructor(private httpClient: HttpClient, private cfg: Config) {
   }
 
   protected get<T>(endpoint: string, httpParams?: HttpParams): Observable<T> {

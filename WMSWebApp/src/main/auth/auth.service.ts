@@ -29,6 +29,7 @@ export class AuthenticationService extends BaseService{
   login(authData: AuthenticationData): Observable<ResponseBody<User>> {
     return this.post<ResponseBody<User>>(this.config.UserApi.login, authData).pipe(
       map((user: ResponseBody<User>) => {
+        user.data.authData = window.btoa(authData.username + ':' + authData.password);
         localStorage.setItem('user', this.codeUserData(user.data));
         this.userSubject$.next(user.data);
         return user;

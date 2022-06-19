@@ -45,6 +45,10 @@ export class OrderComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.getOrders();
+    this.initHeaders();
+  }
+
+  initHeaders(): void {
     this.headers = [
       Headers.Lp,
       Headers.Barcode,
@@ -54,14 +58,15 @@ export class OrderComponent extends BaseComponent implements OnInit {
   }
 
   getOrders(id?: number): void {
-    this.addSubscription(this.orderService.getOrders(id)
+    this.addSubscription(
+      this.orderService.getOrders(id)
       .subscribe(
         (orders: ResponseBody<Order[]>) => {
           this.orders = orders;
           this.orders.data.forEach((order: Order) => order.readableOrderState = this.orderService.getOrderStateValue(order.orderState))
         },
         (error: HttpErrorResponse) => {
-          this.orders.error = error.error.errors.Name
+          this.orders.error = error;
         }
       )
     );

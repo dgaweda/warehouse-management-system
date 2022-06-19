@@ -13,6 +13,7 @@ export class BasicAuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const currentUser = this.authService.currentUser;
+    console.log(`CurrentUSer`, currentUser);
     const headers = new HttpHeaders({
       'Authorization': `Basic ${currentUser?.authData}`,
       'Content-Type': 'application/json; charset=UTF-8'

@@ -24,7 +24,7 @@ export class OrderService extends BaseService {
 
   getOrders(id?: number): Observable<ResponseBody<Order[]>> {
     const httpParam = this.apiService.createHttpParams([{key: 'Id',value: id}]);
-    return this.get<ResponseBody<Order[]>>(this.cfg.OrderApi.getOrders, httpParam);
+    return this.get<ResponseBody<Order[]>>(this.config.OrderApi.getOrders, httpParam);
   }
 
   removeOrder(id: number): Observable<ResponseBody<Order>> {
