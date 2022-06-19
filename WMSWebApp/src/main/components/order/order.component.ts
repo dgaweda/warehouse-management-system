@@ -44,8 +44,8 @@ export class OrderComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getOrders();
     this.initHeaders();
+    this.getOrders();
   }
 
   initHeaders(): void {
@@ -65,7 +65,7 @@ export class OrderComponent extends BaseComponent implements OnInit {
           this.orders = orders;
           this.orders.data.forEach((order: Order) => order.readableOrderState = this.orderService.getOrderStateValue(order.orderState))
         },
-        (error: HttpErrorResponse) => {
+        (error) => {
           this.orders.error = error;
         }
       )

@@ -27,12 +27,8 @@ export class DeliveryComponent extends BaseComponent implements OnInit {
     this.addSubscription(
       this.deliveryService.getDeliveries(name)
         .subscribe(
-          (delivery: ResponseBody<Delivery[]>) => {
-            this.deliveries = delivery;
-          },
-          (response: HttpErrorResponse) => {
-            this.deliveries.error = response.error.errors.Name;
-          }
+          (delivery: ResponseBody<Delivery[]>) => this.deliveries = delivery,
+          (error) => this.deliveries.error = error
         )
     );
   }

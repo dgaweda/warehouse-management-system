@@ -10,7 +10,7 @@ import * as CryptoJS from 'crypto-js';
 import {BaseService} from "../service/base.service";
 
 @Injectable({providedIn: 'root'})
-export class AuthenticationService extends BaseService{
+export class AuthenticationService extends BaseService {
   private userSubject$: BehaviorSubject<User | null>;
 
   constructor(
