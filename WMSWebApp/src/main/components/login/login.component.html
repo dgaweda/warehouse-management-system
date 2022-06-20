@@ -11,6 +11,7 @@
       <input formControlName="password" id="password" type="password" class="p-2">
     </div>
     <div class="row mt-5">
+      <dx-button [disabled]="!loginForm.valid || loading" styling="contained">Zaloguj</dx-button>
       <button type="submit" [disabled]="!loginForm.valid || loading" class="btn btn-primary fw-bold text-secondary p-3 mt-3 text-uppercase">
         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
         Zaloguj

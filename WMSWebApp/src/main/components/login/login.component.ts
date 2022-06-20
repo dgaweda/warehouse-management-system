@@ -27,6 +27,7 @@ export class LoginComponent extends BaseComponent {
     this.loading = false;
     this.submitted = false;
     this.error = '';
+    console.log(`dupa`,this.authenticationService.currentUser);
     if(this.authenticationService.currentUser) {
       this.router.navigate(['/home']);
     }
@@ -42,6 +43,7 @@ export class LoginComponent extends BaseComponent {
   }
 
   onSubmit(): void {
+    console.log(`onSubmit`);
     this.submitted = true;
     if(this.loginForm.invalid) {
       return;
