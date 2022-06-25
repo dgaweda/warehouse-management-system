@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using warehouse_management_system.Authentication;
 using warehouse_management_system.Controllers.BaseController;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 
 namespace warehouse_management_system.Controllers

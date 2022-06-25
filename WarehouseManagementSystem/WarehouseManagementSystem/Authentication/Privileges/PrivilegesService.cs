@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using DataAccess.Entities.EntityBases;
 using WarehouseManagementSystem.ApplicationServices.API.Enums;
 using static System.Int32;
 

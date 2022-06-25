@@ -1,16 +1,16 @@
 ﻿using DataAccess.Entities;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Helpers.DataAccess.Repository;
+using DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.DeliveryProductCommands
 {
     public class RemoveProductCommand : CommandBase<Product, Product>
     {
-        public override async Task<Product> Execute(WMSDatabaseContext context)
+        public override async Task<Product> Execute(IRepository<Product> productRepository)
         {
-            var product = await context.Products.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
-            await context.DeleteRecord(Parameter);
+            var product = await productRepository.Entity.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
+            await productRepository.Delete(Parameter.Id);
             return product;
         }
     }

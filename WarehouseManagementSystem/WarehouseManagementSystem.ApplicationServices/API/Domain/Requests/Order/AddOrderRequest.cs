@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using DataAccess.Entities;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.OrderLine;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Order
 {

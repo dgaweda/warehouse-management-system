@@ -2,9 +2,9 @@
 using System.Linq;
 using DataAccess.Entities;
 
-namespace DataAccess.CQRS.Helpers
+namespace DataAccess.CQRS.Extensions
 {
-    public static class OrderHelper
+    public static class OrderExtension
     {
         public static List<Order> FilterById(this List<Order> orders, int? id)
         {

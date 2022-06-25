@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using DataAccess.Entities;
 
-namespace DataAccess.CQRS.Helpers
+namespace DataAccess.CQRS.Extensions
 {
-    public static class DepartureHelper
+    public static class DepartureExtension
     {
-        public async static Task<Departure> SetState(this Departure departure)
+        public static Departure SetState(this Departure departure)
         {
             departure.State = departure.State;
             departure.CloseTime = departure.State == StateType.CLOSED ? DateTime.Now : null;

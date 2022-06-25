@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DataAccess.CQRS.Helpers
+namespace DataAccess.CQRS.Extensions
 {
-    public static class LocationHelper
+    public static class LocationExtension
     {
         public static Location SetMaxAmount(this Location locationToEdit, Location locationFromRequest)
         {

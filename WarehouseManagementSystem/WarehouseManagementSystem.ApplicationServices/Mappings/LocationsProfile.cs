@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using DataAccess.Entities;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings
 {

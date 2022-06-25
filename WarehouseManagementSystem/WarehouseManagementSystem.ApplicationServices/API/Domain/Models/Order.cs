@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
 {

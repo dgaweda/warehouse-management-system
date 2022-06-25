@@ -7,7 +7,6 @@ using DataAccess.CQRS.Queries.DeliveryQueries;
 using DataAccess.Entities;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Delivery;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHandlers

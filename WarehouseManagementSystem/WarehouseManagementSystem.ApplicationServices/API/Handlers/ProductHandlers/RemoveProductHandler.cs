@@ -4,6 +4,7 @@ using AutoMapper;
 using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.DeliveryProductCommands;
 using DataAccess.Entities;
+using DataAccess.Repository;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product;
@@ -14,10 +15,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductHand
         CommandHandler<RemoveProductRequest, RemoveProductResponse, Product, Domain.Models.Product, RemoveProductCommand>,
         IRequestHandler<RemoveProductRequest, RemoveProductResponse>
     {
-        public RemoveProductHandler(IMapper mapper, ICommandExecutor commandExecutor) : base(mapper, commandExecutor)
+        public RemoveProductHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Product> repositoryService) 
+            : base(mapper, commandExecutor, repositoryService)
         {
         }
 
-        public async Task<RemoveProductResponse> Handle(RemoveProductRequest request, CancellationToken cancellationToken) => await PrepareResponse(request);
+        public async Task<RemoveProductResponse> Handle(RemoveProductRequest request, CancellationToken cancellationToken) => await GetResponse(request);
     }
 }

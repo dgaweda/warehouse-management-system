@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using AutoMapper;
+﻿using AutoMapper;
 using DataAccess;
 using DataAccess.CQRS.Queries;
 using System.Threading.Tasks;

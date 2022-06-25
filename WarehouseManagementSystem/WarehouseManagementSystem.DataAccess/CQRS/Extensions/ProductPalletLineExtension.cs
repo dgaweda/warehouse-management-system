@@ -5,9 +5,9 @@ using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
-namespace DataAccess.CQRS.Helpers
+namespace DataAccess.CQRS.Extensions
 {
-    public static class ProductPalletLineHelper
+    public static class ProductPalletLineExtension
     {
         public static async Task<List<ProductPalletLine>> GetProductPalletLines(this WMSDatabaseContext context)
         {
@@ -41,5 +41,10 @@ namespace DataAccess.CQRS.Helpers
 
             return palletLines.Where(x => x.PalletId == palletId).ToList();
         }
+
+        public static bool PalletIsEmpty(this WMSDatabaseContext context, ProductPalletLine productPalletLine)
+        {
+            return !context.ProductPalletLines.Select(x => x.PalletId).Contains(productPalletLine.PalletId);
+        } 
     }
 }

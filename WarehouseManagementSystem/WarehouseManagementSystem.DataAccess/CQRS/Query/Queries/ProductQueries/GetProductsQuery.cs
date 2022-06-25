@@ -1,7 +1,7 @@
 ﻿using DataAccess.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Helpers;
+using DataAccess.CQRS.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Queries.DeliveryProductQueries

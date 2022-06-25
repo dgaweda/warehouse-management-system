@@ -4,6 +4,7 @@ using AutoMapper;
 using DataAccess.CQRS;
 using DataAccess.CQRS.Commands;
 using DataAccess.Entities;
+using DataAccess.Repository;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
@@ -14,11 +15,14 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandler
         CommandHandler<EditUserRequest, EditUserResponse, User, Domain.Models.User, EditUserCommand>,
         IRequestHandler<EditUserRequest, EditUserResponse>
     {
-        public EditUserHandler(ICommandExecutor commandExecutor, IMapper mapper) : base(mapper, commandExecutor)
+        public EditUserHandler(ICommandExecutor commandExecutor, IMapper mapper, IRepository<User> repositoryService) : base(mapper, commandExecutor, repositoryService)
         {
         }
 
-        public async Task<EditUserResponse> Handle(EditUserRequest request, CancellationToken cancellationToken) => await PrepareResponse(request);
+        public async Task<EditUserResponse> Handle(EditUserRequest request, CancellationToken cancellationToken)
+        {
+            return await GetResponse(request);
+        }
     }
 }
 

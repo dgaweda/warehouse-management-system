@@ -1,14 +1,14 @@
 ﻿using DataAccess.Entities;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Helpers.DataAccess.Repository;
+using DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands.SeniorityCommands
 {
     public class AddSeniorityCommand : CommandBase<Seniority, Seniority>
     {
-        public override async Task<Seniority> Execute(WMSDatabaseContext context)
+        public override async Task<Seniority> Execute(IRepository<Seniority> seniorityRepository)
         {
-            await context.AddRecord(Parameter);
+            await seniorityRepository.Add(Parameter);
 
             return Parameter;
         }

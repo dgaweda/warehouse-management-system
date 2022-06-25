@@ -6,9 +6,9 @@ using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
-namespace DataAccess.CQRS.Helpers
+namespace DataAccess.CQRS.Extensions
 {
-    public static class PalletHelper
+    public static class PalletExtension
     {
         public static async Task<List<Pallet>> GetPallets(this WMSDatabaseContext context)
         {

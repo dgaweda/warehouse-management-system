@@ -1,15 +1,14 @@
 ﻿using System.Threading.Tasks;
-using DataAccess.CQRS.Helpers.DataAccess.Repository;
 using DataAccess.Entities;
-using Microsoft.EntityFrameworkCore;
+using DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands.OrderLineCommands
 {
     public class AddOrderLineCommand: CommandBase<OrderLine, OrderLine>
     {
-        public override async Task<OrderLine> Execute(WMSDatabaseContext context)
+        public override async Task<OrderLine> Execute(IRepository<OrderLine> orderLineRepository)
         {
-            await context.AddRecord(Parameter);
+            await orderLineRepository.Add(Parameter);
             return Parameter;
         }
     }

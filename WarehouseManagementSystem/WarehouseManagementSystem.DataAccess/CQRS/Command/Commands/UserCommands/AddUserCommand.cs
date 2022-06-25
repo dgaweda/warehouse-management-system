@@ -1,15 +1,15 @@
 ﻿using System.Threading.Tasks;
-using DataAccess.CQRS.Helpers.DataAccess.Repository;
 using DataAccess.Entities;
+using DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands
 {
     public class AddUserCommand : CommandBase<User, User>
     {
-        public override async Task<User> Execute(WMSDatabaseContext context)
+        public override async Task<User> Execute(IRepository<User> userRepository)
         {
             Parameter.Password = BCrypt.Net.BCrypt.HashPassword(Parameter.Password);
-            await context.AddRecord(Parameter);
+            await userRepository.Add(Parameter);
 
             return Parameter;
         }

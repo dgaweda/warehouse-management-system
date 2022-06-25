@@ -1,4 +1,4 @@
-﻿using DataAccess.CQRS.Helpers;
+﻿using DataAccess.CQRS.Extensions;
 using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

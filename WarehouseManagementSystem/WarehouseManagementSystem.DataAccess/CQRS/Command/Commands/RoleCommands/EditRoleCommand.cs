@@ -1,14 +1,14 @@
 ﻿using DataAccess.Entities;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Helpers.DataAccess.Repository;
+using DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands.RoleCommands
 {
     public class EditRoleCommand : CommandBase<Role, Role>
     {
-        public override async Task<Role> Execute(WMSDatabaseContext context)
+        public override async Task<Role> Execute(IRepository<Role> roleRepository)
         {
-            await context.UpdateRecord(Parameter);
+            await roleRepository.Update(Parameter);
             return Parameter;
         }
     }

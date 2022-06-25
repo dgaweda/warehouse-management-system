@@ -1,18 +1,19 @@
-﻿using DataAccess.Entities;
-using System.Threading.Tasks;
-using DataAccess.CQRS.Helpers;
-using DataAccess.CQRS.Helpers.DataAccess.Repository;
+﻿using System.Threading.Tasks;
+using DataAccess.CQRS.Commands;
+using DataAccess.CQRS.Extensions;
+using DataAccess.Entities;
+using DataAccess.Repository;
 
-namespace DataAccess.CQRS.Commands.DepartureCommands
+namespace DataAccess.CQRS.Command.Commands.DepartureCommands
 {
     public class EditDepartureStateCommand : CommandBase<Departure, Departure>
     {
-        public override async Task<Departure> Execute(WMSDatabaseContext context)
+        public override async Task<Departure> Execute(IRepository<Departure> departureRepository)
         {
-            var departureToUpdate = await context.GetById<Departure>(Parameter.Id);
-            await departureToUpdate.SetState();
+            var departureToUpdate = await departureRepository.GetById(Parameter.Id);
+            departureToUpdate.SetState();
 
-            await context.UpdateRecord(departureToUpdate);
+            await departureRepository.Update(departureToUpdate);
             return departureToUpdate;
         }
     }

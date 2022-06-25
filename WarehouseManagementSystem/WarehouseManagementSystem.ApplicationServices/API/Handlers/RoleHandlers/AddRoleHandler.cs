@@ -4,6 +4,7 @@ using AutoMapper;
 using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.RoleCommands;
 using DataAccess.Entities;
+using DataAccess.Repository;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Role;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role;
@@ -14,10 +15,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.RoleHandler
         CommandHandler<AddRoleRequest, AddRoleResponse, Role, Domain.Models.Role, AddRoleCommand>,
         IRequestHandler<AddRoleRequest, AddRoleResponse> 
     {
-        public AddRoleHandler(ICommandExecutor commandExecutor, IMapper mapper) : base(mapper, commandExecutor)
+        public AddRoleHandler(ICommandExecutor commandExecutor, IMapper mapper, IRepository<Role> repositoryService) 
+            : base(mapper, commandExecutor, repositoryService)
         {
         }
 
-        public async Task<AddRoleResponse> Handle(AddRoleRequest request, CancellationToken cancellationToken) => await PrepareResponse(request);
+        public async Task<AddRoleResponse> Handle(AddRoleRequest request, CancellationToken cancellationToken) => await GetResponse(request);
     }
 }

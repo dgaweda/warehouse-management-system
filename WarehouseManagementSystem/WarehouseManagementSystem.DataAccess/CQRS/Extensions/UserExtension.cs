@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Entities;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Protocols;
 
-namespace DataAccess.CQRS.Helpers
+namespace DataAccess.CQRS.Extensions
 {
-    public static class UserHelper
+    public static class UserExtension
     {
         public static List<User> FilterByUserId(this List<User> users, int userId)
         {

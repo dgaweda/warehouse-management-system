@@ -4,10 +4,7 @@ using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using warehouse_management_system.Controllers.BaseController;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location;
 
 namespace warehouse_management_system.Controllers

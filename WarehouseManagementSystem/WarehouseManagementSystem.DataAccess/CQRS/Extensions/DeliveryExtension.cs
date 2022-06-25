@@ -2,9 +2,9 @@
 using System.Linq;
 using DataAccess.Entities;
 
-namespace DataAccess.CQRS.Helpers
+namespace DataAccess.CQRS.Extensions
 {
-    public static class DeliveryHelper
+    public static class DeliveryExtension
     {
         public static int SetDeliveryNumber(this Delivery Parameter, List<Delivery> deliveries)
         {

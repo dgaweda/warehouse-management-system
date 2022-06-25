@@ -1,14 +1,14 @@
 ﻿using DataAccess.Entities;
 using System.Threading.Tasks;
+using DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands.DeliveryProductCommands
 {
     public class AddProductCommand : CommandBase<Product, Product>
     {
-        public override async Task<Product> Execute(WMSDatabaseContext context)
+        public override async Task<Product> Execute(IRepository<Product> productRepository)
         {
-            await context.AddAsync(Parameter);
-            await context.SaveChangesAsync();
+            await productRepository.Add(Parameter);
             return Parameter;
         }
     }

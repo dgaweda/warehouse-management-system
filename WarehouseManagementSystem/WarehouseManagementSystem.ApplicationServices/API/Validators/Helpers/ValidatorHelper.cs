@@ -3,7 +3,6 @@ using System.Linq;
 using System.Net.Mail;
 using DataAccess;
 using DataAccess.Entities.EntityBases;
-using Microsoft.EntityFrameworkCore;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
 {

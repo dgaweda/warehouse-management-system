@@ -2,9 +2,9 @@
 using System.Linq;
 using DataAccess.Entities;
 
-namespace DataAccess.CQRS.Helpers
+namespace DataAccess.CQRS.Extensions
 {
-    public static class ProductHelper
+    public static class ProductExtension
     {
         public static void SetProperties(this Product product, Product requestProduct)
         {

@@ -1,16 +1,16 @@
 ﻿using DataAccess.Entities;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Helpers.DataAccess.Repository;
+using DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.LocationCommands
 {
     public class RemoveLocationCommand : CommandBase<Location, Location>
     {
-        public override async Task<Location> Execute(WMSDatabaseContext context)
+        public override async Task<Location> Execute(IRepository<Location> locationRepository)
         {
-            var location = await context.Locations.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
-            await context.DeleteRecord(Parameter);
+            var location = await locationRepository.Entity.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
+            await locationRepository.Delete(Parameter.Id);
             return location;
         }
     }

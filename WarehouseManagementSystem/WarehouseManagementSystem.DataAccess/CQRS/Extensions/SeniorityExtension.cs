@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Entities;
 
-namespace DataAccess.CQRS.Helpers
+namespace DataAccess.CQRS.Extensions
 {
-    public static class SeniorityHelper
+    public static class SeniorityExtension
     {
         public static List<Seniority> FilterByUserFirstName(this List<Seniority> seniorities, string userFirstName)
         {

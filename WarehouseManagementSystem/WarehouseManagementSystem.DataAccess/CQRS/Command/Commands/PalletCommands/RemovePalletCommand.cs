@@ -1,16 +1,16 @@
 ﻿using DataAccess.Entities;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Helpers.DataAccess.Repository;
+using DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.PalletCommands
 {
     public class RemovePalletCommand : CommandBase<Pallet, Pallet>
     {
-        public override async Task<Pallet> Execute(WMSDatabaseContext context)
+        public override async Task<Pallet> Execute(IRepository<Pallet> palletRepository)
         {
-            var pallet = await context.Pallets.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
-            await context.DeleteRecord(Parameter);
+            var pallet = await palletRepository.Entity.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
+            await palletRepository.Delete(Parameter.Id);
             return pallet;
         }
     }
