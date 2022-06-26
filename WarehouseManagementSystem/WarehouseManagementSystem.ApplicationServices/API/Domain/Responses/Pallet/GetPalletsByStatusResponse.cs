@@ -2,7 +2,7 @@
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet
 {
-    public class GetPalletsByStatusResponse : ResponseBase<List<Domain.Models.Pallet>>
+    public class GetPalletsByStatusResponse : ResponseBase<List<Domain.Models.PalletDto>>
     {
     }
 }

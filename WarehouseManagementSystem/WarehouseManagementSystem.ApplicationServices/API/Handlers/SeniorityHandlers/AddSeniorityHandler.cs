@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Seniori
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.SeniorityHandlers
 {
     public class AddSeniorityHandler :
-        CommandHandler<AddSeniorityRequest, AddSeniorityResponse, Seniority, Domain.Models.Seniority, AddSeniorityCommand>,
+        CommandHandler<AddSeniorityRequest, AddSeniorityResponse, Seniority, Domain.Models.SeniorityDto, AddSeniorityCommand>,
         IRequestHandler<AddSeniorityRequest, AddSeniorityResponse>
     {
         public AddSeniorityHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Seniority> repositoryService) 

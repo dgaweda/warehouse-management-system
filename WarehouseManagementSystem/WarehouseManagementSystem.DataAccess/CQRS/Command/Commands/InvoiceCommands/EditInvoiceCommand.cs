@@ -11,11 +11,9 @@ namespace DataAccess.CQRS.Commands.InvoiceCommands
         public override async Task<Invoice> Execute(IRepository<Invoice> invoiceRepository)
         {
             var invoices = await invoiceRepository.Entity.ToListAsync();
-
             Parameter.SetInvoiceNumber(invoices);
-
-            await invoiceRepository.UpdateAsync(Parameter);
-            return Parameter;
+            
+            return await invoiceRepository.UpdateAsync(Parameter);
         }
     }
 }

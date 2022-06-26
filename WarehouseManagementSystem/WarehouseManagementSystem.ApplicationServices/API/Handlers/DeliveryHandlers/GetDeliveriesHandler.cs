@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHandlers
 {
     public class GetDeliveriesHandler
-        : QueryHandler<GetDeliveriesRequest, GetDeliveriesResponse, GetDeliveriesQuery, List<Delivery>, List<Domain.Models.Delivery>>, 
+        : QueryHandler<GetDeliveriesRequest, GetDeliveriesResponse, GetDeliveriesQuery, List<Delivery>, List<Domain.Models.DeliveryDto>>, 
             IRequestHandler<GetDeliveriesRequest, GetDeliveriesResponse>
     {
         public GetDeliveriesHandler(IMapper mapper, IQueryExecutor queryExecutor)

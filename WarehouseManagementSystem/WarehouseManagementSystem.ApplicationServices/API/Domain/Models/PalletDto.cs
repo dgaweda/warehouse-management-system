@@ -2,7 +2,7 @@
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
 {
-    public class Pallet
+    public class PalletDto
     {
         public string PalletStatus { get; set; }
         public string Barcode { get; set; }

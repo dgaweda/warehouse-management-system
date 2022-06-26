@@ -10,9 +10,8 @@ namespace DataAccess.CQRS.Commands.LocationCommands
         public override async Task<Location> Execute(IRepository<Location> locationRepository)
         {
             var locationToEdit = await locationRepository.Entity.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
-
-            await locationRepository.UpdateAsync(locationToEdit);
-            return locationToEdit;
+            
+            return await locationRepository.UpdateAsync(locationToEdit);
         }
 
         

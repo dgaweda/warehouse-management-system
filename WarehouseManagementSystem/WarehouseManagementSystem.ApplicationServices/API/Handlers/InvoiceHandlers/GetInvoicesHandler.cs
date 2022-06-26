@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Invoice
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.InvoiceHandlers
 {
     public class GetInvoicesHandler : 
-        QueryHandler<GetInvoicesRequest, GetInvoicesResponse, GetInvoicesQuery, List<Invoice> , List<Domain.Models.Invoice>>,
+        QueryHandler<GetInvoicesRequest, GetInvoicesResponse, GetInvoicesQuery, List<Invoice> , List<Domain.Models.InvoiceDto>>,
         IRequestHandler<GetInvoicesRequest, GetInvoicesResponse>
     {
         public GetInvoicesHandler(IQueryExecutor queryExecutor, IMapper mapper) : base(mapper, queryExecutor)

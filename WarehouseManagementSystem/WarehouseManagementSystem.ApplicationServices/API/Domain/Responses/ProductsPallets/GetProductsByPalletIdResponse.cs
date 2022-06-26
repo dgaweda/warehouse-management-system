@@ -2,7 +2,7 @@
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.ProductsPallets
 {
-    public class GetProductsByPalletIdResponse : ResponseBase<List<Domain.Models.ProductPalletLine>>
+    public class GetProductsByPalletIdResponse : ResponseBase<List<Domain.Models.ProductPalletLineDto>>
     {
     }
 }

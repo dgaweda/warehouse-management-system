@@ -2,7 +2,7 @@
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Seniority
 {
-    public class GetSenioritiesResponse : ResponseBase<List<Domain.Models.Seniority>>
+    public class GetSenioritiesResponse : ResponseBase<List<Domain.Models.SeniorityDto>>
     {
     }
 }

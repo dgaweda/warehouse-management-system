@@ -15,9 +15,7 @@ namespace DataAccess.CQRS.Commands.ProductCommands
                 .FirstOrDefaultAsync(x => x.Id == Parameter.Id); ;
 
             location.SetProductAmount(Parameter);
-
-            await locationRepository.UpdateAsync(location);
-            return location;
+            return await locationRepository.UpdateAsync(location);
         }
 
 

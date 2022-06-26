@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.OrderHandlers
 {
     public class RemoveOrderHandler:
-        CommandHandler<RemoveOrderRequest, RemoveOrderResponse, Order, Domain.Models.Order, RemoveOrderCommand>,
+        CommandHandler<RemoveOrderRequest, RemoveOrderResponse, Order, Domain.Models.OrderDto, RemoveOrderCommand>,
         IRequestHandler<RemoveOrderRequest, RemoveOrderResponse>
     {
         public RemoveOrderHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Order> repositoryService) 

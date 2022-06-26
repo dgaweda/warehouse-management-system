@@ -8,8 +8,7 @@ namespace DataAccess.CQRS.Commands.LocationCommands
     {
         public override async Task<Location> Execute(IRepository<Location> locationRepository)
         {
-            await locationRepository.AddAsync(Parameter);
-            return Parameter;
+            return await locationRepository.AddAsync(Parameter);;
         }
     }
 }

@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHandlers
 {
     public class RemoveDeliveryHandler 
-        : CommandHandler<RemoveDeliveryRequest, RemoveDeliveryResponse, Delivery, Domain.Models.Delivery, RemoveDeliveryCommand>,
+        : CommandHandler<RemoveDeliveryRequest, RemoveDeliveryResponse, Delivery, Domain.Models.DeliveryDto, RemoveDeliveryCommand>,
         IRequestHandler<RemoveDeliveryRequest, RemoveDeliveryResponse>
     {
         public RemoveDeliveryHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Delivery> repositoryService) :base(mapper, commandExecutor, repositoryService)

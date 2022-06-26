@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandlers
 {
     public class RemovePalletHandler :
-        CommandHandler<RemovePalletRequest, RemovePalletResponse, Pallet, Domain.Models.Pallet, RemovePalletCommand>,
+        CommandHandler<RemovePalletRequest, RemovePalletResponse, Pallet, Domain.Models.PalletDto, RemovePalletCommand>,
         IRequestHandler<RemovePalletRequest, RemovePalletResponse>
     {
 

@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductHandlers
 {
     public class EditProductHandler :
-        CommandHandler<EditProductRequest, EditProductResponse, Product, Domain.Models.Product, EditProductCommand>,
+        CommandHandler<EditProductRequest, EditProductResponse, Product, Domain.Models.ProductDto, EditProductCommand>,
         IRequestHandler<EditProductRequest, EditProductResponse>
     {
         public EditProductHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Product> repositoryService)

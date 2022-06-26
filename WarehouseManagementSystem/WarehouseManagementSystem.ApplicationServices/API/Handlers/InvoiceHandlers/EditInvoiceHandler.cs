@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Invoice
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.InvoiceHandlers
 {
     public class EditInvoiceHandler
-        : CommandHandler<EditInvoiceRequest, EditInvoiceResponse, Invoice, Domain.Models.Invoice, EditInvoiceCommand>,
+        : CommandHandler<EditInvoiceRequest, EditInvoiceResponse, Invoice, Domain.Models.InvoiceDto, EditInvoiceCommand>,
         IRequestHandler<EditInvoiceRequest, EditInvoiceResponse>
     {
         public EditInvoiceHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Invoice> repositoryService)

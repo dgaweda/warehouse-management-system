@@ -1,6 +1,6 @@
 ﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
 {
-    public class User
+    public class UserDTO
     {
         public int Id { get; set; }
         public string UserName { get; set; }

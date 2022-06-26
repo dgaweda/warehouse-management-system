@@ -14,6 +14,7 @@ namespace DataAccess.CQRS.Commands.OrderCommands
             Parameter.OrderLines.ForEach(x => x.OrderId = Parameter.Id);
             await orderRepository.GetDbContext().Set<OrderLine>().AddRangeAsync(Parameter.OrderLines);
             await orderRepository.AddAsync(Parameter);
+            await orderRepository.GetDbContext().SaveChangesAsync();
             return Parameter;
         }
     }

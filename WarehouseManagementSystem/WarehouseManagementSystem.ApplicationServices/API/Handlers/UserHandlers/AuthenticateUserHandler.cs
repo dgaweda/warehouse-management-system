@@ -11,7 +11,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandlers
 {
     public class AuthenticateUserHandler :
-        QueryHandler<AuthenticateUserRequest, AuthenticateUserResponse, AuthenticateUserQuery, DataAccess.Entities.User, User>,
+        QueryHandler<AuthenticateUserRequest, AuthenticateUserResponse, AuthenticateUserQuery, DataAccess.Entities.User, UserDTO>,
         IRequestHandler<AuthenticateUserRequest, AuthenticateUserResponse>
     {
         public AuthenticateUserHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)

@@ -2,7 +2,7 @@
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
 {
-    public class Invoice
+    public class InvoiceDto
     {
         public string InvoiceNumber { get; set; }
         public string Provider { get; set; }

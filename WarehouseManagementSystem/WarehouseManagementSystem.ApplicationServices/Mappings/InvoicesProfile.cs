@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DataAccess.Entities;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Invoice;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings
@@ -8,7 +9,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
     {
         public InvoicesProfile()
         {
-            CreateMap<Invoice, API.Domain.Models.Invoice>()
+            CreateMap<Invoice, InvoiceDto>()
                 .ForMember(dest => dest.InvoiceNumber, opt => opt.MapFrom(src => src.InvoiceNumber))
                 .ForMember(dest => dest.Provider, opt => opt.MapFrom(src => src.Provider))
                 .ForMember(dest => dest.InvoiceReceiptDate, opt => opt.MapFrom(src => src.ReceiptDateTime))

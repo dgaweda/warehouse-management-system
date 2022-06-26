@@ -1,6 +1,6 @@
 ﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
 {
-    public class OrderLine
+    public class OrderLineDto
     {
         public int OrderId { get; set; }
         public int ProductId { get; set; }

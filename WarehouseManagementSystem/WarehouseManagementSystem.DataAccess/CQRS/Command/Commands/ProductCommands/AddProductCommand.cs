@@ -8,8 +8,7 @@ namespace DataAccess.CQRS.Commands.DeliveryProductCommands
     {
         public override async Task<Product> Execute(IRepository<Product> productRepository)
         {
-            await productRepository.AddAsync(Parameter);
-            return Parameter;
+            return await productRepository.AddAsync(Parameter);
         }
     }
 }

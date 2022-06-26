@@ -10,9 +10,8 @@ namespace DataAccess.CQRS.Commands.DepartureCommands
         public override async Task<Departure> Execute(IRepository<Departure> departureRepository)
         {
             Parameter.OpeningTime = DateTime.Now;
-
-            await departureRepository.AddAsync(Parameter);
-            return Parameter;
+            
+            return await departureRepository.AddAsync(Parameter);
         }
     }
 }

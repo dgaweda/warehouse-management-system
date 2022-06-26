@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.OrderHandlers
 {
     public class AddOrderHandler: 
-        CommandHandler<AddOrderRequest, AddOrderResponse, Order, Domain.Models.Order, AddOrderCommand>,
+        CommandHandler<AddOrderRequest, AddOrderResponse, Order, Domain.Models.OrderDto, AddOrderCommand>,
         IRequestHandler<AddOrderRequest, AddOrderResponse>
     {
         public AddOrderHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Order> repositoryService)

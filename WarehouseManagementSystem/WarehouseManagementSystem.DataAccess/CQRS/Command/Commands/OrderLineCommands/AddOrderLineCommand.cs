@@ -8,8 +8,7 @@ namespace DataAccess.CQRS.Commands.OrderLineCommands
     {
         public override async Task<OrderLine> Execute(IRepository<OrderLine> orderLineRepository)
         {
-            await orderLineRepository.AddAsync(Parameter);
-            return Parameter;
+            return await orderLineRepository.AddAsync(Parameter);
         }
     }
 }

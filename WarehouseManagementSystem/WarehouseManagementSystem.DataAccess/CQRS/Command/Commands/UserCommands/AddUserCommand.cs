@@ -9,9 +9,7 @@ namespace DataAccess.CQRS.Commands
         public override async Task<User> Execute(IRepository<User> userRepository)
         {
             Parameter.Password = BCrypt.Net.BCrypt.HashPassword(Parameter.Password);
-            await userRepository.AddAsync(Parameter);
-
-            return Parameter;
+            return await userRepository.AddAsync(Parameter);
         }
     }
 }

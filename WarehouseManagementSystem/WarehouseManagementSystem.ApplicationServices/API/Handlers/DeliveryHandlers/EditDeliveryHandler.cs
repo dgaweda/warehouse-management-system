@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHandlers
 {
     public class EditDeliveryHandler
-        : CommandHandler<EditDeliveryRequest, EditDeliveryResponse, Delivery, Domain.Models.Delivery, EditDeliveryCommand>,
+        : CommandHandler<EditDeliveryRequest, EditDeliveryResponse, Delivery, Domain.Models.DeliveryDto, EditDeliveryCommand>,
         IRequestHandler<EditDeliveryRequest, EditDeliveryResponse>
     {
         public EditDeliveryHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Delivery> repositoryService) 

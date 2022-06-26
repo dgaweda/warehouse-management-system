@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.RoleHandlers
 {
     public class RemoveRoleHandler
-        : CommandHandler<RemoveRoleRequest, RemoveRoleResponse, Role, Domain.Models.Role, RemoveRoleCommand>,
+        : CommandHandler<RemoveRoleRequest, RemoveRoleResponse, Role, Domain.Models.RoleDto, RemoveRoleCommand>,
         IRequestHandler<RemoveRoleRequest, RemoveRoleResponse>
     {
         public RemoveRoleHandler(ICommandExecutor commandExecutor, IMapper mapper, IRepository<Role> repositoryService) 

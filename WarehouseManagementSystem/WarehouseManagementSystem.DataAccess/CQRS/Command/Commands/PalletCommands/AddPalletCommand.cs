@@ -8,8 +8,7 @@ namespace DataAccess.CQRS.Commands.PalletCommands
     {
         public override async Task<Pallet> Execute(IRepository<Pallet> palletRepository)
         {
-            await palletRepository.AddAsync(Parameter);
-            return Parameter;
+            return await palletRepository.AddAsync(Parameter);
         }
     }
 }

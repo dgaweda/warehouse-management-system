@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Locatio
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.LocationHandlers
 {
     public class AddLocationHandler :
-        CommandHandler<AddLocationRequest, AddLocationResponse, Location, Domain.Models.Location, AddLocationCommand>,
+        CommandHandler<AddLocationRequest, AddLocationResponse, Location, Domain.Models.LocationDto, AddLocationCommand>,
         IRequestHandler<AddLocationRequest, AddLocationResponse>
     {
         public AddLocationHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Location> repositoryService) 

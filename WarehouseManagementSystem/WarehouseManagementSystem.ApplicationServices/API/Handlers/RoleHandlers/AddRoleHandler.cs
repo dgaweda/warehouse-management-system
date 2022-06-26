@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.RoleHandlers
 {
     public class AddRoleHandler : 
-        CommandHandler<AddRoleRequest, AddRoleResponse, Role, Domain.Models.Role, AddRoleCommand>,
+        CommandHandler<AddRoleRequest, AddRoleResponse, Role, Domain.Models.RoleDto, AddRoleCommand>,
         IRequestHandler<AddRoleRequest, AddRoleResponse> 
     {
         public AddRoleHandler(ICommandExecutor commandExecutor, IMapper mapper, IRepository<Role> repositoryService) 

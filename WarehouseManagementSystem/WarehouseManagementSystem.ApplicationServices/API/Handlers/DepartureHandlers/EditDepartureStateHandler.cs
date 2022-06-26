@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departu
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHandlers
 {
     public class EditDepartureStateHandler :
-        CommandHandler<EditDepartureStateRequest, EditDepartureStateResponse, Departure, Domain.Models.Departure, EditDepartureStateCommand>,
+        CommandHandler<EditDepartureStateRequest, EditDepartureStateResponse, Departure, Domain.Models.DepartureDTO, EditDepartureStateCommand>,
         IRequestHandler<EditDepartureStateRequest, EditDepartureStateResponse>
     {
         public EditDepartureStateHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Departure> repositoryService)

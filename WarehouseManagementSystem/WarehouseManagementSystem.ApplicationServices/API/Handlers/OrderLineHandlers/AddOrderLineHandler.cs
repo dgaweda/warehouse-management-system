@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.OrderLi
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.OrderLineHandlers
 {
     public class AddOrderLineHandler:
-        CommandHandler<AddOrderLineRequest, AddOrderLineResponse, DataAccess.Entities.OrderLine,OrderLine, AddOrderLineCommand>,
+        CommandHandler<AddOrderLineRequest, AddOrderLineResponse, DataAccess.Entities.OrderLine,OrderLineDto, AddOrderLineCommand>,
         IRequestHandler<AddOrderLineRequest, AddOrderLineResponse>
     {
         public AddOrderLineHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<DataAccess.Entities.OrderLine> repositoryService)

@@ -15,8 +15,7 @@ namespace DataAccess.CQRS.Commands.DeliveryProductCommands
                 .FirstOrDefaultAsync(x => x.Id == Parameter.Id);
 
             product.SetProperties(Parameter);
-            await productRepository.UpdateAsync(product);
-            return product;
+            return await productRepository.UpdateAsync(product);
         }
     }
 }

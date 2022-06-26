@@ -4,7 +4,7 @@ using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 
 namespace warehouse_management_system.Controllers.BaseController
 {
-    public static class Helper
+    public static class ApiControllerBaseExtension
     {
         private const string Privileges = "Privileges";
         private const string Request = "Request";

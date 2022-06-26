@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
 {
-    public class Order
+    public class OrderDto
     {
-        public List<OrderLine> OrderLines { get; set; }
+        public List<OrderLineDto> OrderLines { get; set; }
         public string OrderState { get; set; }
         public string Barcode { get; set; }
         public DateTime? PickingStart { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
 {
-    public class Location
+    public class LocationDto
     {
         public string Type { get; set; }
         public string Name { get; set; }

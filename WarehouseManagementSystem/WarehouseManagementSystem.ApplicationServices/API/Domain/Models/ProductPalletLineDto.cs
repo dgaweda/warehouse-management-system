@@ -1,6 +1,6 @@
 ﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
 {
-    public class ProductPalletLine 
+    public class ProductPalletLineDto 
     {
         public string PalletBarcode { get; set; }
         public string ProductName { get; set; }

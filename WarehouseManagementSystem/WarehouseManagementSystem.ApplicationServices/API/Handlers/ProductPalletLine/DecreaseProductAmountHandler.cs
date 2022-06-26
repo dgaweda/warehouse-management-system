@@ -11,7 +11,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductPalletLine
 {
     public class DecreaseProductAmountHandler :
-        CommandHandler<DecreaseProductAmountRequest, DecreaseProductAmountResponse, DataAccess.Entities.ProductPalletLine, Domain.Models.ProductPalletLine, DecreaseProductAmountCommand>,
+        CommandHandler<DecreaseProductAmountRequest, DecreaseProductAmountResponse, DataAccess.Entities.ProductPalletLine, Domain.Models.ProductPalletLineDto, DecreaseProductAmountCommand>,
         IRequestHandler<DecreaseProductAmountRequest, DecreaseProductAmountResponse>
     {
         public DecreaseProductAmountHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<DataAccess.Entities.ProductPalletLine> repositoryService) : base(mapper, commandExecutor, repositoryService)

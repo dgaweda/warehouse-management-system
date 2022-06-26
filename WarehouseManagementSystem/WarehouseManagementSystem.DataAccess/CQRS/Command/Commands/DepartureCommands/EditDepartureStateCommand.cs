@@ -12,9 +12,8 @@ namespace DataAccess.CQRS.Command.Commands.DepartureCommands
         {
             var departureToUpdate = await departureRepository.GetByIdAsync(Parameter.Id);
             departureToUpdate.SetState();
-
-            await departureRepository.UpdateAsync(departureToUpdate);
-            return departureToUpdate;
+            
+            return await departureRepository.UpdateAsync(departureToUpdate);;
         }
     }
 }
