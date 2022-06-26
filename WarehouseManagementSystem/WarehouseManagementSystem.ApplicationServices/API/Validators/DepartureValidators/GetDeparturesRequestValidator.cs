@@ -11,7 +11,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Departure
         public GetDeparturesRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.Name).Must(_validator.CheckIfDepartureNameExist).WithMessage(x => $"Departure of name: {x.Name} doesn't exist.");
+            RuleFor(x => x.Name).Must(_validator.IsDepartureNameExist).WithMessage(x => $"Departure of name: {x.Name} doesn't exist.");
         }
     }
 }

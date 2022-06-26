@@ -15,19 +15,19 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
             _context = context;
         }
         
-        public bool CheckIfExist<TEntity>(int? id)
+        public bool IsExist<TEntity>(int? id)
             where TEntity : class, IEntityBase
         {
             return (id != null && id != 0) && _context.Set<TEntity>().Any(x => x.Id == id);
         }
         
-        public bool CheckIfExist<TEntity>(int id) 
+        public bool IsExist<TEntity>(int id) 
             where TEntity : class, IEntityBase
         {
             return id != 0 && _context.Set<TEntity>().Any(x => x.Id == id);
         }
         
-        public bool CheckIfLocationNameIsNotTaken(string name)
+        public bool IsLocationNameIsTaken(string name)
         {
             return _context.Locations.Any(x => x.Name == name);
         }
@@ -37,47 +37,47 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
             return _context.Locations.Where(y => y.Id == id).Select(x => x.MaxAmount).FirstOrDefault();
         }
 
-        public bool CheckIfProductIsOnPalletForUnfolding(int id)
+        public bool IsProductOnPalletForUnfolding(int id)
         {
             return _context.ProductPalletLines.Any(x => x.ProductId == id);
         }
 
-        public bool CheckIfPalletForUnfoldingExist(int palletId)
+        public bool IsPalletForUnfoldingExist(int palletId)
         {
             return _context.ProductPalletLines.Any(x => x.PalletId == palletId);
         }
         
-        public bool CheckIfProductBarcodeIsUnique(string barcode)
+        public bool IsProductBarcodeUnique(string barcode)
         {
             return !_context.Products.Any(x => x.Barcode == barcode);
         }
         
-        public bool CheckIfPalletBarcodeIsUnique(string barcode)
+        public bool IsPalletBarcodeIsUnique(string barcode)
         {
             return !_context.Pallets.Any(x => x.Barcode == barcode);
         }
         
-        public bool CheckIfRoleNameIsUnique(string name)
+        public bool IsRoleNameIsUnique(string name)
         {
             return !_context.Roles.Any(x => x.Name == name);
         }
 
-        public bool CheckIfEmployeeIsNotHired(int userId)
+        public bool IsHiredEmployee(int userId)
         {
             return !_context.Seniorities.Any(x => x.UserId == userId);
         }
         
-        public bool CheckIfDeliveryExist(string name)
+        public bool IsDeliveryExist(string name)
         {
             return string.IsNullOrEmpty(name) || _context.Deliveries.Any(x => x.Name.Contains(name));
         }
         
-        public bool CheckIfDepartureNameIsUnique(string name)
+        public bool IsDepartureNameIsUnique(string name)
         {
             return !_context.Departures.Any(x => x.Name == name);
         }
 
-        public bool CheckIfDepartureNameExist(string name)
+        public bool IsDepartureNameExist(string name)
         {
             return string.IsNullOrEmpty(name) || _context.Departures.Any(x => x.Name.Contains(name));
         }
@@ -95,27 +95,30 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
             }
         }
         
-        public bool CheckIfUsernameIsUnique(string username)
+        public bool IsUsernameIsUnique(string username)
         {
             return !_context.Users.Any(x => x.UserName == username);
         }
 
-        public bool CheckIfUsernameExist(string username)
+        public bool IsUsernameExist(string username)
         {
-            return !CheckIfUsernameIsUnique(username);
+            return !IsUsernameIsUnique(username);
         }
         
-        public bool CheckLocationCurrentAmount(int id)
+        public bool IsLocationStillHaveProducts(int id)
         {
             var location = _context.Locations.SingleOrDefault(x => x.Id == id);
             return location?.CurrentAmount < 0 || location?.CurrentAmount > location?.MaxAmount;
         }
 
-        public bool CheckIfOrderBarcodeIsUnique(string barcode)
+        public bool IsOrderBarcodeIsUnique(string barcode)
         {
             return !_context.Orders.Any(x => x.Barcode.Equals(barcode));
         }
-        
-        
+
+        public bool IsPalletIdExistsInProductPalletLine(int palletId)
+        {
+            return _context.ProductPalletLines.Any((x) => x.PalletId == palletId);
+        }
     }
 }

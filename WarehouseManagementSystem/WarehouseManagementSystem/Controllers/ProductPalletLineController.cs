@@ -10,21 +10,36 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 namespace warehouse_management_system.Controllers
 {
     [Authorize]
-    [Route("[controller]")]
+    [Route("/api/pallet/{palletId}/products/")]
     [ApiController]
     public class ProductPalletLineController : ApiControllerBase
     {
+        private readonly IMediator _mediator;
         public ProductPalletLineController(IMediator mediator) 
             : base(mediator)
         {
+            _mediator = mediator;
         }
 
         [HttpGet]
-        [Route("Products/")]
-        public Task<IActionResult> GetProductsByPalletId([FromQuery] GetProductsByPalletIdRequest request) => Handle<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse>(request);
+        [Route("")]
+        public async Task<IActionResult> GetProductsByPalletId([FromRoute] int palletId)
+        {
+            return await Handle<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse>
+                (new GetProductsByPalletIdRequest() { PalletId = palletId });
+        }
     
         [HttpPatch]
-        [Route("Set/ProductAmount/")]
-        public Task<IActionResult> DecreaseProductAmount([FromQuery] DecreaseProductAmountRequest request) => Handle<DecreaseProductAmountRequest, DecreaseProductAmountResponse>(request);
+        [Route("{productId}/amount")]
+        public async Task<IActionResult> DecreaseProductAmount([FromRoute] int palletId, [FromRoute] int productId,  [FromBody] int amount)
+        {
+            var request = new DecreaseProductAmountRequest()
+            {
+                PalletId = palletId,
+                ProductAmount = amount,
+                ProductId = productId
+            };
+            return await Handle<DecreaseProductAmountRequest, DecreaseProductAmountResponse>(request);
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.LocationHan
         public async Task<GetLocationsResponse> Handle(GetLocationsRequest request, CancellationToken cancellationToken)
         {
             var query = CreateQuery(request);
-            var response = await PrepareResponse(query);
+            var response = await GetResponse(query);
             return response;
         }
 

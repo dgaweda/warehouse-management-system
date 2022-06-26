@@ -21,7 +21,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductPall
         public async Task<GetProductsByPalletIdResponse> Handle(GetProductsByPalletIdRequest request, CancellationToken cancellationToken)
         {
             var query = CreateQuery(request);
-            var response = await PrepareResponse(query);
+            var response = await GetResponse(query);
             return response;
         }
 

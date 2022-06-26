@@ -11,7 +11,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductVa
         public RemoveProductRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.Id).Must(_validator.CheckIfExist<Product>).WithMessage(x => $"Product of ID: {x.Id} doesn't exists.");
+            RuleFor(x => x.Id).Must(_validator.IsExist<Product>).WithMessage(x => $"Product of ID: {x.Id} doesn't exists.");
         }
     }
 }

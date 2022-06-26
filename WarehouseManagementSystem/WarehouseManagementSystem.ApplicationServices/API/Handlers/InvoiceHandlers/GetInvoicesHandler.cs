@@ -21,7 +21,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.InvoiceHand
         public async Task<GetInvoicesResponse> Handle(GetInvoicesRequest request, CancellationToken cancellationToken)
         {
             var query = CreateQuery(request);
-            var response = await PrepareResponse(query);
+            var response = await GetResponse(query);
             return response;
         }
 

@@ -8,9 +8,9 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public class CommandHandler<TRequest, TResponse, TEntity, TDomainModel, TCommand>
-        : ICommandHandler<TRequest, TResponse, TDomainModel> 
-        where TResponse : ResponseBase<TDomainModel>, new()
+    public class CommandHandler<TRequest, TResponse, TEntity, TDtoModel, TCommand>
+        : ICommandHandler<TRequest, TResponse, TDtoModel> 
+        where TResponse : ResponseBase<TDtoModel>, new()
         where TCommand : CommandBase<TEntity, TEntity>, new()
         where TEntity : class, IEntityBase
     {
@@ -34,11 +34,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
             };
             
             var entityModel = await _commandExecutor.Execute(command, _repositoryService);
-            var domainModel = _mapper.Map<TDomainModel>(entityModel);
-            return new TResponse()
-            {
-                Data = domainModel
-            };
+            var dtoModel = _mapper.Map<TDtoModel>(entityModel);
+            return new TResponse() { Response = dtoModel };
         }
     }
 }

@@ -11,9 +11,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
         public EditLocationValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.Id).Must(_validator.CheckIfExist<Location>).WithMessage("Location doesn't exists.");
+            RuleFor(x => x.Id).Must(_validator.IsExist<Location>).WithMessage("Location doesn't exists.");
             RuleFor(x => x.MaxAmount).GreaterThan(0);
-            RuleFor(x => x.Name).Must(_validator.CheckIfLocationNameIsNotTaken).WithMessage(x => $"Location of name: {x.Name} already exists.");
+            RuleFor(x => x.Name).Must(_validator.IsLocationNameIsTaken).WithMessage(x => $"Location of name: {x.Name} already exists.");
             RuleFor(x => x.Name).NotEmpty();
         }
     }

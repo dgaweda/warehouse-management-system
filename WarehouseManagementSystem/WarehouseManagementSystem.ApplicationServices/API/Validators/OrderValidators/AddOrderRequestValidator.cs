@@ -10,7 +10,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.OrderVali
         public AddOrderRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.Barcode).Must(_validator.CheckIfOrderBarcodeIsUnique)
+            RuleFor(x => x.Barcode).Must(_validator.IsOrderBarcodeIsUnique)
                 .WithMessage("Już istnieje zamówienie o podanym numerze.");
             RuleFor(x => x.Barcode).NotEmpty()
                 .WithMessage("Numer zamówienia nie może być pusty");

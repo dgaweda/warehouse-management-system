@@ -22,7 +22,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.SeniorityHa
         public async Task<GetSenioritiesResponse> Handle(GetSenioritiesRequest request, CancellationToken cancellationToken)
         {
             var query = CreateQuery(request);
-            var response = await PrepareResponse(query);
+            var response = await GetResponse(query);
             return response;
         }
 

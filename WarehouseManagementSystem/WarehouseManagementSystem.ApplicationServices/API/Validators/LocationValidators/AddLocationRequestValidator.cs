@@ -13,13 +13,13 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
         {
             _validator = validator;
 
-            RuleFor(x => x.Name).Must(_validator.CheckIfLocationNameIsNotTaken).WithMessage(x => $"Location named: {x.Name} already exists.");
+            RuleFor(x => x.Name).Must(_validator.IsLocationNameIsTaken).WithMessage(x => $"Location named: {x.Name} already exists.");
             RuleFor(x => x.Name).Must(MatchLocationPattern).WithMessage("Name is invalid. Example location: Z.01-02");
 
             RuleFor(x => x.MaxAmount).ExclusiveBetween(1, 999);
             RuleFor(x => x.MaxAmount).NotEmpty().WithMessage("Max amount can't be empty");
 
-            RuleFor(x => x.ProductId).Must(_validator.CheckIfExist<Product>).WithMessage("Product doesn't exists");
+            RuleFor(x => x.ProductId).Must(_validator.IsExist<Product>).WithMessage("Product doesn't exists");
         }
 
         private bool MatchLocationPattern(string name)

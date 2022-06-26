@@ -8,7 +8,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.OrderLi
 
 namespace warehouse_management_system.Controllers
 {
-    [Route("[controller]")]
+    [Route("/api/order/{orderId}/")]
     [ApiController]
     public class OrderLineController: ApiControllerBase
     {
@@ -17,7 +17,7 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpPost]
-        [Route("Add/")]
+        [Route("add/")]
         public Task<IActionResult> AddOrderLine([FromBody] AddOrderLineRequest request) =>
             Handle<AddOrderLineRequest, AddOrderLineResponse>(request);
     }

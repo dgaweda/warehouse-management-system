@@ -21,7 +21,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandl
         public async Task<GetPalletsResponse> Handle(GetPalletsRequest request, CancellationToken cancellationToken)
         {
             var query = CreateQuery(request);
-            var response = await PrepareResponse(query);
+            var response = await GetResponse(query);
             return response;
         }
         public override GetPalletsQuery CreateQuery(GetPalletsRequest request)

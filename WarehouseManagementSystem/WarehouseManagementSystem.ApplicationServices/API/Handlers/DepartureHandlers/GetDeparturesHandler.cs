@@ -23,7 +23,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHa
         public async Task<GetDeparturesResponse> Handle(GetDeparturesRequest request, CancellationToken cancellation)
         {
             var query = CreateQuery(request);
-            var response = await PrepareResponse(query);
+            var response = await GetResponse(query);
             return response;
         }
 

@@ -13,7 +13,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
         {
             _validator = validator;
             RuleFor(x => x.Id)
-                .Must(_validator.CheckIfExist<Location>)
+                .Must(_validator.IsExist<Location>)
                 .WithMessage("Location doesn't exists.");
 
             RuleFor(x => x.CurrentAmount)

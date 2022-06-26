@@ -10,7 +10,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Invoice
 namespace warehouse_management_system.Controllers
 {
     [Authorize]
-    [Route("[controller]")]
+    [Route("/api/invoice/")]
     [ApiController]
     public class InvoiceController : ApiControllerBase
     {
@@ -21,19 +21,19 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("Get/")]
+        [Route("get/")]
         public Task<IActionResult> GetInvoices([FromQuery] GetInvoicesRequest request) => Handle<GetInvoicesRequest, GetInvoicesResponse>(request);
 
         [HttpPost]
-        [Route("Add/")]
+        [Route("add/")]
         public Task<IActionResult> AddInvoice([FromBody] AddInvoiceRequest request) => Handle<AddInvoiceRequest, AddInvoiceResponse>(request);
 
         [HttpDelete]
-        [Route("Remove/")]
+        [Route("remove/")]
         public Task<IActionResult> RemoveInvoice([FromQuery] RemoveInvoiceRequest request) => Handle<RemoveInvoiceRequest, RemoveInvoiceResponse>(request);
 
         [HttpPut]
-        [Route("Edit/")]
+        [Route("edit/")]
         public Task<IActionResult> EditInvoice([FromBody] EditInvoiceRequest request) => Handle<EditInvoiceRequest, EditInvoiceResponse>(request);
     }
 }

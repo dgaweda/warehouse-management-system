@@ -10,7 +10,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.RoleValid
         public RemoveRoleRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.RoleId).Must(_validator.CheckIfExist<DataAccess.Entities.Role>).WithMessage("Selected role doesn't exist.");
+            RuleFor(x => x.RoleId).Must(_validator.IsExist<DataAccess.Entities.Role>).WithMessage("Selected role doesn't exist.");
         }
     }
 }

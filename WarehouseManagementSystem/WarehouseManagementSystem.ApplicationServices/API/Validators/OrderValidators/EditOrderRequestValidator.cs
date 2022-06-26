@@ -12,9 +12,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.OrderVali
         {
             _validator = validator;
             RuleFor(x => x.Id).NotEmpty().WithMessage("Id zamówienia nie może być puste.");
-            RuleFor(x => x.Id).Must(_validator.CheckIfExist<Order>)
+            RuleFor(x => x.Id).Must(_validator.IsExist<Order>)
                 .WithMessage("Zamówienie o podanym id nie istnieje.");
-            RuleFor(x => x.Barcode).Must(_validator.CheckIfOrderBarcodeIsUnique)
+            RuleFor(x => x.Barcode).Must(_validator.IsOrderBarcodeIsUnique)
                 .WithMessage("Już istnieje zamówienie o podanym numerze.");
             RuleFor(x => x.Barcode).NotEmpty()
                 .WithMessage("Numer zamówienia nie może być pusty");

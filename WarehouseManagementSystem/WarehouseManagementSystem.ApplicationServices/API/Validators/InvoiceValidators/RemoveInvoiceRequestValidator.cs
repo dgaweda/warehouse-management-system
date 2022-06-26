@@ -11,7 +11,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.InvoiceVa
         public RemoveInvoiceRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.InvoiceId).Must(_validator.CheckIfExist<Invoice>).WithMessage(x => $"Invoice with id: {x.InvoiceId} not exists.");
+            RuleFor(x => x.InvoiceId).Must(_validator.IsExist<Invoice>).WithMessage(x => $"Invoice with id: {x.InvoiceId} not exists.");
         }
     }
 }

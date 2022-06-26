@@ -12,7 +12,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.PalletVal
         public RemovePalletRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.PalletId).Must(_validator.CheckIfExist<Pallet>).WithMessage("Pallet not exist.");
+            RuleFor(x => x.PalletId).Must(_validator.IsExist<Pallet>).WithMessage("Pallet not exist.");
         }
     }
 }

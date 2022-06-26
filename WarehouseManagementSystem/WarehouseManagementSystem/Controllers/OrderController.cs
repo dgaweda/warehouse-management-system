@@ -10,7 +10,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;
 namespace warehouse_management_system.Controllers
 {
     [Authorize]
-    [Route("[controller]")]
+    [Route("/api/order/")]
     [ApiController]
     public class OrderController : ApiControllerBase
     {
@@ -20,19 +20,19 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("Get/")]
+        [Route("get/")]
         public Task<IActionResult> GetOrders([FromQuery] GetOrdersRequest request) => Handle<GetOrdersRequest, GetOrdersResponse>(request);
         
         [HttpPost]   
-        [Route("Add/")]
+        [Route("add/")]
         public Task<IActionResult> AddOrder([FromBody] AddOrderRequest request) => Handle<AddOrderRequest, AddOrderResponse>(request);
         
         [HttpPut]   
-        [Route("Edit/")]
+        [Route("edit/")]
         public Task<IActionResult> EditOrder([FromBody] EditOrderRequest request) => Handle<EditOrderRequest, EditOrderResponse>(request);
         
         [HttpDelete]   
-        [Route("Remove/")]
+        [Route("remove/")]
         public Task<IActionResult> RemoveOrder([FromBody] RemoveOrderRequest request) => Handle<RemoveOrderRequest, RemoveOrderResponse>(request);
     }
 }

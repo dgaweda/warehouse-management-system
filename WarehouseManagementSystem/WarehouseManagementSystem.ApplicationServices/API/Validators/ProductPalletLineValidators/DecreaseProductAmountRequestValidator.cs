@@ -14,8 +14,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductPa
             RuleFor(x => x.ProductId).NotEmpty().WithMessage("Product id must be filled");
             RuleFor(x => x.ProductAmount).GreaterThan(0).WithMessage("Amount must be greater than 0.");
 
-            RuleFor(x => x.PalletId).Must(_validator.CheckIfPalletForUnfoldingExist).WithMessage("Pallet doesn't exist.");
-            RuleFor(x => x.ProductId).Must(_validator.CheckIfProductIsOnPalletForUnfolding).WithMessage("Product doesn't exist.");
+            RuleFor(x => x.PalletId).Must(_validator.IsPalletForUnfoldingExist).WithMessage("Pallet doesn't exist.");
+            RuleFor(x => x.ProductId).Must(_validator.IsProductOnPalletForUnfolding).WithMessage("Product doesn't exist.");
         }
     }
 }

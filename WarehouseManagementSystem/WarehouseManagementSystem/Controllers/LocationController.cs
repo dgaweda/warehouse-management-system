@@ -10,7 +10,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Locatio
 namespace warehouse_management_system.Controllers
 {
     [Authorize]
-    [Route("[controller]")]
+    [Route("/api/location/")]
     [ApiController]
     public class LocationController : ApiControllerBase
     {
@@ -25,11 +25,11 @@ namespace warehouse_management_system.Controllers
         public Task<IActionResult> Get([FromQuery] GetLocationsRequest request) => Handle<GetLocationsRequest, GetLocationsResponse>(request);
 
         [HttpPost]
-        [Route("Add/")]
+        [Route("add/")]
         public Task<IActionResult> Add([FromBody] AddLocationRequest request) => Handle<AddLocationRequest, AddLocationResponse>(request);
 
         [HttpPatch]
-        [Route("Edit/")]
+        [Route("edit/")]
         public Task<IActionResult> Edit([FromBody] EditLocationRequest request) => Handle<EditLocationRequest, EditLocationResponse>(request);
 
         [HttpPatch]
@@ -41,7 +41,7 @@ namespace warehouse_management_system.Controllers
         public Task<IActionResult> SetProductLocation([FromBody] SetProductLocationRequest request) => Handle<SetProductLocationRequest, SetProductLocationResponse>(request);
 
         [HttpDelete]
-        [Route("Remove/")]
+        [Route("remove/")]
         public Task<IActionResult> Remove([FromQuery] RemoveLocationRequest request) =>  Handle<RemoveLocationRequest, RemoveLocationResponse>(request);
     }
 }

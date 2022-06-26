@@ -8,7 +8,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 
 namespace warehouse_management_system.Controllers
 {
-    [Route("[controller]")]
+    [Route("/api/delivery/")]
     [ApiController]
     public class DeliveryController : ApiControllerBase
     {
@@ -17,19 +17,19 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("Get/")]
+        [Route("get/")]
         public async Task<IActionResult> GetDeliveries([FromQuery] GetDeliveriesRequest request) => await Handle<GetDeliveriesRequest, GetDeliveriesResponse>(request);
 
         [HttpPost]
-        [Route("Add/")]
+        [Route("add/")]
         public async Task<IActionResult> AddDelivery([FromBody] AddDeliveryRequest request) => await Handle<AddDeliveryRequest, AddDeliveryResponse>(request);
 
         [HttpDelete]
-        [Route("Remove/")]
+        [Route("remove/")]
         public async Task<IActionResult> RemoveDelivery([FromQuery] RemoveDeliveryRequest request) => await Handle<RemoveDeliveryRequest, RemoveDeliveryResponse>(request);
 
         [HttpPut]
-        [Route("Edit/")]
+        [Route("edit/")]
         public async Task<IActionResult> EditDelivery([FromBody] EditDeliveryRequest request) => await Handle<EditDeliveryRequest, EditDeliveryResponse>(request);
     }
 }

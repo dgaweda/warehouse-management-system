@@ -12,8 +12,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
         public RemoveLocationValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.Id).Must(_validator.CheckIfExist<Location>).WithMessage("Location doesn't exists");
-            RuleFor(x => x.Id).Must(_validator.CheckLocationCurrentAmount).WithMessage("Location still have some products");
+            RuleFor(x => x.Id).Must(_validator.IsExist<Location>).WithMessage("Location doesn't exists");
+            RuleFor(x => x.Id).Must(_validator.IsLocationStillHaveProducts).WithMessage("Location still have some products");
         }
     }
 }

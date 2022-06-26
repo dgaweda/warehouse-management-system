@@ -14,7 +14,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.UserValid
             RuleFor(x => x.UserName).NotEmpty().WithMessage("Username must be specified.");
             RuleFor(x => x.Password).NotEmpty().WithMessage("Password must be specified.");
             RuleFor(x => x.UserName).MaximumLength(30).WithMessage("Username is too long. Max 30 characters.");
-            RuleFor(x => x.UserName).Must(_validator.CheckIfUsernameIsUnique).WithMessage("User with that username already exist.");
+            RuleFor(x => x.UserName).Must(_validator.IsUsernameIsUnique).WithMessage("User with that username already exist.");
             RuleFor(x => x.Email).NotEmpty().WithMessage("Email must be specified.");
             RuleFor(x => x.Email).Must(_validator.CheckEmailFormat).WithMessage("Email is incorrect.");
             RuleFor(x => x.Name).NotEmpty().WithMessage("Name must be specifed.");

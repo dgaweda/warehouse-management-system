@@ -28,22 +28,22 @@ namespace warehouse_management_system.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("Add/")]
+        [Route("add/")]
         public async Task<IActionResult> AddUser([FromBody] AddUserRequest request) => await Handle<AddUserRequest, AddUserResponse>(request);
 
         [Authorize]
         [HttpGet]
-        [Route("Get/")]
+        [Route("get/")]
         public async Task<IActionResult> GetUsers([FromQuery] GetUsersRequest request) => await Handle<GetUsersRequest, GetUsersResponse>(request);
 
         [Authorize]
         [HttpPut]
-        [Route("Edit/")]
+        [Route("edit/")]
         public async Task<IActionResult> EditUser([FromBody] EditUserRequest request) => await Handle<EditUserRequest, EditUserResponse>(request);
 
         [Authorize]
         [HttpDelete]
-        [Route("Remove/")]
+        [Route("remove/")]
         public async Task<IActionResult> RemoveUser([FromQuery] RemoveUserRequest request) => await Handle<RemoveUserRequest, RemoveUserResponse>(request);
     }
 }

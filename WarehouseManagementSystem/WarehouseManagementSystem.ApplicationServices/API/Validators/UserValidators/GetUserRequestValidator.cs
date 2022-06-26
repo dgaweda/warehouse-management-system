@@ -12,7 +12,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.UserValid
         public GetUserRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.UserId).Must(_validator.CheckIfExist<User>).WithMessage("User doesn't exists");
+            RuleFor(x => x.UserId).Must(_validator.IsExist<User>).WithMessage("User doesn't exists");
         }
     }
 }

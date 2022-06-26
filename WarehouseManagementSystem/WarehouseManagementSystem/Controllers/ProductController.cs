@@ -11,7 +11,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 namespace warehouse_management_system.Controllers
 {
     [Authorize]
-    [Route("[controller]")]
+    [Route("/api/product/")]
     [ApiController]
     public class ProductController : ApiControllerBase
     {
@@ -22,19 +22,19 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("Get/")]
+        [Route("get/")]
         public Task<IActionResult> Get([FromQuery] GetProductsRequest request) =>Handle<GetProductsRequest, GetProductsResponse>(request);
 
         [HttpPost]
-        [Route("Add/")]
+        [Route("add/")]
         public Task<IActionResult> Add([FromBody] AddProductRequest request) => Handle<AddProductRequest, AddProductResponse>(request);
 
         [HttpPatch]
-        [Route("Edit/")]
+        [Route("edit/")]
         public Task<IActionResult> Edit([FromBody] EditProductRequest request) => Handle<EditProductRequest, EditProductResponse>(request);
 
         [HttpDelete]
-        [Route("Remove/")]
+        [Route("remove/")]
         public Task<IActionResult> Remove([FromQuery] RemoveProductRequest request) => Handle<RemoveProductRequest, RemoveProductResponse>(request);
     }
 }

@@ -22,7 +22,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductHand
         public Task<GetProductsResponse> Handle(GetProductsRequest request, CancellationToken cancellationToken)
         {
             var query = CreateQuery(request);
-            var response = PrepareResponse(query);
+            var response = GetResponse(query);
             return response;
         }
         public override GetProductsQuery CreateQuery(GetProductsRequest request)
