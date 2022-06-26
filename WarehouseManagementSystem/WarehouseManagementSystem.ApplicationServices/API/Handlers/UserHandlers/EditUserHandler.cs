@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandlers
 {
     public class EditUserHandler : 
-        CommandHandler<EditUserRequest, EditUserResponse, User, Domain.Models.UserDTO, EditUserCommand>,
+        CommandHandler<EditUserRequest, EditUserResponse, User, Domain.Models.UserDto, EditUserCommand>,
         IRequestHandler<EditUserRequest, EditUserResponse>
     {
         public EditUserHandler(ICommandExecutor commandExecutor, IMapper mapper, IRepository<User> repositoryService) : base(mapper, commandExecutor, repositoryService)

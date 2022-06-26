@@ -13,10 +13,10 @@ namespace warehouse_management_system.Controllers
     [Authorize]
     [Route("[controller]")]
     [ApiController]
-    public class DepartureController : ApiControllerBase<DepartureController>
+    public class DepartureController : ApiControllerBase
     {
-        public DepartureController(IMediator mediator, ILogger<DepartureController> logger, IPrivilegesService privileges) 
-            : base(mediator, logger)
+        public DepartureController(IMediator mediator, IPrivilegesService privileges) 
+            : base(mediator)
         {
         }
 

@@ -13,10 +13,10 @@ namespace warehouse_management_system.Controllers
     [Authorize]
     [Route("[controller]")]
     [ApiController]
-    public class PalletController : ApiControllerBase<PalletController>
+    public class PalletController : ApiControllerBase
     {
-        public PalletController(IMediator mediator, ILogger<PalletController> logger, IPrivilegesService privileges) 
-            : base(mediator, logger)
+        public PalletController(IMediator mediator, IPrivilegesService privileges) 
+            : base(mediator)
         {
         }
 

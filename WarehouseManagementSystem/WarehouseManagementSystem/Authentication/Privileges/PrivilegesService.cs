@@ -15,6 +15,7 @@ namespace warehouse_management_system.Authentication
             var role = ParseUserRoleToEnum(claimsPrincipal);
             var claims = role switch
             {
+                
                 RoleKey.GENERAL_ADMIN => SetGeneralAdminPrivileges(),
                 RoleKey.MANAGER => SetManagerPrivileges(),
                 RoleKey.WAREHOUSEMAN => SetWarehouseManPrivileges(),

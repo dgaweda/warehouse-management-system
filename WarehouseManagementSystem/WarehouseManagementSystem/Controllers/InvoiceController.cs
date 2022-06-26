@@ -12,10 +12,10 @@ namespace warehouse_management_system.Controllers
     [Authorize]
     [Route("[controller]")]
     [ApiController]
-    public class InvoiceController : ApiControllerBase<InvoiceController>
+    public class InvoiceController : ApiControllerBase
     {
-        public InvoiceController(IMediator mediator, ILogger<InvoiceController> logger) 
-            : base(mediator, logger)
+        public InvoiceController(IMediator mediator) 
+            : base(mediator)
         {
 
         }

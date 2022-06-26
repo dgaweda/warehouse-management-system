@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using warehouse_management_system.Authentication;
+using warehouse_management_system.Middleware;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.SeniorityValidators;
@@ -104,6 +105,10 @@ namespace warehouse_management_system
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            
+            app.UseMiddleware<LogMiddleware>();
+            app.UseMiddleware<CustomExceptionHandlerMiddleware>();
+            
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

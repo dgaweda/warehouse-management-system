@@ -13,13 +13,12 @@ namespace warehouse_management_system.Controllers
     
     [ApiController]
     [Route("[controller]")]
-    public class UserController : ApiControllerBase<UserController>
+    public class UserController : ApiControllerBase
     {
-        private readonly IMediator _mediator;
-        public UserController(IMediator mediator, ILogger<UserController> logger) 
-            : base(mediator, logger)
+        public UserController(IMediator mediator)
+            : base(mediator)
         {
-            _mediator = mediator;
+            
         }
 
         [AllowAnonymous]

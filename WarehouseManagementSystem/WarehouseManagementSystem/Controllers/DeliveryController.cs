@@ -10,9 +10,9 @@ namespace warehouse_management_system.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class DeliveryController : ApiControllerBase<DeliveryController>
+    public class DeliveryController : ApiControllerBase
     {
-        public DeliveryController(IMediator mediator, ILogger<DeliveryController> logger) : base(mediator, logger)
+        public DeliveryController(IMediator mediator) : base(mediator)
         {
         }
 

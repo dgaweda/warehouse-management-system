@@ -6,13 +6,14 @@ using DataAccess.CQRS.Commands.DepartureCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
 using MediatR;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Departure;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departure;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHandlers
 {
     public class AddDepartureHandler :
-        CommandHandler<AddDepartureRequest, AddDepartureResponse, Departure, Domain.Models.DepartureDTO, AddDepartureCommand>,
+        CommandHandler<AddDepartureRequest, AddDepartureResponse, Departure, DepartureDto, AddDepartureCommand>,
         IRequestHandler<AddDepartureRequest, AddDepartureResponse>
     {
         public AddDepartureHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Departure> repositoryService)

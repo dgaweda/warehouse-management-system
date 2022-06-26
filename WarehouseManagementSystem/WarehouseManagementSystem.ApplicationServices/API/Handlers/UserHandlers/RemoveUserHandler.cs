@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandlers
 {
     public class RemoveUserHandler 
-        :CommandHandler<RemoveUserRequest, RemoveUserResponse, User, Domain.Models.UserDTO, RemoveUserCommand>,
+        :CommandHandler<RemoveUserRequest, RemoveUserResponse, User, Domain.Models.UserDto, RemoveUserCommand>,
         IRequestHandler<RemoveUserRequest, RemoveUserResponse>
     {
         public RemoveUserHandler(ICommandExecutor commandExecutor, IMapper mapper, IRepository<User> repositoryService) : base(mapper, commandExecutor, repositoryService)

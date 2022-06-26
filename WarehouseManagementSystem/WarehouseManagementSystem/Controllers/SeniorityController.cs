@@ -13,10 +13,10 @@ namespace warehouse_management_system.Controllers
     [Authorize]
     [Route("[controller]")]
     [ApiController]
-    public class SeniorityController : ApiControllerBase<SeniorityController>
+    public class SeniorityController : ApiControllerBase
     {
-        public SeniorityController(IMediator mediator, ILogger<SeniorityController> logger, IPrivilegesService privileges) 
-            : base(mediator, logger)
+        public SeniorityController(IMediator mediator, IPrivilegesService privileges) 
+            : base(mediator)
         {
         }
 

@@ -12,11 +12,11 @@ namespace warehouse_management_system.Controllers
     [Authorize]
     [Route("[controller]")]
     [ApiController]
-    public class LocationController : ApiControllerBase<LocationController>
+    public class LocationController : ApiControllerBase
     {
 
-        public LocationController(IMediator mediator, ILogger<LocationController> logger) 
-            : base(mediator, logger)
+        public LocationController(IMediator mediator) 
+            : base(mediator)
         {
         }
 
