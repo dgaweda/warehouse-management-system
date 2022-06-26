@@ -8,7 +8,7 @@ namespace DataAccess.CQRS.Commands.SeniorityCommands
     {
         public override async Task<Seniority> Execute(IRepository<Seniority> seniorityRepository)
         {
-            await seniorityRepository.Add(Parameter);
+            await seniorityRepository.AddAsync(Parameter);
 
             return Parameter;
         }

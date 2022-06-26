@@ -8,7 +8,7 @@ namespace DataAccess.CQRS.Commands.RoleCommands
     {
         public override async Task<Role> Execute(IRepository<Role> roleRepository)
         {
-            await roleRepository.Update(Parameter);
+            await roleRepository.UpdateAsync(Parameter);
             return Parameter;
         }
     }

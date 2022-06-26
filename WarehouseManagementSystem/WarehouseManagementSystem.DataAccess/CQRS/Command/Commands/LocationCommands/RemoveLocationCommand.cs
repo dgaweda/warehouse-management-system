@@ -10,7 +10,7 @@ namespace DataAccess.CQRS.Commands.LocationCommands
         public override async Task<Location> Execute(IRepository<Location> locationRepository)
         {
             var location = await locationRepository.Entity.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
-            await locationRepository.Delete(Parameter.Id);
+            await locationRepository.DeleteAsync(Parameter.Id);
             return location;
         }
     }

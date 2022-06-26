@@ -9,9 +9,9 @@ namespace DataAccess.CQRS.Commands.SeniorityCommands
     {
         public override async Task<Seniority> Execute(IRepository<Seniority> seniorityRepository)
         {
-            await seniorityRepository.Update(Parameter);
+            await seniorityRepository.UpdateAsync(Parameter);
             
-            var updatedRecord = await seniorityRepository.GetEntity()
+            var updatedRecord = await seniorityRepository.Entity
                 .Include(x => x.User)
                 .FirstOrDefaultAsync(x => x.Id == Parameter.Id);
 

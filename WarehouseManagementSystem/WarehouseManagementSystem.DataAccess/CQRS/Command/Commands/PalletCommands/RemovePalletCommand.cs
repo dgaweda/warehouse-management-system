@@ -10,7 +10,7 @@ namespace DataAccess.CQRS.Commands.PalletCommands
         public override async Task<Pallet> Execute(IRepository<Pallet> palletRepository)
         {
             var pallet = await palletRepository.Entity.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
-            await palletRepository.Delete(Parameter.Id);
+            await palletRepository.DeleteAsync(Parameter.Id);
             return pallet;
         }
     }

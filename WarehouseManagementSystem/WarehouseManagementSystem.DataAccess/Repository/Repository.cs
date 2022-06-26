@@ -13,7 +13,7 @@ namespace DataAccess.Repository
         {
             _dbContext = dbContext;
         }
-        public async Task<TEntity> Add(TEntity entity)
+        public async Task<TEntity> AddAsync(TEntity entity)
         {
             await Entity.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
@@ -25,12 +25,12 @@ namespace DataAccess.Repository
             return _dbContext;
         }
 
-        public async Task<TEntity> GetById(int id)
+        public async Task<TEntity> GetByIdAsync(int id)
         {
             return await Entity.FirstOrDefaultAsync(i => i.Id == id);
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             var entityToDelete = await Entity.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -41,7 +41,7 @@ namespace DataAccess.Repository
             }
         }
 
-        public async Task<TEntity> Update(TEntity entity)
+        public async Task<TEntity> UpdateAsync(TEntity entity)
         {
             var entityToDetach = await Entity.FirstOrDefaultAsync(x => x.Id == entity.Id);
 

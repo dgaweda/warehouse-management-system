@@ -23,7 +23,7 @@ namespace DataAccess.CQRS.Commands.ProductsPalletsCommands
             await productPalletLine.DecreaseProductAmount(Parameter);
 
             if (productPalletLine.ProductAmount == default)
-                await productPalletLineRepository.Delete(productPalletLine.Id);
+                await productPalletLineRepository.DeleteAsync(productPalletLine.Id);
 
             if (productPalletLine.ProductAmount < 0)
                 throw new ArgumentOutOfRangeException("Amount can't be less than 0.");

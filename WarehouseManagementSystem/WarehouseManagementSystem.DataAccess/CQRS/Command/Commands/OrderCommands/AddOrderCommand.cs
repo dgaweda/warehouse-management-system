@@ -13,7 +13,7 @@ namespace DataAccess.CQRS.Commands.OrderCommands
             Parameter.OrderState = OrderState.RECEIVED;
             Parameter.OrderLines.ForEach(x => x.OrderId = Parameter.Id);
             await orderRepository.GetDbContext().Set<OrderLine>().AddRangeAsync(Parameter.OrderLines);
-            await orderRepository.Add(Parameter);
+            await orderRepository.AddAsync(Parameter);
             return Parameter;
         }
     }

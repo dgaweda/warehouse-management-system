@@ -18,7 +18,7 @@ namespace DataAccess.CQRS.Commands.LocationCommands
                 .SetMaxAmount(Parameter)
                 .SetName(Parameter);
 
-            await locationRepository.Update(locationToEdit);
+            await locationRepository.UpdateAsync(locationToEdit);
             return locationToEdit;
         }
     }

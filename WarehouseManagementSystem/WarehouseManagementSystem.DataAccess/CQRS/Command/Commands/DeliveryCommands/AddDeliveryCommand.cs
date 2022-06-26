@@ -15,7 +15,7 @@ namespace DataAccess.CQRS.Commands.DeliveryCommands
                 .SetDeliveryNumber(deliveries)
                 .SetDeliveryName(Parameter);
 
-            await deliveryRepository.Add(Parameter);
+            await deliveryRepository.AddAsync(Parameter);
             return Parameter;
         }
     }

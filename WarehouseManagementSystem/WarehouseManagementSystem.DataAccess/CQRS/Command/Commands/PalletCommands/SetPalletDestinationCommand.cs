@@ -11,12 +11,12 @@ namespace DataAccess.CQRS.Commands.PalletCommands
     {
         public override async Task<Pallet> Execute(IRepository<Pallet> palletRepository)
         {
-            var pallet = await palletRepository.GetById(Parameter.Id);
+            var pallet = await palletRepository.GetByIdAsync(Parameter.Id);
 
             pallet.SetProperties(Parameter);
             pallet.SetStatus();
 
-            await palletRepository.Update(pallet);
+            await palletRepository.UpdateAsync(pallet);
             
             return await palletRepository.Entity.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
         }

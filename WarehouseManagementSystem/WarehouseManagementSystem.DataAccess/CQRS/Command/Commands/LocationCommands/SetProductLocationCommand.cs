@@ -16,7 +16,7 @@ namespace DataAccess.CQRS.Commands.ProductCommands
 
             location.SetProductAmount(Parameter);
 
-            await locationRepository.Update(location);
+            await locationRepository.UpdateAsync(location);
             return location;
         }
 

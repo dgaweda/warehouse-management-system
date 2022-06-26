@@ -10,10 +10,10 @@ namespace DataAccess.CQRS.Command.Commands.DepartureCommands
     {
         public override async Task<Departure> Execute(IRepository<Departure> departureRepository)
         {
-            var departureToUpdate = await departureRepository.GetById(Parameter.Id);
+            var departureToUpdate = await departureRepository.GetByIdAsync(Parameter.Id);
             departureToUpdate.SetState();
 
-            await departureRepository.Update(departureToUpdate);
+            await departureRepository.UpdateAsync(departureToUpdate);
             return departureToUpdate;
         }
     }

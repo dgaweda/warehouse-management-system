@@ -10,7 +10,7 @@ namespace DataAccess.CQRS.Commands.DeliveryCommands
         public override async Task<Delivery> Execute(IRepository<Delivery> deliveryRepository)
         {
             var delivery = await deliveryRepository.Entity.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
-            await deliveryRepository.Delete(Parameter.Id);
+            await deliveryRepository.DeleteAsync(Parameter.Id);
             return delivery;
         }
     }

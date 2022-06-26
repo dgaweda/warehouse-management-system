@@ -10,7 +10,7 @@ namespace DataAccess.CQRS.Commands.InvoiceCommands
         public override async Task<Invoice> Execute(IRepository<Invoice> invoiceRepository)
         {
             var invoice = await invoiceRepository.Entity.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
-            await invoiceRepository.Delete(Parameter.Id);
+            await invoiceRepository.DeleteAsync(Parameter.Id);
             return invoice;
         }
     }

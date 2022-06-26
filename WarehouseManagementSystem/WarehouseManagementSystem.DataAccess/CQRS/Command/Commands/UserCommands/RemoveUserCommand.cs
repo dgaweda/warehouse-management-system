@@ -1,16 +1,17 @@
 ﻿using DataAccess.Entities;
 using System.Threading.Tasks;
 using DataAccess.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands
 {
     public class RemoveUserCommand : CommandBase<User, User>
     {
 
-        public override async Task<User> Execute(IRepository<User> repositoryService)
+        public override async Task<User> Execute(IRepository<User> userRepository)
         {
-            var user = await context.Users.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
-            await context.Delete(Parameter);
+            var user = await userRepository.Entity.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
+            await userRepository.DeleteAsync(Parameter.Id);
             return user;
         }
     }

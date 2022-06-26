@@ -11,7 +11,7 @@ namespace DataAccess.CQRS.Commands.DepartureCommands
         {
             Parameter.OpeningTime = DateTime.Now;
 
-            await departureRepository.Add(Parameter);
+            await departureRepository.AddAsync(Parameter);
             return Parameter;
         }
     }

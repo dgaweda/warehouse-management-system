@@ -14,7 +14,7 @@ namespace DataAccess.CQRS.Commands.InvoiceCommands
 
             Parameter.SetInvoiceNumber(invoices);
 
-            await invoiceRepository.Update(Parameter);
+            await invoiceRepository.UpdateAsync(Parameter);
             return Parameter;
         }
     }

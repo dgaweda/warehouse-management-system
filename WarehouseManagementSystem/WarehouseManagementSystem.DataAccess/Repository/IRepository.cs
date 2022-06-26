@@ -8,10 +8,10 @@ namespace DataAccess.Repository
     {
         DbSet<T> Entity { get; }
         
-        Task<T> GetById(int id);
-        Task<T> Add(T entity);
-        Task<T> Update(T entity);
-        Task Delete(int id);
+        Task<T> GetByIdAsync(int id);
+        Task<T> AddAsync(T entity);
+        Task<T> UpdateAsync(T entity);
+        Task DeleteAsync(int id);
         WMSDatabaseContext GetDbContext();
     }
 }

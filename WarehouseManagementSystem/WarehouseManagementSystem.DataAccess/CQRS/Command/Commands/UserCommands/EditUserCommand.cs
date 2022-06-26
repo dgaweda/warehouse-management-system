@@ -9,9 +9,9 @@ namespace DataAccess.CQRS.Commands
     {
         public override async Task<User> Execute(IRepository<User> userRepository)
         {
-            await userRepository.Update(Parameter);
+            await userRepository.UpdateAsync(Parameter);
 
-            var updatedRecord = await userRepository.GetEntity()
+            var updatedRecord = await userRepository.Entity
                 .Include(x => x.Role)
                 .FirstOrDefaultAsync(user => user.Id == Parameter.Id);
 

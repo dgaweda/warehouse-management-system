@@ -13,7 +13,7 @@ namespace DataAccess.CQRS.Commands
             var invoices = await invoiceRepository.Entity.ToListAsync();
             Parameter.SetInvoiceNumber(invoices);
 
-            await invoiceRepository.Add(Parameter);
+            await invoiceRepository.AddAsync(Parameter);
 
             return Parameter;
         }

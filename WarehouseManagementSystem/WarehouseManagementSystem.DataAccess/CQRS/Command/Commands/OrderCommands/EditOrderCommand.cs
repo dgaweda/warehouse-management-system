@@ -9,7 +9,7 @@ namespace DataAccess.CQRS.Commands.OrderCommands
     {
         public override async Task<Order> Execute(IRepository<Order> orderRepository)
         {
-            await orderRepository.Update(Parameter);
+            await orderRepository.UpdateAsync(Parameter);
             var order = await orderRepository.Entity.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
             return order;
         }

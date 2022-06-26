@@ -11,7 +11,7 @@ namespace DataAccess.CQRS.Commands.LocationCommands
         {
             var locationToEdit = await locationRepository.Entity.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
 
-            await locationRepository.Update(locationToEdit);
+            await locationRepository.UpdateAsync(locationToEdit);
             return locationToEdit;
         }
 
