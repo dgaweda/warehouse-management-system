@@ -20,7 +20,7 @@ namespace DataAccess.CQRS.Commands.ProductsPalletsCommands
                 .FirstOrDefaultAsync(@pallet => @pallet.Id == productPalletLine.PalletId);
             
 
-            await productPalletLine.DecreaseProductAmount(Parameter);
+            productPalletLine.DecreaseProductAmount(Parameter);
 
             if (productPalletLine.ProductAmount == default)
                 await productPalletLineRepository.DeleteAsync(productPalletLine.Id);

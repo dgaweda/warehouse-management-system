@@ -22,7 +22,9 @@ namespace warehouse_management_system.Controllers.BaseController
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(
+                    ModelState.Where(x => x.Value.Errors.Any())
+                        .Select(x => new { property = x.Key, errors = x.Value.Errors }));
             }
             
             if (User.IsPermitted(request) || request.IsAuthenticateUserRequest())
@@ -31,10 +33,10 @@ namespace warehouse_management_system.Controllers.BaseController
                 return response.Error is null ? Ok(response) : ErrorResponse(response.Error);
             }
 
-            return ErrorResponse(new ErrorModel(ErrorType.Forbidden));
+            return ErrorResponse(new ErrorModel(ErrorType.Unauthorized));
         }
 
-        protected IActionResult ErrorResponse(ErrorModel errorModel)
+        private IActionResult ErrorResponse(ErrorModel errorModel)
         {
             var httpCode = errorModel.Error.GetHttpStatusCode();
             return StatusCode((int)httpCode, errorModel);

@@ -17,8 +17,7 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpPost]
-        [Route("add/")]
-        public Task<IActionResult> AddOrderLine([FromBody] AddOrderLineRequest request) =>
-            Handle<AddOrderLineRequest, AddOrderLineResponse>(request);
+        [Route("add")]
+        public async Task<IActionResult> AddOrderLine([FromBody] AddOrderLineRequest request) => await Handle<AddOrderLineRequest, AddOrderLineResponse>(request);
     }
 }

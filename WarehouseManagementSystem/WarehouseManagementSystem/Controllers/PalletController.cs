@@ -21,23 +21,29 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("get/")]
-        public Task<IActionResult> Get([FromQuery] GetPalletsRequest request) => Handle<GetPalletsRequest, GetPalletsResponse>(request);
+        public async Task<IActionResult> Get([FromQuery] GetPalletsRequest request) => await Handle<GetPalletsRequest, GetPalletsResponse>(request);
         
         [HttpGet]
-        [Route("status/")]
-        public Task<IActionResult> GetByStatus([FromQuery] GetPalletsByStatusRequest request) => Handle<GetPalletsByStatusRequest, GetPalletsByStatusResponse>(request);
+        [Route("by-status")]
+        public async Task<IActionResult> GetByStatus([FromQuery] GetPalletsByStatusRequest request) => await Handle<GetPalletsByStatusRequest, GetPalletsByStatusResponse>(request);
 
         [HttpDelete]
-        [Route("remove/")]
-        public Task<IActionResult> Remove([FromQuery] RemovePalletRequest request) => Handle<RemovePalletRequest, RemovePalletResponse>(request);
+        [Route("remove/{palletId}")]
+        public async Task<IActionResult> Remove([FromRoute] int palletId)
+        {
+            var request = new RemovePalletRequest()
+            {
+                PalletId = palletId
+            };
+            return await Handle<RemovePalletRequest, RemovePalletResponse>(request);
+        }
 
         [HttpPost]
-        [Route("add/")]
-        public Task<IActionResult> Add([FromBody] AddPalletRequest request) => Handle<AddPalletRequest, AddPalletResponse>(request);
+        [Route("add")]
+        public async Task<IActionResult> Add([FromBody] AddPalletRequest request) => await Handle<AddPalletRequest, AddPalletResponse>(request);
 
         [HttpPatch]
-        [Route("edit/")]
-        public Task<IActionResult> SetPalletDestination([FromBody] SetPalletDestinationRequest request) =>  Handle<SetPalletDestinationRequest, SetPalletDestinationResponse>(request);
+        [Route("edit")]
+        public async Task<IActionResult> SetPalletDestination([FromBody] SetPalletDestinationRequest request) => await Handle<SetPalletDestinationRequest, SetPalletDestinationResponse>(request);
     }
 }

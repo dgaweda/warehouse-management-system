@@ -21,19 +21,18 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("get/")]
-        public Task<IActionResult> GetInvoices([FromQuery] GetInvoicesRequest request) => Handle<GetInvoicesRequest, GetInvoicesResponse>(request);
+        public async Task<IActionResult> GetInvoices([FromQuery] GetInvoicesRequest request) => await Handle<GetInvoicesRequest, GetInvoicesResponse>(request);
 
         [HttpPost]
-        [Route("add/")]
-        public Task<IActionResult> AddInvoice([FromBody] AddInvoiceRequest request) => Handle<AddInvoiceRequest, AddInvoiceResponse>(request);
+        [Route("add")]
+        public async Task<IActionResult> AddInvoice([FromBody] AddInvoiceRequest request) => await Handle<AddInvoiceRequest, AddInvoiceResponse>(request);
 
         [HttpDelete]
-        [Route("remove/")]
-        public Task<IActionResult> RemoveInvoice([FromQuery] RemoveInvoiceRequest request) => Handle<RemoveInvoiceRequest, RemoveInvoiceResponse>(request);
+        [Route("remove/{InvoiceId}")]
+        public async Task<IActionResult> RemoveInvoice([FromRoute] RemoveInvoiceRequest request) => await Handle<RemoveInvoiceRequest, RemoveInvoiceResponse>(request);
 
         [HttpPut]
-        [Route("edit/")]
-        public Task<IActionResult> EditInvoice([FromBody] EditInvoiceRequest request) => Handle<EditInvoiceRequest, EditInvoiceResponse>(request);
+        [Route("edit")]
+        public async Task<IActionResult> EditInvoice([FromBody] EditInvoiceRequest request) => await Handle<EditInvoiceRequest, EditInvoiceResponse>(request);
     }
 }

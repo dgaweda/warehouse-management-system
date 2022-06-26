@@ -22,19 +22,18 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("get/")]
-        public Task<IActionResult> Get([FromQuery] GetProductsRequest request) =>Handle<GetProductsRequest, GetProductsResponse>(request);
+        public async Task<IActionResult> Get([FromQuery] GetProductsRequest request) => await Handle<GetProductsRequest, GetProductsResponse>(request);
 
         [HttpPost]
-        [Route("add/")]
-        public Task<IActionResult> Add([FromBody] AddProductRequest request) => Handle<AddProductRequest, AddProductResponse>(request);
+        [Route("add")]
+        public async Task<IActionResult> Add([FromBody] AddProductRequest request) => await Handle<AddProductRequest, AddProductResponse>(request);
 
         [HttpPatch]
-        [Route("edit/")]
-        public Task<IActionResult> Edit([FromBody] EditProductRequest request) => Handle<EditProductRequest, EditProductResponse>(request);
+        [Route("edit")]
+        public async Task<IActionResult> Edit([FromBody] EditProductRequest request) => await Handle<EditProductRequest, EditProductResponse>(request);
 
         [HttpDelete]
-        [Route("remove/")]
-        public Task<IActionResult> Remove([FromQuery] RemoveProductRequest request) => Handle<RemoveProductRequest, RemoveProductResponse>(request);
+        [Route("remove/{Id}")]
+        public async Task<IActionResult> Remove([FromRoute] RemoveProductRequest request) => await Handle<RemoveProductRequest, RemoveProductResponse>(request);
     }
 }

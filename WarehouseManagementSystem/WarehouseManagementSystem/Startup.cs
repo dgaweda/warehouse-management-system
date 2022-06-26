@@ -103,12 +103,11 @@ namespace warehouse_management_system
             );
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
             
             app.UseMiddleware<LogMiddleware>();
-            app.UseMiddleware<CustomExceptionHandlerMiddleware>();
-            
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

@@ -21,27 +21,26 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("get")]
-        public Task<IActionResult> Get([FromQuery] GetLocationsRequest request) => Handle<GetLocationsRequest, GetLocationsResponse>(request);
+        public async Task<IActionResult> Get([FromQuery] GetLocationsRequest request) => await Handle<GetLocationsRequest, GetLocationsResponse>(request);
 
         [HttpPost]
-        [Route("add/")]
-        public Task<IActionResult> Add([FromBody] AddLocationRequest request) => Handle<AddLocationRequest, AddLocationResponse>(request);
+        [Route("add")]
+        public async Task<IActionResult> Add([FromBody] AddLocationRequest request) => await Handle<AddLocationRequest, AddLocationResponse>(request);
 
         [HttpPatch]
-        [Route("edit/")]
-        public Task<IActionResult> Edit([FromBody] EditLocationRequest request) => Handle<EditLocationRequest, EditLocationResponse>(request);
+        [Route("edit")]
+        public async Task<IActionResult> Edit([FromBody] EditLocationRequest request) => await Handle<EditLocationRequest, EditLocationResponse>(request);
 
         [HttpPatch]
-        [Route("Edit/CurrentAmount")]
-        public Task<IActionResult> EditCurrentAmount([FromQuery] EditLocationCurrentAmountRequest request) => Handle<EditLocationCurrentAmountRequest, EditLocationCurrentAmountResponse>(request);
+        [Route("edit/current-amount")]
+        public async Task<IActionResult> EditCurrentAmount([FromQuery] EditLocationCurrentAmountRequest request) => await Handle<EditLocationCurrentAmountRequest, EditLocationCurrentAmountResponse>(request);
 
         [HttpPatch]
-        [Route("Set/Location/")]
-        public Task<IActionResult> SetProductLocation([FromBody] SetProductLocationRequest request) => Handle<SetProductLocationRequest, SetProductLocationResponse>(request);
+        [Route("edit/product-location")]
+        public async Task<IActionResult> SetProductLocation([FromBody] SetProductLocationRequest request) => await Handle<SetProductLocationRequest, SetProductLocationResponse>(request);
 
         [HttpDelete]
-        [Route("remove/")]
-        public Task<IActionResult> Remove([FromQuery] RemoveLocationRequest request) =>  Handle<RemoveLocationRequest, RemoveLocationResponse>(request);
+        [Route("remove/{Id}")]
+        public async Task<IActionResult> Remove([FromRoute] RemoveLocationRequest request) => await Handle<RemoveLocationRequest, RemoveLocationResponse>(request);
     }
 }

@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using DataAccess;
 using DataAccess.CQRS.Queries;
 using System.Threading.Tasks;
@@ -8,10 +9,10 @@ using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public abstract class QueryHandler<TRequest, TResponse, TQuery, TEntityList, TDomainModelList>
-        : IQueryHandler<TRequest, TResponse, TQuery, TEntityList, TDomainModelList>
+    public abstract class QueryHandler<TRequest, TResponse, TQuery, TEntityList, TDtoModelList>
+        : IQueryHandler<TQuery, TResponse>
         where TQuery : QueryBase<TEntityList>
-        where TResponse : ResponseBase<TDomainModelList>, new()
+        where TResponse : ResponseBase<TDtoModelList>, new()
     {
         private readonly IMapper _mapper;
         private readonly IQueryExecutor _queryExecutor;
@@ -22,7 +23,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
             _queryExecutor = queryExecutor;
         }
 
-        public async Task<TResponse> PrepareResponse(TQuery query)
+        public async Task<TResponse> GetResponse(TQuery query)
         {
             var entityModel = await _queryExecutor.Execute(query);
             if (entityModel is null)
@@ -32,13 +33,13 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
                     Error = new ErrorModel(ErrorType.NotFound)
                 };
             }
-            var domainModel = _mapper.Map<TDomainModelList>(entityModel);
+            var domainModel = _mapper.Map<TDtoModelList>(entityModel);
             return new TResponse()
             {
-                Data = domainModel
+                Response = domainModel
             };
         }
-        
+
         public abstract TQuery CreateQuery(TRequest request);
     }
 }

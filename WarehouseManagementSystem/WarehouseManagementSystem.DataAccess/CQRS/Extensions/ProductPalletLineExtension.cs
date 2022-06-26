@@ -24,7 +24,7 @@ namespace DataAccess.CQRS.Extensions
                 .ToListAsync();
         }
 
-        public static async Task DecreaseProductAmount(this ProductPalletLine productPalletLine, ProductPalletLine requestProductPalletLine)
+        public static void DecreaseProductAmount(this ProductPalletLine productPalletLine, ProductPalletLine requestProductPalletLine)
         {
             productPalletLine.ProductAmount -= requestProductPalletLine.ProductAmount;
         }
@@ -34,12 +34,13 @@ namespace DataAccess.CQRS.Extensions
             pallet.PalletStatus = PalletStatus.UNFOLDED;
         }
 
-        public static List<ProductPalletLine> FilterByPalletId(this List<ProductPalletLine> palletLines, int palletId)
+        public static List<ProductPalletLine>? FilterByPalletId(this List<ProductPalletLine> palletLines, int palletId)
         {
             if (palletId == default)
                 return palletLines;
 
-            return palletLines.Where(x => x.PalletId == palletId).ToList();
+            palletLines = palletLines.Where(x => x.PalletId == palletId).ToList();
+            return palletLines.Any() ? palletLines : null;
         }
 
         public static bool PalletIsEmpty(this WMSDatabaseContext context, ProductPalletLine productPalletLine)

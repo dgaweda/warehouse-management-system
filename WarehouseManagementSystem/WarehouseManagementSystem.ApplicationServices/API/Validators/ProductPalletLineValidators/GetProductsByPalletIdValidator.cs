@@ -1,5 +1,4 @@
-﻿using DataAccess.Entities;
-using FluentValidation;
+﻿using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 
@@ -11,16 +10,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductPa
         public GetProductsByPalletIdRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.PalletId)
-                .NotEmpty()
-                .Custom((value, context) =>
-                {
-                    var exist = _validator.IsPalletIdExistsInProductPalletLine(value);
-                    if (!exist)
-                    {
-                        context.AddFailure("Pallet is probably empty or doesn't exist.");
-                    }
-                });
+            RuleFor(x => x.PalletId).Must(_validator.IsPalletIdExistsInProductPalletLine).WithMessage("Pallet is empty or doesn't exist.");
         }
     }
 }

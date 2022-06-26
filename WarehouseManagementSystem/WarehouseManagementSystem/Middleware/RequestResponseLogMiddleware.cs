@@ -23,6 +23,10 @@ namespace warehouse_management_system.Middleware
             {
                 await _next(context);
             }
+            catch (Exception e)
+            {
+                _logger.LogError("Exception: {e.Message}", e);
+            }
             finally
             {
                 _logger.LogInformation("-- {HttpProtocol} -- {Method} -- {Host}{Url} => HTTP Response: {StatusCode} --",

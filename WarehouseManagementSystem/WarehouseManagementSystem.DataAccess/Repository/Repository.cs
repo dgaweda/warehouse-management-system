@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities.EntityBases;
+﻿#nullable enable
+using DataAccess.Entities.EntityBases;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -27,7 +28,8 @@ namespace DataAccess.Repository
 
         public async Task<TEntity> GetByIdAsync(int id)
         {
-            return await Entity.FirstOrDefaultAsync(i => i.Id == id);
+            var result = await Entity.FirstOrDefaultAsync(i => i.Id == id);
+            return result;
         }
 
         public async Task DeleteAsync(int id)

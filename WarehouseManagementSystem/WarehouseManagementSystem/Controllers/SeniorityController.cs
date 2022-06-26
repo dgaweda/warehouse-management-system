@@ -11,7 +11,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Seniori
 namespace warehouse_management_system.Controllers
 {
     [Authorize]
-    [Route("[controller]")]
+    [Route("api/seniority/")]
     [ApiController]
     public class SeniorityController : ApiControllerBase
     {
@@ -21,15 +21,14 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("All/")]
-        public Task<IActionResult> GetSeniorities([FromQuery] GetSenioritiesRequest request) => Handle<GetSenioritiesRequest, GetSenioritiesResponse>(request);
+        public async Task<IActionResult> GetSeniorities([FromQuery] GetSenioritiesRequest request) => await Handle<GetSenioritiesRequest, GetSenioritiesResponse>(request);
 
         [HttpPost]
-        [Route("add/")]
-        public Task<IActionResult> AddSeniority([FromBody] AddSeniorityRequest request) => Handle<AddSeniorityRequest, AddSeniorityResponse>(request);
+        [Route("add")]
+        public async Task<IActionResult> AddSeniority([FromBody] AddSeniorityRequest request) => await Handle<AddSeniorityRequest, AddSeniorityResponse>(request);
 
         [HttpPut]
-        [Route("edit/")]
-        public Task<IActionResult> EditSeniority([FromBody] EditSeniorityRequest request) => Handle<EditSeniorityRequest, EditSeniorityResponse>(request);
+        [Route("edit")]
+        public async Task<IActionResult> EditSeniority([FromBody] EditSeniorityRequest request) => await Handle<EditSeniorityRequest, EditSeniorityResponse>(request);
     }
 }
