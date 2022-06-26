@@ -16,10 +16,16 @@
 
         public const string UnsupportedMediaType = "UNSUPPORTED_MEDIA_TYPE";
 
-        public const string RequestTooLarge = "REQUEST_TOO_LARGE";
+        public const string TooLargeData = "TOO_LARGE_DATA";
 
         public const string TooManyRequests = "TOO_MANY_REQUESTS";
 
         public const string Forbidden = "FORBIDDEN";
+
+        public const string NoContent = "NO_CONTENT";
+
+        public const string AlreadyExist = "ALREADY_EXIST";
+
+        public const string BadFormat = "BAD_FORMAT";
     }
 }

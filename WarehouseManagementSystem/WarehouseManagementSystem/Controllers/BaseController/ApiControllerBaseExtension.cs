@@ -36,12 +36,7 @@ namespace warehouse_management_system.Controllers.BaseController
             var privilege = request.GetRequestName();
             return user.HasClaim(x => x.Type.Equals(Privileges) && x.Value.Equals(privilege));
         }
-        
-        public static ObjectResult ReturnHttpResult<TRequest, TResponse>(TRequest request, TResponse response)
-        {
-            
-        }
-        
+
         private static string GetRequestName<TRequest>(this TRequest request)
         {
             return typeof(TRequest).Name.Replace(Request, "");
