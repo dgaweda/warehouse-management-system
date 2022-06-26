@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Helpers;
+using DataAccess.CQRS.Extensions;
 
 namespace DataAccess.CQRS.Queries
 {

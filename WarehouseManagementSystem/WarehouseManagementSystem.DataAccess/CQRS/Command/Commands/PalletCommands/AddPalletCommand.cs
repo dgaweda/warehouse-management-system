@@ -1,15 +1,14 @@
 ﻿using DataAccess.Entities;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Helpers.DataAccess.Repository;
+using DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands.PalletCommands
 {
     public class AddPalletCommand : CommandBase<Pallet, Pallet>
     {
-        public override async Task<Pallet> Execute(WMSDatabaseContext context)
+        public override async Task<Pallet> Execute(IRepository<Pallet> palletRepository)
         {
-            await context.AddRecord(Parameter);
-            return Parameter;
+            return await palletRepository.AddAsync(Parameter);
         }
     }
 }

@@ -10,21 +10,21 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 namespace warehouse_management_system.Controllers
 {
     [Authorize]
-    [Route("[controller]")]
+    [Route("/api/pallet/")]
     [ApiController]
-    public class ProductPalletLineController : ApiControllerBase<ProductPalletLineController>
+    public class ProductPalletLineController : ApiControllerBase
     {
-        public ProductPalletLineController(IMediator mediator, ILogger<ProductPalletLineController> logger) 
-            : base(mediator, logger)
+        public ProductPalletLineController(IMediator mediator) 
+            : base(mediator)
         {
         }
 
         [HttpGet]
-        [Route("Products/")]
-        public Task<IActionResult> GetProductsByPalletId([FromQuery] GetProductsByPalletIdRequest request) => Handle<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse>(request);
-    
+        [Route("{palletId}/products")]
+        public async Task<IActionResult> GetProductsByPalletId([FromRoute] GetProductsByPalletIdRequest request) => await Handle<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse>(request);
+
         [HttpPatch]
-        [Route("Set/ProductAmount/")]
-        public Task<IActionResult> DecreaseProductAmount([FromQuery] DecreaseProductAmountRequest request) => Handle<DecreaseProductAmountRequest, DecreaseProductAmountResponse>(request);
+        [Route("decrease-product-amount")]
+        public async Task<IActionResult> DecreaseProductAmount([FromBody] DecreaseProductAmountRequest request) => await Handle<DecreaseProductAmountRequest, DecreaseProductAmountResponse>(request);
     }
 }

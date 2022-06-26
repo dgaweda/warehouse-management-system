@@ -1,25 +1,24 @@
 ﻿using DataAccess.Entities;
-using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Helpers;
-using DataAccess.CQRS.Helpers.DataAccess.Repository;
+using DataAccess.CQRS.Extensions;
+using DataAccess.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.LocationCommands
 {
     public class EditLocationCommand : CommandBase<Location, Location>
     {
-        public override async Task<Location> Execute(WMSDatabaseContext context)
+        public override async Task<Location> Execute(IRepository<Location> locationRepository)
         {
-            var locationToEdit = await context.Locations
+            var locationToEdit = await locationRepository.Entity
                 .Include(x => x.Product)
                 .FirstOrDefaultAsync(x => x.Id == Parameter.Id);
 
             locationToEdit
                 .SetMaxAmount(Parameter)
                 .SetName(Parameter);
-
-            await context.UpdateRecord(locationToEdit);
-            return locationToEdit;
+            
+            return await locationRepository.UpdateAsync(locationToEdit);
         }
     }
 }

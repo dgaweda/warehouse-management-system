@@ -11,9 +11,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.OrderVali
         public RemoveOrderRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.Id).NotEmpty().WithMessage("Id zamówienia nie może być puste.");
-            RuleFor(x => x.Id).Must(_validator.CheckIfExist<Order>)
-                .WithMessage("Zamówienie o podanym id nie istnieje.");
+            RuleFor(x => x.Id).NotEmpty().WithMessage($"Id zamówienia nie może być puste.");
+            RuleFor(x => x.Id).Must(_validator.IsExist<Order>)
+                .WithMessage($"Zamówienie o podanym id nie istnieje.");
         }
     }
 }

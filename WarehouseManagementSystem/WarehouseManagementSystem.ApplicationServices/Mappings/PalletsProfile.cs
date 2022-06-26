@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DataAccess.Entities;
 using System.Linq;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings
@@ -9,7 +10,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
     {
         public PalletsProfile()
         {
-            CreateMap<Pallet, API.Domain.Models.Pallet>()
+            CreateMap<Pallet, PalletDto>()
                 .ForMember(x => x.PalletStatus, y => y.MapFrom(z => z.PalletStatus))
                 .ForMember(x => x.Barcode, y => y.MapFrom(z => z.Barcode))
                 .ForMember(x => x.OrderBarcode, y => y.MapFrom(z => z.Order != null ? z.Order.Barcode : string.Empty))

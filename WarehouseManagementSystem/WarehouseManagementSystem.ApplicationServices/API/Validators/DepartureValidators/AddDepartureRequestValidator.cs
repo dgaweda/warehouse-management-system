@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Departure;
+using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.DepartureValidators
@@ -11,7 +12,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Departure
         public AddDepartureRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.Name).Must(_validator.CheckIfDepartureNameIsUnique).WithMessage("Departure name must be unique.");
+            RuleFor(x => x.Name).Must(_validator.IsDepartureNameIsUnique).WithMessage($"{ErrorType.ValidationError} - Departure name must be unique.");
         }
     }
 }

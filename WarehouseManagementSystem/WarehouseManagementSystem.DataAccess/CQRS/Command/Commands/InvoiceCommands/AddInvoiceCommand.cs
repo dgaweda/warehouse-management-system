@@ -1,21 +1,20 @@
-﻿using DataAccess.CQRS.Helpers;
-using DataAccess.CQRS.Helpers.DataAccess.Repository;
-using DataAccess.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using DataAccess.Entities;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Extensions;
+using DataAccess.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands
 {
     public class AddInvoiceCommand : CommandBase<Invoice, Invoice>
     {
-        public override async Task<Invoice> Execute(WMSDatabaseContext context)
+        public override async Task<Invoice> Execute(IRepository<Invoice> invoiceRepository)
         {
-            var invoices = await context.Invoices.ToListAsync();
+            var invoices = await invoiceRepository.Entity.ToListAsync();
             Parameter.SetInvoiceNumber(invoices);
+            
 
-            await context.AddRecord(Parameter);
-
-            return Parameter;
+            return await invoiceRepository.AddAsync(Parameter);
         }
     }
 }

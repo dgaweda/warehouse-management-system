@@ -11,7 +11,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandlers
 {
     public class AuthenticateUserHandler :
-        QueryHandler<AuthenticateUserRequest, AuthenticateUserResponse, AuthenticateUserQuery, DataAccess.Entities.User, User>,
+        QueryHandler<AuthenticateUserRequest, AuthenticateUserResponse, AuthenticateUserQuery, DataAccess.Entities.User, UserDto>,
         IRequestHandler<AuthenticateUserRequest, AuthenticateUserResponse>
     {
         public AuthenticateUserHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
@@ -21,7 +21,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandler
         public async Task<AuthenticateUserResponse> Handle(AuthenticateUserRequest request, CancellationToken cancellationToken)
         {
             var query = CreateQuery(request);
-            var response = await PrepareResponse(query);
+            var response = await GetResponse(query);
             return response;
         }
 

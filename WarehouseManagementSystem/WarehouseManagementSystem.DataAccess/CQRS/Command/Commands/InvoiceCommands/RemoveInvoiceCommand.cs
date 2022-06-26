@@ -1,16 +1,16 @@
 ﻿using DataAccess.Entities;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Helpers.DataAccess.Repository;
+using DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.InvoiceCommands
 {
     public class RemoveInvoiceCommand : CommandBase<Invoice, Invoice>
     {
-        public override async Task<Invoice> Execute(WMSDatabaseContext context)
+        public override async Task<Invoice> Execute(IRepository<Invoice> invoiceRepository)
         {
-            var invoice = await context.Invoices.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
-            await context.DeleteRecord(Parameter);
+            var invoice = await invoiceRepository.Entity.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
+            await invoiceRepository.DeleteAsync(Parameter.Id);
             return invoice;
         }
     }

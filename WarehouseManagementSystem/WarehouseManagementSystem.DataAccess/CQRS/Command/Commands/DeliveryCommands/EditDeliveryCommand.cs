@@ -1,15 +1,14 @@
 ﻿using DataAccess.Entities;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Helpers.DataAccess.Repository;
+using DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands.DeliveryCommands
 {
     public class EditDeliveryCommand : CommandBase<Delivery, Delivery>
     {
-        public override async Task<Delivery> Execute(WMSDatabaseContext context)
+        public override async Task<Delivery> Execute(IRepository<Delivery> deliveryRepository)
         {
-            await context.UpdateRecord(Parameter);
-            return Parameter;
+            return await deliveryRepository.UpdateAsync(Parameter);
         }
     }
 }

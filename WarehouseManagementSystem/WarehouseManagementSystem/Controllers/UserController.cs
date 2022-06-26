@@ -12,39 +12,37 @@ namespace warehouse_management_system.Controllers
 {
     
     [ApiController]
-    [Route("[controller]")]
-    public class UserController : ApiControllerBase<UserController>
+    [Route("/api/user/")]
+    public class UserController : ApiControllerBase
     {
-        private readonly IMediator _mediator;
-        public UserController(IMediator mediator, ILogger<UserController> logger) 
-            : base(mediator, logger)
+        public UserController(IMediator mediator)
+            : base(mediator)
         {
-            _mediator = mediator;
+            
         }
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("Login/")]
+        [Route("login")]
         public async Task<IActionResult> AuthenticateUser([FromBody] AuthenticateUserRequest request) => await Handle<AuthenticateUserRequest, AuthenticateUserResponse>(request);
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("Add/")]
+        [Route("add")]
         public async Task<IActionResult> AddUser([FromBody] AddUserRequest request) => await Handle<AddUserRequest, AddUserResponse>(request);
 
-            [Authorize]
+        [Authorize]
         [HttpGet]
-        [Route("Get/")]
         public async Task<IActionResult> GetUsers([FromQuery] GetUsersRequest request) => await Handle<GetUsersRequest, GetUsersResponse>(request);
 
         [Authorize]
         [HttpPut]
-        [Route("Edit/")]
+        [Route("edit")]
         public async Task<IActionResult> EditUser([FromBody] EditUserRequest request) => await Handle<EditUserRequest, EditUserResponse>(request);
 
         [Authorize]
         [HttpDelete]
-        [Route("Remove/")]
-        public async Task<IActionResult> RemoveUser([FromQuery] RemoveUserRequest request) => await Handle<RemoveUserRequest, RemoveUserResponse>(request);
+        [Route("remove/{UserId}")]
+        public async Task<IActionResult> RemoveUser([FromRoute] RemoveUserRequest request) => await Handle<RemoveUserRequest, RemoveUserResponse>(request);
     }
 }

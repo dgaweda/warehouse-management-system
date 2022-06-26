@@ -6,3 +6,26 @@ ngb-toast {
 .toast {
   background-color: rgba(255, 3, 3, 0.5);
 }
+
+// Nav Tabs
+.nav-tabs {
+  background: $primary;
+
+  .nav-link {
+    border: none !important;
+    &:active, &:link, &:visited {
+      color:white !important;
+    }
+
+    &:hover, {
+      background: darken($primary, 10%);
+    }
+
+    &.active {
+      color: black !important;
+      background: darken(white, 3%) !important;
+    }
+  }
+}
+
+

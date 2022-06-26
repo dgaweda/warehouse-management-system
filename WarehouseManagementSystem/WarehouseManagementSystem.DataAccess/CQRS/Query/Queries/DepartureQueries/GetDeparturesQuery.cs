@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Helpers;
+using DataAccess.CQRS.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Queries.DepartureQueries
@@ -12,7 +12,7 @@ namespace DataAccess.CQRS.Queries.DepartureQueries
     {
         public string Name { get; set; }
         public DateTime OpeningTime { get; set; }
-        public StateType State { get; set; }
+        public StateType? State { get; set; }
 
         public override async Task<List<Departure>> Execute(WMSDatabaseContext context)
         {

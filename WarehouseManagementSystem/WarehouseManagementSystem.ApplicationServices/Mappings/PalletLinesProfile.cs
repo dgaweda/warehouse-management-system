@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DataAccess.Entities;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings
@@ -8,7 +9,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
     {
         public PalletLinesProfile()
         {
-            CreateMap<ProductPalletLine, API.Domain.Models.ProductPalletLine>()
+            CreateMap<ProductPalletLine, ProductPalletLineDto>()
                 .ForMember(dest => dest.PalletBarcode, opt => opt.MapFrom(src => src.Pallet.Barcode))
                 .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
                 .ForMember(dest => dest.ProductAmount, opt => opt.MapFrom(src => src.ProductAmount))

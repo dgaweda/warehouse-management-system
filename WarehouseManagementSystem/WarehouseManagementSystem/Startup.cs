@@ -1,6 +1,7 @@
 
 using DataAccess;
 using DataAccess.CQRS;
+using DataAccess.Repository;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using warehouse_management_system.Authentication;
+using warehouse_management_system.Middleware;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.SeniorityValidators;
@@ -44,8 +46,9 @@ namespace warehouse_management_system
 
             services.AddTransient<IPrivilegesService, PrivilegesService>();
 
-            services.AddAutoMapper(typeof(UsersProfile)
-                .Assembly); // This Line Enables AutoMapper to map all profiles without adding everyone of them.
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            services.AddAutoMapper(typeof(UsersProfile).Assembly); // This Line Enables AutoMapper to map all profiles without adding everyone of them.
             // It gets Assembly from one profile to get all the mappings.
             services.AddMediatR(typeof(ResponseBase<>));
 
@@ -100,8 +103,11 @@ namespace warehouse_management_system
             );
             app.UseHttpsRedirection();
             app.UseRouting();
+            
+            app.UseMiddleware<LogMiddleware>();
             app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

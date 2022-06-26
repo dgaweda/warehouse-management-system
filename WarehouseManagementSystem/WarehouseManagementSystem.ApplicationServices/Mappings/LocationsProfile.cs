@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DataAccess.Entities;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings
 {
@@ -9,7 +9,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
     {
         public LocationsProfile()
         {
-            CreateMap<Location, API.Domain.Models.Location>()
+            CreateMap<Location, LocationDto>()
                 .ForMember(x => x.Type, y => y.MapFrom(z => z.LocationType))
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
                 .ForMember(x => x.CurrentAmount, y => y.MapFrom(z => z.CurrentAmount))

@@ -1,9 +1,10 @@
-﻿using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
+﻿
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain
 {
-    public class ResponseBase<T> : ErrorResponseBase
+    public class ResponseBase<T>: ErrorResponseBase
     {
-        public T Data { get; set; }
+        public T Response { get; set; }
     }
 }

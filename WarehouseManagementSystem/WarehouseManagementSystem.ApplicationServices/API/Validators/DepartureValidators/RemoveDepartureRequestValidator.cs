@@ -1,6 +1,7 @@
 ﻿using DataAccess.Entities;
 using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Departure;
+using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.DepartureValidators
@@ -12,7 +13,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Departure
         public RemoveDepartureRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.DepartureId).Must(_validator.CheckIfExist<Departure>).WithMessage("Departure doesn't exist");
+            RuleFor(x => x.DepartureId).Must(_validator.IsExist<Departure>).WithMessage($"{ErrorType.NotFound} - Departure doesn't exist");
         }
     }
 }

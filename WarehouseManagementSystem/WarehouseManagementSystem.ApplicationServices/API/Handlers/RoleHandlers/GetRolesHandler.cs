@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.RoleHandlers
 {
     public class GetRolesHandler : 
-        QueryHandler<GetRolesRequest, GetRolesResponse, GetRolesQuery, List<Role>, List<Domain.Models.Role>>,
+        QueryHandler<GetRolesRequest, GetRolesResponse, GetRolesQuery, List<Role>, List<Domain.Models.RoleDto>>,
         IRequestHandler<GetRolesRequest, GetRolesResponse>
     { 
         public GetRolesHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
@@ -22,7 +22,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.RoleHandler
         public async Task<GetRolesResponse> Handle(GetRolesRequest request, CancellationToken cancellationToken)
         {
             var query = CreateQuery(request);
-            var response = await PrepareResponse(query);
+            var response = await GetResponse(query);
             return response;
         }
 

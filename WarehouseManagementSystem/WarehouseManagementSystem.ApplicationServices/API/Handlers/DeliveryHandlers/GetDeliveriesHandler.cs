@@ -7,13 +7,12 @@ using DataAccess.CQRS.Queries.DeliveryQueries;
 using DataAccess.Entities;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Delivery;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHandlers
 {
     public class GetDeliveriesHandler
-        : QueryHandler<GetDeliveriesRequest, GetDeliveriesResponse, GetDeliveriesQuery, List<Delivery>, List<Domain.Models.Delivery>>, 
+        : QueryHandler<GetDeliveriesRequest, GetDeliveriesResponse, GetDeliveriesQuery, List<Delivery>, List<Domain.Models.DeliveryDto>>, 
             IRequestHandler<GetDeliveriesRequest, GetDeliveriesResponse>
     {
         public GetDeliveriesHandler(IMapper mapper, IQueryExecutor queryExecutor)
@@ -25,7 +24,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHan
             CancellationToken cancellationToken)
         {
             var query = CreateQuery(request);
-            var response = await PrepareResponse(query);
+            var response = await GetResponse(query);
             return response;
         }
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DataAccess.Entities;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings
@@ -8,7 +9,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
     {
         public DeliveriesProfile()
         {
-            CreateMap<Delivery, API.Domain.Models.Delivery>()
+            CreateMap<Delivery, DeliveryDto>()
                 .ForMember(dest => dest.Arrival, option => option.MapFrom(src => src.Arrival))
                 .ForMember(dest => dest.Name, option => option.MapFrom(src => src.Name));
 

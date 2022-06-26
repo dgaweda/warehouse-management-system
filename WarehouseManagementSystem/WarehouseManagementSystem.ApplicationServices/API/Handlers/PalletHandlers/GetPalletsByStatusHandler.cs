@@ -6,14 +6,13 @@ using MediatR;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandlers
 {
     public class GetPalletsByStatusHandler : 
-        QueryHandler<GetPalletsByStatusRequest, GetPalletsByStatusResponse, GetPalletsByStatusQuery, List<Pallet>, List<Domain.Models.Pallet>>,
+        QueryHandler<GetPalletsByStatusRequest, GetPalletsByStatusResponse, GetPalletsByStatusQuery, List<Pallet>, List<Domain.Models.PalletDto>>,
         IRequestHandler<GetPalletsByStatusRequest, GetPalletsByStatusResponse>
     {
         public GetPalletsByStatusHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
@@ -23,7 +22,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandl
         public async Task<GetPalletsByStatusResponse> Handle(GetPalletsByStatusRequest request, CancellationToken cancellationToken)
         {
             var query = CreateQuery(request);
-            var response = await PrepareResponse(query);
+            var response = await GetResponse(query);
             return response;
         }
 

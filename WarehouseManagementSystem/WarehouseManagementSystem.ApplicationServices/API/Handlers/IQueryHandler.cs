@@ -1,13 +1,9 @@
-﻿using DataAccess.CQRS.Queries;
-using System.Threading.Tasks;
-using WarehouseManagementSystem.ApplicationServices.API.Domain;
+﻿using System.Threading.Tasks;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public interface IQueryHandler<TRequest, TResponse, TQuery, TResult, TDomainModel>
-        where TQuery : QueryBase<TResult>
-        where TResponse : ResponseBase<TDomainModel>, new()
+    public interface IQueryHandler<in TQuery, TResponse>
     {
-        Task<TResponse> PrepareResponse(TQuery query);
+        Task<TResponse> GetResponse(TQuery query);
     }
 }

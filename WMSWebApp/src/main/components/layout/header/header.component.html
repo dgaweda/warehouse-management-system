@@ -1,0 +1,26 @@
+<div class="row m-0">
+<!--  <ul ngbNav [activeId]="activePageIndex" class="nav-tabs col-md-11 justify-content-start">-->
+<!--    <li [ngbNavItem]="i" *ngFor="let page of pages; let i = index">-->
+<!--      <a ngbNavLink [routerLink]="page.route">{{ page.name }}</a>-->
+<!--    </li>-->
+<!--  </ul>-->
+  <dx-tabs
+    selectionMode="single"
+    [dataSource]="this.pages"
+    [selectedIndex]="this.activePageIndex"
+    (onItemClick)="onSelectTab($event)"
+  >
+  </dx-tabs>
+</div>
+<div class="dx-field-value">
+  <dx-drop-down-button *ngIf="isLoggedIn"
+    [splitButton]="true"
+    [useSelectMode]="false"
+    [text]="currentUser.userName"
+    icon="user"
+    [items]="dropdownOptions"
+    (onItemClick)="onItemSelect($event)"
+  ></dx-drop-down-button>
+</div>
+<!--  <dx-button  icon="return" [hidden]="!showLogoutButton" (click)="logout()">Wyloguj</dx-button>-->
+<!--    <button [hidden]="!showLogoutButton" class="btn btn-primary logout&#45;&#45;button " (click)="logout()">Wyloguj</button>-->

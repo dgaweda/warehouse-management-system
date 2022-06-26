@@ -1,23 +1,21 @@
 ﻿using DataAccess.Entities;
-using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Helpers;
-using DataAccess.CQRS.Helpers.DataAccess.Repository;
+using DataAccess.CQRS.Extensions;
+using DataAccess.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.ProductCommands
 {
     public class SetProductLocationCommand : CommandBase<Location, Location>
     {
-        public override async Task<Location> Execute(WMSDatabaseContext context)
+        public override async Task<Location> Execute(IRepository<Location> locationRepository)
         {
-            var location = await context.Locations
+            var location = await locationRepository.Entity
                 .Include(x => x.Product)
                 .FirstOrDefaultAsync(x => x.Id == Parameter.Id); ;
 
             location.SetProductAmount(Parameter);
-
-            await context.UpdateRecord(location);
-            return location;
+            return await locationRepository.UpdateAsync(location);
         }
 
 

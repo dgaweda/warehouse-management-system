@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DataAccess.Entities;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
 
 namespace WarehouseManagementSystem.ApplicationServices.Mappings
@@ -9,24 +10,13 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
         public ProductsProfile()
         {
 
-            CreateMap<Product, API.Domain.Models.Product>()
-                .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
-                .ForMember(x => x.ExpirationDate, y => y.MapFrom(z => z.ExpirationDate))
-                .ForMember(x => x.Barcode, y => y.MapFrom(z => z.Barcode))
-                .ForMember(x => x.PalletLines, y => y.MapFrom(src => src.PalletLines));
+            CreateMap<Product, ProductDto>();
 
-            CreateMap<AddProductRequest, Product>()
-                .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
-                .ForMember(x => x.ExpirationDate, y => y.MapFrom(z => z.ExpirationDate))
-                .ForMember(x => x.Barcode, y => y.MapFrom(z => z.Barcode));
+            CreateMap<AddProductRequest, Product>();
 
-            CreateMap<EditProductRequest, Product>()
-                .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
-                .ForMember(x => x.ExpirationDate, y => y.MapFrom(z => z.ExpirationDate))
-                .ForMember(x => x.Barcode, y => y.MapFrom(z => z.Barcode));
+            CreateMap<EditProductRequest, Product>();
 
-            CreateMap<RemoveProductRequest, Product>()
-                .ForMember(x => x.Id, y => y.MapFrom(z => z.Id));
+            CreateMap<RemoveProductRequest, Product>();
 
         }
     }

@@ -1,6 +1,7 @@
 ﻿using DataAccess.Entities;
 using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
+using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationValidators
@@ -12,8 +13,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
         public RemoveLocationValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.Id).Must(_validator.CheckIfExist<Location>).WithMessage("Location doesn't exists");
-            RuleFor(x => x.Id).Must(_validator.CheckLocationCurrentAmount).WithMessage("Location still have some products");
+            RuleFor(x => x.Id).Must(_validator.IsExist<Location>).WithMessage($"{ErrorType.NotFound} - Location doesn't exists");
+            RuleFor(x => x.Id).Must(_validator.IsLocationStillHaveProducts).WithMessage($"{ErrorType.ValidationError} - Location still have some products");
         }
     }
 }

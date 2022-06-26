@@ -1,3 +1,18 @@
+.btn-primary {
+  font-weight: bold !important;
+
+  &:hover, &:active {
+    color:white !important;
+    background: #1c93f4;
+  }
+
+  &:disabled {
+    background: grey;
+    opacity:0.7;
+    color: white;
+  }
+}
+
 .download--button {
   padding: 10px 15px 10px 15px;
   margin: 0 auto;
@@ -6,15 +21,12 @@
   color: #F49F1C;
   width: fit-content;
   border: 0;
+}
 
-  &:hover, &:active {
-    color:white;
-    background: #1c93f4;
-  }
+.logout--button {
+  background: $secondary !important;
 
-  &:disabled {
-    background: grey;
-    opacity:0.7;
-    color: white;
+  &:hover {
+    background: lighten($secondary, 10%) !important;
   }
 }

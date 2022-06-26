@@ -12,7 +12,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Seniority
         {
             _validator = validator;
             RuleFor(x => x.EmploymentDate).GreaterThanOrEqualTo(DateTime.Now.Date).WithMessage($"EmploymentDate must be equal or greater than {DateTime.Now.Date}.");
-            RuleFor(x => x.UserId).Must(_validator.CheckIfEmployeeIsNotHired).WithMessage("Employee is already hired.");
+            RuleFor(x => x.UserId).Must(_validator.IsHiredEmployee).WithMessage($"Employee is already hired.");
         }
     }
 }

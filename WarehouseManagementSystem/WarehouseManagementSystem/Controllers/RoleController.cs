@@ -5,37 +5,35 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using warehouse_management_system.Authentication;
 using warehouse_management_system.Controllers.BaseController;
-using WarehouseManagementSystem.ApplicationServices.API.Domain;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Role;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role;
 
 namespace warehouse_management_system.Controllers
 {
     [Authorize]
-    [Route("[controller]")]
+    [Route("api/role/")]
     [ApiController]
-    public class RoleController : ApiControllerBase<RoleController>
+    public class RoleController : ApiControllerBase
     {
-        public RoleController(IMediator mediator, ILogger<RoleController> logger, IPrivilegesService privileges) 
-            : base(mediator, logger)
+        public RoleController(IMediator mediator, IPrivilegesService privileges) 
+            : base(mediator)
         {
         }
 
         [HttpPost]
-        [Route("Add/")]
-        public Task<IActionResult> AddRole([FromBody] AddRoleRequest request) => Handle<AddRoleRequest, AddRoleResponse>(request);
+        [Route("add")]
+        public async Task<IActionResult> AddRole([FromBody] AddRoleRequest request) => await Handle<AddRoleRequest, AddRoleResponse>(request);
 
         [HttpGet]
-        [Route("Get/")]
-        public Task<IActionResult> GetRoles([FromQuery] GetRolesRequest request) => Handle<GetRolesRequest, GetRolesResponse>(request);
+        public async Task<IActionResult> GetRoles([FromQuery] GetRolesRequest request) => await Handle<GetRolesRequest, GetRolesResponse>(request);
 
         [HttpPut]
-        [Route("Edit/")]
-        public Task<IActionResult> EditRole([FromBody] EditRoleRequest request) => Handle<EditRoleRequest, EditRoleResponse>(request);
+        [Route("edit")]
+        public async Task<IActionResult> EditRole([FromBody] EditRoleRequest request) => await Handle<EditRoleRequest, EditRoleResponse>(request);
 
 
         [HttpDelete]
-        [Route("Delete/")]
-        public Task<IActionResult> RemoveRole([FromBody] RemoveRoleRequest request) => Handle<RemoveRoleRequest, RemoveRoleResponse>(request);
+        [Route("remove/{RoleId}")]
+        public async Task<IActionResult> RemoveRole([FromRoute] RemoveRoleRequest request) => await Handle<RemoveRoleRequest, RemoveRoleResponse>(request);
     }
 }

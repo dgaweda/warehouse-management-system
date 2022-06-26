@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandlers
 {
     public class GetUsersHandler :
-        QueryHandler<GetUsersRequest, GetUsersResponse, GetUsersQuery, List<User>, List<Domain.Models.User>>,
+        QueryHandler<GetUsersRequest, GetUsersResponse, GetUsersQuery, List<User>, List<Domain.Models.UserDto>>,
         IRequestHandler<GetUsersRequest, GetUsersResponse>
     {
         public GetUsersHandler(IQueryExecutor queryExecutor, IMapper mapper) : base(mapper, queryExecutor)
@@ -22,7 +22,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandler
         public async Task<GetUsersResponse> Handle(GetUsersRequest request, CancellationToken cancellationToken)
         {
             var query = CreateQuery(request);
-            var response = await PrepareResponse(query);
+            var response = await GetResponse(query);
             return response;
         }
 

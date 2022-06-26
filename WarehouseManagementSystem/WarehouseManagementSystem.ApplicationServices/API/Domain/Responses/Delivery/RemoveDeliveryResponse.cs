@@ -1,6 +1,6 @@
 ﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Delivery
 {
-    public class RemoveDeliveryResponse : ResponseBase<Domain.Models.Delivery>
+    public class RemoveDeliveryResponse : ResponseBase<Domain.Models.DeliveryDto>
     {
     }
 }

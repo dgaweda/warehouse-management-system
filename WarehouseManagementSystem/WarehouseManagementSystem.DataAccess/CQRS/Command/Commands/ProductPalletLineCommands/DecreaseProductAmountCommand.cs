@@ -2,37 +2,39 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Helpers;
-using DataAccess.CQRS.Helpers.DataAccess.Repository;
+using DataAccess.CQRS.Extensions;
+using DataAccess.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.ProductsPalletsCommands
 {
     public class DecreaseProductAmountCommand : CommandBase<ProductPalletLine, ProductPalletLine>
     {
-        public override async Task<ProductPalletLine> Execute(WMSDatabaseContext context)
+        public override async Task<ProductPalletLine> Execute(IRepository<ProductPalletLine> productPalletLineRepository)
         {
-            var productPalletLines = await context.GetProductPalletLines();
-            var productPalletLine = productPalletLines
-                .FirstOrDefault(x => x.PalletId == Parameter.PalletId && x.ProductId == Parameter.ProductId);
+            var dbContext = productPalletLineRepository.GetDbContext();
+            var productPalletLine = await productPalletLineRepository.Entity
+                .FirstOrDefaultAsync(x => x.PalletId == Parameter.PalletId && x.ProductId == Parameter.ProductId);
 
-            await productPalletLine.DecreaseProductAmount(Parameter);
+            var pallet = await dbContext.Set<Pallet>()
+                .FirstOrDefaultAsync(@pallet => @pallet.Id == productPalletLine.PalletId);
+            
+
+            productPalletLine.DecreaseProductAmount(Parameter);
 
             if (productPalletLine.ProductAmount == default)
-                await context.DeleteRecord(productPalletLine);
+                await productPalletLineRepository.DeleteAsync(productPalletLine.Id);
 
             if (productPalletLine.ProductAmount < 0)
                 throw new ArgumentOutOfRangeException("Amount can't be less than 0.");
 
-            if (PalletIsEmpty(context))
+            if (dbContext.PalletIsEmpty(productPalletLine))
             {
-                var pallet = await context.GetById<Pallet>(productPalletLine.PalletId);
                 pallet.SetPalletStatus();
             }
 
-            await context.SaveChangesAsync();
+            await dbContext.SaveChangesAsync();
             return productPalletLine;
         }
-
-        private bool PalletIsEmpty(WMSDatabaseContext context) => !context.ProductPalletLines.Select(x => x.PalletId).Contains(Parameter.PalletId);
     }
 }
