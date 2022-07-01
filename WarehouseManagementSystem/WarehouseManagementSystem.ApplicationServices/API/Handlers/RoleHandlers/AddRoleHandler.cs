@@ -5,8 +5,10 @@ using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.RoleCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Role;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seniority;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.RoleHandlers
@@ -20,6 +22,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.RoleHandler
         {
         }
 
-        public async Task<AddRoleResponse> Handle(AddRoleRequest request, CancellationToken cancellationToken) => await GetResponse(request);
+        public async Task<AddRoleResponse> Handle(AddRoleRequest request, CancellationToken cancellationToken) => await HandleRequest(request);
     }
 }

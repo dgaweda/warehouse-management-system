@@ -5,6 +5,7 @@ using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.SeniorityCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seniority;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Seniority;
@@ -20,6 +21,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.SeniorityHa
         {
         }
 
-        public async Task<EditSeniorityResponse> Handle(EditSeniorityRequest request, CancellationToken cancellationToken) => await GetResponse(request);
+        public async Task<EditSeniorityResponse> Handle(EditSeniorityRequest request, CancellationToken cancellationToken) => await HandleRequest(request);
     }
 }

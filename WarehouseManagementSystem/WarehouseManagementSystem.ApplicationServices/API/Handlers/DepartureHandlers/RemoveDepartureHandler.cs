@@ -5,6 +5,7 @@ using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.DepartureCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Departure;
@@ -21,6 +22,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHa
         {
 
         }
-        public async Task<RemoveDepartureResponse> Handle(RemoveDepartureRequest request, CancellationToken cancellationToken) => await GetResponse(request);
+        public async Task<RemoveDepartureResponse> Handle(RemoveDepartureRequest request, CancellationToken cancellationToken) => await HandleRequest(request);
     }
 }

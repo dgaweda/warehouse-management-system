@@ -5,6 +5,7 @@ using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.LocationCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location;
@@ -15,10 +16,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.LocationHan
         CommandHandler<EditLocationCurrentAmountRequest, EditLocationCurrentAmountResponse, Location, Domain.Models.LocationDto, EditLocationCurrentAmountCommand>,
         IRequestHandler<EditLocationCurrentAmountRequest, EditLocationCurrentAmountResponse>
     {
-        public EditLocationCurrentAmountHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Location> repositoryService) 
+        public EditLocationCurrentAmountHandler(IMapper mapper, ICommandExecutor commandExecutor,
+            IRepository<Location> repositoryService) 
             : base(mapper, commandExecutor, repositoryService)
         {
         }
-        public async Task<EditLocationCurrentAmountResponse> Handle(EditLocationCurrentAmountRequest request, CancellationToken cancellationToken) => await GetResponse(request);
+        public async Task<EditLocationCurrentAmountResponse> Handle(EditLocationCurrentAmountRequest request, CancellationToken cancellationToken) => await HandleRequest(request);
     }
 }

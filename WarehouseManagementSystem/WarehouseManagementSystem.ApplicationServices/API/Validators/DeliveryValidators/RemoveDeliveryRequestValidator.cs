@@ -13,7 +13,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.DeliveryV
         public RemoveDeliveryRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.DeliveryId).Must(_validator.IsExist<Delivery>).WithMessage($"{ErrorType.NotFound} - Delivery doesn't exist.");
+            RuleFor(x => x.DeliveryId).Must(_validator.Exist<Delivery>).WithMessage(ErrorType.NotFound);
         }
     }
 }

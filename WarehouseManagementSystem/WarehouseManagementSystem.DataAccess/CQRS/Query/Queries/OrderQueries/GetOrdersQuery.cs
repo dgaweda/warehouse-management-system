@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Extensions;
 using DataAccess.Entities;
+using DataAccess.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Queries.OrderQueries

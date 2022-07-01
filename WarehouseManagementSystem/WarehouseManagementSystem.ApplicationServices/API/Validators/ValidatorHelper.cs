@@ -15,13 +15,13 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
             _context = context;
         }
         
-        public bool IsExist<TEntity>(int? id)
+        public bool Exist<TEntity>(int? id)
             where TEntity : class, IEntityBase
         {
             return (id != null && id != 0) && _context.Set<TEntity>().Any(x => x.Id == id);
         }
         
-        public bool IsExist<TEntity>(int id) 
+        public bool Exist<TEntity>(int id) 
             where TEntity : class, IEntityBase
         {
             return id != 0 && _context.Set<TEntity>().Any(x => x.Id == id);
@@ -57,7 +57,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
             return !_context.Pallets.Any(x => x.Barcode == barcode);
         }
         
-        public bool IsRoleNameIsUnique(string name)
+        public bool IsRoleNameUnique(string name)
         {
             return !_context.Roles.Any(x => x.Name == name);
         }
@@ -82,27 +82,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
             return string.IsNullOrEmpty(name) || _context.Departures.Any(x => x.Name.Contains(name));
         }
 
-        public bool CheckEmailFormat(string email)
-        {
-            try
-            {
-                var mail = new MailAddress(email);
-                return true;
-            }
-            catch(Exception)
-            {
-                return false;
-            }
-        }
-        
-        public bool IsUsernameIsUnique(string username)
-        {
-            return !_context.Users.Any(x => x.UserName == username);
-        }
-
         public bool IsUsernameExist(string username)
         {
-            return !IsUsernameIsUnique(username);
+            return !_context.Users.Any(x => x.UserName == username);
         }
         
         public bool IsLocationStillHaveProducts(int id)
@@ -111,7 +93,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
             return location?.CurrentAmount < 0 || location?.CurrentAmount > location?.MaxAmount;
         }
 
-        public bool IsOrderBarcodeIsUnique(string barcode)
+        public bool IsOrderBarcodeUnique(string barcode)
         {
             return !_context.Orders.Any(x => x.Barcode.Equals(barcode));
         }
@@ -119,6 +101,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
         public bool IsPalletIdExistsInProductPalletLine(int palletId)
         {
             return _context.ProductPalletLines.Any((x) => x.PalletId == palletId);
+        }
+
+        public bool IsInvoiceNumberNotExist(string invoiceNumber)
+        {
+            return !_context.Invoices.Any(x => x.InvoiceNumber == invoiceNumber);
         }
     }
 }

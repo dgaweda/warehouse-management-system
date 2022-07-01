@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Extensions;
+using DataAccess.Extensions;
 
 namespace DataAccess.CQRS.Queries
 {
@@ -25,7 +25,7 @@ namespace DataAccess.CQRS.Queries
             return users
                 .FilterByUserId(UserId)
                 .FilterByRoleName(RoleName)
-                .FilterByPESEL(PESEL)
+                .FilterByPesel(PESEL)
                 .FilterByAge(Age)
                 .FilterByName(Name)
                 .FilterByLastName(LastName);

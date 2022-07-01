@@ -6,13 +6,14 @@ using DataAccess.CQRS.Commands.SeniorityCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
 using MediatR;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seniority;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Seniority;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.SeniorityHandlers
 {
     public class AddSeniorityHandler :
-        CommandHandler<AddSeniorityRequest, AddSeniorityResponse, Seniority, Domain.Models.SeniorityDto, AddSeniorityCommand>,
+        CommandHandler<AddSeniorityRequest, AddSeniorityResponse, Seniority, SeniorityDto, AddSeniorityCommand>,
         IRequestHandler<AddSeniorityRequest, AddSeniorityResponse>
     {
         public AddSeniorityHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Seniority> repositoryService) 
@@ -21,6 +22,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.SeniorityHa
 
         }
 
-        public async Task<AddSeniorityResponse> Handle(AddSeniorityRequest request, CancellationToken cancellationToken) => await GetResponse(request);
+        public async Task<AddSeniorityResponse> Handle(AddSeniorityRequest request, CancellationToken cancellationToken) => await HandleRequest(request);
     }
 }

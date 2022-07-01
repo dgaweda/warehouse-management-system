@@ -13,7 +13,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductPa
         {
             _validator = validator;
             RuleFor(x => x.PalletId).Must(_validator.IsPalletIdExistsInProductPalletLine)
-                .WithMessage($"{ErrorType.NotFound} - Pallet is empty or doesn't exist.");
+                .WithMessage("Pallet is empty or doesn't exist.");
         }
     }
 }

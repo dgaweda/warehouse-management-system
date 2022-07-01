@@ -1,7 +1,7 @@
 ﻿using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Extensions;
+using DataAccess.Extensions;
 using DataAccess.Repository;
 
 namespace DataAccess.CQRS.Commands.DeliveryCommands

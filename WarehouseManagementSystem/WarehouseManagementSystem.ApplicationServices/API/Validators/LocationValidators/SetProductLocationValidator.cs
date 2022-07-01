@@ -12,10 +12,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
         public SetProductLocationValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.LocationId).Must(_validator.IsExist<Location>).WithMessage($"{ErrorType.NotFound} - Location doesn't exist");
-            RuleFor(x => x.ProductId).Must(_validator.IsProductOnPalletForUnfolding).WithMessage($"{ErrorType.NotFound} - Product doesn't exists.");
-            RuleFor(x => x.Amount).GreaterThan(0).WithMessage(ErrorType.BadFormat);
-            RuleFor(x => x.Amount).LessThan(x => _validator.GetLocationMaxAmount(x.LocationId)).WithMessage(x => $"{ErrorType.TooLargeData} - Amount must be less than {_validator.GetLocationMaxAmount(x.LocationId)}.");
+            RuleFor(x => x.LocationId).Must(_validator.Exist<Location>).WithMessage(ErrorType.NotFound);
+            RuleFor(x => x.ProductId).Must(_validator.IsProductOnPalletForUnfolding).WithMessage(ErrorType.NotFound);
+            RuleFor(x => x.Amount).GreaterThan(0).WithMessage(ErrorType.GreaterThanZero);
+            RuleFor(x => x.Amount).LessThan(x => _validator.GetLocationMaxAmount(x.LocationId)).WithMessage(x => $"Must be less than {_validator.GetLocationMaxAmount(x.LocationId)}.");
         }
     }
 }

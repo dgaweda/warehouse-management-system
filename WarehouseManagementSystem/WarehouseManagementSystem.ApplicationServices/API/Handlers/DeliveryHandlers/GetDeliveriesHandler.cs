@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHandlers
 {
     public class GetDeliveriesHandler
-        : QueryHandler<GetDeliveriesRequest, GetDeliveriesResponse, GetDeliveriesQuery, List<Delivery>, List<Domain.Models.DeliveryDto>>, 
+        : QueryHandler<GetDeliveriesResponse, GetDeliveriesQuery, List<Delivery>, List<Domain.Models.DeliveryDto>>, 
             IRequestHandler<GetDeliveriesRequest, GetDeliveriesResponse>
     {
         public GetDeliveriesHandler(IMapper mapper, IQueryExecutor queryExecutor)
@@ -23,17 +23,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHan
         public async Task<GetDeliveriesResponse> Handle(GetDeliveriesRequest request,
             CancellationToken cancellationToken)
         {
-            var query = CreateQuery(request);
-            var response = await GetResponse(query);
-            return response;
-        }
-
-        public override GetDeliveriesQuery CreateQuery(GetDeliveriesRequest request)
-        {
-            return new GetDeliveriesQuery()
+            var query = new GetDeliveriesQuery()
             {
                 Name = request.Name
             };
+            var response = await HandleQuery(query);
+            return response;
         }
     }
 }

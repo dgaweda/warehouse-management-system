@@ -5,6 +5,7 @@ using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.PalletCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
@@ -15,11 +16,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandl
         CommandHandler<SetPalletDestinationRequest, SetPalletDestinationResponse, Pallet, Domain.Models.PalletDto, SetPalletDestinationCommand>,
         IRequestHandler<SetPalletDestinationRequest, SetPalletDestinationResponse>
     {
-        public SetPalletDestinationHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Pallet> repositoryService)
+        public SetPalletDestinationHandler(IMapper mapper, ICommandExecutor commandExecutor,
+            IRepository<Pallet> repositoryService)
             : base(mapper, commandExecutor, repositoryService)
         {
         }
 
-        public async Task<SetPalletDestinationResponse> Handle(SetPalletDestinationRequest request, CancellationToken cancellationToken) => await GetResponse(request);
+        public async Task<SetPalletDestinationResponse> Handle(SetPalletDestinationRequest request, CancellationToken cancellationToken) => await HandleRequest(request);
     }
 }

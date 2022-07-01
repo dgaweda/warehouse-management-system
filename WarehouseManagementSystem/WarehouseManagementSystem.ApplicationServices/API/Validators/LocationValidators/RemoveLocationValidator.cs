@@ -13,8 +13,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
         public RemoveLocationValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.Id).Must(_validator.IsExist<Location>).WithMessage($"{ErrorType.NotFound} - Location doesn't exists");
-            RuleFor(x => x.Id).Must(_validator.IsLocationStillHaveProducts).WithMessage($"{ErrorType.ValidationError} - Location still have some products");
+            RuleFor(x => x.Id).Must(_validator.Exist<Location>).WithMessage(ErrorType.NotFound);
+            RuleFor(x => x.Id).Must(_validator.IsLocationStillHaveProducts).WithMessage("Can't remove location with products.");
         }
     }
 }

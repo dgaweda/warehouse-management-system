@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Locatio
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.LocationHandlers
 {
     public class GetLocationsHandler :
-        QueryHandler<GetLocationsRequest, GetLocationsResponse, GetLocationsQuery, List<Location>, List<Domain.Models.LocationDto>>,
+        QueryHandler<GetLocationsResponse, GetLocationsQuery, List<Location>, List<Domain.Models.LocationDto>>,
         IRequestHandler<GetLocationsRequest, GetLocationsResponse>
     {
         public GetLocationsHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
@@ -21,18 +21,13 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.LocationHan
 
         public async Task<GetLocationsResponse> Handle(GetLocationsRequest request, CancellationToken cancellationToken)
         {
-            var query = CreateQuery(request);
-            var response = await GetResponse(query);
-            return response;
-        }
-
-        public override GetLocationsQuery CreateQuery(GetLocationsRequest request)
-        {
-            return new GetLocationsQuery()
+            var query = new GetLocationsQuery()
             {
                 LocationType = request.LocationType,
                 Name = request.Name
             };
+            var response = await HandleQuery(query);
+            return response;
         }
     }
 }

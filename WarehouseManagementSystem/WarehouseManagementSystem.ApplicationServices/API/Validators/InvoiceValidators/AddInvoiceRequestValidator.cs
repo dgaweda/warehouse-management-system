@@ -13,10 +13,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.InvoiceVa
         public AddInvoiceRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.DeliveryId).Must(_validator.IsExist<Delivery>).WithMessage($"{ErrorType.NotFound}: Delivery doesn't exists.");
-            RuleFor(x => x.Provider).NotEmpty().WithMessage($"{ErrorType.NoContent} - Provider must be specified.");
-            RuleFor(x => x.ReceiptDateTime.Date).LessThanOrEqualTo(DateTime.Now.Date);
-            RuleFor(x => x.CreationDate.Date).LessThanOrEqualTo(y => y.ReceiptDateTime.Date).WithMessage($"{ErrorType.ValidationError} - Creation date of invoice must be less than Receipt datetime.");
+            RuleFor(x => x.DeliveryId).Must(_validator.Exist<Delivery>).WithMessage(ErrorType.NotFound);
+            RuleFor(x => x.Provider).NotEmpty().WithMessage(ErrorType.NotEmpty);
+            RuleFor(x => x.ReceiptDateTime.Date).LessThanOrEqualTo(DateTime.Now.Date).WithMessage(ErrorType.BadFormat);
+            RuleFor(x => x.CreationDate.Date).LessThanOrEqualTo(y => y.ReceiptDateTime.Date).WithMessage("Must be less than Receipt datetime.");
         }
     }
 }

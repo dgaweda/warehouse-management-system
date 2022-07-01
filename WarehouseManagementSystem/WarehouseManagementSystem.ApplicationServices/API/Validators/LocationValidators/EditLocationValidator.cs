@@ -12,10 +12,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
         public EditLocationValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.Id).Must(_validator.IsExist<Location>).WithMessage($"{ErrorType.NotFound} - Location doesn't exists.");
-            RuleFor(x => x.MaxAmount).GreaterThan(0).WithMessage(ErrorType.BadFormat);
-            RuleFor(x => x.Name).Must(_validator.IsLocationNameIsTaken).WithMessage(x => $"{ErrorType.AlreadyExist} - Location of name: {x.Name} already exists.");
-            RuleFor(x => x.Name).NotEmpty().WithMessage(ErrorType.NoContent);
+            RuleFor(x => x.Id).Must(_validator.Exist<Location>).WithMessage(ErrorType.NotFound);
+            RuleFor(x => x.MaxAmount).GreaterThan(0).WithMessage(ErrorType.GreaterThanZero);
+            RuleFor(x => x.Name).Must(_validator.IsLocationNameIsTaken).WithMessage(ErrorType.AlreadyExist);
+            RuleFor(x => x.Name).NotEmpty().WithMessage(ErrorType.NotEmpty);
         }
     }
 }

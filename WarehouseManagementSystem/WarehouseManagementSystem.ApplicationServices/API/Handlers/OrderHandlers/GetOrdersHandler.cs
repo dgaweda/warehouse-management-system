@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.OrderHandlers
 {
     public class GetOrdersHandler :
-        QueryHandler<GetOrdersRequest, GetOrdersResponse, GetOrdersQuery, List<Order>, List<Domain.Models.OrderDto>>,
+        QueryHandler<GetOrdersResponse, GetOrdersQuery, List<Order>, List<Domain.Models.OrderDto>>,
         IRequestHandler<GetOrdersRequest, GetOrdersResponse>
     {
         public GetOrdersHandler(IMapper mapper, IQueryExecutor queryExecutor)
@@ -22,17 +22,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.OrderHandle
 
         public async Task<GetOrdersResponse> Handle(GetOrdersRequest request, CancellationToken cancellationToken)
         {
-            var query = CreateQuery(request);
-            var response = await GetResponse(query);
-            return response;
-        }
-
-        public override GetOrdersQuery CreateQuery(GetOrdersRequest request)
-        {
-            return new GetOrdersQuery()
+            var query = new GetOrdersQuery()
             {
                 Id = request.Id
             };
+            var response = await HandleQuery(query);
+            return response;
         }
     }
 }

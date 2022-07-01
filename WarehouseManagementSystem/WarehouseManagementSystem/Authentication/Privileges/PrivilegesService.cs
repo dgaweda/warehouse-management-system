@@ -6,7 +6,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Enums;
 using static System.Int32;
 
 
-namespace warehouse_management_system.Authentication
+namespace warehouse_management_system.Authentication.Privileges
 {
     public class PrivilegesService : IPrivilegesService
     {
@@ -120,7 +120,7 @@ namespace warehouse_management_system.Authentication
 
         private static Claim AddClaim(Privilege claimName)
         {
-            return new Claim("Privileges", Privileges.Get(claimName));
+            return new Claim("Privileges", Authentication.Privileges.Privileges.Get(claimName));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System.Net;
+using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery;
 using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
@@ -12,7 +13,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.DeliveryV
         public GetDeliveryRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.Name).Must(_validator.IsDeliveryExist).WithMessage($"{ErrorType.NotFound} - Delivery doesn't exist.");
+            RuleFor(x => x.Name).Must(_validator.IsDeliveryExist).WithMessage(ErrorType.NotFound);
         }
     }
 }

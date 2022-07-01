@@ -1,6 +1,7 @@
 ﻿using DataAccess.Entities;
 using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;
+using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.PalletValidators
@@ -12,7 +13,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.PalletVal
         public RemovePalletRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.PalletId).Must(_validator.IsExist<Pallet>).WithMessage($"Pallet not exist.");
+            RuleFor(x => x.PalletId).Must(_validator.Exist<Pallet>).WithMessage(ErrorType.NotFound);
         }
     }
 }

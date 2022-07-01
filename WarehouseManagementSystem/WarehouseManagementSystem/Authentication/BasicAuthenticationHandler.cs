@@ -12,6 +12,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using DataAccess.AuthenticateUserService;
+using warehouse_management_system.Authentication.Privileges;
 
 namespace warehouse_management_system.Authentication
 {

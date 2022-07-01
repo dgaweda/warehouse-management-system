@@ -2,6 +2,7 @@
 using DataAccess;
 using DataAccess.CQRS;
 using DataAccess.Repository;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
@@ -13,8 +14,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using warehouse_management_system.Authentication;
+using warehouse_management_system.Authentication.Privileges;
 using warehouse_management_system.Middleware;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
+using WarehouseManagementSystem.ApplicationServices.API.PipelineBehavior;
+using WarehouseManagementSystem.ApplicationServices.API.Validators;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.SeniorityValidators;
 using WarehouseManagementSystem.ApplicationServices.Mappings;
@@ -37,8 +41,10 @@ namespace warehouse_management_system
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
             services.AddCors();
-            services.AddMvcCore()
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddSeniorityRequestValidator>());
+            services.AddMvcCore();
+
+            
+                // .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddSeniorityRequestValidator>());
 
             services.AddTransient<IQueryExecutor, QueryExecutor>();
 
@@ -51,6 +57,7 @@ namespace warehouse_management_system
             services.AddAutoMapper(typeof(UsersProfile).Assembly); // This Line Enables AutoMapper to map all profiles without adding everyone of them.
             // It gets Assembly from one profile to get all the mappings.
             services.AddMediatR(typeof(ResponseBase<>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 
             services.AddHttpContextAccessor();
 
@@ -59,6 +66,7 @@ namespace warehouse_management_system
                     option.UseSqlServer(Configuration.GetConnectionString("WMSDatabaseContext")));
 
             services.AddScoped(typeof(IValidatorHelper), typeof(ValidatorHelper));
+            services.AddValidatorsFromAssembly(typeof(AddSeniorityRequestValidator).Assembly);
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
@@ -104,7 +112,7 @@ namespace warehouse_management_system
             app.UseHttpsRedirection();
             app.UseRouting();
             
-            app.UseMiddleware<LogMiddleware>();
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseAuthentication();
             app.UseAuthorization();
 

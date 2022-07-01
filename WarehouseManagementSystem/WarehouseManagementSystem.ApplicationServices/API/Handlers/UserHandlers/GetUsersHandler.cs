@@ -6,13 +6,14 @@ using DataAccess;
 using DataAccess.CQRS.Queries;
 using DataAccess.Entities;
 using MediatR;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandlers
 {
     public class GetUsersHandler :
-        QueryHandler<GetUsersRequest, GetUsersResponse, GetUsersQuery, List<User>, List<Domain.Models.UserDto>>,
+        QueryHandler<GetUsersResponse, GetUsersQuery, List<User>, List<UserDto>>,
         IRequestHandler<GetUsersRequest, GetUsersResponse>
     {
         public GetUsersHandler(IQueryExecutor queryExecutor, IMapper mapper) : base(mapper, queryExecutor)
@@ -21,14 +22,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandler
 
         public async Task<GetUsersResponse> Handle(GetUsersRequest request, CancellationToken cancellationToken)
         {
-            var query = CreateQuery(request);
-            var response = await GetResponse(query);
-            return response;
-        }
-
-        public override GetUsersQuery CreateQuery(GetUsersRequest request)
-        {
-            return new GetUsersQuery()
+            var query = new GetUsersQuery()
             {
                 Age = request.Age,
                 UserId = request.UserId,
@@ -37,6 +31,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandler
                 PESEL = request.PESEL,
                 RoleName = request.RoleName
             };
+            var response = await HandleQuery(query);
+            return response;
         }
     }
 }

@@ -2,6 +2,7 @@
 using DataAccess.Entities.EntityBases;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using DataAccess.Exceptions;
 
 namespace DataAccess.Repository
 {
@@ -29,6 +30,9 @@ namespace DataAccess.Repository
         public async Task<TEntity> GetByIdAsync(int id)
         {
             var result = await Entity.FirstOrDefaultAsync(i => i.Id == id);
+            if (result is null)
+                throw new NotFoundException($"{nameof(TEntity)} with id: {id} doesn't exist.");
+            
             return result;
         }
 
@@ -36,18 +40,20 @@ namespace DataAccess.Repository
         {
             var entityToDelete = await Entity.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (entityToDelete != null)
-            {
-                _dbContext.Set<TEntity>().Remove(entityToDelete);
-                await _dbContext.SaveChangesAsync();
-            }
+            if (entityToDelete == null)
+                throw new NotFoundException($"{nameof(TEntity)} with id: {id} doesn't exist.");
+            
+            _dbContext.Set<TEntity>().Remove(entityToDelete);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
             var entityToDetach = await Entity.FirstOrDefaultAsync(x => x.Id == entity.Id);
-
-            // _dbContext.Update(entity);
+            
+            if (entityToDetach == null)
+                throw new NotFoundException($"{nameof(TEntity)} with id: {entity.Id} doesn't exist.");
+            
             _dbContext.Entry(entityToDetach).State = EntityState.Detached;
             _dbContext.Entry(entity).State = EntityState.Modified;
 

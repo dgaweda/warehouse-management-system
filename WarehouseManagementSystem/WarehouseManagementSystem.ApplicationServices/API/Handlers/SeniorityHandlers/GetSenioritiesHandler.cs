@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Seniori
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.SeniorityHandlers
 {
     public class GetSenioritiesHandler :
-        QueryHandler<GetSenioritiesRequest, GetSenioritiesResponse, GetSenioritiesQuery, List<Seniority>, List<Domain.Models.SeniorityDto>>,
+        QueryHandler<GetSenioritiesResponse, GetSenioritiesQuery, List<Seniority>, List<Domain.Models.SeniorityDto>>,
         IRequestHandler<GetSenioritiesRequest, GetSenioritiesResponse>
     {
         public GetSenioritiesHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
@@ -21,19 +21,14 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.SeniorityHa
 
         public async Task<GetSenioritiesResponse> Handle(GetSenioritiesRequest request, CancellationToken cancellationToken)
         {
-            var query = CreateQuery(request);
-            var response = await GetResponse(query);
-            return response;
-        }
-
-        public override GetSenioritiesQuery CreateQuery(GetSenioritiesRequest request)
-        {
-            return new GetSenioritiesQuery()
+            var query = new GetSenioritiesQuery()
             {
                 EmploymentDate = request.EmploymentDate,
                 UserLastName = request.UserLastName,
                 UserFirstName = request.UserFirstName
             };
+            var response = await HandleQuery(query);
+            return response;
         }
     }
 }

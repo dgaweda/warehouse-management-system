@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Extensions;
+using DataAccess.Extensions;
 using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace DataAccess.CQRS.Queries.PalletQueries

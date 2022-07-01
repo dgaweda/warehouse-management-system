@@ -11,14 +11,14 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.OrderVali
         public AddOrderRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.Barcode).Must(_validator.IsOrderBarcodeIsUnique)
-                .WithMessage($"{ErrorType.AlreadyExist} - Order already exist.");
+            RuleFor(x => x.Barcode).Must(_validator.IsOrderBarcodeUnique)
+                .WithMessage(ErrorType.AlreadyExist);
             RuleFor(x => x.Barcode).NotEmpty()
-                .WithMessage($"{ErrorType.NoContent} - Barcode can't be empty.");
+                .WithMessage(ErrorType.NotFound);
             RuleFor(x => x.Barcode).MaximumLength(10)
-                .WithMessage($"{ErrorType.TooLargeData} - Barcode can have maximum 10 chars.");
+                .WithMessage($"Maximum 10 chars.");
             RuleFor(x => x.OrderLines).NotEmpty()
-                .WithMessage($"{ErrorType.NoContent} - Orderline can't be empty.");
+                .WithMessage(ErrorType.NotEmpty);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using DataAccess.CQRS.Commands;
-using DataAccess.CQRS.Extensions;
 using DataAccess.Entities;
+using DataAccess.Extensions;
 using DataAccess.Repository;
 
 namespace DataAccess.CQRS.Command.Commands.DepartureCommands

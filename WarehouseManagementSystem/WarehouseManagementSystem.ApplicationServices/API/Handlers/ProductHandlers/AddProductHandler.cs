@@ -5,6 +5,7 @@ using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.DeliveryProductCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product;
@@ -15,11 +16,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductHand
         CommandHandler<AddProductRequest, AddProductResponse, Product, Domain.Models.ProductDto, AddProductCommand>,
         IRequestHandler<AddProductRequest, AddProductResponse>
     {
-        public AddProductHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Product> repositoryService) 
+        public AddProductHandler(IMapper mapper, ICommandExecutor commandExecutor,
+            IRepository<Product> repositoryService) 
             : base(mapper, commandExecutor, repositoryService)
         {
         }
 
-        public async Task<AddProductResponse> Handle(AddProductRequest request, CancellationToken cancellationToken) => await GetResponse(request);
+        public async Task<AddProductResponse> Handle(AddProductRequest request, CancellationToken cancellationToken) => await HandleRequest(request);
     }
 }

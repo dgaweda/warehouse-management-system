@@ -13,7 +13,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departu
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHandlers
 {
     public class GetDeparturesHandler :
-        QueryHandler<GetDeparturesRequest, GetDeparturesResponse, GetDeparturesQuery, List<Departure>, List<DepartureDto>>,
+        QueryHandler<GetDeparturesResponse, GetDeparturesQuery, List<Departure>, List<DepartureDto>>,
         IRequestHandler<GetDeparturesRequest, GetDeparturesResponse>
     {
         public GetDeparturesHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
@@ -22,19 +22,14 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHa
 
         public async Task<GetDeparturesResponse> Handle(GetDeparturesRequest request, CancellationToken cancellation)
         {
-            var query = CreateQuery(request);
-            var response = await GetResponse(query);
-            return response;
-        }
-
-        public override GetDeparturesQuery CreateQuery(GetDeparturesRequest request)
-        {
-            return new GetDeparturesQuery()
+            var query = new GetDeparturesQuery()
             {
                 Name = request.Name,
                 OpeningTime = request.OpeningTime,
                 State = request.State
             };
+            var response = await HandleQuery(query);
+            return response;
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Entities;
 
-namespace DataAccess.CQRS.Extensions
+namespace DataAccess.Extensions
 {
     public static class DepartureExtension
     {
@@ -15,20 +15,20 @@ namespace DataAccess.CQRS.Extensions
             return departure;
         }
 
-        public static List<Departure> FilterByName(this List<Departure> departures, string Name)
+        public static List<Departure> FilterByName(this List<Departure> departures, string name)
         {
-            if (string.IsNullOrEmpty(Name))
+            if (string.IsNullOrEmpty(name))
                 return departures;
 
-            return departures.Where(departure => departure.Name.Contains(Name)).ToList();
+            return departures.Where(departure => departure.Name.Contains(name)).ToList();
         }
 
-        public static List<Departure> FilterByOpeningTime(this List<Departure> departures, DateTime OpeningTime)
+        public static List<Departure> FilterByOpeningTime(this List<Departure> departures, DateTime openingTime)
         {
-            if (OpeningTime == default)
+            if (openingTime == default)
                 return departures;
 
-            return departures.Where(departure => departure.OpeningTime == OpeningTime).ToList();
+            return departures.Where(departure => departure.OpeningTime == openingTime).ToList();
         }
     }
 }

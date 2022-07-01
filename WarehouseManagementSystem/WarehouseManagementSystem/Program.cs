@@ -11,7 +11,7 @@ namespace warehouse_management_system
     {
         public static void Main(string[] args)
         {
-            var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+            var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 
             try
             {
@@ -25,7 +25,7 @@ namespace warehouse_management_system
             }
             finally
             {
-                NLog.LogManager.Shutdown();
+                LogManager.Shutdown();
             }
             
         }

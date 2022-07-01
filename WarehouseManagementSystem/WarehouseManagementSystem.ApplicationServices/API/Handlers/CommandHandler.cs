@@ -2,8 +2,10 @@
 using DataAccess.CQRS;
 using DataAccess.CQRS.Commands;
 using System.Threading.Tasks;
+using DataAccess.Entities;
 using DataAccess.Entities.EntityBases;
 using DataAccess.Repository;
+using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
@@ -25,7 +27,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
             _commandExecutor = commandExecutor;
         }
 
-        public async Task<TResponse> GetResponse(TRequest request)
+        public async Task<TResponse> HandleRequest(TRequest request)
         {
             var entityData = _mapper.Map<TEntity>(request);
             var command = new TCommand()
