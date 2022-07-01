@@ -17,7 +17,7 @@ namespace warehouse_management_system.Controllers
     public class ProductController : ApiControllerBase
     {
 
-        public ProductController(IMediator mediator, IPrivilegesService privileges) 
+        public ProductController(IMediator mediator) 
             : base(mediator)
         {
         }
