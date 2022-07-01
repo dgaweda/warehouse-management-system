@@ -15,13 +15,13 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
             _context = context;
         }
         
-        public bool IsExist<TEntity>(int? id)
+        public bool Exist<TEntity>(int? id)
             where TEntity : class, IEntityBase
         {
             return (id != null && id != 0) && _context.Set<TEntity>().Any(x => x.Id == id);
         }
         
-        public bool IsExist<TEntity>(int id) 
+        public bool Exist<TEntity>(int id) 
             where TEntity : class, IEntityBase
         {
             return id != 0 && _context.Set<TEntity>().Any(x => x.Id == id);

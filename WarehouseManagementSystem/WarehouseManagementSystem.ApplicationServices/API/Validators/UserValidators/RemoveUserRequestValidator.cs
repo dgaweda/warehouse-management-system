@@ -1,6 +1,7 @@
 ﻿using DataAccess.Entities;
 using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
+using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.UserValidators
@@ -12,7 +13,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.UserValid
         public RemoveUserRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.UserId).Must(_validator.IsExist<User>).WithMessage($"Employee doesn't exist");
+            RuleFor(x => x.UserId).Must(_validator.Exist<User>).WithMessage(ErrorType.NotFound);
         }
     }
 }

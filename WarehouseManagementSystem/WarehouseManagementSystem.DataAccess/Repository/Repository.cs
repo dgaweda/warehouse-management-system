@@ -46,8 +46,7 @@ namespace DataAccess.Repository
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
             var entityToDetach = await Entity.FirstOrDefaultAsync(x => x.Id == entity.Id);
-
-            // _dbContext.Update(entity);
+            
             _dbContext.Entry(entityToDetach).State = EntityState.Detached;
             _dbContext.Entry(entity).State = EntityState.Modified;
 

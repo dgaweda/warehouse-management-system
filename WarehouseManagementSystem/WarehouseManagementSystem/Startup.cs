@@ -2,6 +2,7 @@
 using DataAccess;
 using DataAccess.CQRS;
 using DataAccess.Repository;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
@@ -37,8 +38,10 @@ namespace warehouse_management_system
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
             services.AddCors();
-            services.AddMvcCore()
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddSeniorityRequestValidator>());
+            services.AddMvcCore();
+
+            
+                // .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddSeniorityRequestValidator>());
 
             services.AddTransient<IQueryExecutor, QueryExecutor>();
 
@@ -59,6 +62,7 @@ namespace warehouse_management_system
                     option.UseSqlServer(Configuration.GetConnectionString("WMSDatabaseContext")));
 
             services.AddScoped(typeof(IValidatorHelper), typeof(ValidatorHelper));
+            services.AddValidatorsFromAssemblyContaining<AddSeniorityRequestValidator>();
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
@@ -104,7 +108,7 @@ namespace warehouse_management_system
             app.UseHttpsRedirection();
             app.UseRouting();
             
-            app.UseMiddleware<LogMiddleware>();
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseAuthentication();
             app.UseAuthorization();
 

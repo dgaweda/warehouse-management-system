@@ -12,7 +12,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Departure
         public AddDepartureRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.Name).Must(_validator.IsDepartureNameIsUnique).WithMessage($"{ErrorType.ValidationError} - Departure name must be unique.");
+            RuleFor(x => x.Name).Must(_validator.IsDepartureNameIsUnique).WithMessage(ErrorType.MustBeUnique);
         }
     }
 }

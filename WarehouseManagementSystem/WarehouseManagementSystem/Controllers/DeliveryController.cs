@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using warehouse_management_system.Controllers.BaseController;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery;
