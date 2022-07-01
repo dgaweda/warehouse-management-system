@@ -5,6 +5,7 @@ using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.LocationCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location;
@@ -15,11 +16,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.LocationHan
         CommandHandler<AddLocationRequest, AddLocationResponse, Location, Domain.Models.LocationDto, AddLocationCommand>,
         IRequestHandler<AddLocationRequest, AddLocationResponse>
     {
-        public AddLocationHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Location> repositoryService) 
+        public AddLocationHandler(IMapper mapper, ICommandExecutor commandExecutor,
+            IRepository<Location> repositoryService) 
             : base(mapper, commandExecutor, repositoryService)
         {
 
         }
-        public async Task<AddLocationResponse> Handle(AddLocationRequest request, CancellationToken cancellationToken) => await GetResponse(request);
+        public async Task<AddLocationResponse> Handle(AddLocationRequest request, CancellationToken cancellationToken) => await HandleRequest(request);
     }
 }

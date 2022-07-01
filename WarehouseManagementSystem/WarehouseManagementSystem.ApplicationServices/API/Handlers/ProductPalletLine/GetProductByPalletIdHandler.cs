@@ -11,7 +11,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductPalletLine
 {
     public class GetProductByPalletIdHandler :
-        QueryHandler<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse, GetProductsByPalletIdQuery, List<DataAccess.Entities.ProductPalletLine>, List<Domain.Models.ProductPalletLineDto>>,
+        QueryHandler<GetProductsByPalletIdResponse, GetProductsByPalletIdQuery, List<DataAccess.Entities.ProductPalletLine>, List<Domain.Models.ProductPalletLineDto>>,
         IRequestHandler<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse>
     {
         public GetProductByPalletIdHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
@@ -20,17 +20,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductPall
 
         public async Task<GetProductsByPalletIdResponse> Handle(GetProductsByPalletIdRequest request, CancellationToken cancellationToken)
         {
-            var query = CreateQuery(request);
-            var response = await GetResponse(query);
-            return response;
-        }
-
-        public override GetProductsByPalletIdQuery CreateQuery(GetProductsByPalletIdRequest request)
-        {
-            return new GetProductsByPalletIdQuery()
+            var query = new GetProductsByPalletIdQuery()
             {
                 PalletId = request.PalletId
             };
+            var response = await HandleQuery(query);
+            return response;
         }
     }
 }

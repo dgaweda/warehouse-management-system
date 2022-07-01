@@ -17,14 +17,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHan
             AddDeliveryCommand>,
         IRequestHandler<AddDeliveryRequest, AddDeliveryResponse>
     {
-        private readonly IValidator<GetDeliveriesRequest> _validator;
         public AddDeliveryHandler(IMapper mapper, ICommandExecutor commandExecutor,
-            IRepository<Delivery> repositoryService, IValidator<GetDeliveriesRequest> validator)
+            IRepository<Delivery> repositoryService)
             : base(mapper, commandExecutor, repositoryService)
         {
-            _validator = validator;
         }
 
-        public async Task<AddDeliveryResponse> Handle(AddDeliveryRequest request, CancellationToken cancellationToken) => await GetResponse(request);
+        public async Task<AddDeliveryResponse> Handle(AddDeliveryRequest request, CancellationToken cancellationToken) => await HandleRequest(request);
     }
 }

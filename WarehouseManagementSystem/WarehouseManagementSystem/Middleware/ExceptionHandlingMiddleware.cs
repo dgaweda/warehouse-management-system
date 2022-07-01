@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
+using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling.Exceptions;
 
 namespace warehouse_management_system.Middleware
 {
@@ -24,12 +25,6 @@ namespace warehouse_management_system.Middleware
         {
             try
             {
-                _logger.LogInformation("-- {HttpProtocol} -- {Method} -- {Host}{Url} => HTTP Response: {StatusCode} --",
-                    context.Request.Method,
-                    context.Request.Protocol,
-                    context.Request.Host,
-                    context.Request.Path.Value,
-                    context.Response.StatusCode);
                 await _next(context);
             }
             catch (ValidationException exception)
@@ -48,6 +43,15 @@ namespace warehouse_management_system.Middleware
             {
                 await SetHttpContextResponse(500, exception.Message, context);
             }
+            finally
+            {
+                _logger.LogInformation("-- {HttpProtocol} -- {Method} -- {Host}{Url} => HTTP Response: {StatusCode} --",
+                    context.Request.Method,
+                    context.Request.Protocol,
+                    context.Request.Host,
+                    context.Request.Path.Value,
+                    context.Response.StatusCode);
+            }
         }
 
         private async Task SetHttpContextResponse(int statusCode, string message, HttpContext context)
@@ -62,9 +66,10 @@ namespace warehouse_management_system.Middleware
         {
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             context.Response.ContentType = "application/json; charset=UTF-8";
+            _logger.LogError("-- Validation Failed --");
             foreach (var failure in exception.Errors)
             {
-                _logger.LogError($"-- Validation Failed --\n/\t-- {failure.PropertyName}: {failure.AttemptedValue} -- {failure.ErrorMessage} --");
+                _logger.LogError($"-- {failure.PropertyName}: {failure.AttemptedValue} -- {failure.ErrorMessage} --");
                 await context.Response.WriteAsJsonAsync(new ErrorModel(failure.PropertyName, failure.AttemptedValue, failure.ErrorMessage));
             }
         }

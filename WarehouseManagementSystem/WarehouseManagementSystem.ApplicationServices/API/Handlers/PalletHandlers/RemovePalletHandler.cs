@@ -5,6 +5,7 @@ using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.PalletCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
@@ -16,9 +17,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandl
         IRequestHandler<RemovePalletRequest, RemovePalletResponse>
     {
 
-        public RemovePalletHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Pallet> repositoryService) : base(mapper, commandExecutor, repositoryService)
+        public RemovePalletHandler(IMapper mapper, ICommandExecutor commandExecutor,
+            IRepository<Pallet> repositoryService)
+            : base(mapper, commandExecutor, repositoryService)
         {
         }
-        public Task<RemovePalletResponse> Handle(RemovePalletRequest request, CancellationToken cancellationToken) => GetResponse(request);
+        public Task<RemovePalletResponse> Handle(RemovePalletRequest request, CancellationToken cancellationToken) => HandleRequest(request);
     }
 }

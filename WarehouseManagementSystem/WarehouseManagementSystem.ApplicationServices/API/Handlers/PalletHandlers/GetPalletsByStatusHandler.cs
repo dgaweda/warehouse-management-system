@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandlers
 {
     public class GetPalletsByStatusHandler : 
-        QueryHandler<GetPalletsByStatusRequest, GetPalletsByStatusResponse, GetPalletsByStatusQuery, List<Pallet>, List<Domain.Models.PalletDto>>,
+        QueryHandler<GetPalletsByStatusResponse, GetPalletsByStatusQuery, List<Pallet>, List<Domain.Models.PalletDto>>,
         IRequestHandler<GetPalletsByStatusRequest, GetPalletsByStatusResponse>
     {
         public GetPalletsByStatusHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
@@ -21,17 +21,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandl
 
         public async Task<GetPalletsByStatusResponse> Handle(GetPalletsByStatusRequest request, CancellationToken cancellationToken)
         {
-            var query = CreateQuery(request);
-            var response = await GetResponse(query);
-            return response;
-        }
-
-        public override GetPalletsByStatusQuery CreateQuery(GetPalletsByStatusRequest request)
-        {
-            return new GetPalletsByStatusQuery()
+            var query = new GetPalletsByStatusQuery()
             {
                 PalletStatus = request.PalletStatus
             };
+            var response = await HandleQuery(query);
+            return response;
         }
     }
 }

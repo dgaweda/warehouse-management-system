@@ -5,6 +5,7 @@ using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.DeliveryCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Delivery;
@@ -15,10 +16,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHan
         : CommandHandler<RemoveDeliveryRequest, RemoveDeliveryResponse, Delivery, Domain.Models.DeliveryDto, RemoveDeliveryCommand>,
         IRequestHandler<RemoveDeliveryRequest, RemoveDeliveryResponse>
     {
-        public RemoveDeliveryHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Delivery> repositoryService) :base(mapper, commandExecutor, repositoryService)
+        public RemoveDeliveryHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Delivery> repositoryService) 
+            : base(mapper, commandExecutor, repositoryService)
         {
         }
 
-        public Task<RemoveDeliveryResponse> Handle(RemoveDeliveryRequest request, CancellationToken cancellationToken) => GetResponse(request);
+        public Task<RemoveDeliveryResponse> Handle(RemoveDeliveryRequest request, CancellationToken cancellationToken) => HandleRequest(request);
     }
 }

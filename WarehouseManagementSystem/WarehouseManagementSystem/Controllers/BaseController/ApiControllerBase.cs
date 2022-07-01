@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
+using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling.Exceptions;
 
 namespace warehouse_management_system.Controllers.BaseController
 {

@@ -3,12 +3,11 @@ using DataAccess;
 using DataAccess.CQRS.Queries;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
-using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
+using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling.Exceptions;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public abstract class QueryHandler<TRequest, TResponse, TQuery, TEntityList, TDtoModelList>
-        : IQueryHandler<TQuery, TResponse>
+    public abstract class QueryHandler<TResponse, TQuery, TEntityList, TDtoModelList> : IQueryHandler<TQuery, TResponse>
         where TQuery : QueryBase<TEntityList>
         where TResponse : ResponseBase<TDtoModelList>, new()
     {
@@ -21,7 +20,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
             _queryExecutor = queryExecutor;
         }
 
-        public async Task<TResponse> GetResponse(TQuery query)
+        public async Task<TResponse> HandleQuery(TQuery query)
         {
             var entityModel = await _queryExecutor.Execute(query);
             if (entityModel is null)
@@ -33,7 +32,5 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
                 Response = domainModel
             };
         }
-
-        public abstract TQuery CreateQuery(TRequest request);
     }
 }
