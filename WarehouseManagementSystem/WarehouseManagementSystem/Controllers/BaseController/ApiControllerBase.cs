@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using DataAccess.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
-using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling.Exceptions;
 
 namespace warehouse_management_system.Controllers.BaseController
 {
@@ -17,13 +17,13 @@ namespace warehouse_management_system.Controllers.BaseController
         protected async Task<IActionResult> Handle<TRequest, TResponse>(TRequest request)
             where TRequest : IRequest<TResponse>
         {
-            if (User.IsPermitted(request) || request.IsAuthenticateUserRequest())
+            if (User.IsPermitted(request))
             {
                 var response = await _mediator.Send(request);
                 return Ok(response);
             }
 
-            throw new NotAuthenticatedException($"User {User.Identity.Name} is not authenticated.");
+            throw new ForbidException();
         }
     }
 }

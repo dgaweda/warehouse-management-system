@@ -11,7 +11,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.OrderVali
         public AddOrderRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.Barcode).Must(_validator.IsOrderBarcodeIsUnique)
+            RuleFor(x => x.Barcode).Must(_validator.IsOrderBarcodeUnique)
                 .WithMessage(ErrorType.AlreadyExist);
             RuleFor(x => x.Barcode).NotEmpty()
                 .WithMessage(ErrorType.NotFound);

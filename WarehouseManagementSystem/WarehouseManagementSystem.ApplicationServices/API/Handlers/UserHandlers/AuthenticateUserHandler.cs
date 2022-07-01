@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DataAccess;
 using DataAccess.AuthenticateUserService;
+using DataAccess.Entities;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
@@ -11,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandlers
 {
     public class AuthenticateUserHandler :
-        QueryHandler<AuthenticateUserResponse, AuthenticateUserQuery, DataAccess.Entities.User, UserDto>,
+        QueryHandler<AuthenticateUserResponse, AuthenticateUserQuery, User, UserDto>,
         IRequestHandler<AuthenticateUserRequest, AuthenticateUserResponse>
     {
         public AuthenticateUserHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)

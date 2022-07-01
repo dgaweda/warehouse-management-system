@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Extensions;
+using DataAccess.Extensions;
 
 namespace DataAccess.CQRS.Queries.InvoiceQueries
 {

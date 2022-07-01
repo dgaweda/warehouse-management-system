@@ -6,13 +6,14 @@ using DataAccess;
 using DataAccess.CQRS.Queries;
 using DataAccess.Entities;
 using MediatR;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandlers
 {
     public class GetUsersHandler :
-        QueryHandler<GetUsersResponse, GetUsersQuery, List<User>, List<Domain.Models.UserDto>>,
+        QueryHandler<GetUsersResponse, GetUsersQuery, List<User>, List<UserDto>>,
         IRequestHandler<GetUsersRequest, GetUsersResponse>
     {
         public GetUsersHandler(IQueryExecutor queryExecutor, IMapper mapper) : base(mapper, queryExecutor)

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace warehouse_management_system.Authentication
+namespace warehouse_management_system.Authentication.Privileges
 {
     public static class Privileges
     {

@@ -2,7 +2,7 @@
 using System.Linq;
 using DataAccess.Entities;
 
-namespace DataAccess.CQRS.Extensions
+namespace DataAccess.Extensions
 {
     public static class OrderExtension
     {

@@ -5,7 +5,7 @@ using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
-namespace DataAccess.CQRS.Extensions
+namespace DataAccess.Extensions
 {
     public static class ProductPalletLineExtension
     {

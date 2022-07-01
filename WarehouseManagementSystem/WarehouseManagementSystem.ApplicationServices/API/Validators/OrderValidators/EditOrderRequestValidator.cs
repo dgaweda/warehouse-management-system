@@ -21,7 +21,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.OrderVali
                 .WithMessage(ErrorType.NotFound);
             
             RuleFor(x => x.Barcode)
-                .Must(_validator.IsOrderBarcodeIsUnique)
+                .Must(_validator.IsOrderBarcodeUnique)
                 .WithMessage(ErrorType.AlreadyExist);
             
             RuleFor(x => x.Barcode)

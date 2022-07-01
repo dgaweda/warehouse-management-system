@@ -1,7 +1,4 @@
-﻿using System.Net;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Mvc;
-using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
+﻿using System.Security.Claims;
 
 namespace warehouse_management_system.Controllers.BaseController
 {

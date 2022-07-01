@@ -1,8 +1,8 @@
-﻿using DataAccess.CQRS.Extensions;
-using DataAccess.Entities;
+﻿using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DataAccess.Extensions;
 
 namespace DataAccess.CQRS.Queries.RoleQueries
 {

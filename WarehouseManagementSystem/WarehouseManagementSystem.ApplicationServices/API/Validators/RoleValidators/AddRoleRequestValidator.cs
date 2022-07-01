@@ -12,7 +12,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.RoleValid
         {
             _validator = validator;
             RuleFor(x => x.Name).NotEmpty().WithMessage(ErrorType.NotEmpty);
-            RuleFor(x => x.Name).Must(_validator.IsRoleNameIsUnique).WithMessage(ErrorType.AlreadyExist);
+            RuleFor(x => x.Name).Must(_validator.IsRoleNameUnique).WithMessage(ErrorType.AlreadyExist);
             RuleFor(x => x.Description).NotEmpty().WithMessage(ErrorType.NotEmpty);
             RuleFor(x => x.Salary).InclusiveBetween(2500, 99999).WithMessage("Must be equal or greater than 2500.");
             RuleFor(x => x.Salary).NotEmpty().WithMessage(ErrorType.NotEmpty);

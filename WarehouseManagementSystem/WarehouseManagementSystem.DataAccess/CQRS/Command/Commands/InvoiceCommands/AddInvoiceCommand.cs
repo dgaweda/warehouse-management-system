@@ -1,6 +1,6 @@
 ﻿using DataAccess.Entities;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Extensions;
+using DataAccess.Extensions;
 using DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
 

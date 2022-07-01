@@ -13,8 +13,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.UserValid
             _validator = validator;
             RuleFor(x => x.Username).NotEmpty().WithMessage(ErrorType.NotEmpty);
             RuleFor(x => x.Password).NotEmpty().WithMessage(ErrorType.NotEmpty);
-            RuleFor(x => x.Username).Must(_validator.IsUsernameExist).WithMessage(ErrorType.NotFound);
-            
         }
     }
 }

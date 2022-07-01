@@ -2,8 +2,8 @@
 using DataAccess;
 using DataAccess.CQRS.Queries;
 using System.Threading.Tasks;
+using DataAccess.Exceptions;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
-using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling.Exceptions;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
@@ -22,14 +22,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 
         public async Task<TResponse> HandleQuery(TQuery query)
         {
-            var entityModel = await _queryExecutor.Execute(query);
-            if (entityModel is null)
-                throw new NotFoundException();
-
-            var domainModel = _mapper.Map<TDtoModelList>(entityModel);
+            var entity = await _queryExecutor.Execute(query);
+            var dto = _mapper.Map<TDtoModelList>(entity);
             return new TResponse()
             {
-                Response = domainModel
+                Response = dto
             };
         }
     }

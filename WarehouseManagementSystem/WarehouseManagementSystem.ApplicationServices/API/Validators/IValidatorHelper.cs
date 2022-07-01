@@ -1,6 +1,6 @@
 ﻿using DataAccess.Entities.EntityBases;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
+namespace WarehouseManagementSystem.ApplicationServices.API.Validators
 {
     public interface IValidatorHelper
     {
@@ -12,16 +12,15 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
         bool IsPalletForUnfoldingExist(int palletId);
         bool IsProductBarcodeUnique(string barcode);
         bool IsPalletBarcodeIsUnique(string barcode);
-        bool IsRoleNameIsUnique(string name);
+        bool IsRoleNameUnique(string name);
         bool IsHiredEmployee(int employeeId);
         bool IsDeliveryExist(string name);
         bool IsDepartureNameIsUnique(string name);
         bool IsDepartureNameExist(string name);
-        bool CheckEmailFormat(string email);
-        bool IsUsernameIsUnique(string username);
-        bool IsLocationStillHaveProducts(int id);
         bool IsUsernameExist(string username);
-        bool IsOrderBarcodeIsUnique(string barcode);
+        bool IsLocationStillHaveProducts(int id);
+        bool IsOrderBarcodeUnique(string barcode);
         bool IsPalletIdExistsInProductPalletLine(int palletId);
+        bool IsInvoiceNumberNotExist(string invoiceNumber);
     }
 }

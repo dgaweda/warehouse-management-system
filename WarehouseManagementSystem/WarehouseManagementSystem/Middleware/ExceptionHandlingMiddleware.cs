@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Net;
+using System.Security.Authentication;
 using System.Threading.Tasks;
+using DataAccess.Exceptions;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
-using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling.Exceptions;
 
 namespace warehouse_management_system.Middleware
 {
@@ -35,9 +36,13 @@ namespace warehouse_management_system.Middleware
             {
                 await SetHttpContextResponse((int)HttpStatusCode.NotFound, exception.Message, context);
             }
-            catch (NotAuthenticatedException exception)
+            catch (AuthenticationException exception)
             {
                 await SetHttpContextResponse((int)HttpStatusCode.Unauthorized, exception.Message, context);
+            }
+            catch (ForbidException exception)
+            {
+                await SetHttpContextResponse((int)HttpStatusCode.Forbidden, exception.Message, context);
             }
             catch (Exception exception)
             {

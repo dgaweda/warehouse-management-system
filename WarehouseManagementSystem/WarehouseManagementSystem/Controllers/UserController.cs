@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using DataAccess.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
@@ -15,16 +16,21 @@ namespace warehouse_management_system.Controllers
     [Route("/api/user/")]
     public class UserController : ApiControllerBase
     {
+        private readonly IMediator _mediator;
         public UserController(IMediator mediator)
             : base(mediator)
         {
-            
+            _mediator = mediator;
         }
 
         [AllowAnonymous]
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> AuthenticateUser([FromBody] AuthenticateUserRequest request) => await Handle<AuthenticateUserRequest, AuthenticateUserResponse>(request);
+        public async Task<IActionResult> AuthenticateUser([FromBody] AuthenticateUserRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        } 
 
         [AllowAnonymous]
         [HttpPost]

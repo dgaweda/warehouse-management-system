@@ -15,7 +15,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.UserValid
             RuleFor(x => x.UserName).NotEmpty().WithMessage(ErrorType.NotEmpty);
             RuleFor(x => x.Password).NotEmpty().WithMessage(ErrorType.NotEmpty);
             RuleFor(x => x.UserName).MaximumLength(30).WithMessage($"Maximum 30 characters.");
-            RuleFor(x => x.UserName).Must(_validator.IsUsernameIsUnique).WithMessage(ErrorType.AlreadyExist);
+            RuleFor(x => x.UserName).Must(_validator.IsUsernameExist).WithMessage(ErrorType.AlreadyExist);
             RuleFor(x => x.Email).NotEmpty().WithMessage(ErrorType.NotEmpty);
             RuleFor(x => x.Email).EmailAddress().WithMessage(ErrorType.BadFormat);
             RuleFor(x => x.Name).NotEmpty().WithMessage(ErrorType.NotEmpty);

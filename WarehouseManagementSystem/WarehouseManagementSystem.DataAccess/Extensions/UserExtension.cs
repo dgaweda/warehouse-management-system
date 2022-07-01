@@ -2,7 +2,7 @@
 using System.Linq;
 using DataAccess.Entities;
 
-namespace DataAccess.CQRS.Extensions
+namespace DataAccess.Extensions
 {
     public static class UserExtension
     {
@@ -16,7 +16,7 @@ namespace DataAccess.CQRS.Extensions
             return string.IsNullOrEmpty(roleName) ? users : users.Where(user => user.Role.Name.Contains(roleName)).ToList();
         }
 
-        public static List<User> FilterByPESEL(this List<User> users, string pesel)
+        public static List<User> FilterByPesel(this List<User> users, string pesel)
         {
             return string.IsNullOrEmpty(pesel) ? users : users.Where(user => user.PESEL == pesel).ToList();
         }
