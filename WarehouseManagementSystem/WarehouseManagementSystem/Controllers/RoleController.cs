@@ -16,7 +16,7 @@ namespace warehouse_management_system.Controllers
     [ApiController]
     public class RoleController : ApiControllerBase
     {
-        public RoleController(IMediator mediator, IPrivilegesService privileges) 
+        public RoleController(IMediator mediator) 
             : base(mediator)
         {
         }
