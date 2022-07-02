@@ -24,15 +24,13 @@ namespace warehouse_management_system.Controllers
         public async Task<IActionResult> GetInvoices([FromQuery] GetInvoicesRequest request) => await Handle<GetInvoicesRequest, GetInvoicesResponse>(request);
 
         [HttpPost]
-        [Route("add")]
         public async Task<IActionResult> AddInvoice([FromBody] AddInvoiceRequest request) => await Handle<AddInvoiceRequest, AddInvoiceResponse>(request);
 
         [HttpDelete]
-        [Route("remove/{InvoiceId}")]
+        [Route("{InvoiceId}")]
         public async Task<IActionResult> RemoveInvoice([FromRoute] RemoveInvoiceRequest request) => await Handle<RemoveInvoiceRequest, RemoveInvoiceResponse>(request);
 
         [HttpPut]
-        [Route("edit")]
         public async Task<IActionResult> EditInvoice([FromBody] EditInvoiceRequest request) => await Handle<EditInvoiceRequest, EditInvoiceResponse>(request);
     }
 }

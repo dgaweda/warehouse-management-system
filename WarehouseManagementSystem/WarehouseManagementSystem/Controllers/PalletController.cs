@@ -29,7 +29,7 @@ namespace warehouse_management_system.Controllers
         public async Task<IActionResult> GetByStatus([FromQuery] GetPalletsByStatusRequest request) => await Handle<GetPalletsByStatusRequest, GetPalletsByStatusResponse>(request);
 
         [HttpDelete]
-        [Route("remove/{palletId}")]
+        [Route("{palletId}")]
         public async Task<IActionResult> Remove([FromRoute] int palletId)
         {
             var request = new RemovePalletRequest()

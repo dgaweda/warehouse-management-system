@@ -22,16 +22,14 @@ namespace warehouse_management_system.Controllers
         [HttpGet]
         public async Task<IActionResult> GetOrders([FromQuery] GetOrdersRequest request) => await Handle<GetOrdersRequest, GetOrdersResponse>(request);
         
-        [HttpPost]   
-        [Route("add")]
+        [HttpPost]
         public async Task<IActionResult> AddOrder([FromBody] AddOrderRequest request) => await Handle<AddOrderRequest, AddOrderResponse>(request);
         
-        [HttpPut]   
-        [Route("edit")]
+        [HttpPut]
         public async Task<IActionResult> EditOrder([FromBody] EditOrderRequest request) => await Handle<EditOrderRequest, EditOrderResponse>(request);
         
         [HttpDelete]   
-        [Route("remove/{Id}")]
+        [Route("{Id}")]
         public async Task<IActionResult> RemoveOrder([FromRoute] RemoveOrderRequest request) => await Handle<RemoveOrderRequest, RemoveOrderResponse>(request);
     }
 }

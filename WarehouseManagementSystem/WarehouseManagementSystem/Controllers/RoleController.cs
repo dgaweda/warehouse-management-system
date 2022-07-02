@@ -22,19 +22,17 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpPost]
-        [Route("add")]
         public async Task<IActionResult> AddRole([FromBody] AddRoleRequest request) => await Handle<AddRoleRequest, AddRoleResponse>(request);
 
         [HttpGet]
         public async Task<IActionResult> GetRoles([FromQuery] GetRolesRequest request) => await Handle<GetRolesRequest, GetRolesResponse>(request);
 
         [HttpPut]
-        [Route("edit")]
         public async Task<IActionResult> EditRole([FromBody] EditRoleRequest request) => await Handle<EditRoleRequest, EditRoleResponse>(request);
 
 
         [HttpDelete]
-        [Route("remove/{RoleId}")]
+        [Route("{RoleId}")]
         public async Task<IActionResult> RemoveRole([FromRoute] RemoveRoleRequest request) => await Handle<RemoveRoleRequest, RemoveRoleResponse>(request);
     }
 }

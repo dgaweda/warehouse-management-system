@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Authentication;
 using System.Threading.Tasks;
 using DataAccess.Exceptions;
 using MediatR;
@@ -17,6 +18,9 @@ namespace warehouse_management_system.Controllers.BaseController
         protected async Task<IActionResult> Handle<TRequest, TResponse>(TRequest request)
             where TRequest : IRequest<TResponse>
         {
+            if (User.Identity is { IsAuthenticated: false })
+                throw new AuthenticationException("Not authenticated.");
+            
             if (User.IsPermitted(request))
             {
                 var response = await _mediator.Send(request);

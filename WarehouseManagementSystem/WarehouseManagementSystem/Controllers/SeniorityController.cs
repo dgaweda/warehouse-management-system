@@ -25,11 +25,9 @@ namespace warehouse_management_system.Controllers
         public async Task<IActionResult> GetSeniorities([FromQuery] GetSenioritiesRequest request) => await Handle<GetSenioritiesRequest, GetSenioritiesResponse>(request);
 
         [HttpPost]
-        [Route("add")]
         public async Task<IActionResult> AddSeniority([FromBody] AddSeniorityRequest request) => await Handle<AddSeniorityRequest, AddSeniorityResponse>(request);
 
         [HttpPut]
-        [Route("edit")]
         public async Task<IActionResult> EditSeniority([FromBody] EditSeniorityRequest request) => await Handle<EditSeniorityRequest, EditSeniorityResponse>(request);
     }
 }

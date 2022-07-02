@@ -25,15 +25,14 @@ namespace warehouse_management_system.Controllers
         public async Task<IActionResult> GetDepartures([FromQuery] GetDeparturesRequest request) => await Handle<GetDeparturesRequest, GetDeparturesResponse>(request);
 
         [HttpPost]
-        [Route("add")]
         public async Task<IActionResult> AddDeparture([FromBody] AddDepartureRequest request) => await Handle<AddDepartureRequest, AddDepartureResponse>(request);
 
         [HttpPatch]
-        [Route("edit/departure-state")]
+        [Route("departure-state")]
         public async Task<IActionResult> EditDepartureState([FromQuery] EditDepartureStateRequest request) => await Handle<EditDepartureStateRequest, EditDepartureStateResponse>(request);
 
         [HttpDelete]
-        [Route("remove/{DepartureId}")]
+        [Route("{DepartureId}")]
         public async Task<IActionResult> RemoveDeparture([FromRoute] RemoveDepartureRequest request) => await Handle<RemoveDepartureRequest, RemoveDepartureResponse>(request);
     }
 }

@@ -34,7 +34,6 @@ namespace warehouse_management_system.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("add")]
         public async Task<IActionResult> AddUser([FromBody] AddUserRequest request) => await Handle<AddUserRequest, AddUserResponse>(request);
 
         [Authorize]
@@ -43,12 +42,11 @@ namespace warehouse_management_system.Controllers
 
         [Authorize]
         [HttpPut]
-        [Route("edit")]
         public async Task<IActionResult> EditUser([FromBody] EditUserRequest request) => await Handle<EditUserRequest, EditUserResponse>(request);
 
         [Authorize]
         [HttpDelete]
-        [Route("remove/{UserId}")]
+        [Route("{UserId}")]
         public async Task<IActionResult> RemoveUser([FromRoute] RemoveUserRequest request) => await Handle<RemoveUserRequest, RemoveUserResponse>(request);
     }
 }
