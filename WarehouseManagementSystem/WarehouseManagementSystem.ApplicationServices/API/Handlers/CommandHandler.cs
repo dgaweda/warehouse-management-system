@@ -14,7 +14,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
         : ICommandHandler<TRequest, TResponse, TDtoModel> 
         where TResponse : ResponseBase<TDtoModel>, new()
         where TCommand : CommandBase<TEntity, TEntity>, new()
-        where TEntity : class, IEntityBase
+        where TEntity : EntityBase
     {
         private readonly IMapper _mapper;
         private readonly ICommandExecutor _commandExecutor;

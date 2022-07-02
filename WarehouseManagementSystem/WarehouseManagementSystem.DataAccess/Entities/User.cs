@@ -5,10 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class User : IEntityBase
+    public class User : EntityBase
     {
-        public int Id { get; set; }
-        
         [MaxLength(100)]
         [Required]
         [Column("Nazwa użytkownika")]

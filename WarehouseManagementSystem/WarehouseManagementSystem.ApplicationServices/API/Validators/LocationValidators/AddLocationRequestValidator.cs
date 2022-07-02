@@ -2,7 +2,6 @@
 using System.Text.RegularExpressions;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
 using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
-using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 using Product = DataAccess.Entities.Product;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationValidators
@@ -14,7 +13,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
         {
             _validator = validator;
 
-            RuleFor(x => x.Name).Must(_validator.IsLocationNameIsTaken).WithMessage(ErrorType.AlreadyExist);
+            RuleFor(x => x.Name).Must(_validator.IsLocationWithThatNameExits).WithMessage(ErrorType.AlreadyExist);
             RuleFor(x => x.Name).Must(MatchLocationPattern).WithMessage($"Invalid location name. Example location: Z.01-02");
             RuleFor(x => x.MaxAmount).ExclusiveBetween(1, 999);
             RuleFor(x => x.MaxAmount).NotEmpty().WithMessage(ErrorType.NotEmpty);

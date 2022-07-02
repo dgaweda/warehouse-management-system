@@ -6,13 +6,14 @@ using DataAccess;
 using DataAccess.CQRS.Queries.SeniorityQueries;
 using DataAccess.Entities;
 using MediatR;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seniority;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Seniority;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.SeniorityHandlers
 {
     public class GetSenioritiesHandler :
-        QueryHandler<GetSenioritiesResponse, GetSenioritiesQuery, List<Seniority>, List<Domain.Models.SeniorityDto>>,
+        QueryHandler<GetSenioritiesResponse, GetSenioritiesQuery, Seniority, SeniorityDto>,
         IRequestHandler<GetSenioritiesRequest, GetSenioritiesResponse>
     {
         public GetSenioritiesHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)

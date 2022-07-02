@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandlers
 {
     public class GetPalletsByStatusHandler : 
-        QueryHandler<GetPalletsByStatusResponse, GetPalletsByStatusQuery, List<Pallet>, List<Domain.Models.PalletDto>>,
+        QueryHandler<GetPalletsByStatusResponse, GetPalletsByStatusQuery, Pallet, Domain.Models.PalletDto>,
         IRequestHandler<GetPalletsByStatusRequest, GetPalletsByStatusResponse>
     {
         public GetPalletsByStatusHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)

@@ -6,7 +6,7 @@ using DataAccess.Exceptions;
 
 namespace DataAccess.Repository
 {
-    public class Repository<TEntity>: IRepository<TEntity> where TEntity : class, IEntityBase
+    public class Repository<TEntity>: IRepository<TEntity> where TEntity : EntityBase
     {
         private readonly WMSDatabaseContext _dbContext;
         public DbSet<TEntity> Entity => _dbContext.Set<TEntity>();

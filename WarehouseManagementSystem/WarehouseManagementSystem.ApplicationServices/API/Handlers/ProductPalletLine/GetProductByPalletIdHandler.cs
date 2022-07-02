@@ -5,13 +5,14 @@ using AutoMapper;
 using DataAccess;
 using DataAccess.CQRS.Queries.PalletsProductsQueries;
 using MediatR;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.ProductsPallets;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductPalletLine
 {
     public class GetProductByPalletIdHandler :
-        QueryHandler<GetProductsByPalletIdResponse, GetProductsByPalletIdQuery, List<DataAccess.Entities.ProductPalletLine>, List<Domain.Models.ProductPalletLineDto>>,
+        QueryHandler<GetProductsByPalletIdResponse, GetProductsByPalletIdQuery, DataAccess.Entities.ProductPalletLine, ProductPalletLineDto>,
         IRequestHandler<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse>
     {
         public GetProductByPalletIdHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)

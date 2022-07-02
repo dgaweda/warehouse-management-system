@@ -5,15 +5,14 @@ using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.OrderValidators
 {
-    public class RemoveOrderRequestValidator: AbstractValidator<RemoveOrderRequest>
+    public class GetOrderRequestValidator : AbstractValidator<GetOrdersRequest>
     {
         private readonly IValidatorHelper _validator;
-        public RemoveOrderRequestValidator(IValidatorHelper validator)
+        public GetOrderRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.Id).NotEmpty().WithMessage(ErrorType.NotEmpty);
-            RuleFor(x => x.Id).Must(_validator.Exist<Order>)
-                .WithMessage(ErrorType.NotFound);
+
+            RuleFor(x => x.Id).Must(_validator.Exist<Order>).WithMessage(ErrorType.NotFound);
         }
     }
 }

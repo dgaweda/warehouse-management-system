@@ -13,7 +13,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandlers
 {
     public class GetUsersHandler :
-        QueryHandler<GetUsersResponse, GetUsersQuery, List<User>, List<UserDto>>,
+        QueryHandler<GetUsersResponse, GetUsersQuery, User, UserDto>,
         IRequestHandler<GetUsersRequest, GetUsersResponse>
     {
         public GetUsersHandler(IQueryExecutor queryExecutor, IMapper mapper) : base(mapper, queryExecutor)

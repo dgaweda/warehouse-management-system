@@ -6,10 +6,8 @@ using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace DataAccess.Entities
 {
-    public class Pallet : IEntityBase
+    public class Pallet : EntityBase
     {
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(10)]
         [Column("Kod kreskowy")]

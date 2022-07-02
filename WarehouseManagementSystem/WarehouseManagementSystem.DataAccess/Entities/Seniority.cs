@@ -5,10 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class Seniority : IEntityBase
+    public class Seniority : EntityBase
     {
-        public int Id { get; set; }
-
         [Required]
         [Column("Data zatrudnienia", TypeName = "date")]
         public DateTime EmploymentDate { get; set; }

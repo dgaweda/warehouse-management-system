@@ -1,12 +1,13 @@
 ﻿using DataAccess.Entities.EntityBases;
+using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators
 {
     public interface IValidatorHelper
     {
-        bool Exist<TEntity>(int? id) where TEntity : class, IEntityBase;
-        bool Exist<TEntity>(int id) where TEntity : class, IEntityBase;
-        bool IsLocationNameIsTaken(string name);
+        bool Exist<TEntity>(int? id) where TEntity : EntityBase;
+        bool Exist<TEntity>(int id) where TEntity : EntityBase;
+        bool IsLocationWithThatNameExits(string name);
         int GetLocationMaxAmount(int id);
         bool IsProductOnPalletForUnfolding(int id);
         bool IsPalletForUnfoldingExist(int palletId);
@@ -22,5 +23,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
         bool IsOrderBarcodeUnique(string barcode);
         bool IsPalletIdExistsInProductPalletLine(int palletId);
         bool IsInvoiceNumberNotExist(string invoiceNumber);
+        bool IsLocationWithThatTypeExist(LocationType locationType);
     }
 }

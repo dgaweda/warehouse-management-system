@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repository
 {
-    public interface IRepository<T> where T : class, IEntityBase
+    public interface IRepository<T> where T : EntityBase
     {
         DbSet<T> Entity { get; }
         WMSDatabaseContext GetDbContext();

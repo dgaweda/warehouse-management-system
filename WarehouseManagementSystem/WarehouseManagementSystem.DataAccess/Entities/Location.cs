@@ -5,9 +5,8 @@ using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace DataAccess.Entities
 {
-    public class Location : IEntityBase
+    public class Location : EntityBase
     {
-        public int Id { get; set; }
         public int? ProductId { get; set; }
 
         [Required]

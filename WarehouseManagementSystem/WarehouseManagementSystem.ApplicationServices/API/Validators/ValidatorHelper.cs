@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Net.Mail;
+﻿using System.Linq;
 using DataAccess;
 using DataAccess.Entities.EntityBases;
+using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
+namespace WarehouseManagementSystem.ApplicationServices.API.Validators
 {
     public class ValidatorHelper : IValidatorHelper
     {
@@ -16,18 +15,18 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
         }
         
         public bool Exist<TEntity>(int? id)
-            where TEntity : class, IEntityBase
+            where TEntity : EntityBase
         {
             return (id != null && id != 0) && _context.Set<TEntity>().Any(x => x.Id == id);
         }
         
         public bool Exist<TEntity>(int id) 
-            where TEntity : class, IEntityBase
+            where TEntity : EntityBase
         {
             return id != 0 && _context.Set<TEntity>().Any(x => x.Id == id);
         }
         
-        public bool IsLocationNameIsTaken(string name)
+        public bool IsLocationWithThatNameExits(string name)
         {
             return _context.Locations.Any(x => x.Name == name);
         }
@@ -106,6 +105,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers
         public bool IsInvoiceNumberNotExist(string invoiceNumber)
         {
             return !_context.Invoices.Any(x => x.InvoiceNumber == invoiceNumber);
+        }
+
+        public bool IsLocationWithThatTypeExist(LocationType locationType)
+        {
+            return _context.Locations.Any(x => x.LocationType == locationType);
         }
     }
 }

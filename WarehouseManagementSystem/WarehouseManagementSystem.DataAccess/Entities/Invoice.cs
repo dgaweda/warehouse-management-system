@@ -6,10 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class Invoice : IEntityBase
+    public class Invoice : EntityBase
     {
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(50)]
         [Column("Numer faktury")]
