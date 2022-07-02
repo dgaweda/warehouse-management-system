@@ -7,9 +7,8 @@ using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace DataAccess.Entities
 {
-    public class Order : IEntityBase
+    public class Order : EntityBase
     {
-        public int Id { get; set; }
         [Column("Stan zamówienia")]
         public OrderState OrderState { get; set; }
 

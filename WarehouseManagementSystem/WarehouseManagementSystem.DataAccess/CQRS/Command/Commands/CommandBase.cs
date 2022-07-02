@@ -5,7 +5,7 @@ using DataAccess.Repository;
 namespace DataAccess.CQRS.Commands
 {
     public abstract class CommandBase<TParameter, TResult>
-        where TParameter : class, IEntityBase
+        where TParameter : EntityBase
     {
         public TParameter Parameter { get; set; }
         public abstract Task<TResult> Execute(IRepository<TParameter> repositoryService);

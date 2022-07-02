@@ -5,8 +5,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
 {
     public interface IValidatorHelper
     {
-        bool Exist<TEntity>(int? id) where TEntity : class, IEntityBase;
-        bool Exist<TEntity>(int id) where TEntity : class, IEntityBase;
+        bool Exist<TEntity>(int? id) where TEntity : EntityBase;
+        bool Exist<TEntity>(int id) where TEntity : EntityBase;
         bool IsLocationWithThatNameExits(string name);
         int GetLocationMaxAmount(int id);
         bool IsProductOnPalletForUnfolding(int id);

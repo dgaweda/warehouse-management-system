@@ -9,7 +9,7 @@ namespace DataAccess.CQRS
     {
 
         public Task<TResult> Execute<TParameters, TResult>(CommandBase<TParameters, TResult> command, IRepository<TParameters> repositoryService)
-            where TParameters : class, IEntityBase
+            where TParameters : EntityBase
         {
             return command.Execute(repositoryService);
         } 

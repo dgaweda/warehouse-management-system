@@ -19,7 +19,6 @@ using warehouse_management_system.Middleware;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
 using WarehouseManagementSystem.ApplicationServices.API.PipelineBehavior;
 using WarehouseManagementSystem.ApplicationServices.API.Validators;
-using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.SeniorityValidators;
 using WarehouseManagementSystem.ApplicationServices.Mappings;
 

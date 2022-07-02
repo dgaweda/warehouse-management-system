@@ -2,9 +2,9 @@
 
 namespace DataAccess.Entities.EntityBases
 {
-    public interface IEntityBase
+    public abstract class EntityBase
     {
-        [Key]
-        int Id { get; set; }
+        [Key] 
+        public int Id { get; set; }
     }
 }

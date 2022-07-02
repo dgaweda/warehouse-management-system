@@ -21,11 +21,7 @@ namespace DataAccess.CQRS.Queries.LocationQueries
                 .Where(x => x.LocationType == LocationType)
                 .ToListAsync();
             
-            var result = locations.FilterByName(Name);
-            if (!result.Any())
-                throw new NotFoundException("Location doesn't exist");
-
-            return result;
+            return locations.FilterByName(Name);
         }
     }
 }

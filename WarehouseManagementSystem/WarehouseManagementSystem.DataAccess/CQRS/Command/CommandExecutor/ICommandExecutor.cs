@@ -8,6 +8,6 @@ namespace DataAccess.CQRS
     public interface ICommandExecutor
     {
         Task<TResult> Execute<TParameter, TResult>(CommandBase<TParameter, TResult> command, IRepository<TParameter> repositoryService) 
-            where TParameter : class, IEntityBase;
+            where TParameter : EntityBase;
     }
 }
