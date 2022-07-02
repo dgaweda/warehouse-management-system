@@ -34,13 +34,12 @@ namespace DataAccess.Extensions
             pallet.PalletStatus = PalletStatus.UNFOLDED;
         }
 
-        public static List<ProductPalletLine>? FilterByPalletId(this List<ProductPalletLine> palletLines, int palletId)
+        public static List<ProductPalletLine> FilterByPalletId(this List<ProductPalletLine> palletLines, int palletId)
         {
             if (palletId == default)
                 return palletLines;
 
-            palletLines = palletLines.Where(x => x.PalletId == palletId).ToList();
-            return palletLines.Any() ? palletLines : null;
+            return palletLines.Where(x => x.PalletId == palletId).ToList();
         }
 
         public static bool PalletIsEmpty(this WMSDatabaseContext context, ProductPalletLine productPalletLine)

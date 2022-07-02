@@ -26,6 +26,12 @@ namespace warehouse_management_system.Middleware
         {
             try
             {
+                _logger.LogInformation("-- {HttpProtocol} -- {Method} -- {Host}{Url} => HTTP Response: {StatusCode} --",
+                    context.Request.Method,
+                    context.Request.Protocol,
+                    context.Request.Host,
+                    context.Request.Path.Value,
+                    context.Response.StatusCode);
                 await _next(context);
             }
             catch (ValidationException exception)
@@ -48,15 +54,6 @@ namespace warehouse_management_system.Middleware
             {
                 await SetHttpContextResponse(500, exception.Message, context);
             }
-            finally
-            {
-                _logger.LogInformation("-- {HttpProtocol} -- {Method} -- {Host}{Url} => HTTP Response: {StatusCode} --",
-                    context.Request.Method,
-                    context.Request.Protocol,
-                    context.Request.Host,
-                    context.Request.Path.Value,
-                    context.Response.StatusCode);
-            }
         }
 
         private async Task SetHttpContextResponse(int statusCode, string message, HttpContext context)
@@ -64,7 +61,7 @@ namespace warehouse_management_system.Middleware
             _logger.LogError("-- {Message} --", message);
             context.Response.StatusCode = statusCode;
             context.Response.ContentType = "application/json; charset=UTF-8";
-            await context.Response.WriteAsJsonAsync(new ErrorModel(message));
+            await context.Response.WriteAsJsonAsync(new { errorMessage = message});
         }
 
         private async Task HandleValidationException(ValidationException exception, HttpContext context)

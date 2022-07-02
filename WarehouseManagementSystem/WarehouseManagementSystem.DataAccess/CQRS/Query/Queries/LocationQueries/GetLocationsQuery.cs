@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccess.Exceptions;
 using DataAccess.Extensions;
 using Microsoft.EntityFrameworkCore;
 using WarehouseManagementSystem.ApplicationServices.API.Enums;
@@ -20,7 +21,11 @@ namespace DataAccess.CQRS.Queries.LocationQueries
                 .Where(x => x.LocationType == LocationType)
                 .ToListAsync();
             
-            return locations.FilterByName(Name);
+            var result = locations.FilterByName(Name);
+            if (!result.Any())
+                throw new NotFoundException("Location doesn't exist");
+
+            return result;
         }
     }
 }

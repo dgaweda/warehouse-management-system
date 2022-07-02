@@ -11,12 +11,14 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandlers
 {
-    public class AuthenticateUserHandler :
-        QueryHandler<AuthenticateUserResponse, AuthenticateUserQuery, User, UserDto>,
-        IRequestHandler<AuthenticateUserRequest, AuthenticateUserResponse>
+    public class AuthenticateUserHandler : IRequestHandler<AuthenticateUserRequest, AuthenticateUserResponse>
     {
-        public AuthenticateUserHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
+        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMapper _mapper;
+        public AuthenticateUserHandler(IMapper mapper, IQueryExecutor queryExecutor)
         {
+            _mapper = mapper;
+            _queryExecutor = queryExecutor;
         }
         
         public async Task<AuthenticateUserResponse> Handle(AuthenticateUserRequest request, CancellationToken cancellationToken)
@@ -26,8 +28,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandler
                 Username = request.Username,
                 Password = request.Password
             };
-            var response = await HandleQuery(query);
-            return response;
+            var entity = await _queryExecutor.Execute(query);
+            var dto = _mapper.Map<UserDto>(entity);
+            return new AuthenticateUserResponse()
+            {
+                Response = dto
+            };
         }
     }
 }

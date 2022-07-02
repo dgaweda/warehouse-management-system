@@ -14,7 +14,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
             _validator = validator;
             RuleFor(x => x.Id).Must(_validator.Exist<Location>).WithMessage(ErrorType.NotFound);
             RuleFor(x => x.MaxAmount).GreaterThan(0).WithMessage(ErrorType.GreaterThanZero);
-            RuleFor(x => x.Name).Must(_validator.IsLocationNameIsTaken).WithMessage(ErrorType.AlreadyExist);
+            RuleFor(x => x.Name).Must(_validator.IsLocationWithThatNameExits).WithMessage(ErrorType.AlreadyExist);
             RuleFor(x => x.Name).NotEmpty().WithMessage(ErrorType.NotEmpty);
         }
     }

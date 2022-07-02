@@ -13,7 +13,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departu
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHandlers
 {
     public class GetDeparturesHandler :
-        QueryHandler<GetDeparturesResponse, GetDeparturesQuery, List<Departure>, List<DepartureDto>>,
+        QueryHandler<GetDeparturesResponse, GetDeparturesQuery, Departure, DepartureDto>,
         IRequestHandler<GetDeparturesRequest, GetDeparturesResponse>
     {
         public GetDeparturesHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)

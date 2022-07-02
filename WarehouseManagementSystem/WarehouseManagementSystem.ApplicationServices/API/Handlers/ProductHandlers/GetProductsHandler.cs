@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductHandlers
 {
     public class GetProductsHandler :
-        QueryHandler<GetProductsResponse, GetProductsQuery, List<Product>, List<Domain.Models.ProductDto>>,
+        QueryHandler<GetProductsResponse, GetProductsQuery, Product, Domain.Models.ProductDto>,
         IRequestHandler<GetProductsRequest, GetProductsResponse>
     {
         public GetProductsHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)

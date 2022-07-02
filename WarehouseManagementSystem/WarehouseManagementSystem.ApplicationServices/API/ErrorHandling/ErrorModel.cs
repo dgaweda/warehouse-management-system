@@ -1,4 +1,4 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses
+﻿namespace WarehouseManagementSystem.ApplicationServices.API.ErrorHandling
 {
     public class ErrorModel
     {
@@ -10,11 +10,6 @@
         {
             Property = property;
             Value = value;
-            ErrorMessage = errorMessage;
-        }
-        
-        public ErrorModel(string errorMessage)
-        {
             ErrorMessage = errorMessage;
         }
     }
