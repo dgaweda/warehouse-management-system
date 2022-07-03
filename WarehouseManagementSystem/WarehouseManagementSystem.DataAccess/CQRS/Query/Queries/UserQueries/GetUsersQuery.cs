@@ -2,11 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Query.Queries;
 using DataAccess.Extensions;
+using DataAccess.Repository;
+using DataAccess.Repository.UserRepository;
 
 namespace DataAccess.CQRS.Queries
 {
-    public class GetUsersQuery : QueryBase<List<User>>
+    public class GetUsersQuery : QueryBase<List<User>, IUserRepository>
     {
         public int UserId { get; set; }
         public string RoleName { get; set; }
@@ -14,13 +17,11 @@ namespace DataAccess.CQRS.Queries
         public int Age { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
+        
 
-        public override async Task<List<User>> Execute(WMSDatabaseContext context)
+        public override async Task<List<User>> Execute(UserRepository userRepository)
         {
-            var users = await context.Users
-                .Include(x => x.Role)
-                .Include(x => x.Seniority)
-                .ToListAsync();
+            var users = await RepositoryService.GetAllAsync();
             
             return users
                 .FilterByUserId(UserId)
