@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using DataAccess;
-using DataAccess.AuthenticateUserService;
+using DataAccess.CQRS.Query.Queries.UsersQueries;
 using DataAccess.Entities;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;

@@ -1,6 +1,8 @@
-﻿namespace DataAccess.Repository.DeliveryRepository
+﻿using DataAccess.Entities;
+
+namespace DataAccess.Repository.DeliveryRepository
 {
-    public interface IDeliveryRepository
+    public interface IDeliveryRepository : IRepository<Delivery>
     {
         
     }

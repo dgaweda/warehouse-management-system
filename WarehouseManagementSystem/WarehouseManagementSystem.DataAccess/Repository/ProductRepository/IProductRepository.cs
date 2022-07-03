@@ -1,6 +1,8 @@
-﻿namespace DataAccess.Repository.ProductRepository
+﻿using DataAccess.Entities;
+
+namespace DataAccess.Repository.ProductRepository
 {
-    public interface IProductRepository
+    public interface IProductRepository : IRepository<Product>
     {
         
     }

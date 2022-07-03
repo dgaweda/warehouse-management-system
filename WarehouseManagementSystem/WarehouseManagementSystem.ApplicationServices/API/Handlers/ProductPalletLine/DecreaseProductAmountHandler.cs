@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using DataAccess.CQRS;
-using DataAccess.CQRS.Commands.ProductsPalletsCommands;
+using DataAccess.CQRS.Command.ProductPalletLineCommands;
 using DataAccess.Repository;
 using FluentValidation;
 using MediatR;

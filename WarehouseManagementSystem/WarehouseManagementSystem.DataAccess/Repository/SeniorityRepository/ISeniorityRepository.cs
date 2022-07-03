@@ -1,6 +1,8 @@
-﻿namespace DataAccess.Repository.SeniorityRepository
+﻿using DataAccess.Entities;
+
+namespace DataAccess.Repository.SeniorityRepository
 {
-    public interface ISeniorityRepository
+    public interface ISeniorityRepository: IRepository<Seniority>
     {
         
     }

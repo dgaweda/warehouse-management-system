@@ -5,6 +5,5 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Orde
 {
     public class GetOrdersRequest : IRequest<GetOrdersResponse>
     {
-        public int? Id { get; set; }
     }
 }

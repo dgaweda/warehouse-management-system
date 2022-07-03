@@ -1,6 +1,8 @@
-﻿namespace DataAccess.Repository.RoleRepository
+﻿using DataAccess.Entities;
+
+namespace DataAccess.Repository.RoleRepository
 {
-    public interface IRoleRepository
+    public interface IRoleRepository : IRepository<Role>
     {
         
     }

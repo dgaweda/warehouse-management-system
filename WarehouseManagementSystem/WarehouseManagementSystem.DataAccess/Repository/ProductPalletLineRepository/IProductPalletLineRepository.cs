@@ -1,7 +1,11 @@
-﻿namespace DataAccess.Repository.ProductPalletLineRepository
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using DataAccess.Entities;
+
+namespace DataAccess.Repository.ProductPalletLineRepository
 {
-    public interface IProductPalletLineRepository
+    public interface IProductPalletLineRepository : IRepository<ProductPalletLine>
     {
-        
+        Task<List<ProductPalletLine>> GetProductsByPalletId(int palletId);
     }
 }

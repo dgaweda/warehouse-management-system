@@ -19,9 +19,16 @@ namespace warehouse_management_system.Controllers
             : base(mediator)
         {
         }
+        
+        [HttpGet]
+        [Route("{Id}")]
+        public async Task<IActionResult> GetLocationById([FromRoute] GetLocationByIdRequest request) => await Handle<GetLocationByIdRequest, GetLocationByIdResponse>(request);
+        
+        [HttpGet]
+        public async Task<IActionResult> GetLocationsByName([FromQuery] GetLocationsByNameRequest request) => await Handle<GetLocationsByNameRequest, GetLocationsByNameResponse>(request);
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] GetLocationsRequest request) => await Handle<GetLocationsRequest, GetLocationsResponse>(request);
+        public async Task<IActionResult> GetLocationsByType([FromQuery] GetLocationsByTypeRequest request) => await Handle<GetLocationsByTypeRequest, GetLocationsByTypeResponse>(request);
 
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] AddLocationRequest request) => await Handle<AddLocationRequest, AddLocationResponse>(request);

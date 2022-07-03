@@ -1,6 +1,8 @@
-﻿namespace DataAccess.Repository.OrderRepository
+﻿using DataAccess.Entities;
+
+namespace DataAccess.Repository.OrderRepository
 {
-    public class IOrderRepository
+    public interface IOrderRepository : IRepository<Order>
     {
         
     }

@@ -23,6 +23,9 @@ namespace warehouse_management_system.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetDepartures([FromQuery] GetDeparturesRequest request) => await Handle<GetDeparturesRequest, GetDeparturesResponse>(request);
+        
+        [HttpGet]
+        public async Task<IActionResult> GetDeparturesByState([FromQuery] GetDeparturesByStateRequest request) => await Handle<GetDeparturesByStateRequest, GetDeparturesByStateResponse>(request);
 
         [HttpPost]
         public async Task<IActionResult> AddDeparture([FromBody] AddDepartureRequest request) => await Handle<AddDepartureRequest, AddDepartureResponse>(request);

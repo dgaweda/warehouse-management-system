@@ -5,7 +5,7 @@ using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.OrderValidators
 {
-    public class GetOrderRequestValidator : AbstractValidator<GetOrdersRequest>
+    public class GetOrderRequestValidator : AbstractValidator<GetOrderByIdRequest>
     {
         private readonly IValidatorHelper _validator;
         public GetOrderRequestValidator(IValidatorHelper validator)

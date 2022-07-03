@@ -9,6 +9,5 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Depa
     {
         public string Name { get; set; }
         public DateTime OpeningTime { get; set; }
-        public StateType State { get; set; }
     }
 }
