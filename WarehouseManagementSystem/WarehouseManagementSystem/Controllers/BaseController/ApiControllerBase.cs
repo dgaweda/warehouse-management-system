@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using DataAccess.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using warehouse_management_system.Exceptions;
 
 namespace warehouse_management_system.Controllers.BaseController
 {
@@ -20,14 +21,12 @@ namespace warehouse_management_system.Controllers.BaseController
         {
             if (User.Identity is { IsAuthenticated: false })
                 throw new AuthenticationException("Not authenticated.");
-            
-            if (User.IsPermitted(request))
-            {
-                var response = await _mediator.Send(request);
-                return Ok(response);
-            }
 
-            throw new ForbidException();
+            if (!User.IsPermitted(request)) 
+                throw new ForbidException();
+
+            var response = await _mediator.Send(request);
+            return Ok(response);
         }
     }
 }
