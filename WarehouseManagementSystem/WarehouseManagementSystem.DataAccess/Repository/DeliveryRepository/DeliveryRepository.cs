@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities;
+﻿using System.Linq;
+using DataAccess.Entities;
 
 namespace DataAccess.Repository.DeliveryRepository
 {
@@ -6,6 +7,11 @@ namespace DataAccess.Repository.DeliveryRepository
     {
         public DeliveryRepository(WMSDatabaseContext dbContext) : base(dbContext)
         {
+        }
+
+        protected override IQueryable<Delivery> GetQueryableEntity()
+        {
+            return Entity.AsQueryable();
         }
     }
 }

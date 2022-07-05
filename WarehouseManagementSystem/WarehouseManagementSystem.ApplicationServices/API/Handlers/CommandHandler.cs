@@ -6,7 +6,6 @@ using DataAccess.CQRS.Command.Commands;
 using DataAccess.Entities;
 using DataAccess.Entities.EntityBases;
 using DataAccess.Repository;
-using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
@@ -18,26 +17,24 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
         where TEntity : EntityBase
     {
         private readonly IMapper _mapper;
-        private readonly ICommandExecutor _commandExecutor;
-        private readonly IRepository<TEntity> _repositoryService;
+        private readonly TRepository _repositoryService;
 
-        protected CommandHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<TEntity> repositoryService)
+        protected CommandHandler(IMapper mapper, TRepository repositoryService)
         {
             _repositoryService = repositoryService;
             _mapper = mapper;
-            _commandExecutor = commandExecutor;
         }
 
         public async Task<TResponse> HandleRequest(TRequest request)
         {
-            var entityData = _mapper.Map<TEntity>(request);
+            var entityModel = _mapper.Map<TEntity>(request);
             var command = new TCommand()
             {
-                Parameter = entityData
+                Parameter = entityModel
             };
-            
-            var entityModel = await command.Execute()
-            var dtoModel = _mapper.Map<TDtoModel>(entityModel);
+
+            var entityData = await command.Execute(_repositoryService);
+            var dtoModel = _mapper.Map<TEntityDto>(entityData);
             return new TResponse() { Response = dtoModel };
         }
     }

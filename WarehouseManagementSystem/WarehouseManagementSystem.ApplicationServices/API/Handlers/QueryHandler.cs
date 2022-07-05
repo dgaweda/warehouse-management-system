@@ -11,9 +11,9 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public abstract class QueryHandler<TResponse, TQuery, TResult, TResultDto, TRepository> : IQueryHandler<TQuery, TResponse>
-        where TQuery : QueryBase<TResult>
-        where TResponse : ResponseBase<TResultDto>, new()
+    public abstract class QueryHandler<TResponse, TQuery, TEntity, TEntityDto, TRepository> : IQueryHandler<TQuery, TResponse>
+        where TQuery : QueryBase<TEntity, TRepository>
+        where TResponse : ResponseBase<TEntityDto>, new()
     {
         private readonly IMapper _mapper;
         private readonly TRepository _repository;
@@ -26,17 +26,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 
         public async Task<TResponse> HandleQuery(TQuery query)
         {
-            var entity = await query.Execute();
-            if (entity.Any())
+            var entity = await query.Execute(_repository);
+            var dto = _mapper.Map<TEntityDto>(entity);
+            return new TResponse()
             {
-                var dto = _mapper.Map<TResultDto>(entity);
-                return new TResponse()
-                {
-                    Response = dto
-                };
-            }
-
-            throw new NotFoundException(typeof(TEntity).Name + " doesn't exist.");
+                Response = dto
+            };
         }
     }
 }

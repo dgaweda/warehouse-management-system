@@ -18,9 +18,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHan
             AddDeliveryCommand, IDeliveryRepository>,
         IRequestHandler<AddDeliveryRequest, AddDeliveryResponse>
     {
-        public AddDeliveryHandler(IMapper mapper, ICommandExecutor<IDeliveryRepository> commandExecutor,
-            IRepository<Delivery> repositoryService)
-            : base(mapper, commandExecutor, repositoryService)
+        public AddDeliveryHandler(IMapper mapper, IRepository<Delivery> repositoryService)
+            : base(mapper, repositoryService)
         {
         }
 

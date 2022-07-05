@@ -16,20 +16,20 @@ namespace DataAccess.Repository.UserRepository
 
         public override async Task<List<User>> GetAllAsync()
         {
-            return await GetUsers().ToListAsync();
+            return await GetQueryableEntity().ToListAsync();
         }
-        
+
         public override async Task<User> GetByIdAsync(int id)
         {
-            return await GetUsers().FirstOrDefaultAsync(x => x.Id == id);
+            return await GetQueryableEntity().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<User> GetUserByUsernameAsync(string username)
         {
-            return await GetUsers().FirstOrDefaultAsync(x => x.UserName.Equals(username));
+            return await GetQueryableEntity().FirstOrDefaultAsync(x => x.UserName.Equals(username));
         }
-        
-        private IQueryable<User> GetUsers()
+
+        public override IQueryable<User> GetQueryableEntity()
         {
             return DbContext.Users
                 .Include(x => x.Seniority)

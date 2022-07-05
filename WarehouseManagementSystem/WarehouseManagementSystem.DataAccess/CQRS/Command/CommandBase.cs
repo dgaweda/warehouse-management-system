@@ -2,10 +2,10 @@
 
 namespace DataAccess.CQRS.Command.Commands
 {
-    public abstract class CommandBase<TParameter, TResult, TRepository>
+    public abstract class CommandBase<T, TRepository>
     {
-        public TParameter Parameter { get; set; }
+        public T Parameter { get; set; }
 
-        public abstract Task<TResult> Execute(TRepository repository);
+        public abstract Task<T> Execute(TRepository repository);
     }
 }

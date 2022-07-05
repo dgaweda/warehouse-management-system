@@ -1,39 +1,43 @@
 ﻿#nullable enable
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using DataAccess.Entities.EntityBases;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using DataAccess.Exceptions;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DataAccess.Repository
 {
-    public class Repository<TEntity>: IRepository<TEntity> where TEntity : EntityBase
+    public abstract class Repository<TEntity>: IRepository<TEntity> where TEntity : EntityBase
     {
         protected readonly WMSDatabaseContext DbContext;
-        public DbSet<TEntity> Entity => DbContext.Set<TEntity>();
+        private readonly DbSet<TEntity> _entity;
 
         public Repository(WMSDatabaseContext dbContext)
-        {
+{
             DbContext = dbContext;
+            _entity = DbContext.Set<TEntity>();
         }
         public async Task<TEntity> AddAsync(TEntity entity)
         {
-            await Entity.AddAsync(entity);
+            await _entity.AddAsync(entity);
             await DbContext.SaveChangesAsync();
             return entity;
         }
 
         public async Task<List<TEntity>> AddRangeAsync(List<TEntity> entities)
         {
-            await Entity.AddRangeAsync(entities);
+            await _entity.AddRangeAsync(entities);
             await DbContext.SaveChangesAsync();
             return entities;
         }
 
         public virtual async Task<TEntity> GetByIdAsync(int id)
         {
-            var result = await Entity.FirstOrDefaultAsync(i => i.Id == id);
+            var result = await _entity.FirstOrDefaultAsync(i => i.Id == id);
             if (result is null)
                 throw new NotFoundException($"{nameof(TEntity)} with id: {id} doesn't exist.");
             
@@ -42,12 +46,12 @@ namespace DataAccess.Repository
 
         public virtual async Task<List<TEntity>> GetAllAsync()
         {
-            return await Entity.ToListAsync();
+            return await _entity.ToListAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            var entityToDelete = await Entity.FirstOrDefaultAsync(x => x.Id == id);
+            var entityToDelete = await _entity.FirstOrDefaultAsync(x => x.Id == id);
 
             if (entityToDelete == null)
                 throw new NotFoundException($"{nameof(TEntity)} with id: {id} doesn't exist.");
@@ -58,7 +62,7 @@ namespace DataAccess.Repository
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
-            var entityToDetach = await Entity.FirstOrDefaultAsync(x => x.Id == entity.Id);
+            var entityToDetach = await _entity.FirstOrDefaultAsync(x => x.Id == entity.Id);
             
             if (entityToDetach == null)
                 throw new NotFoundException($"{nameof(TEntity)} with id: {entity.Id} doesn't exist.");
@@ -69,5 +73,7 @@ namespace DataAccess.Repository
             await DbContext.SaveChangesAsync();
             return entity;
         }
+
+        public abstract IQueryable<TEntity> GetQueryableEntity();
     }
 }

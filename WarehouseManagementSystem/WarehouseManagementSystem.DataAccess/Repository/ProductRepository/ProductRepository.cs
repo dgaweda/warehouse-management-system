@@ -16,6 +16,7 @@ namespace DataAccess.Repository.ProductRepository
             return await DbContext.Products
                 .Include(x => x.PalletLines)
                 .ThenInclude(x => x.Pallet)
+                .AsNoTracking()
                 .ToListAsync();
         }
     }
