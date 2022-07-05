@@ -16,8 +16,8 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHan
         : QueryHandler<GetDeliveriesResponse, GetDeliveriesQuery, List<Delivery>, List<Domain.Models.DeliveryDto>, IDeliveryRepository>, 
             IRequestHandler<GetDeliveriesRequest, GetDeliveriesResponse>
     {
-        public GetDeliveriesHandler(IMapper mapper, IQueryExecutor queryExecutor)
-            : base(mapper, queryExecutor)
+        public GetDeliveriesHandler(IMapper mapper, IDeliveryRepository repository)
+            : base(mapper, repository)
         {
         }
 

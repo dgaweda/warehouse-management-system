@@ -17,5 +17,6 @@ namespace DataAccess.Repository
         Task<T> UpdateAsync(T entity);
         Task DeleteAsync(int id);
         Task<List<T>> GetAllAsync();
+        IQueryable<T> GetQueryableEntity();
     }
 }

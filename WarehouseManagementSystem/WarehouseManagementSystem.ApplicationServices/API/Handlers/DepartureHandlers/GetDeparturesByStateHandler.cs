@@ -17,7 +17,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHa
         QueryHandler<GetDeparturesByStateResponse, GetDeparturesByStateQuery, List<Departure>, List<DepartureDto>, IDepartureRepository>,
         IRequestHandler<GetDeparturesByStateRequest, GetDeparturesByStateResponse>
     {
-        public GetDeparturesByStateHandler(IMapper mapper) : base(mapper)
+        public GetDeparturesByStateHandler(IMapper mapper, IDepartureRepository repository) : base(mapper, repository)
         {
         }
 

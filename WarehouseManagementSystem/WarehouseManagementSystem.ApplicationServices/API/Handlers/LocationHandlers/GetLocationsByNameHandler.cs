@@ -6,6 +6,7 @@ using DataAccess;
 using DataAccess.CQRS.Query.LocationQueries;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using DataAccess.Repository.LocationRepository;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location;
@@ -13,10 +14,11 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Locatio
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.LocationHandlers
 {
     public class GetLocationsByNameHandler :
-        QueryHandler<GetLocationsByNameRequest, GetLocationsByNameResponse, Location, Domain.Models.LocationDto>,
+        QueryHandler<GetLocationsByNameRequest, GetLocationsByNameResponse, Location, Domain.Models.LocationDto, ILocationRepository>,
         IRequestHandler<GetLocationsByTypeRequest, GetLocationsByTypeResponse>
     {
-        public GetLocationsHandler(IMapper mapper) : base(mapper, queryExecutor)
+        public GetLocationsHandler(IMapper mapper, ILocationRepository locationRepository) 
+            : base(mapper, locationRepository)
         {
         }
 

@@ -7,7 +7,7 @@ using DataAccess.Repository.DepartureRepository;
 
 namespace DataAccess.CQRS.Command.Commands.DepartureCommands
 {
-    public class EditDepartureStateCommand : CommandBase<Departure, Departure, IDepartureRepository>
+    public class EditDepartureStateCommand : CommandBase<Departure, IDepartureRepository>
     {
         public override async Task<Departure> Execute(IDepartureRepository departureRepository)
         {

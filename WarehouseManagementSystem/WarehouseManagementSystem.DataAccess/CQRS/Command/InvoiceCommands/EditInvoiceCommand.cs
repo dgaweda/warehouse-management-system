@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.InvoiceCommands
 {
-    public class EditInvoiceCommand : CommandBase<Invoice, Invoice, IInvoiceRepository>
+    public class EditInvoiceCommand : CommandBase<Invoice, IInvoiceRepository>
     {
         public override async Task<Invoice> Execute(IInvoiceRepository invoiceRepository)
         {

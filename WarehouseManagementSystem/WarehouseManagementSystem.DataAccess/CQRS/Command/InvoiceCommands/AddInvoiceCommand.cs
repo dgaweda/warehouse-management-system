@@ -8,14 +8,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands
 {
-    public class AddInvoiceCommand : CommandBase<Invoice, Invoice, IInvoiceRepository>
+    public class AddInvoiceCommand : CommandBase<Invoice, IInvoiceRepository>
     {
         public override async Task<Invoice> Execute(IInvoiceRepository invoiceRepository)
         {
             var invoices = await invoiceRepository.Entity.ToListAsync();
             Parameter.SetInvoiceNumber(invoices);
             
-
             return await invoiceRepository.AddAsync(Parameter);
         }
     }
