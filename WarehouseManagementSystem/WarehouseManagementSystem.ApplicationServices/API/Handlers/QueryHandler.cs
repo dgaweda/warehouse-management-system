@@ -12,7 +12,6 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
     public abstract class QueryHandler<TResponse, TQuery, TResult, TResultDto, TRepository> : IQueryHandler<TQuery, TResponse>
-        where TQuery : QueryBase<TResult>
         where TResponse : ResponseBase<TResultDto>, new()
     {
         private readonly IMapper _mapper;

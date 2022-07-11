@@ -1,16 +1,15 @@
 ﻿using DataAccess.Entities;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Command.Commands;
-using DataAccess.Repository;
+using DataAccess.CQRS.Command;
 using DataAccess.Repository.DeliveryRepository;
 
 namespace DataAccess.CQRS.Commands.DeliveryCommands
 {
-    public class EditDeliveryCommand : CommandBase<Delivery, Delivery, IDeliveryRepository>
+    public class EditDeliveryCommand : CommandBase<Delivery, IDeliveryRepository>
     {
-        public override async Task<Delivery> Execute(IDeliveryRepository deliveryRepository)
+        public override async Task Execute(IDeliveryRepository deliveryRepository)
         {
-            return await deliveryRepository.UpdateAsync(Parameter);
+            await deliveryRepository.UpdateAsync(Parameter);
         }
     }
 }

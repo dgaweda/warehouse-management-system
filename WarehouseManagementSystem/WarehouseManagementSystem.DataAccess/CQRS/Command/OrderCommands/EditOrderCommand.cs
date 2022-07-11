@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using DataAccess.CQRS.Command;
 using DataAccess.CQRS.Command.Commands;
 using DataAccess.Entities;
 using DataAccess.Repository;
@@ -7,13 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.OrderCommands
 {
-    public class EditOrderCommand: CommandBase<Order, Order, IOrderRepository>
+    public class EditOrderCommand: CommandBase<Order, IOrderRepository>
     {
-        public override async Task<Order> Execute(IOrderRepository orderRepository)
+        public override async Task Execute(IOrderRepository orderRepository)
         {
             await orderRepository.UpdateAsync(Parameter);
-            var order = await orderRepository.Entity.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
-            return order;
         }
     }
 }

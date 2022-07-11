@@ -1,23 +1,21 @@
-﻿using DataAccess.Entities;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-using DataAccess.CQRS.Command.Commands;
+﻿using System.Threading.Tasks;
+using DataAccess.Entities;
 using DataAccess.Extensions;
-using DataAccess.Repository;
 using DataAccess.Repository.DeliveryRepository;
+using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.CQRS.Commands.DeliveryCommands
+namespace DataAccess.CQRS.Command.DeliveryCommands
 {
-    public class AddDeliveryCommand : CommandBase<Delivery, Delivery, IDeliveryRepository>
+    public class AddDeliveryCommand : CommandBase<Delivery, IDeliveryRepository>
     {
-        public override async Task<Delivery> Execute(IDeliveryRepository deliveryRepository)
+        public override async Task Execute(IDeliveryRepository deliveryRepository)
         {
             var deliveries = await deliveryRepository.Entity.ToListAsync();
             Parameter
                 .SetDeliveryNumber(deliveries)
                 .SetDeliveryName(Parameter);
             
-            return await deliveryRepository.AddAsync(Parameter);
+            await deliveryRepository.AddAsync(Parameter);
         }
     }
 }
