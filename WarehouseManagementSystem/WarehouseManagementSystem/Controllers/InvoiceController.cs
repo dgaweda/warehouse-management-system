@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using warehouse_management_system.Controllers.BaseController;
@@ -10,30 +9,30 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Invoice
 namespace warehouse_management_system.Controllers
 {
     [Authorize]
-    [Route("[controller]")]
+    [Route("/api/invoice/")]
     [ApiController]
-    public class InvoiceController : ApiControllerBase<InvoiceController>
+    public class InvoiceController : ApiControllerBase
     {
-        public InvoiceController(IMediator mediator, ILogger<InvoiceController> logger) 
-            : base(mediator, logger)
+        public InvoiceController(IMediator mediator) 
+            : base(mediator)
         {
 
         }
 
         [HttpGet]
-        [Route("Get/")]
-        public Task<IActionResult> GetInvoices([FromQuery] GetInvoicesRequest request) => Handle<GetInvoicesRequest, GetInvoicesResponse>(request);
+        public async Task<IActionResult> GetInvoices([FromQuery] GetInvoicesRequest request) => await Handle<GetInvoicesRequest, GetInvoicesResponse>(request);
+        
+        [HttpGet]
+        public async Task<IActionResult> GetInvoiceByInvoiceNumber([FromQuery] GetInvoiceByInvoiceNumberRequest request) => await Handle<GetInvoiceByInvoiceNumberRequest, GetInvoiceByInvoiceNumberResponse>(request);
 
         [HttpPost]
-        [Route("Add/")]
-        public Task<IActionResult> AddInvoice([FromBody] AddInvoiceRequest request) => Handle<AddInvoiceRequest, AddInvoiceResponse>(request);
+        public async Task<IActionResult> AddInvoice([FromBody] AddInvoiceRequest request) => await Handle<AddInvoiceRequest, AddInvoiceResponse>(request);
 
         [HttpDelete]
-        [Route("Remove/")]
-        public Task<IActionResult> RemoveInvoice([FromQuery] RemoveInvoiceRequest request) => Handle<RemoveInvoiceRequest, RemoveInvoiceResponse>(request);
+        [Route("{InvoiceId}")]
+        public async Task<IActionResult> RemoveInvoice([FromRoute] RemoveInvoiceRequest request) => await Handle<RemoveInvoiceRequest, RemoveInvoiceResponse>(request);
 
         [HttpPut]
-        [Route("Edit/")]
-        public Task<IActionResult> EditInvoice([FromBody] EditInvoiceRequest request) => Handle<EditInvoiceRequest, EditInvoiceResponse>(request);
+        public async Task<IActionResult> EditInvoice([FromBody] EditInvoiceRequest request) => await Handle<EditInvoiceRequest, EditInvoiceResponse>(request);
     }
 }

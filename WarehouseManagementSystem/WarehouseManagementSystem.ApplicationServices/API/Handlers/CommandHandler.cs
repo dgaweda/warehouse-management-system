@@ -1,39 +1,30 @@
 ﻿using AutoMapper;
-using DataAccess.CQRS;
-using DataAccess.CQRS.Commands;
 using System.Threading.Tasks;
-using WarehouseManagementSystem.ApplicationServices.API.Domain;
+using DataAccess.CQRS.Command;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public class CommandHandler<TRequest, TResponse, TEntity, TDomainModel, TCommand>
-        : ICommandHandler<TRequest, TResponse, TDomainModel> 
-        where TResponse : ResponseBase<TDomainModel>, new()
-        where TCommand : CommandBase<TEntity, TEntity>, new()
+    public class CommandHandler<TCommand, TEntity, TRepository> : ICommandHandler<TEntity>
+        where TCommand : CommandBase<TEntity, TRepository>, new()
     {
         private readonly IMapper _mapper;
-        private readonly ICommandExecutor _commandExecutor;
+        private readonly TRepository _repositoryService;
 
-        protected CommandHandler(IMapper mapper, ICommandExecutor commandExecutor)
+        protected CommandHandler(IMapper mapper, TRepository repositoryService)
         {
+            _repositoryService = repositoryService;
             _mapper = mapper;
-            _commandExecutor = commandExecutor;
         }
 
-        public async Task<TResponse> PrepareResponse(TRequest request)
+        public async Task<TEntity> HandleRequest<TRequest>(TRequest request)
         {
-            var entityData = _mapper.Map<TEntity>(request);
+            var entityModel = _mapper.Map<TEntity>(request);
             var command = new TCommand()
             {
-                Parameter = entityData
+                Parameter = entityModel
             };
-            
-            var entityModel = await _commandExecutor.Execute(command);
-            var domainModel = _mapper.Map<TDomainModel>(entityModel);
-            return new TResponse()
-            {
-                Data = domainModel
-            };
+
+            return await command.Execute(_repositoryService);
         }
     }
 }

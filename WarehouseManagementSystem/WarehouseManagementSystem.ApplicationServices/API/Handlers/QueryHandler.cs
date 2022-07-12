@@ -1,45 +1,31 @@
-﻿using System.Security.Claims;
-using AutoMapper;
-using DataAccess;
-using DataAccess.CQRS.Queries;
+﻿using AutoMapper;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Query;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
-using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public abstract class QueryHandler<TRequest, TResponse, TQuery, TEntityList, TDomainModelList>
-        : IQueryHandler<TRequest, TResponse, TQuery, TEntityList, TDomainModelList>
-        where TQuery : QueryBase<TEntityList>
-        where TResponse : ResponseBase<TDomainModelList>, new()
+    public abstract class QueryHandler<TQuery, TResponse, TEntity, TEntityDto, TRepository> : IQueryHandler<TQuery, TResponse>
+        where TResponse : ResponseBase<TEntityDto>, new()
+        where TQuery : QueryBase<TEntity, TRepository>
     {
         private readonly IMapper _mapper;
-        private readonly IQueryExecutor _queryExecutor;
-        
-        protected QueryHandler(IMapper mapper, IQueryExecutor queryExecutor)
+        private readonly TRepository _repository;
+
+        protected QueryHandler(IMapper mapper, TRepository repository)
         {
             _mapper = mapper;
-            _queryExecutor = queryExecutor;
-        }
-
-        public async Task<TResponse> PrepareResponse(TQuery query)
-        {
-            var entityModel = await _queryExecutor.Execute(query);
-            if (entityModel is null)
-            {
-                return new TResponse()
-                {
-                    Error = new ErrorModel(ErrorType.NotFound)
-                };
-            }
-            var domainModel = _mapper.Map<TDomainModelList>(entityModel);
-            return new TResponse()
-            {
-                Data = domainModel
-            };
+            _repository = repository;
         }
         
-        public abstract TQuery CreateQuery(TRequest request);
+        public async Task<TResponse> HandleQuery(TQuery query)
+        {
+            var entity = await query.Execute(_repository);
+            var dto = _mapper.Map<TEntityDto>(entity);
+            return new TResponse()
+            {
+                Response = dto
+            };
+        }
     }
 }

@@ -1,24 +1,21 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using warehouse_management_system.Controllers.BaseController;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.OrderLine;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.OrderLine;
 
 namespace warehouse_management_system.Controllers
 {
-    [Route("[controller]")]
+    [Route("/api/order/{orderId}/order-line/")]
     [ApiController]
-    public class OrderLineController: ApiControllerBase<OrderLineController>
+    public class OrderLineController: ApiControllerBase
     {
-        public OrderLineController(IMediator mediator, ILogger<OrderLineController> logger) : base(mediator, logger)
+        public OrderLineController(IMediator mediator) : base(mediator)
         {
         }
 
         [HttpPost]
-        [Route("Add/")]
-        public Task<IActionResult> AddOrderLine([FromBody] AddOrderLineRequest request) =>
-            Handle<AddOrderLineRequest, AddOrderLineResponse>(request);
+        public async Task<IActionResult> AddOrderLine([FromBody] AddOrderLineRequest request) => await Handle<AddOrderLineRequest, AddOrderLineResponse>(request);
     }
 }

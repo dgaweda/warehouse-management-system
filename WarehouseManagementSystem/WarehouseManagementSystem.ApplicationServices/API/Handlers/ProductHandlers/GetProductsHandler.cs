@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess;
 using DataAccess.CQRS.Queries.DeliveryProductQueries;
 using DataAccess.Entities;
 using MediatR;
@@ -12,7 +10,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductHandlers
 {
     public class GetProductsHandler :
-        QueryHandler<GetProductsRequest, GetProductsResponse, GetProductsQuery, List<Product>, List<Domain.Models.Product>>,
+        QueryHandler<GetProductsResponse, GetProductsQuery, Product, Domain.Models.ProductDto>,
         IRequestHandler<GetProductsRequest, GetProductsResponse>
     {
         public GetProductsHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
@@ -21,18 +19,14 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductHand
 
         public Task<GetProductsResponse> Handle(GetProductsRequest request, CancellationToken cancellationToken)
         {
-            var query = CreateQuery(request);
-            var response = PrepareResponse(query);
-            return response;
-        }
-        public override GetProductsQuery CreateQuery(GetProductsRequest request)
-        {
-            return new GetProductsQuery()
+            var query = new GetProductsQuery()
             {
                 Barcode = request.Barcode,
                 Id = request.Id,
                 Name = request.Name
             };
+            var response = HandleQuery(query);
+            return response;
         }
     }
 }

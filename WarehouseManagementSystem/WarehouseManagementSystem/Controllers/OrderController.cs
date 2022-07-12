@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using warehouse_management_system.Controllers.BaseController;
@@ -10,29 +9,30 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;
 namespace warehouse_management_system.Controllers
 {
     [Authorize]
-    [Route("[controller]")]
+    [Route("/api/order/")]
     [ApiController]
-    public class OrderController : ApiControllerBase<OrderController>
+    public class OrderController : ApiControllerBase
     {
-        public OrderController(IMediator mediator, ILogger<OrderController> logger) 
-            : base(mediator, logger)
+        public OrderController(IMediator mediator) 
+            : base(mediator)
         {
         }
 
         [HttpGet]
-        [Route("Get/")]
-        public Task<IActionResult> GetOrders([FromQuery] GetOrdersRequest request) => Handle<GetOrdersRequest, GetOrdersResponse>(request);
+        public async Task<IActionResult> GetOrders(GetOrdersRequest request) => await Handle<GetOrdersRequest, GetOrdersResponse>(request);
         
-        [HttpPost]   
-        [Route("Add/")]
-        public Task<IActionResult> AddOrder([FromBody] AddOrderRequest request) => Handle<AddOrderRequest, AddOrderResponse>(request);
+        [HttpGet]
+        [Route("{Id}")]
+        public async Task<IActionResult> GetOrderById([FromRoute] GetOrderByIdRequest request) => await Handle<GetOrderByIdRequest, GetOrderByIdResponse>(request);
         
-        [HttpPut]   
-        [Route("Edit/")]
-        public Task<IActionResult> EditOrder([FromBody] EditOrderRequest request) => Handle<EditOrderRequest, EditOrderResponse>(request);
+        [HttpPost]
+        public async Task<IActionResult> AddOrder([FromBody] AddOrderRequest request) => await Handle<AddOrderRequest, AddOrderResponse>(request);
+        
+        [HttpPut]
+        public async Task<IActionResult> EditOrder([FromBody] EditOrderRequest request) => await Handle<EditOrderRequest, EditOrderResponse>(request);
         
         [HttpDelete]   
-        [Route("Remove/")]
-        public Task<IActionResult> RemoveOrder([FromBody] RemoveOrderRequest request) => Handle<RemoveOrderRequest, RemoveOrderResponse>(request);
+        [Route("{Id}")]
+        public async Task<IActionResult> RemoveOrder([FromRoute] RemoveOrderRequest request) => await Handle<RemoveOrderRequest, RemoveOrderResponse>(request);
     }
 }

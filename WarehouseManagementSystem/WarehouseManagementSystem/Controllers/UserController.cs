@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Logging;
 using warehouse_management_system.Controllers.BaseController;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
@@ -12,39 +11,40 @@ namespace warehouse_management_system.Controllers
 {
     
     [ApiController]
-    [Route("[controller]")]
-    public class UserController : ApiControllerBase<UserController>
+    [Route("/api/user/")]
+    public class UserController : ApiControllerBase
     {
         private readonly IMediator _mediator;
-        public UserController(IMediator mediator, ILogger<UserController> logger) 
-            : base(mediator, logger)
+        public UserController(IMediator mediator)
+            : base(mediator)
         {
             _mediator = mediator;
         }
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("Login/")]
-        public async Task<IActionResult> AuthenticateUser([FromBody] AuthenticateUserRequest request) => await Handle<AuthenticateUserRequest, AuthenticateUserResponse>(request);
+        [Route("login")]
+        public async Task<IActionResult> AuthenticateUser([FromBody] AuthenticateUserRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        } 
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("Add/")]
         public async Task<IActionResult> AddUser([FromBody] AddUserRequest request) => await Handle<AddUserRequest, AddUserResponse>(request);
 
         [Authorize]
         [HttpGet]
-        [Route("Get/")]
         public async Task<IActionResult> GetUsers([FromQuery] GetUsersRequest request) => await Handle<GetUsersRequest, GetUsersResponse>(request);
 
         [Authorize]
         [HttpPut]
-        [Route("Edit/")]
         public async Task<IActionResult> EditUser([FromBody] EditUserRequest request) => await Handle<EditUserRequest, EditUserResponse>(request);
 
         [Authorize]
         [HttpDelete]
-        [Route("Remove/")]
-        public async Task<IActionResult> RemoveUser([FromQuery] RemoveUserRequest request) => await Handle<RemoveUserRequest, RemoveUserResponse>(request);
+        [Route("{UserId}")]
+        public async Task<IActionResult> RemoveUser([FromRoute] RemoveUserRequest request) => await Handle<RemoveUserRequest, RemoveUserResponse>(request);
     }
 }

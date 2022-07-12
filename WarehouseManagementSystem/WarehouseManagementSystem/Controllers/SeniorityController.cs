@@ -1,37 +1,30 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using warehouse_management_system.Authentication;
 using warehouse_management_system.Controllers.BaseController;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seniority;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Seniority;
 
 namespace warehouse_management_system.Controllers
 {
     [Authorize]
-    [Route("[controller]")]
+    [Route("api/seniority/")]
     [ApiController]
-    public class SeniorityController : ApiControllerBase<SeniorityController>
+    public class SeniorityController : ApiControllerBase
     {
-        public SeniorityController(IMediator mediator, ILogger<SeniorityController> logger, IPrivilegesService privileges) 
-            : base(mediator, logger)
+        public SeniorityController(IMediator mediator) 
+            : base(mediator)
         {
         }
 
         [HttpGet]
-        [Route("All/")]
-        public Task<IActionResult> GetSeniorities([FromQuery] GetSenioritiesRequest request) => Handle<GetSenioritiesRequest, GetSenioritiesResponse>(request);
+        public async Task<IActionResult> GetSeniorities([FromQuery] GetSenioritiesRequest request) => await Handle<GetSenioritiesRequest, GetSenioritiesResponse>(request);
 
         [HttpPost]
-        [Route("Add/")]
-        public Task<IActionResult> AddSeniority([FromBody] AddSeniorityRequest request) => Handle<AddSeniorityRequest, AddSeniorityResponse>(request);
+        public async Task<IActionResult> AddSeniority([FromBody] AddSeniorityRequest request) => await Handle<AddSeniorityRequest, AddSeniorityResponse>(request);
 
         [HttpPut]
-        [Route("Edit/")]
-        public Task<IActionResult> EditSeniority([FromBody] EditSeniorityRequest request) => Handle<EditSeniorityRequest, EditSeniorityResponse>(request);
+        public async Task<IActionResult> EditSeniority([FromBody] EditSeniorityRequest request) => await Handle<EditSeniorityRequest, EditSeniorityResponse>(request);
     }
 }

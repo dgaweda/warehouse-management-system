@@ -1,9 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.DeliveryCommands;
 using DataAccess.Entities;
+using DataAccess.Repository.DeliveryRepository;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Delivery;
@@ -11,13 +11,21 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHandlers
 {
     public class RemoveDeliveryHandler 
-        : CommandHandler<RemoveDeliveryRequest, RemoveDeliveryResponse, Delivery, Domain.Models.Delivery, RemoveDeliveryCommand>,
+        : CommandHandler<RemoveDeliveryCommand, Delivery, IDeliveryRepository>,
         IRequestHandler<RemoveDeliveryRequest, RemoveDeliveryResponse>
     {
-        public RemoveDeliveryHandler(IMapper mapper, ICommandExecutor commandExecutor) :base(mapper, commandExecutor)
+        public RemoveDeliveryHandler(IMapper mapper, IDeliveryRepository repositoryService) 
+            : base(mapper, repositoryService)
         {
         }
 
-        public Task<RemoveDeliveryResponse> Handle(RemoveDeliveryRequest request, CancellationToken cancellationToken) => PrepareResponse(request);
+        public async Task<RemoveDeliveryResponse> Handle(RemoveDeliveryRequest request, CancellationToken cancellationToken)
+        {
+            await HandleRequest(request);
+            return new RemoveDeliveryResponse()
+            {
+                Response = Unit.Value
+            };
+        }
     }
 }

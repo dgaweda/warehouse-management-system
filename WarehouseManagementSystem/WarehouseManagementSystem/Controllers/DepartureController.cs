@@ -1,41 +1,38 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using warehouse_management_system.Authentication;
 using warehouse_management_system.Controllers.BaseController;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Departure;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departure;
 
 namespace warehouse_management_system.Controllers
 {
     [Authorize]
-    [Route("[controller]")]
+    [Route("/api/departure/")]
     [ApiController]
-    public class DepartureController : ApiControllerBase<DepartureController>
+    public class DepartureController : ApiControllerBase
     {
-        public DepartureController(IMediator mediator, ILogger<DepartureController> logger, IPrivilegesService privileges) 
-            : base(mediator, logger)
+        public DepartureController(IMediator mediator) 
+            : base(mediator)
         {
         }
 
         [HttpGet]
-        [Route("Get/")]
         public async Task<IActionResult> GetDepartures([FromQuery] GetDeparturesRequest request) => await Handle<GetDeparturesRequest, GetDeparturesResponse>(request);
+        
+        [HttpGet]
+        public async Task<IActionResult> GetDeparturesByState([FromQuery] GetDeparturesByStateRequest request) => await Handle<GetDeparturesByStateRequest, GetDeparturesByStateResponse>(request);
 
         [HttpPost]
-        [Route("Add/")]
         public async Task<IActionResult> AddDeparture([FromBody] AddDepartureRequest request) => await Handle<AddDepartureRequest, AddDepartureResponse>(request);
 
         [HttpPatch]
-        [Route("Edit/")]
+        [Route("departure-state")]
         public async Task<IActionResult> EditDepartureState([FromQuery] EditDepartureStateRequest request) => await Handle<EditDepartureStateRequest, EditDepartureStateResponse>(request);
 
         [HttpDelete]
-        [Route("Remove/")]
-        public async Task<IActionResult> RemoveDeparture([FromBody] RemoveDepartureRequest request) => await Handle<RemoveDepartureRequest, RemoveDepartureResponse>(request);
+        [Route("{DepartureId}")]
+        public async Task<IActionResult> RemoveDeparture([FromRoute] RemoveDepartureRequest request) => await Handle<RemoveDepartureRequest, RemoveDepartureResponse>(request);
     }
 }

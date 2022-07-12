@@ -1,59 +1,79 @@
-﻿using DataAccess.Entities.EntityBases;
-using Microsoft.EntityFrameworkCore;
+﻿#nullable enable
 using System.Collections.Generic;
 using System.Linq;
+using DataAccess.Entities.EntityBases;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using DataAccess.Exceptions;
 
 namespace DataAccess.Repository
 {
-    public static class Repository
+    public abstract class Repository<TEntity> : IRepository<TEntity> 
+        where TEntity : EntityBase
     {
-        public static async Task<TEntity> Add<TEntity>(this WMSDatabaseContext context, TEntity entity)
-            where TEntity : class, IEntityBase
+        private readonly WMSDatabaseContext _context;
+        public DbSet<TEntity> Entity { get; }
+
+        protected Repository(WMSDatabaseContext dbContext)
+{
+            _context = dbContext;
+            Entity = _context.Set<TEntity>();
+        }
+        public async Task<TEntity> AddAsync(TEntity entity)
         {
-            context.Set<TEntity>().Add(entity);
-            await context.SaveChangesAsync();
+            await Entity.AddAsync(entity);
+            await _context.SaveChangesAsync();
+            
             return entity;
         }
 
-        public static async Task<List<TEntity>> GetAll<TEntity>(this WMSDatabaseContext context)
-            where TEntity : class, IEntityBase
+        public async Task<List<TEntity>> AddRangeAsync(List<TEntity> entities)
         {
-            return await context.Set<TEntity>().ToListAsync();
+            await Entity.AddRangeAsync(entities);
+            await _context.SaveChangesAsync();
+            
+            return entities;
         }
 
-        public static async Task<TEntity> Get<TEntity>(this WMSDatabaseContext context, int id)
-            where TEntity : class, IEntityBase
+        public virtual async Task<TEntity> GetByIdAsync(int id)
         {
-            return await context.Set<TEntity>().SingleOrDefaultAsync(i => i.Id == id);
+            var result = await Entity.FirstOrDefaultAsync(i => i.Id == id);
+            if (result is null)
+                throw new NotFoundException($"{nameof(TEntity)} with id: {id} doesn't exist.");
+            
+            return result;
         }
 
-        public static async Task<TEntity> Delete<TEntity>(this WMSDatabaseContext context, int id)
-            where TEntity : class, IEntityBase
+        public virtual async Task<List<TEntity>> GetAllAsync()
         {
-            var entities = context.Set<TEntity>();
-            var entity = entities.SingleOrDefault(i => i.Id == id);
+            return await Entity.ToListAsync();
+        }
 
-            if (entity is null)
-            {
-                return entity;
-            }
+        public async Task DeleteAsync(int id)
+        {
+            var entityToDelete = await Entity.FirstOrDefaultAsync(x => x.Id == id);
 
-            entities.Remove(entity);
-            await context.SaveChangesAsync();
+            if (entityToDelete == null)
+                throw new NotFoundException($"{nameof(TEntity)} with id: {id} doesn't exist.");
+
+            Entity.Remove(entityToDelete);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<TEntity> UpdateAsync(TEntity entity)
+        {
+            var entityToDetach = await Entity.FirstOrDefaultAsync(x => x.Id == entity.Id);
+            
+            if (entityToDetach == null)
+                throw new NotFoundException($"{nameof(TEntity)} with id: {entity.Id} doesn't exist.");
+
+            _context.Entry(entityToDetach).State = EntityState.Detached;
+            _context.Entry(entity).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
             return entity;
         }
 
-        public static async Task<TEntity> Update<TEntity>(this WMSDatabaseContext context, TEntity entity)
-            where TEntity : class, IEntityBase
-        {
-            var entityToDetach = context.Set<TEntity>();
-
-            context.Entry(entityToDetach).State = EntityState.Detached;
-            context.Entry(entity).State = EntityState.Modified;
-
-            await context.SaveChangesAsync();
-            return entity;
-        }
+        public abstract IQueryable<TEntity> GetQueryableEntity();
     }
 }

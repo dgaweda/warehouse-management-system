@@ -1,50 +1,50 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using warehouse_management_system.Controllers.BaseController;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location;
 
 namespace warehouse_management_system.Controllers
 {
     [Authorize]
-    [Route("[controller]")]
+    [Route("/api/location/")]
     [ApiController]
-    public class LocationController : ApiControllerBase<LocationController>
+    public class LocationController : ApiControllerBase
     {
 
-        public LocationController(IMediator mediator, ILogger<LocationController> logger) 
-            : base(mediator, logger)
+        public LocationController(IMediator mediator) 
+            : base(mediator)
         {
         }
+        
+        [HttpGet]
+        [Route("{Id}")]
+        public async Task<IActionResult> GetLocationById([FromRoute] GetLocationByIdRequest request) => await Handle<GetLocationByIdRequest, GetLocationByIdResponse>(request);
+        
+        [HttpGet]
+        public async Task<IActionResult> GetLocationsByName([FromQuery] GetLocationsByNameRequest request) => await Handle<GetLocationsByNameRequest, GetLocationsByNameResponse>(request);
 
         [HttpGet]
-        [Route("get")]
-        public Task<IActionResult> Get([FromQuery] GetLocationsRequest request) => Handle<GetLocationsRequest, GetLocationsResponse>(request);
+        public async Task<IActionResult> GetLocationsByType([FromQuery] GetLocationsByTypeRequest request) => await Handle<GetLocationsByTypeRequest, GetLocationsByTypeResponse>(request);
 
         [HttpPost]
-        [Route("Add/")]
-        public Task<IActionResult> Add([FromBody] AddLocationRequest request) => Handle<AddLocationRequest, AddLocationResponse>(request);
+        public async Task<IActionResult> Add([FromBody] AddLocationRequest request) => await Handle<AddLocationRequest, AddLocationResponse>(request);
 
         [HttpPatch]
-        [Route("Edit/")]
-        public Task<IActionResult> Edit([FromBody] EditLocationRequest request) => Handle<EditLocationRequest, EditLocationResponse>(request);
+        public async Task<IActionResult> Edit([FromBody] EditLocationRequest request) => await Handle<EditLocationRequest, EditLocationResponse>(request);
 
         [HttpPatch]
-        [Route("Edit/CurrentAmount")]
-        public Task<IActionResult> EditCurrentAmount([FromQuery] EditLocationCurrentAmountRequest request) => Handle<EditLocationCurrentAmountRequest, EditLocationCurrentAmountResponse>(request);
+        [Route("current-amount")]
+        public async Task<IActionResult> EditCurrentAmount([FromQuery] EditLocationCurrentAmountRequest request) => await Handle<EditLocationCurrentAmountRequest, EditLocationCurrentAmountResponse>(request);
 
         [HttpPatch]
-        [Route("Set/Location/")]
-        public Task<IActionResult> SetProductLocation([FromBody] SetProductLocationRequest request) => Handle<SetProductLocationRequest, SetProductLocationResponse>(request);
+        [Route("product-location")]
+        public async Task<IActionResult> SetProductLocation([FromBody] SetProductLocationRequest request) => await Handle<SetProductLocationRequest, SetProductLocationResponse>(request);
 
         [HttpDelete]
-        [Route("Remove/")]
-        public Task<IActionResult> Remove([FromQuery] RemoveLocationRequest request) =>  Handle<RemoveLocationRequest, RemoveLocationResponse>(request);
+        [Route("{Id}")]
+        public async Task<IActionResult> Remove([FromRoute] RemoveLocationRequest request) => await Handle<RemoveLocationRequest, RemoveLocationResponse>(request);
     }
 }

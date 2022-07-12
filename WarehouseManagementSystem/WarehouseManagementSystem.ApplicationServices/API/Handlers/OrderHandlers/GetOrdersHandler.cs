@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess;
-using DataAccess.CQRS.Queries.OrderQueries;
+using DataAccess.CQRS.Query.Queries.OrderQueries;
 using DataAccess.Entities;
+using DataAccess.Repository.OrderRepository;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Order;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;
@@ -13,27 +11,22 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.OrderHandlers
 {
     public class GetOrdersHandler :
-        QueryHandler<GetOrdersRequest, GetOrdersResponse, GetOrdersQuery, List<Order>, List<Domain.Models.Order>>,
-        IRequestHandler<GetOrdersRequest, GetOrdersResponse>
+        QueryHandler<GetOrderByIdResponse, GetOrdersQuery, Order, Domain.Models.OrderDto, IOrderRepository>,
+        IRequestHandler<GetOrderByIdRequest, GetOrderByIdResponse>
     {
-        public GetOrdersHandler(IMapper mapper, IQueryExecutor queryExecutor)
-            :base(mapper, queryExecutor)
+        public GetOrdersHandler(IMapper mapper, IQueryExecutor<IOrderRepository> queryExecutor, IOrderRepository orderRepository)
+            :base(mapper, queryExecutor, orderRepository)
         {
         }
 
-        public async Task<GetOrdersResponse> Handle(GetOrdersRequest request, CancellationToken cancellationToken)
+        public async Task<GetOrderByIdResponse> Handle(GetOrderByIdRequest request, CancellationToken cancellationToken)
         {
-            var query = CreateQuery(request);
-            var response = await PrepareResponse(query);
-            return response;
-        }
-
-        public override GetOrdersQuery CreateQuery(GetOrdersRequest request)
-        {
-            return new GetOrdersQuery()
+            var query = new GetOrdersQuery()
             {
                 Id = request.Id
             };
+            var response = await HandleQuery(query);
+            return response;
         }
     }
 }

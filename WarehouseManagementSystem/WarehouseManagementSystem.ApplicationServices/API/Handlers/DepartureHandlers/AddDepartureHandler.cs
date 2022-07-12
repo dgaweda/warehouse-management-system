@@ -1,9 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.DepartureCommands;
 using DataAccess.Entities;
+using DataAccess.Repository.DepartureRepository;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Departure;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departure;
@@ -11,13 +11,21 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departu
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHandlers
 {
     public class AddDepartureHandler :
-        CommandHandler<AddDepartureRequest, AddDepartureResponse, Departure, Domain.Models.Departure, AddDepartureCommand>,
+        CommandHandler<AddDepartureCommand, Departure, IDepartureRepository>,
         IRequestHandler<AddDepartureRequest, AddDepartureResponse>
     {
-        public AddDepartureHandler(IMapper mapper, ICommandExecutor commandExecutor) : base(mapper, commandExecutor)
+        public AddDepartureHandler(IMapper mapper, IDepartureRepository repositoryService)
+            : base(mapper, repositoryService)
         {
         }
 
-        public Task<AddDepartureResponse> Handle(AddDepartureRequest request, CancellationToken cancellationToken) => PrepareResponse(request);
+        public async Task<AddDepartureResponse> Handle(AddDepartureRequest request, CancellationToken cancellationToken)
+        {
+            var result = await HandleRequest(request);
+            return new AddDepartureResponse()
+            {
+                Response = result.Id
+            };
+        }
     }
 }

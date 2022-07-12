@@ -1,19 +1,16 @@
 ﻿using AutoMapper;
-using DataAccess;
 using DataAccess.CQRS.Queries.PalletQueries;
 using DataAccess.Entities;
 using MediatR;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandlers
 {
     public class GetPalletsByStatusHandler : 
-        QueryHandler<GetPalletsByStatusRequest, GetPalletsByStatusResponse, GetPalletsByStatusQuery, List<Pallet>, List<Domain.Models.Pallet>>,
+        QueryHandler<GetPalletsByStatusResponse, GetPalletsByStatusQuery, Pallet, Domain.Models.PalletDto>,
         IRequestHandler<GetPalletsByStatusRequest, GetPalletsByStatusResponse>
     {
         public GetPalletsByStatusHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
@@ -22,17 +19,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandl
 
         public async Task<GetPalletsByStatusResponse> Handle(GetPalletsByStatusRequest request, CancellationToken cancellationToken)
         {
-            var query = CreateQuery(request);
-            var response = await PrepareResponse(query);
-            return response;
-        }
-
-        public override GetPalletsByStatusQuery CreateQuery(GetPalletsByStatusRequest request)
-        {
-            return new GetPalletsByStatusQuery()
+            var query = new GetPalletsByStatusQuery()
             {
                 PalletStatus = request.PalletStatus
             };
+            var response = await HandleQuery(query);
+            return response;
         }
     }
 }
