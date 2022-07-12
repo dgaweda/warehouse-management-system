@@ -12,7 +12,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHan
 {
     public class AddDeliveryHandler :
         CommandHandler<AddDeliveryCommand, Delivery, Domain.Models.DeliveryDto, IDeliveryRepository>,
-        IRequestHandler<AddDeliveryRequest>
+        IRequestHandler<AddDeliveryRequest, AddDeliveryResponse>
     {
         public AddDeliveryHandler(IMapper mapper, IDeliveryRepository repositoryService)
             : base(mapper, repositoryService)

@@ -15,26 +15,26 @@ namespace DataAccess.Repository.LocationRepository
 
         public override async Task<List<Location>> GetAllAsync()
         {
-            return await GetLocations().ToListAsync();
+            return await GetQueryableEntity().ToListAsync();
         }
 
         public async Task<List<Location>> GetLocationsByType(LocationType locationType)
         {
-            return await GetLocations()
+            return await GetQueryableEntity()
                 .Where(x => x.LocationType == locationType)
                 .ToListAsync();
         }
 
         public async Task<List<Location>> GetLocationsByName(string name)
         {
-            return await GetLocations()
+            return await GetQueryableEntity()
                 .Where(x => x.Name == name)
                 .ToListAsync();
         }
 
-        private IQueryable<Location> GetLocations()
+        public override IQueryable<Location> GetQueryableEntity()
         {
-            return DbContext.Locations
+            return Entity
                 .Include(x => x.Product)
                 .AsQueryable();
         }

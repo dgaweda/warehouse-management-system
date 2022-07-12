@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Command;
-using DataAccess.Entities.EntityBases;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
+using DataAccess.CQRS.Command;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
@@ -27,9 +26,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
                 Parameter = entityModel
             };
 
-            var entityData = await command.Execute(_repositoryService);
-            var dtoModel = _mapper.Map<TEntityDto>(entityData);
-            return new TResponse() { Response = dtoModel };
+            var entity = await command.Execute(_repositoryService);
+            var dto = _mapper.Map<TEntityDto>(entity);
+            return new TResponse() { Response = dto };
         }
     }
 }

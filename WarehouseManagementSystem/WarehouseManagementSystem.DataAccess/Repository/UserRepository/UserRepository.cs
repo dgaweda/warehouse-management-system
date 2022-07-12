@@ -31,7 +31,7 @@ namespace DataAccess.Repository.UserRepository
 
         public override IQueryable<User> GetQueryableEntity()
         {
-            return DbContext.Users
+            return Entity
                 .Include(x => x.Seniority)
                 .Include(x => x.Role)
                 .Include(x => x.Pallets)

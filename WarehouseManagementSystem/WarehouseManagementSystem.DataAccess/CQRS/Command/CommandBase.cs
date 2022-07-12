@@ -6,6 +6,6 @@ namespace DataAccess.CQRS.Command
     {
         public T Parameter { get; set; }
 
-        public abstract Task<T> Execute(TRepository repository);
+        public abstract Task Execute(TRepository repository);
     }
 }

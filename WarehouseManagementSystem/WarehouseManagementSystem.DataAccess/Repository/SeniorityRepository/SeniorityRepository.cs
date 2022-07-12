@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -13,9 +14,14 @@ namespace DataAccess.Repository.SeniorityRepository
 
         public override async Task<List<Seniority>> GetAllAsync()
         {
-            return await DbContext.Seniorities
+            return await GetQueryableEntity().ToListAsync();
+        }
+
+        public override IQueryable<Seniority> GetQueryableEntity()
+        {
+            return Entity
                 .Include(x => x.User)
-                .ToListAsync();
+                .AsQueryable();
         }
     }
 }

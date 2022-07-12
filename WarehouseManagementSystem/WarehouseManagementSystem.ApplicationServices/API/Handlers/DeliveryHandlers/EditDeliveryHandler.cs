@@ -1,12 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS;
 using DataAccess.CQRS.Commands.DeliveryCommands;
 using DataAccess.Entities;
-using DataAccess.Repository;
 using DataAccess.Repository.DeliveryRepository;
-using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Delivery;
