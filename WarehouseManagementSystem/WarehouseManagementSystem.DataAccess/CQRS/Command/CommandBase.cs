@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace DataAccess.CQRS.Command.Commands
+namespace DataAccess.CQRS.Command
 {
     public abstract class CommandBase<T, TRepository>
     {

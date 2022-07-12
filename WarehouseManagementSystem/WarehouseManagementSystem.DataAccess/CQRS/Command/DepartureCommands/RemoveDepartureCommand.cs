@@ -1,18 +1,17 @@
 ﻿using DataAccess.Entities;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Command;
 using DataAccess.CQRS.Command.Commands;
 using DataAccess.Repository;
 using DataAccess.Repository.DepartureRepository;
 
 namespace DataAccess.CQRS.Commands.DepartureCommands
 {
-    public class RemoveDepartureCommand : CommandBase<Departure, Departure, IDepartureRepository>
+    public class RemoveDepartureCommand : CommandBase<Departure, IDepartureRepository>
     {
-        public override async Task<Departure> Execute(IDepartureRepository departureRepository)
+        public override async Task Execute(IDepartureRepository departureRepository)
         {
-            var departure = await departureRepository.GetByIdAsync(Parameter.Id);
             await departureRepository.DeleteAsync(Parameter.Id);
-            return departure;
         }
     }
 }

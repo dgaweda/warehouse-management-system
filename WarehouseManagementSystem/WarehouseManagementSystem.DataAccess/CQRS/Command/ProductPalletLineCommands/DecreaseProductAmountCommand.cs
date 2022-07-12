@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Command.ProductPalletLineCommands
 {
-    public class DecreaseProductAmountCommand : CommandBase<ProductPalletLine, ProductPalletLine, IProductPalletLineRepository>
+    public class DecreaseProductAmountCommand : CommandBase<ProductPalletLine, IProductPalletLineRepository>
     {
-        public override async Task<ProductPalletLine> Execute(IProductPalletLineRepository productPalletLineRepository)
+        public override async Task Execute(IProductPalletLineRepository productPalletLineRepository)
         {
             var dbContext = productPalletLineRepository.GetDbContext();
             var productPalletLine = await productPalletLineRepository.Entity
@@ -34,7 +34,6 @@ namespace DataAccess.CQRS.Command.ProductPalletLineCommands
             }
 
             await dbContext.SaveChangesAsync();
-            return productPalletLine;
         }
     }
 }
