@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using DataAccess;
-using DataAccess.CQRS.Queries.RoleQueries;
+using DataAccess.CQRS.Query.Queries.RoleQueries;
 using DataAccess.Entities;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;

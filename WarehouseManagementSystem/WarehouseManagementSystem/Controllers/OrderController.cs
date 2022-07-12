@@ -20,7 +20,11 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetOrders([FromQuery] GetOrdersRequest request) => await Handle<GetOrdersRequest, GetOrdersResponse>(request);
+        public async Task<IActionResult> GetOrders(GetOrdersRequest request) => await Handle<GetOrdersRequest, GetOrdersResponse>(request);
+        
+        [HttpGet]
+        [Route("{Id}")]
+        public async Task<IActionResult> GetOrderById([FromRoute] GetOrderByIdRequest request) => await Handle<GetOrderByIdRequest, GetOrderByIdResponse>(request);
         
         [HttpPost]
         public async Task<IActionResult> AddOrder([FromBody] AddOrderRequest request) => await Handle<AddOrderRequest, AddOrderResponse>(request);

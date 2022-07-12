@@ -22,6 +22,9 @@ namespace warehouse_management_system.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetInvoices([FromQuery] GetInvoicesRequest request) => await Handle<GetInvoicesRequest, GetInvoicesResponse>(request);
+        
+        [HttpGet]
+        public async Task<IActionResult> GetInvoiceByInvoiceNumber([FromQuery] GetInvoiceByInvoiceNumberRequest request) => await Handle<GetInvoiceByInvoiceNumberRequest, GetInvoiceByInvoiceNumberResponse>(request);
 
         [HttpPost]
         public async Task<IActionResult> AddInvoice([FromBody] AddInvoiceRequest request) => await Handle<AddInvoiceRequest, AddInvoiceResponse>(request);

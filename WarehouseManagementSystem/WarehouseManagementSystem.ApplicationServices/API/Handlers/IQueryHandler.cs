@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using DataAccess.CQRS.Query.Queries;
+using System.Threading.Tasks;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {

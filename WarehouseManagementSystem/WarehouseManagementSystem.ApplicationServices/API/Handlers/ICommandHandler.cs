@@ -3,9 +3,8 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public interface ICommandHandler<TRequest, TResponse, TDtoModel> 
-        where TResponse : ResponseBase<TDtoModel>, new()
+    public interface ICommandHandler<TEntity>
     {
-        Task<TResponse> HandleRequest(TRequest request);
+        Task<TEntity> HandleRequest<TRequest>(TRequest request);
     }
 }

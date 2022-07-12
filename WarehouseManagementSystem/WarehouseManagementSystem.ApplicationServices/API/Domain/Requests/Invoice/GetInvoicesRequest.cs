@@ -5,6 +5,5 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Invo
 {
     public class GetInvoicesRequest : IRequest<GetInvoicesResponse>
     {
-        public string InvoiceNumber { get; set; }
     }
 }

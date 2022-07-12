@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using DataAccess.CQRS;
+using DataAccess.CQRS.Command.SeniorityCommands;
 using DataAccess.CQRS.Commands.SeniorityCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;

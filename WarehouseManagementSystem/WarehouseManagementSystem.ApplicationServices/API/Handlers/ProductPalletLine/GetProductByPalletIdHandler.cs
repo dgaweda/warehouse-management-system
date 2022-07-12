@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using DataAccess;
-using DataAccess.CQRS.Queries.PalletsProductsQueries;
+using DataAccess.CQRS.Query.PalletsProductsQueries;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets;

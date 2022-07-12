@@ -6,6 +6,7 @@ using DataAccess.Exceptions;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using warehouse_management_system.Exceptions;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
 using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 
@@ -72,7 +73,11 @@ namespace warehouse_management_system.Middleware
             foreach (var failure in exception.Errors)
             {
                 _logger.LogError($"-- {failure.PropertyName}: {failure.AttemptedValue} -- {failure.ErrorMessage} --");
-                await context.Response.WriteAsJsonAsync(new ErrorModel(failure.PropertyName, failure.AttemptedValue, failure.ErrorMessage));
+                await context.Response.WriteAsJsonAsync(new {
+                        property = failure.PropertyName, 
+                        value = failure.AttemptedValue, 
+                        message = failure.ErrorMessage
+                    });
             }
         }
     }

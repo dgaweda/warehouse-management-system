@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication;
 using DataAccess.Entities;
 
 namespace DataAccess.Extensions
@@ -34,6 +35,15 @@ namespace DataAccess.Extensions
         public static List<User> FilterByLastName(this List<User> users, string lastName)
         {
             return string.IsNullOrEmpty(lastName) ? users : users.Where(user => user.LastName.Contains(lastName)).ToList();
+        }
+
+        public static User VerifyPassword(this User user, string password)
+        {
+            var hasCorrectPassword = BCrypt.Net.BCrypt.Verify(password, user.Password);
+            if (!hasCorrectPassword)
+                throw new AuthenticationException("Password is incorrect.");
+
+            return user;
         }
     }
 }
