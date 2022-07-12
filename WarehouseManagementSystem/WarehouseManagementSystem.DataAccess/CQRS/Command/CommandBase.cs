@@ -1,11 +1,12 @@
 ﻿using System.Threading.Tasks;
+using DataAccess.Entities.EntityBases;
 
 namespace DataAccess.CQRS.Command
 {
-    public abstract class CommandBase<T, TRepository>
+    public abstract class CommandBase<TEntity, TRepository>
     {
-        public T Parameter { get; set; }
+        public TEntity Parameter { get; set; }
 
-        public abstract Task Execute(TRepository repository);
+        public abstract Task<TEntity> Execute(TRepository repository);
     }
 }

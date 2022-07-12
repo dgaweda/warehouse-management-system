@@ -8,14 +8,14 @@ namespace DataAccess.CQRS.Command.DeliveryCommands
 {
     public class AddDeliveryCommand : CommandBase<Delivery, IDeliveryRepository>
     {
-        public override async Task Execute(IDeliveryRepository deliveryRepository)
+        public override async Task<Delivery> Execute(IDeliveryRepository deliveryRepository)
         {
             var deliveries = await deliveryRepository.Entity.ToListAsync();
             Parameter
                 .SetDeliveryNumber(deliveries)
                 .SetDeliveryName(Parameter);
             
-            await deliveryRepository.AddAsync(Parameter);
+            return await deliveryRepository.AddAsync(Parameter);
         }
     }
 }

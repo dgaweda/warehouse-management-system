@@ -2,8 +2,8 @@
 
 namespace DataAccess.CQRS.Query.Queries
 {
-    public abstract class QueryBase<TResult, TRepository>
+    public abstract class QueryBase<TEntity, TRepository>
     {
-        public abstract Task<TResult> Execute(TRepository repository);
+        public abstract Task<TEntity> Execute(TRepository repository);
     }
 }

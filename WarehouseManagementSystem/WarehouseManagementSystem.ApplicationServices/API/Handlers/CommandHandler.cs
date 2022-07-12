@@ -1,11 +1,13 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
 using DataAccess.CQRS.Command;
+using DataAccess.Entities.EntityBases;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public class CommandHandler<TCommand, TEntity, TEntityDto, TRepository> : ICommandHandler<TEntityDto>
+    public class CommandHandler<TCommand, TEntity, TRepository> : ICommandHandler<TEntity>
         where TCommand : CommandBase<TEntity, TRepository>, new()
     {
         private readonly IMapper _mapper;
@@ -17,8 +19,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
             _mapper = mapper;
         }
 
-        public async Task<TResponse> HandleRequest<TRequest, TResponse>(TRequest request) 
-            where TResponse : ResponseBase<TEntityDto>, new()
+        public async Task<TEntity> HandleRequest<TRequest>(TRequest request)
         {
             var entityModel = _mapper.Map<TEntity>(request);
             var command = new TCommand()
@@ -26,9 +27,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
                 Parameter = entityModel
             };
 
-            var entity = await command.Execute(_repositoryService);
-            var dto = _mapper.Map<TEntityDto>(entity);
-            return new TResponse() { Response = dto };
+            return await command.Execute(_repositoryService);
         }
     }
 }

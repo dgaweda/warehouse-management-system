@@ -11,7 +11,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHandlers
 {
     public class AddDeliveryHandler :
-        CommandHandler<AddDeliveryCommand, Delivery, Domain.Models.DeliveryDto, IDeliveryRepository>,
+        CommandHandler<AddDeliveryCommand, Delivery, int, IDeliveryRepository>,
         IRequestHandler<AddDeliveryRequest, AddDeliveryResponse>
     {
         public AddDeliveryHandler(IMapper mapper, IDeliveryRepository repositoryService)
@@ -21,7 +21,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHan
 
         public async Task<AddDeliveryResponse> Handle(AddDeliveryRequest request, CancellationToken cancellationToken)
         {
-            return await HandleRequest<AddDeliveryRequest, AddDeliveryResponse>(request);
+            var result = await HandleRequest<AddDeliveryRequest>(request);
+            return new AddDeliveryResponse()
+            {
+                Response = result
+            }
         }
     }
 }
