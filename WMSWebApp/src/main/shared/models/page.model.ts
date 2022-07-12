@@ -1,4 +1,5 @@
 export interface Page {
-  route: string,
-  name: string
+  text: string;
+  route: string;
+  icon: string;
 }

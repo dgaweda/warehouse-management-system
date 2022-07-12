@@ -1,6 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using System.Threading.Tasks;
 using DataAccess.CQRS.Query;
+using DataAccess.Exceptions;
+using DataAccess.Repository;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers

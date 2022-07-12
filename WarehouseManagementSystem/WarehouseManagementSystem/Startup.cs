@@ -1,7 +1,7 @@
 
 using DataAccess;
-using DataAccess.CQRS;
-using FluentValidation.AspNetCore;
+using DataAccess.Repository;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -12,8 +12,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using warehouse_management_system.Authentication;
+using warehouse_management_system.Authentication.Privileges;
+using warehouse_management_system.Middleware;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
-using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
+using WarehouseManagementSystem.ApplicationServices.API.PipelineBehavior;
+using WarehouseManagementSystem.ApplicationServices.API.Validators;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.SeniorityValidators;
 using WarehouseManagementSystem.ApplicationServices.Mappings;
 
@@ -35,19 +38,17 @@ namespace warehouse_management_system
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
             services.AddCors();
-            services.AddMvcCore()
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddSeniorityRequestValidator>());
+            services.AddMvcCore();
 
-            services.AddTransient<IQueryExecutor, QueryExecutor>();
-
-            services.AddTransient<ICommandExecutor, CommandExecutor>();
 
             services.AddTransient<IPrivilegesService, PrivilegesService>();
 
-            services.AddAutoMapper(typeof(UsersProfile)
-                .Assembly); // This Line Enables AutoMapper to map all profiles without adding everyone of them.
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            services.AddAutoMapper(typeof(UsersProfile).Assembly); // This Line Enables AutoMapper to map all profiles without adding everyone of them.
             // It gets Assembly from one profile to get all the mappings.
             services.AddMediatR(typeof(ResponseBase<>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 
             services.AddHttpContextAccessor();
 
@@ -56,6 +57,7 @@ namespace warehouse_management_system
                     option.UseSqlServer(Configuration.GetConnectionString("WMSDatabaseContext")));
 
             services.AddScoped(typeof(IValidatorHelper), typeof(ValidatorHelper));
+            services.AddValidatorsFromAssembly(typeof(AddSeniorityRequestValidator).Assembly);
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
@@ -66,15 +68,7 @@ namespace warehouse_management_system
                     };
                     options.SerializerSettings.Converters.Add(dateConverter);
                 });
-            // services.AddAuthorization(options =>
-            // {
-            //     options.AddPolicy(Enum.GetName(RoleKey.WAREHOUSEMAN),
-            //         policy => policy.RequireClaim("Privileges", PrivilegesService.GetWarehouseManPrivileges()));
-            //     options.AddPolicy(Enum.GetName(RoleKey.GENERAL_ADMIN),
-            //         policy => policy.RequireClaim("Privileges", PrivilegesService.GetGeneralAdminPrivileges()));
-            //     options.AddPolicy(Enum.GetName(RoleKey.GENERAL_ADMIN),
-            //         policy => policy.RequireClaim("Privileges", PrivilegesService.GetManagerPrivileges()));
-            // });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "warehouse_management_system", Version = "v1" });
@@ -100,8 +94,11 @@ namespace warehouse_management_system
             );
             app.UseHttpsRedirection();
             app.UseRouting();
+            
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

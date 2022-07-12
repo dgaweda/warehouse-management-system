@@ -1,6 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.VisualBasic;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using AutoMapper;
 using DataAccess.Entities;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Order;
@@ -10,7 +9,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
     {
         public OrdersProfile()
         {
-            CreateMap<Order, API.Domain.Models.Order>()
+            CreateMap<Order, API.Domain.Models.OrderDto>()
                 .ForMember(x => x.OrderState, y => y.MapFrom(z => Enum.GetName(z.OrderState)))
                 .ForMember(x => x.Barcode, y => y.MapFrom(z => z.Barcode))
                 .ForMember(x => x.PickingStart, y => y.MapFrom(z => z.PickingStart))

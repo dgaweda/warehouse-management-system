@@ -1,4 +1,5 @@
 ﻿
+
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain
 {
     public class ResponseBase<T>

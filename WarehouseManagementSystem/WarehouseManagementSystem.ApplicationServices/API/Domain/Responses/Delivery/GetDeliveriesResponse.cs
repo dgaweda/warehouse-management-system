@@ -2,7 +2,7 @@
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Delivery
 {
-    public class GetDeliveriesResponse : ResponseBase<List<Domain.Models.Delivery>>
+    public class GetDeliveriesResponse : ResponseBase<List<Domain.Models.DeliveryDto>>
     {
     }
 }

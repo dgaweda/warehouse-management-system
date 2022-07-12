@@ -4,7 +4,9 @@ using AutoMapper;
 using DataAccess.CQRS.Commands.DepartureCommands;
 using DataAccess.Entities;
 using DataAccess.Repository.DepartureRepository;
+using FluentValidation;
 using MediatR;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Departure;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departure;
 

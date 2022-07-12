@@ -1,13 +1,11 @@
 ﻿using DataAccess.Entities.EntityBases;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Newtonsoft.Json;
 
 namespace DataAccess.Entities
 {
-    public class OrderLine : IEntityBase
+    public class OrderLine : EntityBase
     {
-        public int Id { get; set; }
         public int ProductId { get; set; }
 
         public int OrderId { get; set; }

@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using DataAccess.CQRS;
 using DataAccess.CQRS.Command.ProductPalletLineCommands;
 using DataAccess.Repository;
 using FluentValidation;

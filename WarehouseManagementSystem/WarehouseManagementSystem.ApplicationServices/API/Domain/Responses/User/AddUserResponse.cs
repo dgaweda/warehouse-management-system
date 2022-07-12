@@ -1,6 +1,6 @@
 ﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User
 {
-    public class AddUserResponse : ResponseBase<Models.User>
+    public class AddUserResponse : ResponseBase<Models.UserDto>
     {
     }
 }

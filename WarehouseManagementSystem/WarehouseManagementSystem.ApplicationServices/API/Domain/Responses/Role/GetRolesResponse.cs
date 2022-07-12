@@ -2,7 +2,7 @@
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role
 {
-    public class GetRolesResponse : ResponseBase<List<Domain.Models.Role>>
+    public class GetRolesResponse : ResponseBase<List<Domain.Models.RoleDto>>
     {
     }
 }

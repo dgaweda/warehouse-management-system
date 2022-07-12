@@ -4,6 +4,7 @@ using AutoMapper;
 using DataAccess.CQRS.Commands.OrderCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Order;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;

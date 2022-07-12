@@ -6,10 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class Delivery : IEntityBase
+    public class Delivery : EntityBase
     {
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(50)]
         [Column("Nazwa dostawcy")]

@@ -47,11 +47,11 @@ class Environment implements Config {
 
   NavigationConfig = {
     mainPages: [
-      {route: '/home', name: 'Strona Główna'},
-      {route: '/order', name: 'Zamówienia'},
-      {route: '/delivery', name: 'Dostawy'}
+      {id: 0, route: '/home', text: 'Strona Główna', icon: 'home'},
+      {id: 1, route: '/order', text: 'Zamówienia', icon: 'orderedlist'},
+      {id: 2, route: '/delivery', text: 'Dostawy', icon: 'hierarchy'}
     ],
-    loginPage: [{route: '/login', name: 'Logowanie'}]
+    loginPage: [{id: 3, route: '/login', text: 'Logowanie', icon: 'return'}]
   };
 }
 

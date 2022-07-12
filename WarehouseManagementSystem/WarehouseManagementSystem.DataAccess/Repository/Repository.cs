@@ -1,10 +1,12 @@
 ﻿#nullable enable
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using DataAccess.Entities.EntityBases;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using DataAccess.Exceptions;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DataAccess.Repository
 {
@@ -66,7 +68,7 @@ namespace DataAccess.Repository
             
             if (entityToDetach == null)
                 throw new NotFoundException($"{nameof(TEntity)} with id: {entity.Id} doesn't exist.");
-
+            
             _context.Entry(entityToDetach).State = EntityState.Detached;
             _context.Entry(entity).State = EntityState.Modified;
 
