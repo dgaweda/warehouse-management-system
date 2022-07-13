@@ -4,6 +4,7 @@ using AutoMapper;
 using DataAccess.CQRS.Commands.InvoiceCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using DataAccess.Repository.InvoiceRepository;
 using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Invoice;
@@ -12,15 +13,21 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Invoice
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.InvoiceHandlers
 {
     public class EditInvoiceHandler
-        : CommandHandler<EditInvoiceRequest, EditInvoiceResponse, Invoice, Domain.Models.InvoiceDto, EditInvoiceCommand>,
+        : CommandHandler<EditInvoiceCommand, Invoice, IInvoiceRepository, Invoice>,
         IRequestHandler<EditInvoiceRequest, EditInvoiceResponse>
     {
-        public EditInvoiceHandler(IMapper mapper, ICommandExecutor commandExecutor,
-            IRepository<Invoice> repositoryService)
-            : base(mapper, commandExecutor, repositoryService)
+        public EditInvoiceHandler(IMapper mapper, IInvoiceRepository repositoryService)
+            : base(mapper, repositoryService)
         {
         }
 
-        public async Task<EditInvoiceResponse> Handle(EditInvoiceRequest request, CancellationToken cancellationToken) => await HandleRequest(request);
+        public async Task<EditInvoiceResponse> Handle(EditInvoiceRequest request, CancellationToken cancellationToken)
+        {
+            var result = await HandleRequest(request);
+            return new EditInvoiceResponse()
+            {
+                Response = result.Id
+            };
+        }
     }
 }
