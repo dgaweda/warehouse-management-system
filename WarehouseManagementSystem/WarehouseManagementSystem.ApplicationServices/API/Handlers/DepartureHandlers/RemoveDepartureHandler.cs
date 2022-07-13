@@ -4,6 +4,7 @@ using AutoMapper;
 using DataAccess.CQRS.Commands.DepartureCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using DataAccess.Repository.DepartureRepository;
 using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
@@ -13,14 +14,18 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departu
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHandlers
 {
     public class RemoveDepartureHandler : 
-        CommandHandler<RemoveDepartureRequest, RemoveDepartureResponse, Departure, DepartureDto, RemoveDepartureCommand>,
+        CommandHandler<RemoveDepartureCommand, Departure, IDepartureRepository, Unit>,
         IRequestHandler<RemoveDepartureRequest, RemoveDepartureResponse>
     {
-        public RemoveDepartureHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Departure> repositoryService) 
-            : base(mapper, commandExecutor, repositoryService)
+        public RemoveDepartureHandler(IMapper mapper, IDepartureRepository repositoryService) 
+            : base(mapper, repositoryService)
         {
 
         }
-        public async Task<RemoveDepartureResponse> Handle(RemoveDepartureRequest request, CancellationToken cancellationToken) => await HandleRequest(request);
+        public async Task<RemoveDepartureResponse> Handle(RemoveDepartureRequest request, CancellationToken cancellationToken)
+        {
+            await HandleRequest(request);
+            return new RemoveDepartureResponse();
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using DataAccess.Entities.EntityBases;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repository
@@ -12,7 +14,7 @@ namespace DataAccess.Repository
         Task<T> AddAsync(T entity);
         Task<List<T>> AddRangeAsync(List<T> entity);
         Task<T> UpdateAsync(T entity);
-        Task DeleteAsync(int id);
+        Task<Unit> DeleteAsync(int id);
         Task<List<T>> GetAllAsync();
         IQueryable<T> GetQueryableEntity();
     }

@@ -1,6 +1,6 @@
 ﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order
 {
-    public class AddOrderResponse: ResponseBase<Domain.Models.OrderDto>
+    public class AddOrderResponse: ResponseBase<int>
     {
     }
 }

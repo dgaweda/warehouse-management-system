@@ -11,7 +11,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHandlers
 {
     public class EditDeliveryHandler
-        : CommandHandler<EditDeliveryCommand, Delivery, IDeliveryRepository>,
+        : CommandHandler<EditDeliveryCommand, Delivery, IDeliveryRepository, Delivery>,
         IRequestHandler<EditDeliveryRequest, EditDeliveryResponse>
     {
         public EditDeliveryHandler(IMapper mapper, IDeliveryRepository repositoryService) 

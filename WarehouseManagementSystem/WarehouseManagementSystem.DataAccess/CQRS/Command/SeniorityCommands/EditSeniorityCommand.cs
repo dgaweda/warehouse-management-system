@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.SeniorityCommands
 {
-    public class EditSeniorityCommand : CommandBase<Seniority, ISeniorityRepository>
+    public class EditSeniorityCommand : CommandBase<Seniority, Seniority, ISeniorityRepository>
     {
-        public override async Task Execute(ISeniorityRepository seniorityRepository)
+        public override async Task<Seniority> Execute(ISeniorityRepository seniorityRepository)
         {
-            await seniorityRepository.UpdateAsync(Parameter);
+            return await seniorityRepository.UpdateAsync(Parameter);
         }
     }
 }

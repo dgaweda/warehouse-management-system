@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities;
+﻿using System.Reflection.Metadata;
+using DataAccess.Entities;
 using System.Threading.Tasks;
 using DataAccess.CQRS.Command;
 using DataAccess.CQRS.Command.Commands;
@@ -7,11 +8,11 @@ using DataAccess.Repository.ProductRepository;
 
 namespace DataAccess.CQRS.Commands.DeliveryProductCommands
 {
-    public class AddProductCommand : CommandBase<Product, IProductRepository>
+    public class AddProductCommand : CommandBase<Product, Product, IProductRepository>
     {
-        public override async Task Execute(IProductRepository productRepository)
+        public override async Task<Product> Execute(IProductRepository productRepository)
         {
-            await productRepository.AddAsync(Parameter);
+            return await productRepository.AddAsync(Parameter);
         }
     }
 }

@@ -8,13 +8,13 @@ using DataAccess.Repository.DepartureRepository;
 
 namespace DataAccess.CQRS.Commands.DepartureCommands
 {
-    public class AddDepartureCommand : CommandBase<Departure, IDepartureRepository>
+    public class AddDepartureCommand : CommandBase<Departure, Departure, IDepartureRepository>
     {
-        public override async Task Execute(IDepartureRepository departureRepository)
+        public override async Task<Departure> Execute(IDepartureRepository departureRepository)
         {
             Parameter.OpeningTime = DateTime.Now;
             
-            await departureRepository.AddAsync(Parameter);
+            return await departureRepository.AddAsync(Parameter);
         }
     }
 }

@@ -5,11 +5,11 @@ using DataAccess.Repository.SeniorityRepository;
 
 namespace DataAccess.CQRS.Command.SeniorityCommands
 {
-    public class AddSeniorityCommand : CommandBase<Seniority, ISeniorityRepository>
+    public class AddSeniorityCommand : CommandBase<Seniority, Seniority, ISeniorityRepository>
     {
-        public override async Task Execute(ISeniorityRepository seniorityRepository)
+        public override async Task<Seniority> Execute(ISeniorityRepository seniorityRepository)
         {
-            await seniorityRepository.AddAsync(Parameter);
+            return await seniorityRepository.AddAsync(Parameter);
         }
     }
 }

@@ -13,7 +13,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHandlers
 {
     public class RemoveDeliveryHandler 
-        : CommandHandler<RemoveDeliveryCommand, Delivery, IDeliveryRepository>,
+        : CommandHandler<RemoveDeliveryCommand, Delivery, IDeliveryRepository, Unit>,
         IRequestHandler<RemoveDeliveryRequest, RemoveDeliveryResponse>
     {
         public RemoveDeliveryHandler(IMapper mapper, IDeliveryRepository repositoryService) 
@@ -24,10 +24,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHan
         public async Task<RemoveDeliveryResponse> Handle(RemoveDeliveryRequest request, CancellationToken cancellationToken)
         {
             await HandleRequest(request);
-            return new RemoveDeliveryResponse()
-            {
-                Response = Unit.Value
-            };
+            return new RemoveDeliveryResponse();
         }
     }
 }

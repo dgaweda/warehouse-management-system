@@ -7,11 +7,11 @@ using DataAccess.Repository.LocationRepository;
 
 namespace DataAccess.CQRS.Commands.LocationCommands
 {
-    public class AddLocationCommand : CommandBase<Location, ILocationRepository>
+    public class AddLocationCommand : CommandBase<Location, Location, ILocationRepository>
     {
-        public override async Task Execute(ILocationRepository locationRepository)
+        public override async Task<Location> Execute(ILocationRepository locationRepository)
         {
-            await locationRepository.AddAsync(Parameter);;
+            return await locationRepository.AddAsync(Parameter);;
         }
     }
 }

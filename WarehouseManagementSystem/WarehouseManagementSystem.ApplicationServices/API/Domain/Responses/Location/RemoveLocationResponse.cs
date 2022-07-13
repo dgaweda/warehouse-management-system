@@ -1,6 +1,8 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location
+﻿using MediatR;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location
 {
-    public class RemoveLocationResponse : ResponseBase<Domain.Models.LocationDto>
+    public class RemoveLocationResponse : ResponseBase<Unit>
     {
     }
 }

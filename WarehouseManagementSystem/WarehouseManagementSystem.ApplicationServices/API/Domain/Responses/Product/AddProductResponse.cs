@@ -1,6 +1,6 @@
 ﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 {
-    public class AddProductResponse : ResponseBase<Domain.Models.ProductDto>
+    public class AddProductResponse : ResponseBase<int>
     {
     }
 }

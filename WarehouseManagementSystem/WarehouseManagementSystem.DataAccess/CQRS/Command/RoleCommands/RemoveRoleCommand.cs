@@ -4,15 +4,16 @@ using DataAccess.CQRS.Command;
 using DataAccess.CQRS.Command.Commands;
 using DataAccess.Repository;
 using DataAccess.Repository.RoleRepository;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.RoleCommands
 {
-    public class RemoveRoleCommand : CommandBase<Role, IRoleRepository>
+    public class RemoveRoleCommand : CommandBase<Role, Unit, IRoleRepository>
     {
-        public override async Task Execute(IRoleRepository roleRepository)
+        public override async Task<Unit> Execute(IRoleRepository roleRepository)
         {
-            await roleRepository.DeleteAsync(Parameter.Id);
+           return await roleRepository.DeleteAsync(Parameter.Id);
         }
     }
 }

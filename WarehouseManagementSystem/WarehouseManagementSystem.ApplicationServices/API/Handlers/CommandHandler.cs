@@ -7,8 +7,8 @@ using DataAccess.Entities.EntityBases;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public class CommandHandler<TCommand, TEntity, TRepository> : ICommandHandler<TEntity>
-        where TCommand : CommandBase<TEntity, TRepository>, new()
+    public class CommandHandler<TCommand, TEntity, TRepository, TResult> : ICommandHandler<TResult>
+        where TCommand : CommandBase<TEntity, TResult, TRepository>, new()
     {
         private readonly IMapper _mapper;
         private readonly TRepository _repositoryService;
@@ -19,7 +19,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
             _mapper = mapper;
         }
 
-        public async Task<TEntity> HandleRequest<TRequest>(TRequest request)
+        public async Task<TResult> HandleRequest<TRequest>(TRequest request)
         {
             var entityModel = _mapper.Map<TEntity>(request);
             var command = new TCommand()

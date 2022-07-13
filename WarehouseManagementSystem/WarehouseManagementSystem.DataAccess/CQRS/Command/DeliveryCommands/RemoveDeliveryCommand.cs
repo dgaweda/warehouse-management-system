@@ -4,15 +4,16 @@ using DataAccess.CQRS.Command;
 using DataAccess.CQRS.Command.Commands;
 using DataAccess.Repository;
 using DataAccess.Repository.DeliveryRepository;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.DeliveryCommands
 {
-    public class RemoveDeliveryCommand : CommandBase<Delivery, IDeliveryRepository>
+    public class RemoveDeliveryCommand : CommandBase<Delivery, Unit, IDeliveryRepository>
     {
-        public override async Task Execute(IDeliveryRepository deliveryRepository)
+        public override async Task<Unit> Execute(IDeliveryRepository deliveryRepository)
         {
-            await deliveryRepository.DeleteAsync(Parameter.Id);
+            return await deliveryRepository.DeleteAsync(Parameter.Id);
         }
     }
 }

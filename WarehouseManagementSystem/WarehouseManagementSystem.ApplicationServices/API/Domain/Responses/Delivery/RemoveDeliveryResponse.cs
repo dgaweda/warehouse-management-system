@@ -4,5 +4,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Del
 {
     public class RemoveDeliveryResponse : ResponseBase<Unit>
     {
+        public RemoveDeliveryResponse()
+        {
+            Response = Unit.Value;
+        }
     }
 }

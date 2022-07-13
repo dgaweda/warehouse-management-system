@@ -1,6 +1,8 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Invoice
+﻿using MediatR;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Invoice
 {
-    public class RemoveInvoiceResponse : ResponseBase<Domain.Models.InvoiceDto>
+    public class RemoveInvoiceResponse : ResponseBase<Unit>
     {
     }
 }

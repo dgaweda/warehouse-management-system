@@ -2,6 +2,7 @@
 using AutoMapper;
 using System.Threading.Tasks;
 using DataAccess.CQRS.Query;
+using DataAccess.CQRS.Query.Queries;
 using DataAccess.Exceptions;
 using DataAccess.Repository;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;

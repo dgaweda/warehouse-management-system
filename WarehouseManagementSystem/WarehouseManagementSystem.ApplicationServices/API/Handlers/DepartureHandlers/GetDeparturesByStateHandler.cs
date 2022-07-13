@@ -14,7 +14,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departu
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHandlers
 {
     public class GetDeparturesByStateHandler :
-        QueryHandler<GetDeparturesByStateResponse, GetDeparturesByStateQuery, List<Departure>, List<DepartureDto>, IDepartureRepository>,
+        QueryHandler<GetDeparturesByStateQuery, GetDeparturesByStateResponse, List<Departure>, List<DepartureDto>, IDepartureRepository>,
         IRequestHandler<GetDeparturesByStateRequest, GetDeparturesByStateResponse>
     {
         public GetDeparturesByStateHandler(IMapper mapper, IDepartureRepository repository) : base(mapper, repository)

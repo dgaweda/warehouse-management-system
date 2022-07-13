@@ -6,6 +6,7 @@ using DataAccess.Entities.EntityBases;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using DataAccess.Exceptions;
+using MediatR;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DataAccess.Repository
@@ -51,7 +52,7 @@ namespace DataAccess.Repository
             return await Entity.ToListAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<Unit> DeleteAsync(int id)
         {
             var entityToDelete = await Entity.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -60,6 +61,8 @@ namespace DataAccess.Repository
 
             Entity.Remove(entityToDelete);
             await _context.SaveChangesAsync();
+
+            return Unit.Value;
         }
 
         public async Task<TEntity> UpdateAsync(TEntity entity)

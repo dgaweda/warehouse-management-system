@@ -9,16 +9,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.ProductCommands
 {
-    public class SetProductLocationCommand : CommandBase<Location, ILocationRepository>
+    public class SetProductLocationCommand : CommandBase<Location, Location, ILocationRepository>
     {
-        public override async Task Execute(ILocationRepository locationRepository)
+        public override async Task<Location> Execute(ILocationRepository locationRepository)
         {
             var location = await locationRepository.Entity
                 .Include(x => x.Product)
                 .FirstOrDefaultAsync(x => x.Id == Parameter.Id); ;
 
             location.SetProductAmount(Parameter);
-            await locationRepository.UpdateAsync(location);
+            return await locationRepository.UpdateAsync(location);
         }
 
 

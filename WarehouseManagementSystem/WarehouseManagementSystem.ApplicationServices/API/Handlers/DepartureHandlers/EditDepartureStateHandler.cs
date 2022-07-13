@@ -4,6 +4,7 @@ using AutoMapper;
 using DataAccess.CQRS.Command.Commands.DepartureCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using DataAccess.Repository.DepartureRepository;
 using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
@@ -14,14 +15,21 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departu
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHandlers
 {
     public class EditDepartureStateHandler :
-        CommandHandler<EditDepartureStateRequest, EditDepartureStateResponse, Departure, DepartureDto, EditDepartureStateCommand>,
+        CommandHandler<EditDepartureStateCommand, Departure, IDepartureRepository, Departure>,
         IRequestHandler<EditDepartureStateRequest, EditDepartureStateResponse>
     {
-        public EditDepartureStateHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Departure> repositoryService)
-            : base(mapper, commandExecutor, repositoryService)
+        public EditDepartureStateHandler(IMapper mapper, IDepartureRepository repositoryService)
+            : base(mapper, repositoryService)
         {
 
         }
-        public async Task<EditDepartureStateResponse> Handle(EditDepartureStateRequest request, CancellationToken cancellationToken) => await HandleRequest(request);
+        public async Task<EditDepartureStateResponse> Handle(EditDepartureStateRequest request, CancellationToken cancellationToken)
+        {
+            var result =  await HandleRequest(request);
+            return new EditDepartureStateResponse()
+            {
+                Response = result.Id
+            };
+        }
     }
 }

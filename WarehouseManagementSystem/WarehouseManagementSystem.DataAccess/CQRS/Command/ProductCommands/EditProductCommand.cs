@@ -9,16 +9,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.DeliveryProductCommands
 {
-    public class EditProductCommand : CommandBase<Product, IProductRepository>
+    public class EditProductCommand : CommandBase<Product, Product, IProductRepository>
     {
-        public override async Task Execute(IProductRepository productRepository)
+        public override async Task<Product> Execute(IProductRepository productRepository)
         {
             var product = await productRepository.Entity
                 .Include(x => x.PalletLines)
                 .FirstOrDefaultAsync(x => x.Id == Parameter.Id);
 
             product.SetProperties(Parameter);
-            await productRepository.UpdateAsync(product);
+            return await productRepository.UpdateAsync(product);
         }
     }
 }

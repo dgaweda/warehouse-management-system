@@ -9,9 +9,9 @@ using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace DataAccess.CQRS.Commands.OrderCommands
 {
-    public class AddOrderCommand: CommandBase<Order, IOrderRepository>
+    public class AddOrderCommand: CommandBase<Order, Order, IOrderRepository>
     {
-        public override async Task Execute(IOrderRepository orderRepository)
+        public override async Task<Order> Execute(IOrderRepository orderRepository)
         {
             Parameter.OrderState = OrderState.RECEIVED;
             Parameter.OrderLines.ForEach(x => x.OrderId = Parameter.Id);

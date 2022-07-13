@@ -4,12 +4,12 @@ using DataAccess.Repository.UserRepository;
 
 namespace DataAccess.CQRS.Command.Commands.UserCommands
 {
-    public class AddUserCommand : CommandBase<User, IUserRepository>
+    public class AddUserCommand : CommandBase<User, User, IUserRepository>
     {
-        public override async Task Execute(IUserRepository userRepository)
+        public override async Task<User> Execute(IUserRepository userRepository)
         {
             Parameter.Password = BCrypt.Net.BCrypt.HashPassword(Parameter.Password);
-            await userRepository.AddAsync(Parameter);
+            return await userRepository.AddAsync(Parameter);
         }
     }
 }

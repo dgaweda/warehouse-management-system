@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands
 {
-    public class EditUserCommand : CommandBase<User, IUserRepository>
+    public class EditUserCommand : CommandBase<User, User, IUserRepository>
     {
-        public override async Task Execute(IUserRepository userRepository)
+        public override async Task<User> Execute(IUserRepository userRepository)
         {
-            await userRepository.UpdateAsync(Parameter);
+            return await userRepository.UpdateAsync(Parameter);
         }
     }
 }
