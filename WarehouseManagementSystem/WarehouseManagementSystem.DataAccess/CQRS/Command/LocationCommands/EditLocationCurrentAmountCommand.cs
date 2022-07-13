@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.LocationCommands
 {
-    public class EditLocationCurrentAmountCommand : CommandBase<Location, ILocationRepository>
+    public class EditLocationCurrentAmountCommand : CommandBase<Location, Location, ILocationRepository>
     {
-        public override async Task Execute(ILocationRepository locationRepository)
+        public override async Task<Location> Execute(ILocationRepository locationRepository)
         {
             var locationToEdit = await locationRepository.Entity.FirstOrDefaultAsync(x => x.Id == Parameter.Id);
             
-            await locationRepository.UpdateAsync(locationToEdit);
+            return await locationRepository.UpdateAsync(locationToEdit);
         }
 
         

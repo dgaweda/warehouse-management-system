@@ -13,10 +13,10 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departu
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHandlers
 {
     public class GetDeparturesHandler :
-        QueryHandler<GetDeparturesResponse, GetDeparturesQuery, List<Departure>, List<DepartureDto>, IDepartureRepository>,
+        QueryHandler<GetDeparturesQuery,GetDeparturesResponse, List<Departure>, List<DepartureDto>, IDepartureRepository>,
         IRequestHandler<GetDeparturesRequest, GetDeparturesResponse>
     {
-        public GetDeparturesHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
+        public GetDeparturesHandler(IMapper mapper, IDepartureRepository departureRepository) : base(mapper, departureRepository)
         {
         }
 

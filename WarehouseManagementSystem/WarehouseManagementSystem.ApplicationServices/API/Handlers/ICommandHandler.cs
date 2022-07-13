@@ -2,8 +2,8 @@
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public interface ICommandHandler<TEntity>
+    public interface ICommandHandler<TResult>
     {
-        Task<TEntity> HandleRequest<TRequest>(TRequest request);
+        Task<TResult> HandleRequest<TRequest>(TRequest request);
     }
 }

@@ -7,14 +7,14 @@ using DataAccess.Repository.DepartureRepository;
 
 namespace DataAccess.CQRS.Command.Commands.DepartureCommands
 {
-    public class EditDepartureStateCommand : CommandBase<Departure, IDepartureRepository>
+    public class EditDepartureStateCommand : CommandBase<Departure, Departure, IDepartureRepository>
     {
-        public override async Task Execute(IDepartureRepository departureRepository)
+        public override async Task<Departure> Execute(IDepartureRepository departureRepository)
         {
             var departureToUpdate = await departureRepository.GetByIdAsync(Parameter.Id);
             departureToUpdate.SetState();
             
-            await departureRepository.UpdateAsync(departureToUpdate);;
+            return await departureRepository.UpdateAsync(departureToUpdate);;
         }
     }
 }
