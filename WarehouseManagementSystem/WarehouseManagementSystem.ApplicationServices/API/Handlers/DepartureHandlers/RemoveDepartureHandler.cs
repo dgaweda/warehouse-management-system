@@ -14,7 +14,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departu
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHandlers
 {
     public class RemoveDepartureHandler : 
-        CommandHandler<RemoveDepartureCommand, Departure, IDepartureRepository, Unit>,
+        CommandHandler<RemoveDepartureCommand, Departure, IDepartureRepository>,
         IRequestHandler<RemoveDepartureRequest, RemoveDepartureResponse>
     {
         public RemoveDepartureHandler(IMapper mapper, IDepartureRepository repositoryService) 

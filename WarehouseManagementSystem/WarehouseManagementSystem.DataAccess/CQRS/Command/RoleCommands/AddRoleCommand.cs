@@ -7,11 +7,11 @@ using DataAccess.Repository.RoleRepository;
 
 namespace DataAccess.CQRS.Commands.RoleCommands
 {
-    public class AddRoleCommand : CommandBase<Role, Role, IRoleRepository>
+    public class AddRoleCommand : CommandBase<Role, IRoleRepository>
     {
-        public override async Task<Role> Execute(IRoleRepository roleRepository)
+        public override async Task Execute(IRoleRepository roleRepository)
         {
-            return await roleRepository.AddAsync(Parameter);
+            await roleRepository.AddAsync(Parameter);
         }
     }
 }

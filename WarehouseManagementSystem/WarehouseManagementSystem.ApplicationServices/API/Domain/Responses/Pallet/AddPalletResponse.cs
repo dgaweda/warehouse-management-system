@@ -1,6 +1,8 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet
+﻿using System;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet
 {
-    public class AddPalletResponse : ResponseBase<int>
+    public class AddPalletResponse : ResponseBase<Guid>
     {
     }
 }

@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -22,23 +23,19 @@ namespace DataAccess.Repository
             _context = dbContext;
             Entity = _context.Set<TEntity>();
         }
-        public async Task<TEntity> AddAsync(TEntity entity)
+        public async Task AddAsync(TEntity entity)
         {
             await Entity.AddAsync(entity);
             await _context.SaveChangesAsync();
-            
-            return entity;
         }
 
-        public async Task<List<TEntity>> AddRangeAsync(List<TEntity> entities)
+        public async Task AddRangeAsync(List<TEntity> entities)
         {
             await Entity.AddRangeAsync(entities);
             await _context.SaveChangesAsync();
-            
-            return entities;
         }
 
-        public virtual async Task<TEntity> GetByIdAsync(int id)
+        public virtual async Task<TEntity> GetByIdAsync(Guid id)
         {
             var result = await Entity.FirstOrDefaultAsync(i => i.Id == id);
             if (result is null)
@@ -52,7 +49,7 @@ namespace DataAccess.Repository
             return await Entity.ToListAsync();
         }
 
-        public async Task<Unit> DeleteAsync(int id)
+        public async Task DeleteAsync(Guid id)
         {
             var entityToDelete = await Entity.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -61,11 +58,9 @@ namespace DataAccess.Repository
 
             Entity.Remove(entityToDelete);
             await _context.SaveChangesAsync();
-
-            return Unit.Value;
         }
 
-        public async Task<TEntity> UpdateAsync(TEntity entity)
+        public async Task UpdateAsync(TEntity entity)
         {
             var entityToDetach = await Entity.FirstOrDefaultAsync(x => x.Id == entity.Id);
             
@@ -76,7 +71,6 @@ namespace DataAccess.Repository
             _context.Entry(entity).State = EntityState.Modified;
 
             await _context.SaveChangesAsync();
-            return entity;
         }
 
         public abstract IQueryable<TEntity> GetQueryableEntity();

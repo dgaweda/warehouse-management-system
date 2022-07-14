@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.PalletCommands
 {
-    public class RemovePalletCommand : CommandBase<Pallet, Unit, IPalletRepository>
+    public class RemovePalletCommand : CommandBase<Pallet, IPalletRepository>
     {
-        public override async Task<Unit> Execute(IPalletRepository palletRepository)
+        public override async Task Execute(IPalletRepository palletRepository)
         {
-            return await palletRepository.DeleteAsync(Parameter.Id);
+            await palletRepository.DeleteAsync(Parameter.Id);
         }
     }
 }

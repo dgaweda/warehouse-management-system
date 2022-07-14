@@ -4,6 +4,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Ord
 {
     public class RemoveOrderResponse: ResponseBase<Unit>
     {
-        
+        public RemoveOrderResponse()
+        {
+            Response = Unit.Value;
+        }
     }
 }

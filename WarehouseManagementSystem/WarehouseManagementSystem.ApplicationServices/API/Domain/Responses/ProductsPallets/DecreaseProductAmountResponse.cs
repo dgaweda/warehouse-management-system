@@ -1,6 +1,8 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.ProductsPallets
+﻿using System;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.ProductsPallets
 {
-    public class DecreaseProductAmountResponse : ResponseBase<int>
+    public class DecreaseProductAmountResponse : ResponseBase<Guid>
     {
     }
 }

@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities;
+﻿using System.Linq;
+using DataAccess.Entities;
 using DataAccess.Repository.OrderRepository;
 
 namespace DataAccess.Repository.OrderLineRepository
@@ -7,6 +8,11 @@ namespace DataAccess.Repository.OrderLineRepository
     {
         public OrderLineRepository(WMSDatabaseContext dbContext) : base(dbContext)
         {
+        }
+
+        public override IQueryable<OrderLine> GetQueryableEntity()
+        {
+            return Entity.AsQueryable();
         }
     }
 }

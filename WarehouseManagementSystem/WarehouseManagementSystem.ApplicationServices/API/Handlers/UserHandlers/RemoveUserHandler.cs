@@ -4,6 +4,7 @@ using AutoMapper;
 using DataAccess.CQRS.Commands;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using DataAccess.Repository.UserRepository;
 using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
@@ -12,14 +13,18 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandlers
 {
     public class RemoveUserHandler 
-        :CommandHandler<RemoveUserRequest, RemoveUserResponse, User, Domain.Models.UserDto, RemoveUserCommand>,
+        :CommandHandler<RemoveUserCommand, User, IUserRepository>,
         IRequestHandler<RemoveUserRequest, RemoveUserResponse>
     {
-        public RemoveUserHandler(ICommandExecutor commandExecutor, IMapper mapper, IRepository<User> repositoryService) 
-            : base(mapper, commandExecutor, repositoryService)
+        public RemoveUserHandler(IMapper mapper, IUserRepository repositoryService) 
+            : base(mapper, repositoryService)
         {
         }
 
-        public async Task<RemoveUserResponse> Handle(RemoveUserRequest request, CancellationToken cancellationToken) => await HandleRequest(request);
+        public async Task<RemoveUserResponse> Handle(RemoveUserRequest request, CancellationToken cancellationToken)
+        {
+            await HandleRequest(request);
+            return new RemoveUserResponse();
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace DataAccess.Repository.UserRepository
             return await GetQueryableEntity().ToListAsync();
         }
 
-        public override async Task<User> GetByIdAsync(int id)
+        public override async Task<User> GetByIdAsync(Guid id)
         {
             return await GetQueryableEntity().FirstOrDefaultAsync(x => x.Id == id);
         }

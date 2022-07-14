@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.OrderCommands
 {
-    public class RemoveOrderCommand: CommandBase<Order, Unit, IOrderRepository>
+    public class RemoveOrderCommand: CommandBase<Order, IOrderRepository>
     {
-        public override async Task<Unit> Execute(IOrderRepository orderRepository)
+        public override async Task Execute(IOrderRepository orderRepository)
         {
-            return await orderRepository.DeleteAsync(Parameter.Id);
+            await orderRepository.DeleteAsync(Parameter.Id);
         }
     }
 }

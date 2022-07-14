@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Entities;
@@ -12,25 +13,25 @@ namespace DataAccess.Repository.InvoiceRepository
         {
         }
 
-        public override async Task<Invoice> GetByIdAsync(int id)
+        public override async Task<Invoice> GetByIdAsync(Guid id)
         {
-            return await GetInvoices().FirstOrDefaultAsync(x => x.Id == id);
+            return await GetQueryableEntity().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public override async Task<List<Invoice>> GetAllAsync()
         {
-            return await GetInvoices().ToListAsync();
+            return await GetQueryableEntity().ToListAsync();
         }
 
         public async Task<Invoice> GetInvoiceByInvoiceNumber(string invoiceNumber)
         {
-            return await GetInvoices()
+            return await GetQueryableEntity()
                 .FirstOrDefaultAsync(x => x.InvoiceNumber == invoiceNumber);
         }
 
-        private IQueryable<Invoice> GetInvoices()
+        public override IQueryable<Invoice> GetQueryableEntity()
         {
-            return DbContext.Invoices
+            return Entity
                 .Include(x => x.Delivery)
                 .AsQueryable();
         }

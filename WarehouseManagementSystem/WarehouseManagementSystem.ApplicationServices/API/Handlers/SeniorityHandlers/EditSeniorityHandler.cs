@@ -4,6 +4,7 @@ using AutoMapper;
 using DataAccess.CQRS.Commands.SeniorityCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using DataAccess.Repository.SeniorityRepository;
 using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seniority;
@@ -12,14 +13,21 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Seniori
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.SeniorityHandlers
 {
     public class EditSeniorityHandler : 
-        CommandHandler<EditSeniorityRequest, EditSeniorityResponse, Seniority, Domain.Models.SeniorityDto, EditSeniorityCommand>,
+        CommandHandler<EditSeniorityCommand, Seniority, ISeniorityRepository>,
         IRequestHandler<EditSeniorityRequest, EditSeniorityResponse>
     {
-        public EditSeniorityHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Seniority> repositoryService) 
-            : base(mapper, commandExecutor, repositoryService)
+        public EditSeniorityHandler(IMapper mapper, ISeniorityRepository repositoryService) 
+            : base(mapper, repositoryService)
         {
         }
 
-        public async Task<EditSeniorityResponse> Handle(EditSeniorityRequest request, CancellationToken cancellationToken) => await HandleRequest(request);
+        public async Task<EditSeniorityResponse> Handle(EditSeniorityRequest request, CancellationToken cancellationToken)
+        {
+            await HandleRequest(request);
+            return new EditSeniorityResponse()
+            {
+                Response = request.Id
+            };
+        }
     }
 }

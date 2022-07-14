@@ -13,7 +13,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHandlers
 {
     public class RemoveDeliveryHandler 
-        : CommandHandler<RemoveDeliveryCommand, Delivery, IDeliveryRepository, Unit>,
+        : CommandHandler<RemoveDeliveryCommand, Delivery, IDeliveryRepository>,
         IRequestHandler<RemoveDeliveryRequest, RemoveDeliveryResponse>
     {
         public RemoveDeliveryHandler(IMapper mapper, IDeliveryRepository repositoryService) 

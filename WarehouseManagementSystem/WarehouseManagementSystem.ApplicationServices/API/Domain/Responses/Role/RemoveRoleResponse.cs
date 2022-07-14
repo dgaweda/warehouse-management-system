@@ -4,5 +4,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Rol
 {
     public class RemoveRoleResponse : ResponseBase<Unit>
     {
+        public RemoveRoleResponse()
+        {
+            Response = Unit.Value;
+        }
     }
 }

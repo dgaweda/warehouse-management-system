@@ -13,7 +13,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Invoice
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.InvoiceHandlers
 {
     public class EditInvoiceHandler
-        : CommandHandler<EditInvoiceCommand, Invoice, IInvoiceRepository, Invoice>,
+        : CommandHandler<EditInvoiceCommand, Invoice, IInvoiceRepository>,
         IRequestHandler<EditInvoiceRequest, EditInvoiceResponse>
     {
         public EditInvoiceHandler(IMapper mapper, IInvoiceRepository repositoryService)
@@ -23,10 +23,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.InvoiceHand
 
         public async Task<EditInvoiceResponse> Handle(EditInvoiceRequest request, CancellationToken cancellationToken)
         {
-            var result = await HandleRequest(request);
+            await HandleRequest(request);
             return new EditInvoiceResponse()
             {
-                Response = result.Id
+                Response = request.Id
             };
         }
     }

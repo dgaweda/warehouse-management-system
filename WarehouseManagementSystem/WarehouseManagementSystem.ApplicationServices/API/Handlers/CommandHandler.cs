@@ -6,8 +6,8 @@ using DataAccess.Entities.EntityBases;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public class CommandHandler<TCommand, TEntity, TRepository> : ICommandHandler<TResult>
-        where TCommand : CommandBase<TEntity, TResult, TRepository>, new()
+    public class CommandHandler<TCommand, TEntity, TRepository> : ICommandHandler
+        where TCommand : CommandBase<TEntity, TRepository>, new()
     {
         private readonly IMapper _mapper;
         private readonly TRepository _repositoryService;

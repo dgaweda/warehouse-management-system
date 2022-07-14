@@ -1,6 +1,8 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.OrderLine
+﻿using System;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.OrderLine
 {
-    public class AddOrderLineResponse: ResponseBase<int>
+    public class AddOrderLineResponse: ResponseBase<Guid>
     {
         
     }

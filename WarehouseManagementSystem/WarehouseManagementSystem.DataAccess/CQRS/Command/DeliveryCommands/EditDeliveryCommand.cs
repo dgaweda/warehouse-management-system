@@ -8,11 +8,11 @@ using MediatR;
 
 namespace DataAccess.CQRS.Commands.DeliveryCommands
 {
-    public class EditDeliveryCommand : CommandBase<Delivery, Delivery, IDeliveryRepository>
+    public class EditDeliveryCommand : CommandBase<Delivery, IDeliveryRepository>
     {
         public override async Task<Delivery> Execute(IDeliveryRepository deliveryRepository)
         {
-            return await deliveryRepository.UpdateAsync(Parameter);
+            await deliveryRepository.UpdateAsync(Parameter);
         }
     }
 }

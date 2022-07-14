@@ -9,7 +9,7 @@ namespace DataAccess.Repository.DeliveryRepository
         {
         }
 
-        protected override IQueryable<Delivery> GetQueryableEntity()
+        public override IQueryable<Delivery> GetQueryableEntity()
         {
             return Entity.AsQueryable();
         }

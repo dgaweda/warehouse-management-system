@@ -15,19 +15,19 @@ namespace DataAccess.Repository.PalletRepository
 
         public override async Task<List<Pallet>> GetAllAsync()
         {
-            return await GetPallets().ToListAsync();
+            return await GetQueryableEntity().ToListAsync();
         }
 
         public async Task<List<Pallet>> GetPalletsByStatus(PalletStatus palletStatus)
         {
-            return await GetPallets()
+            return await GetQueryableEntity()
                 .Where(x => x.PalletStatus == palletStatus)
                 .ToListAsync();
         }
 
-        private IQueryable<Pallet> GetPallets()
+        public override IQueryable<Pallet> GetQueryableEntity()
         {
-            return DbContext.Pallets
+            return Entity
                 .Include(x => x.Departure)
                 .Include(x => x.Order)
                 .Include(x => x.Invoice)

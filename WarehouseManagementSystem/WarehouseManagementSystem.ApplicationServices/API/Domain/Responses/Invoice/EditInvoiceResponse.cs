@@ -1,6 +1,8 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Invoice
+﻿using System;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Invoice
 {
-    public class EditInvoiceResponse : ResponseBase<int>
+    public class EditInvoiceResponse : ResponseBase<Guid>
     {
     }
 }

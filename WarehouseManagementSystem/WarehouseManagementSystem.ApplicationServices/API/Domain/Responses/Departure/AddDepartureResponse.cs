@@ -1,8 +1,9 @@
-﻿using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
+﻿using System;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departure
 {
-    public class AddDepartureResponse : ResponseBase<int>
+    public class AddDepartureResponse : ResponseBase<Guid>
     {
     }
 }

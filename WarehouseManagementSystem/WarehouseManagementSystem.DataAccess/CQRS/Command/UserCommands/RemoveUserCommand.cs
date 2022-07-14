@@ -9,12 +9,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands
 {
-    public class RemoveUserCommand : CommandBase<User, Unit, IUserRepository>
+    public class RemoveUserCommand : CommandBase<User, IUserRepository>
     {
 
-        public override async Task<Unit> Execute(IUserRepository userRepository)
+        public override async Task Execute(IUserRepository userRepository)
         {
-           return await userRepository.DeleteAsync(Parameter.Id);
+           await userRepository.DeleteAsync(Parameter.Id);
         }
     }
 }

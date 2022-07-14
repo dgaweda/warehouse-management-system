@@ -1,6 +1,8 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role
+﻿using System;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role
 {
-    public class AddRoleResponse : ResponseBase<int>
+    public class AddRoleResponse : ResponseBase<Guid>
     {
     }
 }

@@ -4,5 +4,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Loc
 {
     public class RemoveLocationResponse : ResponseBase<Unit>
     {
+        public RemoveLocationResponse()
+        {
+            Response = Unit.Value;
+        }
     }
 }

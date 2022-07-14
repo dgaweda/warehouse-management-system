@@ -1,6 +1,8 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User
+﻿using System;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User
 {
-    public class EditUserResponse : ResponseBase<int>
+    public class EditUserResponse : ResponseBase<Guid>
     {
     }
 }

@@ -19,9 +19,11 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.InvoiceHand
         QueryHandler<GetLocationByIdQuery, GetLocationByIdResponse, Invoice ,Domain.Models.InvoiceDto, ILocationRepository>,
         IRequestHandler<GetLocationByIdRequest, GetLocationByIdResponse>
     {
-        public GetInvoiceByInvoiceNumberHandler(IMapper mapper, ) : base(mapper)
+        public GetInvoiceByInvoiceNumberHandler(IMapper mapper, ILocationRepository repositoryService) 
+            : base(mapper, repositoryService)
         {
         }
+
         public async Task<GetLocationByIdResponse> Handle(GetLocationByIdRequest request, CancellationToken cancellationToken)
         {
             var query = new GetLocationByIdQuery()

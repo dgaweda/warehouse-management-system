@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Entities;
@@ -14,19 +15,19 @@ namespace DataAccess.Repository.OrderRepository
 
         public override async Task<List<Order>> GetAllAsync()
         {
-            return await GetOrders() 
+            return await GetQueryableEntity() 
                 .ToListAsync();
         }
 
-        public override async Task<Order> GetByIdAsync(int id)
+        public override async Task<Order> GetByIdAsync(Guid id)
         {
-            return await GetOrders()
+            return await GetQueryableEntity()
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        private IQueryable<Order> GetOrders()
+        public override IQueryable<Order> GetQueryableEntity()
         {
-            return DbContext.Orders
+            return Entity
                 .Include(x => x.OrderLines)
                 .AsQueryable();
         }

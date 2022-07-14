@@ -4,5 +4,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Inv
 {
     public class RemoveInvoiceResponse : ResponseBase<Unit>
     {
+        public RemoveInvoiceResponse()
+        {
+            Response = Unit.Value;
+        }
     }
 }

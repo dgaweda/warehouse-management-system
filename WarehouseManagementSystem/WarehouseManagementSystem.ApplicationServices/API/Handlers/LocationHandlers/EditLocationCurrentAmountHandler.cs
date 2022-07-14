@@ -4,6 +4,7 @@ using AutoMapper;
 using DataAccess.CQRS.Commands.LocationCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using DataAccess.Repository.LocationRepository;
 using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
@@ -12,14 +13,20 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Locatio
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.LocationHandlers
 {
     public class EditLocationCurrentAmountHandler :
-        CommandHandler<EditLocationCurrentAmountRequest, EditLocationCurrentAmountResponse, Location, Domain.Models.LocationDto, EditLocationCurrentAmountCommand>,
+        CommandHandler<EditLocationCurrentAmountCommand, Location, ILocationRepository>,
         IRequestHandler<EditLocationCurrentAmountRequest, EditLocationCurrentAmountResponse>
     {
-        public EditLocationCurrentAmountHandler(IMapper mapper, ICommandExecutor commandExecutor,
-            IRepository<Location> repositoryService) 
-            : base(mapper, commandExecutor, repositoryService)
+        public EditLocationCurrentAmountHandler(IMapper mapper, ILocationRepository repositoryService) 
+            : base(mapper, repositoryService)
         {
         }
-        public async Task<EditLocationCurrentAmountResponse> Handle(EditLocationCurrentAmountRequest request, CancellationToken cancellationToken) => await HandleRequest(request);
+        public async Task<EditLocationCurrentAmountResponse> Handle(EditLocationCurrentAmountRequest request, CancellationToken cancellationToken)
+        {
+            await HandleRequest(request);
+            return new EditLocationCurrentAmountResponse()
+            {
+                Response = request.Id
+            };
+        }
     }
 }

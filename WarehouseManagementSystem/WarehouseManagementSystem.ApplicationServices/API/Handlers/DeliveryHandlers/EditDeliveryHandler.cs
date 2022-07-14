@@ -11,7 +11,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHandlers
 {
     public class EditDeliveryHandler
-        : CommandHandler<EditDeliveryCommand, Delivery, IDeliveryRepository, Delivery>,
+        : CommandHandler<EditDeliveryCommand, Delivery, IDeliveryRepository>,
         IRequestHandler<EditDeliveryRequest, EditDeliveryResponse>
     {
         public EditDeliveryHandler(IMapper mapper, IDeliveryRepository repositoryService) 
@@ -21,10 +21,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHan
 
         public async Task<EditDeliveryResponse> Handle(EditDeliveryRequest request, CancellationToken cancellationToken)
         {
-            var result = await HandleRequest<EditDeliveryRequest>(request);
+            await HandleRequest(request);
             return new EditDeliveryResponse()
             {
-                Response = result.Id
+                Response = request.Id
             };
         }
     }

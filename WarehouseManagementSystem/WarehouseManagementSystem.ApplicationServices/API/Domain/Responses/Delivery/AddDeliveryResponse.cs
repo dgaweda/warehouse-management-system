@@ -1,8 +1,9 @@
-﻿using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
+﻿using System;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Delivery
 {
-    public class AddDeliveryResponse : ResponseBase<int>
+    public class AddDeliveryResponse : ResponseBase<Guid>
     {
     }
 }

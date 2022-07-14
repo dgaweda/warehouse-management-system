@@ -7,16 +7,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Command.DeliveryCommands
 {
-    public class AddDeliveryCommand : CommandBase<Delivery, Delivery, IDeliveryRepository>
+    public class AddDeliveryCommand : CommandBase<Delivery, IDeliveryRepository>
     {
-        public override async Task<Delivery> Execute(IDeliveryRepository deliveryRepository)
+        public override async Task Execute(IDeliveryRepository deliveryRepository)
         {
             var deliveries = await deliveryRepository.Entity.ToListAsync();
             Parameter
                 .SetDeliveryNumber(deliveries)
                 .SetDeliveryName(Parameter);
             
-            return await deliveryRepository.AddAsync(Parameter);
+            await deliveryRepository.AddAsync(Parameter);
         }
     }
 }

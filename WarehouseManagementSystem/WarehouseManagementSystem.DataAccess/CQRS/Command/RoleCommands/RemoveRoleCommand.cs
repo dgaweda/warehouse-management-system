@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.RoleCommands
 {
-    public class RemoveRoleCommand : CommandBase<Role, Unit, IRoleRepository>
+    public class RemoveRoleCommand : CommandBase<Role, IRoleRepository>
     {
         public override async Task<Unit> Execute(IRoleRepository roleRepository)
         {
-           return await roleRepository.DeleteAsync(Parameter.Id);
+           await roleRepository.DeleteAsync(Parameter.Id);
         }
     }
 }

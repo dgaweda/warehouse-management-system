@@ -8,11 +8,11 @@ using MediatR;
 
 namespace DataAccess.CQRS.Commands.DepartureCommands
 {
-    public class RemoveDepartureCommand : CommandBase<Departure, Unit, IDepartureRepository>
+    public class RemoveDepartureCommand : CommandBase<Departure, IDepartureRepository>
     {
         public override async Task<Unit> Execute(IDepartureRepository departureRepository)
         {
-            return await departureRepository.DeleteAsync(Parameter.Id);
+            await departureRepository.DeleteAsync(Parameter.Id);
         }
     }
 }

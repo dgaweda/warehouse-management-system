@@ -7,11 +7,11 @@ using DataAccess.Repository.PalletRepository;
 
 namespace DataAccess.CQRS.Commands.PalletCommands
 {
-    public class AddPalletCommand : CommandBase<Pallet, Pallet, IPalletRepository>
+    public class AddPalletCommand : CommandBase<Pallet, IPalletRepository>
     {
-        public override async Task<Pallet> Execute(IPalletRepository palletRepository)
+        public override async Task Execute(IPalletRepository palletRepository)
         {
-            return await palletRepository.AddAsync(Parameter);
+            await palletRepository.AddAsync(Parameter);
         }
     }
 }

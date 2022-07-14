@@ -4,6 +4,7 @@ using AutoMapper;
 using DataAccess.CQRS.Commands.PalletCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using DataAccess.Repository.PalletRepository;
 using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;
@@ -12,15 +13,18 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandlers
 {
     public class RemovePalletHandler :
-        CommandHandler<RemovePalletRequest, RemovePalletResponse, Pallet, Domain.Models.PalletDto, RemovePalletCommand>,
+        CommandHandler<RemovePalletCommand, Pallet, IPalletRepository>,
         IRequestHandler<RemovePalletRequest, RemovePalletResponse>
     {
 
-        public RemovePalletHandler(IMapper mapper, ICommandExecutor commandExecutor,
-            IRepository<Pallet> repositoryService)
-            : base(mapper, commandExecutor, repositoryService)
+        public RemovePalletHandler(IMapper mapper, IPalletRepository repositoryService)
+            : base(mapper, repositoryService)
         {
         }
-        public Task<RemovePalletResponse> Handle(RemovePalletRequest request, CancellationToken cancellationToken) => HandleRequest(request);
+        public async Task<RemovePalletResponse> Handle(RemovePalletRequest request, CancellationToken cancellationToken)
+        {
+            await HandleRequest(request);
+            return new RemovePalletResponse();
+        }
     }
 }

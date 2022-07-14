@@ -4,5 +4,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pro
 {
     public class RemoveProductResponse : ResponseBase<Unit>
     {
+        public RemoveProductResponse()
+        {
+            Response = Unit.Value;
+        }
     }
 }

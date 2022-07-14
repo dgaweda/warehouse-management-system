@@ -6,6 +6,7 @@ using DataAccess.Entities;
 using DataAccess.Repository;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using DataAccess.Repository.UserRepository;
 using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
@@ -15,17 +16,21 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandlers
 {
     public class AddUserHandler : 
-        CommandHandler<AddUserRequest, AddUserResponse, User, UserDto, AddUserCommand>,
+        CommandHandler<AddUserCommand, User, IUserRepository>,
         IRequestHandler<AddUserRequest, AddUserResponse>
     {
-        public AddUserHandler(ICommandExecutor commandExecutor, IMapper mapper, IRepository<User> repositoryService) 
-            : base(mapper, commandExecutor, repositoryService)
+        public AddUserHandler(IMapper mapper, IUserRepository repositoryService) 
+            : base(mapper, repositoryService)
         {
         }
 
         public async Task<AddUserResponse> Handle(AddUserRequest request, CancellationToken cancellationToken)
         {
-            return await HandleRequest(request);
+            await HandleRequest(request);
+            return new AddUserResponse()
+            {
+                Response = request.Id
+            };
         }
     }
 }

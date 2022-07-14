@@ -4,6 +4,7 @@ using AutoMapper;
 using DataAccess.CQRS.Commands.LocationCommands;
 using DataAccess.Entities;
 using DataAccess.Repository;
+using DataAccess.Repository.LocationRepository;
 using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
@@ -12,15 +13,22 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Locatio
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.LocationHandlers
 {
     public class AddLocationHandler :
-        CommandHandler<AddLocationRequest, AddLocationResponse, Location, Domain.Models.LocationDto, AddLocationCommand>,
+        CommandHandler<AddLocationCommand, Location, ILocationRepository>,
         IRequestHandler<AddLocationRequest, AddLocationResponse>
     {
-        public AddLocationHandler(IMapper mapper, ICommandExecutor commandExecutor,
-            IRepository<Location> repositoryService) 
-            : base(mapper, commandExecutor, repositoryService)
+        public AddLocationHandler(IMapper mapper,
+            ILocationRepository repositoryService) 
+            : base(mapper, repositoryService)
         {
 
         }
-        public async Task<AddLocationResponse> Handle(AddLocationRequest request, CancellationToken cancellationToken) => await HandleRequest(request);
+        public async Task<AddLocationResponse> Handle(AddLocationRequest request, CancellationToken cancellationToken)
+        {
+            await HandleRequest(request);
+            return new AddLocationResponse()
+            {
+                Response = request.Id
+            };
+        }
     }
 }

@@ -20,8 +20,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHan
         {
         }
 
-        public async Task<GetDeliveriesResponse> Handle(GetDeliveriesRequest request,
-            CancellationToken cancellationToken)
+        public async Task<GetDeliveriesResponse> Handle(GetDeliveriesRequest request, CancellationToken cancellationToken)
         {
             var query = new GetDeliveriesQuery()
             {

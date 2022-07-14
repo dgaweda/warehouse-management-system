@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.LocationCommands
 {
-    public class RemoveLocationCommand : CommandBase<Location, Unit, ILocationRepository>
+    public class RemoveLocationCommand : CommandBase<Location, ILocationRepository>
     {
-        public override async Task<Unit> Execute(ILocationRepository locationRepository)
+        public override async Task Execute(ILocationRepository locationRepository)
         {
-            return await locationRepository.DeleteAsync(Parameter.Id);
+            await locationRepository.DeleteAsync(Parameter.Id);
         }
     }
 }

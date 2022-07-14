@@ -13,7 +13,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departu
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHandlers
 {
     public class AddDepartureHandler :
-        CommandHandler<AddDepartureCommand, Departure, IDepartureRepository, Departure>,
+        CommandHandler<AddDepartureCommand, Departure, IDepartureRepository>,
         IRequestHandler<AddDepartureRequest, AddDepartureResponse>
     {
         public AddDepartureHandler(IMapper mapper, IDepartureRepository repositoryService)
@@ -23,10 +23,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHa
 
         public async Task<AddDepartureResponse> Handle(AddDepartureRequest request, CancellationToken cancellationToken)
         {
-            var result = await HandleRequest(request);
+            await HandleRequest(request);
             return new AddDepartureResponse()
             {
-                Response = result.Id
+                Response = request.Id
             };
         }
     }

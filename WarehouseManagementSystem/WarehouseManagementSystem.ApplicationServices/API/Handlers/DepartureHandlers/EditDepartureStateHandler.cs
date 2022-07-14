@@ -15,7 +15,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departu
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHandlers
 {
     public class EditDepartureStateHandler :
-        CommandHandler<EditDepartureStateCommand, Departure, IDepartureRepository, Departure>,
+        CommandHandler<EditDepartureStateCommand, Departure, IDepartureRepository>,
         IRequestHandler<EditDepartureStateRequest, EditDepartureStateResponse>
     {
         public EditDepartureStateHandler(IMapper mapper, IDepartureRepository repositoryService)
@@ -25,10 +25,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHa
         }
         public async Task<EditDepartureStateResponse> Handle(EditDepartureStateRequest request, CancellationToken cancellationToken)
         {
-            var result =  await HandleRequest(request);
+            await HandleRequest(request);
             return new EditDepartureStateResponse()
             {
-                Response = result.Id
+                Response = request.Id
             };
         }
     }

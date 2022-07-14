@@ -14,20 +14,20 @@ namespace DataAccess.Repository.ProductPalletLineRepository
 
         public override async Task<List<ProductPalletLine>> GetAllAsync()
         {
-            return await GetProductPalletLine()
+            return await GetQueryableEntity()
                 .ToListAsync();
         }
 
         public async Task<List<ProductPalletLine>> GetProductsByPalletId(int palletId)
         {
-            return await GetProductPalletLine()
+            return await GetQueryableEntity()
                 .Where(x => x.PalletId == palletId)
                 .ToListAsync();
         }
 
-        private IQueryable<ProductPalletLine> GetProductPalletLine()
+        public override IQueryable<ProductPalletLine> GetQueryableEntity()
         {
-            return DbContext.ProductPalletLines
+            return Entity
                 .Include(x => x.Product)
                 .Include(x => x.Pallet)
                 .ThenInclude(pallet => pallet.Order)

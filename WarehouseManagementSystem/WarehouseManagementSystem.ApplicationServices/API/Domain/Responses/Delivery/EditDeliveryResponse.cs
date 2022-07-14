@@ -1,6 +1,8 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Delivery
+﻿using System;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Delivery
 {
-    public class EditDeliveryResponse : ResponseBase<int>
+    public class EditDeliveryResponse : ResponseBase<Guid>
     {
     }
 }

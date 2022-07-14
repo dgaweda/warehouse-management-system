@@ -10,16 +10,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.PalletCommands
 {
-    public class SetPalletDestinationCommand : CommandBase<Pallet, Pallet, IPalletRepository>
+    public class SetPalletDestinationCommand : CommandBase<Pallet, IPalletRepository>
     {
-        public override async Task<Pallet> Execute(IPalletRepository palletRepository)
+        public override async Task Execute(IPalletRepository palletRepository)
         {
             var pallet = await palletRepository.GetByIdAsync(Parameter.Id);
 
             pallet.SetProperties(Parameter);
             pallet.SetStatus();
 
-            return await palletRepository.UpdateAsync(pallet);
+            await palletRepository.UpdateAsync(pallet);
         }
     }
 }

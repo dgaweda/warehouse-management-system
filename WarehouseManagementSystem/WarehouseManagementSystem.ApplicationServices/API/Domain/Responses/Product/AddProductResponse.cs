@@ -1,6 +1,8 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
+﻿using System;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 {
-    public class AddProductResponse : ResponseBase<int>
+    public class AddProductResponse : ResponseBase<Guid>
     {
     }
 }

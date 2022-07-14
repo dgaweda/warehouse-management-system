@@ -4,5 +4,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pal
 {
     public class RemovePalletResponse : ResponseBase<Unit>
     {
+        public RemovePalletResponse()
+        {
+            Response = Unit.Value;
+        }
     }
 }

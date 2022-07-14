@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repository.ProductRepository
@@ -13,11 +15,17 @@ namespace DataAccess.Repository.ProductRepository
 
         public override async Task<List<Product>> GetAllAsync()
         {
-            return await DbContext.Products
-                .Include(x => x.PalletLines)
-                .ThenInclude(x => x.Pallet)
+            return await GetQueryableEntity()
                 .AsNoTracking()
                 .ToListAsync();
+        }
+
+        public override IQueryable<Product> GetQueryableEntity()
+        {
+            return Entity
+                .Include(x => x.PalletLines)
+                .ThenInclude(x => x.Pallet)
+                .AsQueryable();
         }
     }
 }
