@@ -3,7 +3,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.OrderLi
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.OrderLine
 {
-    public class AddOrderLineRequest: IRequest<AddOrderLineResponse>
+    public class AddOrderLineRequest: RequestBase, IRequest<AddOrderLineResponse>
     {
         public int ProductId { get; set; }
         public int Amount { get; set; }

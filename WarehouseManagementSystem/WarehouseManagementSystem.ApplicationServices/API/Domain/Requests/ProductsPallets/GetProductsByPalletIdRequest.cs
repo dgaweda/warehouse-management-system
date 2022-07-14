@@ -3,7 +3,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets
 {
-    public class GetProductsByPalletIdRequest : IRequest<GetProductsByPalletIdResponse>
+    public class GetProductsByPalletIdRequest : RequestBase, IRequest<GetProductsByPalletIdResponse>
     {
         public int PalletId { get; set; }
     }

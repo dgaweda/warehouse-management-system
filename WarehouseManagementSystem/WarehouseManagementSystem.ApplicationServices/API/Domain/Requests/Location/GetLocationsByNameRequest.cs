@@ -4,7 +4,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location
 {
-    public class GetLocationsByNameRequest : IRequest<GetLocationsByNameResponse>
+    public class GetLocationsByNameRequest : RequestBase, IRequest<GetLocationsByNameResponse>
     {
         public string Name { get; set; }
     }

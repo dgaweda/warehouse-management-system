@@ -5,6 +5,5 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Depa
 {
     public class RemoveDepartureRequest : IRequest<RemoveDepartureResponse>
     {
-        public int DepartureId { get; set; }
     }
 }

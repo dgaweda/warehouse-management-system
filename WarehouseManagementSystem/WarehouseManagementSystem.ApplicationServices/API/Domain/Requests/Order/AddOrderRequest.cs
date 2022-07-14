@@ -5,7 +5,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Order
 {
-    public class AddOrderRequest: IRequest<AddOrderResponse>
+    public class AddOrderRequest: RequestBase, IRequest<AddOrderResponse>
     {
         public string Barcode { get; set; }
         public List<AddOrderLineRequest> OrderLines { get; set; }

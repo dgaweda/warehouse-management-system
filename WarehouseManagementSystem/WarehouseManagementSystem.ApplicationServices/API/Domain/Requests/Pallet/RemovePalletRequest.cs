@@ -1,10 +1,11 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet
 {
-    public class RemovePalletRequest : IRequest<RemovePalletResponse>
+    public class RemovePalletRequest : RequestBase, IRequest<RemovePalletResponse>
     {
-        public int PalletId { get; set; }
+        public override Guid Id { get; set; }
     }
 }

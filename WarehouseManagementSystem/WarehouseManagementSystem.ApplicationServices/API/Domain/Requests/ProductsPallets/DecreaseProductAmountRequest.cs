@@ -5,7 +5,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets
 {
-    public class DecreaseProductAmountRequest : IRequest<DecreaseProductAmountResponse>
+    public class DecreaseProductAmountRequest : RequestBase, IRequest<DecreaseProductAmountResponse>
     {
         public int PalletId { get; set; }
         

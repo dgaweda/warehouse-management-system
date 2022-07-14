@@ -1,10 +1,11 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Order
 {
-    public class GetOrderByIdRequest : IRequest<GetOrderByIdResponse>
+    public class GetOrderByIdRequest : RequestBase, IRequest<GetOrderByIdResponse>
     {
-        public int Id { get; set; }
+        public override Guid Id { get; set; }
     }
 }

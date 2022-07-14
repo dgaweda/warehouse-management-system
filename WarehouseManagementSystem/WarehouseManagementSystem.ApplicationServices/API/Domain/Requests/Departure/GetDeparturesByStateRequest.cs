@@ -4,7 +4,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departu
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Departure
 {
-    public class GetDeparturesByStateRequest : IRequest<GetDeparturesByStateResponse>
+    public class GetDeparturesByStateRequest : RequestBase, IRequest<GetDeparturesByStateResponse>
     {
         public StateType State { get; set; }
     }

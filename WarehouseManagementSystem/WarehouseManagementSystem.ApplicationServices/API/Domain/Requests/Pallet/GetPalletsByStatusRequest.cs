@@ -4,7 +4,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet
 {
-    public class GetPalletsByStatusRequest : IRequest<GetPalletsByStatusResponse>
+    public class GetPalletsByStatusRequest : RequestBase, IRequest<GetPalletsByStatusResponse>
     {
         public PalletStatus PalletStatus { get; set; }
     }

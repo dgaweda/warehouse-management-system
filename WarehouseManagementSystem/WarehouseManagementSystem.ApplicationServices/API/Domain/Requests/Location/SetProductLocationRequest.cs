@@ -3,7 +3,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Locatio
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location
 {
-    public class SetProductLocationRequest : IRequest<SetProductLocationResponse>
+    public class SetProductLocationRequest : RequestBase, IRequest<SetProductLocationResponse>
     {
         public int LocationId { get; set; }
         public int ProductId { get; set; }

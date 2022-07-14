@@ -21,10 +21,10 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DeliveryHan
 
         public async Task<AddDeliveryResponse> Handle(AddDeliveryRequest request, CancellationToken cancellationToken)
         {
-            var result = await HandleRequest(request);
+            await HandleRequest(request);
             return new AddDeliveryResponse()
             {
-                Response = result.Id
+                Response = request.Id
             };
         }
     }

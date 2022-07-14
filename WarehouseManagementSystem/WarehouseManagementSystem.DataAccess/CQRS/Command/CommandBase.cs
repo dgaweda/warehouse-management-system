@@ -1,13 +1,11 @@
-﻿#nullable enable
-using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace DataAccess.CQRS.Command
 {
-    public abstract class CommandBase<TParameter, TResult, TRepository>
+    public abstract class CommandBase<TParameter, TRepository>
     {
         public TParameter Parameter { get; set; }
 
-        public abstract Task<TResult> Execute(TRepository repository);
+        public abstract Task Execute(TRepository repository);
     }
 }

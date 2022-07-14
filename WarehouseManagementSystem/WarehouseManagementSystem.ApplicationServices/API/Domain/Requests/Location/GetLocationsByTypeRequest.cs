@@ -4,7 +4,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location
 {
-    public class GetLocationsByTypeRequest : IRequest<GetLocationsByTypeResponse>
+    public class GetLocationsByTypeRequest : RequestBase, IRequest<GetLocationsByTypeResponse>
     {
         public LocationType LocationType { get; set; }
     }
