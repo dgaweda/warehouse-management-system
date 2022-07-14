@@ -12,7 +12,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.Departure
         public RemoveDepartureRequestValidator(IValidatorHelper validator)
         {
             _validator = validator;
-            RuleFor(x => x.DepartureId).Must(_validator.Exist<Departure>).WithMessage(ErrorType.NotFound);
+            RuleFor(x => x.Id).Must(_validator.Exist<Departure>).WithMessage(ErrorType.NotFound);
         }
     }
 }

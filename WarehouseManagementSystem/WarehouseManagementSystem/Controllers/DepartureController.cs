@@ -33,7 +33,7 @@ namespace warehouse_management_system.Controllers
         public async Task<IActionResult> EditDepartureState([FromQuery] EditDepartureStateRequest request) => await Handle<EditDepartureStateRequest, EditDepartureStateResponse>(request);
 
         [HttpDelete]
-        [Route("{DepartureId}")]
+        [Route("{Id}")]
         public async Task<IActionResult> RemoveDeparture([FromRoute] RemoveDepartureRequest request) => await Handle<RemoveDepartureRequest, RemoveDepartureResponse>(request);
     }
 }
