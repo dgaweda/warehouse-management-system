@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Entities;
@@ -34,9 +35,9 @@ namespace DataAccess.Extensions
             pallet.PalletStatus = PalletStatus.UNFOLDED;
         }
 
-        public static List<ProductPalletLine> FilterByPalletId(this List<ProductPalletLine> palletLines, int palletId)
+        public static List<ProductPalletLine> FilterByPalletId(this List<ProductPalletLine> palletLines, Guid palletId)
         {
-            if (palletId == default)
+            if (palletId == Guid.Empty)
                 return palletLines;
 
             return palletLines.Where(x => x.PalletId == palletId).ToList();

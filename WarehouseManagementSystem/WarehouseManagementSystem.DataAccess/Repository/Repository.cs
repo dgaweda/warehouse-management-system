@@ -23,6 +23,12 @@ namespace DataAccess.Repository
             _context = dbContext;
             Entity = _context.Set<TEntity>();
         }
+
+        public WMSDatabaseContext GetDbContext()
+        {
+            return _context;
+        }
+
         public async Task AddAsync(TEntity entity)
         {
             await Entity.AddAsync(entity);

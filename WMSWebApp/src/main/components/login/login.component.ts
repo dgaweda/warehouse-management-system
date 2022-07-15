@@ -28,9 +28,9 @@ export class LoginComponent extends BaseComponent {
     this.submitted = false;
     this.error = '';
     console.log(`dupa`,this.authenticationService.currentUser);
-    if(this.authenticationService.currentUser) {
-      this.router.navigate(['/home']);
-    }
+    // if(this.authenticationService.currentUser) {
+    this.router.navigate(['/home']);
+    // }
 
     this.loginForm = new FormGroup({
       username: new FormControl('', Validators.required),

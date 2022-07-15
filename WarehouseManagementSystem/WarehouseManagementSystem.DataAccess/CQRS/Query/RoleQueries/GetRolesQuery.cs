@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataAccess.Entities;
 using DataAccess.Extensions;
@@ -8,7 +9,7 @@ namespace DataAccess.CQRS.Query.Queries.RoleQueries
 {
     public class GetRolesQuery : QueryBase<List<Role>, IRoleRepository>
     {
-        public int RoleId { get; set; }
+        public Guid RoleId { get; set; }
         public string RoleName { get; set; }
 
         public override async Task<List<Role>> Execute(IRoleRepository roleRepository)

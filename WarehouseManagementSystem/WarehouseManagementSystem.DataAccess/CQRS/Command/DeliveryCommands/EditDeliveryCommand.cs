@@ -10,7 +10,7 @@ namespace DataAccess.CQRS.Commands.DeliveryCommands
 {
     public class EditDeliveryCommand : CommandBase<Delivery, IDeliveryRepository>
     {
-        public override async Task<Delivery> Execute(IDeliveryRepository deliveryRepository)
+        public override async Task Execute(IDeliveryRepository deliveryRepository)
         {
             await deliveryRepository.UpdateAsync(Parameter);
         }

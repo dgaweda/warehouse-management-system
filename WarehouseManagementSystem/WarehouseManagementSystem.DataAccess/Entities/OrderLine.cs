@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities.EntityBases;
+﻿using System;
+using DataAccess.Entities.EntityBases;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,9 +7,9 @@ namespace DataAccess.Entities
 {
     public class OrderLine : EntityBase
     {
-        public int ProductId { get; set; }
+        public Guid ProductId { get; set; }
 
-        public int OrderId { get; set; }
+        public Guid OrderId { get; set; }
 
         [Required]
         [Range(1, 999)]

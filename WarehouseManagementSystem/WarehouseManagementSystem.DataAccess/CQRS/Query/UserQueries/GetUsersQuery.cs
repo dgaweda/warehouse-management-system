@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities;
+﻿using System;
+using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace DataAccess.CQRS.Queries
 {
     public class GetUsersQuery : QueryBase<List<User>, IUserRepository>
     {
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public string RoleName { get; set; }
         public string PESEL { get; set; }
         public int Age { get; set; }

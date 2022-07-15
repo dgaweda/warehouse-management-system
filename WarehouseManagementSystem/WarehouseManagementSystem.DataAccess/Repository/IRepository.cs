@@ -10,6 +10,7 @@ namespace DataAccess.Repository
 {
     public interface IRepository<T> where T : EntityBase
     {
+        WMSDatabaseContext GetDbContext();
         DbSet<T> Entity { get; }
         Task<T> GetByIdAsync(Guid id);
         Task AddAsync(T entity);

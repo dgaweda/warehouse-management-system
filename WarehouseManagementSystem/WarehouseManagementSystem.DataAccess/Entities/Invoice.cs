@@ -27,7 +27,7 @@ namespace DataAccess.Entities
         public DateTime ReceiptDateTime { get; set; }
 
         [Required]
-        public int DeliveryId { get; set; }
+        public Guid DeliveryId { get; set; }
 
         public Delivery Delivery { get; set; }
         public List<Pallet> Pallets { get; set; }

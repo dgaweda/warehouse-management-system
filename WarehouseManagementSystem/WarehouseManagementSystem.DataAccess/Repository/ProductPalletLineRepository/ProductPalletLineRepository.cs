@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Entities;
@@ -18,7 +19,7 @@ namespace DataAccess.Repository.ProductPalletLineRepository
                 .ToListAsync();
         }
 
-        public async Task<List<ProductPalletLine>> GetProductsByPalletId(int palletId)
+        public async Task<List<ProductPalletLine>> GetProductsByPalletId(Guid palletId)
         {
             return await GetQueryableEntity()
                 .Where(x => x.PalletId == palletId)

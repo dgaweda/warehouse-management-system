@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataAccess.CQRS.Query.Queries;
 using DataAccess.Entities;
@@ -8,7 +9,7 @@ namespace DataAccess.CQRS.Query.PalletsProductsQueries
 {
     public class GetProductsByPalletIdQuery : QueryBase<List<ProductPalletLine>, IProductPalletLineRepository>
     {
-        public int PalletId { get; set; }
+        public Guid PalletId { get; set; }
 
         public override async Task<List<ProductPalletLine>> Execute(IProductPalletLineRepository productPalletLineRepository)
         {

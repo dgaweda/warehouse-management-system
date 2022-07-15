@@ -11,7 +11,7 @@ namespace DataAccess.CQRS.Commands.RoleCommands
 {
     public class RemoveRoleCommand : CommandBase<Role, IRoleRepository>
     {
-        public override async Task<Unit> Execute(IRoleRepository roleRepository)
+        public override async Task Execute(IRoleRepository roleRepository)
         {
            await roleRepository.DeleteAsync(Parameter.Id);
         }

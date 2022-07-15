@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Authentication;
 using DataAccess.Entities;
@@ -7,7 +8,7 @@ namespace DataAccess.Extensions
 {
     public static class UserExtension
     {
-        public static List<User> FilterByUserId(this List<User> users, int userId)
+        public static List<User> FilterByUserId(this List<User> users, Guid userId)
         {
             return userId == default ? users : users.Where(user => user.Id == userId).ToList();
         }

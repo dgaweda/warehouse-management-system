@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities;
+﻿using System;
+using DataAccess.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataAccess.CQRS.Query.Queries;
@@ -11,7 +12,7 @@ namespace DataAccess.CQRS.Queries.DeliveryProductQueries
     public class GetProductsQuery : QueryBase<List<Product>, IProductRepository>
     {
         public string Name { get; set; }
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Barcode { get; set; }
 
         public override async Task<List<Product>> Execute(IProductRepository productRepository)

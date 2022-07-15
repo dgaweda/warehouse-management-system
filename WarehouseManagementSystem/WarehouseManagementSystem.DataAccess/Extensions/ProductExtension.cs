@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Entities;
 
@@ -29,9 +30,9 @@ namespace DataAccess.Extensions
             return products.Where(x => x.Barcode == barcode).ToList();
         }
 
-        public static List<Product> FilterById(this List<Product> products, int id)
+        public static List<Product> FilterById(this List<Product> products, Guid? id)
         {
-            if (id == 0)
+            if (id == Guid.Empty)
                 return products;
 
             return products.Where(x => x.Id == id).ToList();
