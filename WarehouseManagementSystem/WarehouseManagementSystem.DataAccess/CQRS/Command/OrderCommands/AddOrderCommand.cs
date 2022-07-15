@@ -1,9 +1,7 @@
 ﻿
 using System.Threading.Tasks;
 using DataAccess.CQRS.Command;
-using DataAccess.CQRS.Command.Commands;
 using DataAccess.Entities;
-using DataAccess.Repository;
 using DataAccess.Repository.OrderRepository;
 using WarehouseManagementSystem.ApplicationServices.API.Enums;
 

@@ -2,12 +2,9 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using DataAccess.CQRS.Command.SeniorityCommands;
-using DataAccess.CQRS.Command.SeniorityCommands;
 using DataAccess.Entities;
-using DataAccess.Repository;
 using DataAccess.Repository.SeniorityRepository;
 using MediatR;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seniority;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Seniority;
 

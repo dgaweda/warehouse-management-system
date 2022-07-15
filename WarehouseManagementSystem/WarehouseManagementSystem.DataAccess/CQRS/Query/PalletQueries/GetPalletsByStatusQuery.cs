@@ -1,9 +1,7 @@
 ﻿using DataAccess.Entities;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.CQRS.Query.Queries;
-using DataAccess.Extensions;
 using DataAccess.Repository.PalletRepository;
 using WarehouseManagementSystem.ApplicationServices.API.Enums;
 

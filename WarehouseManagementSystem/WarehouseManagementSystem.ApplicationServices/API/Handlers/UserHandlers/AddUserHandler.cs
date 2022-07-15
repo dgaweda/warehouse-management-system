@@ -3,13 +3,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DataAccess.CQRS.Command.Commands.UserCommands;
 using DataAccess.Entities;
-using DataAccess.Repository;
-using DataAccess.Entities;
-using DataAccess.Repository;
 using DataAccess.Repository.UserRepository;
-using FluentValidation;
 using MediatR;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 

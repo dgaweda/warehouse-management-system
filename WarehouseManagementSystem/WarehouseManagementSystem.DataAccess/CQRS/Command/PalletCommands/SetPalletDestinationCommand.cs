@@ -1,12 +1,8 @@
-﻿using System.Linq;
-using DataAccess.Entities;
+﻿using DataAccess.Entities;
 using System.Threading.Tasks;
 using DataAccess.CQRS.Command;
-using DataAccess.CQRS.Command.Commands;
 using DataAccess.Extensions;
-using DataAccess.Repository;
 using DataAccess.Repository.PalletRepository;
-using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Commands.PalletCommands
 {

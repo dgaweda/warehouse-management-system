@@ -1,11 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS;
 using DataAccess.CQRS.Command.ProductPalletLineCommands;
-using DataAccess.Repository;
 using DataAccess.Repository.ProductPalletLineRepository;
-using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.ProductsPallets;

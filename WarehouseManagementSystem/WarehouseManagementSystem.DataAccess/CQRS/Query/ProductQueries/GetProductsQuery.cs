@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using DataAccess.CQRS.Query.Queries;
 using DataAccess.Extensions;
 using DataAccess.Repository.ProductRepository;
-using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Queries.DeliveryProductQueries
 {

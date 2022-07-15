@@ -6,9 +6,6 @@ using DataAccess.Exceptions;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using warehouse_management_system.Exceptions;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
-using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 
 namespace warehouse_management_system.Middleware
 {

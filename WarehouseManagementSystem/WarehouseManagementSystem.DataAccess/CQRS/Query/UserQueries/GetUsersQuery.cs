@@ -1,11 +1,9 @@
 ﻿using System;
 using DataAccess.Entities;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataAccess.CQRS.Query.Queries;
 using DataAccess.Extensions;
-using DataAccess.Repository;
 using DataAccess.Repository.UserRepository;
 
 namespace DataAccess.CQRS.Queries

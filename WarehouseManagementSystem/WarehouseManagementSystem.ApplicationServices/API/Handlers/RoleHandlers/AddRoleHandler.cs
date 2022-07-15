@@ -3,12 +3,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DataAccess.CQRS.Commands.RoleCommands;
 using DataAccess.Entities;
-using DataAccess.Repository;
 using DataAccess.Repository.RoleRepository;
-using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Role;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seniority;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.RoleHandlers

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Command.Commands;
 using DataAccess.Entities;
 using DataAccess.Extensions;
 using DataAccess.Repository.ProductPalletLineRepository;

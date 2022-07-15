@@ -1,12 +1,10 @@
 ﻿using DataAccess.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.CQRS.Query.Queries;
 using DataAccess.Extensions;
 using DataAccess.Repository.DepartureRepository;
-using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Queries.DepartureQueries
 {

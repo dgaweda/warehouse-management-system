@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using DataAccess.CQRS.Command.Commands;
 using DataAccess.Entities;
 using DataAccess.Repository.SeniorityRepository;
 

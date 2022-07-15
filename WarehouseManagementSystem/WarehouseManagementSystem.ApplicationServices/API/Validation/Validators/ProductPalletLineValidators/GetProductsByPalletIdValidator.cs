@@ -1,7 +1,5 @@
-﻿using System.Net;
-using FluentValidation;
+﻿using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets;
-using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductPalletLineValidators
 {

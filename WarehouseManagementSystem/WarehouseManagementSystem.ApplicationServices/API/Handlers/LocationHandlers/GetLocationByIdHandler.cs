@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess;
 using DataAccess.CQRS.Query.LocationQueries;
 using DataAccess.Entities;
 using MediatR;

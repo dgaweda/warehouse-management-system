@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Entities;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repository.ProductRepository

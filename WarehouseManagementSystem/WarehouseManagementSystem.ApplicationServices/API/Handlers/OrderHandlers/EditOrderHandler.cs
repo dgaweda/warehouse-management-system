@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DataAccess.CQRS.Commands.OrderCommands;
 using DataAccess.Entities;
-using DataAccess.Repository;
 using DataAccess.Repository.OrderRepository;
 using FluentValidation;
 using MediatR;

@@ -1,14 +1,11 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using DataAccess.Entities.EntityBases;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using DataAccess.Exceptions;
-using MediatR;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DataAccess.Repository
 {

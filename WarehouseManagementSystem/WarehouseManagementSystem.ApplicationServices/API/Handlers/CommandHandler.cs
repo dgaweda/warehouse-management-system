@@ -1,8 +1,6 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using System.Threading.Tasks;
 using DataAccess.CQRS.Command;
-using DataAccess.Entities.EntityBases;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {

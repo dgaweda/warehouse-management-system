@@ -3,11 +3,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DataAccess.CQRS.Commands.OrderLineCommands;
 using DataAccess.Entities;
-using DataAccess.Repository;
 using DataAccess.Repository.OrderLineRepository;
-using FluentValidation;
 using MediatR;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.OrderLine;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.OrderLine;
 
