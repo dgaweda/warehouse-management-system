@@ -1,27 +1,28 @@
-﻿using DataAccess.Entities.EntityBases;
+﻿using System;
+using DataAccess.Entities.EntityBases;
 using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Validators
+namespace WarehouseManagementSystem.ApplicationServices.API.Validation.Validators
 {
     public interface IValidatorHelper
     {
-        bool Exist<TEntity>(int? id) where TEntity : EntityBase;
-        bool Exist<TEntity>(int id) where TEntity : EntityBase;
+        bool Exist<TEntity>(Guid? id) where TEntity : EntityBase;
+        bool Exist<TEntity>(Guid id) where TEntity : EntityBase;
         bool IsLocationWithThatNameExits(string name);
-        int GetLocationMaxAmount(int id);
-        bool IsProductOnPalletForUnfolding(int id);
-        bool IsPalletForUnfoldingExist(int palletId);
+        int GetLocationMaxAmount(Guid id);
+        bool IsProductOnPalletForUnfolding(Guid id);
+        bool IsPalletForUnfoldingExist(Guid palletId);
         bool IsProductBarcodeUnique(string barcode);
         bool IsPalletBarcodeIsUnique(string barcode);
         bool IsRoleNameUnique(string name);
-        bool IsHiredEmployee(int employeeId);
+        bool IsHiredEmployee(Guid employeeId);
         bool IsDeliveryExist(string name);
         bool IsDepartureNameIsUnique(string name);
         bool IsDepartureNameExist(string name);
         bool IsUsernameExist(string username);
-        bool IsLocationStillHaveProducts(int id);
+        bool IsLocationStillHaveProducts(Guid id);
         bool IsOrderBarcodeUnique(string barcode);
-        bool IsPalletIdExistsInProductPalletLine(int palletId);
+        bool IsPalletIdExistsInProductPalletLine(Guid palletId);
         bool IsInvoiceNumberNotExist(string invoiceNumber);
         bool IsLocationWithThatTypeExist(LocationType locationType);
     }

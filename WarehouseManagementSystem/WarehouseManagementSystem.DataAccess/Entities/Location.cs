@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities.EntityBases;
+﻿using System;
+using DataAccess.Entities.EntityBases;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using WarehouseManagementSystem.ApplicationServices.API.Enums;
@@ -7,7 +8,7 @@ namespace DataAccess.Entities
 {
     public class Location : EntityBase
     {
-        public int? ProductId { get; set; }
+        public Guid? ProductId { get; set; }
 
         [Required]
         [Column("Typ lokalizacji")]

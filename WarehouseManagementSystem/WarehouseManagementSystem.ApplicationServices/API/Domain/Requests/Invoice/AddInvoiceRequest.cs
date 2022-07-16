@@ -9,6 +9,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Invo
         public string Provider { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime ReceiptDateTime { get; set; }
-        public int DeliveryId { get; set; }
+        public Guid DeliveryId { get; set; }
     }
 }

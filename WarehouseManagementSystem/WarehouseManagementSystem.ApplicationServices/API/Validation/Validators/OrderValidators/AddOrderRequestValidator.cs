@@ -1,16 +1,17 @@
 ﻿using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Order;
 using WarehouseManagementSystem.ApplicationServices.API.Validation;
+using WarehouseManagementSystem.ApplicationServices.API.Validation.Validators;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.OrderValidators
 {
     public class AddOrderRequestValidator: AbstractValidator<AddOrderRequest>
     {
-        private readonly IValidatorHelper _validator;
+        
         public AddOrderRequestValidator(IValidatorHelper validator)
         {
-            _validator = validator;
-            RuleFor(x => x.Barcode).Must(_validator.IsOrderBarcodeUnique)
+            
+            RuleFor(x => x.Barcode).Must(validator.IsOrderBarcodeUnique)
                 .WithMessage(ErrorType.AlreadyExist);
             RuleFor(x => x.Barcode).NotEmpty()
                 .WithMessage(ErrorType.NotFound);

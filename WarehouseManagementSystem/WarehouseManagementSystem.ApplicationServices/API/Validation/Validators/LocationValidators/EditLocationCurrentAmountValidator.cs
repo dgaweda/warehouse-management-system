@@ -2,23 +2,24 @@
 using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
 using WarehouseManagementSystem.ApplicationServices.API.Validation;
+using WarehouseManagementSystem.ApplicationServices.API.Validation.Validators;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationValidators
 {
     public class EditLocationCurrentAmountValidator : AbstractValidator<EditLocationCurrentAmountRequest>
     {
-        private IValidatorHelper _validator;
+        private IValidatorHelper validator;
 
         public EditLocationCurrentAmountValidator(IValidatorHelper validator)
         {
-            _validator = validator;
+            
             RuleFor(x => x.Id)
-                .Must(_validator.Exist<Location>)
+                .Must(validator.Exist<Location>)
                 .WithMessage(ErrorType.NotFound);
 
             RuleFor(x => x.CurrentAmount)
-                .LessThan(x => _validator.GetLocationMaxAmount(x.Id))
-                .WithMessage(x => $"Must be less than {_validator.GetLocationMaxAmount(x.Id)}.");
+                .LessThan(x => validator.GetLocationMaxAmount(x.Id))
+                .WithMessage(x => $"Must be less than {validator.GetLocationMaxAmount(x.Id)}.");
         }
     }
 }

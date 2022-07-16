@@ -2,21 +2,20 @@
 using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;
 using WarehouseManagementSystem.ApplicationServices.API.Validation;
+using WarehouseManagementSystem.ApplicationServices.API.Validation.Validators;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.PalletValidators
 {
     public class SetPalletDestinationRequestValidator : AbstractValidator<SetPalletDestinationRequest>
     {
-        readonly IValidatorHelper _validator;
-
         public SetPalletDestinationRequestValidator(IValidatorHelper validator)
         {
-            _validator = validator;
-            RuleFor(x => x.Id).Must(_validator.Exist<Pallet>).WithMessage(ErrorType.NotFound);
-            RuleFor(x => x.OrderId).Must(_validator.Exist<Order>).WithMessage(ErrorType.NotFound);
-            RuleFor(x => x.DepartureId).Must(_validator.Exist<Departure>).WithMessage(ErrorType.NotFound);
-            RuleFor(x => x.InvoiceId).Must(_validator.Exist<Invoice>).WithMessage(ErrorType.NotFound);
-            RuleFor(x => x.UserId).Must(_validator.Exist<User>).WithMessage(ErrorType.NotFound);
+            var validator1 = validator;
+            RuleFor(x => x.Id).Must(validator1.Exist<Pallet>).WithMessage(ErrorType.NotFound);
+            RuleFor(x => x.OrderId).Must(validator1.Exist<Order>).WithMessage(ErrorType.NotFound);
+            RuleFor(x => x.DepartureId).Must(validator1.Exist<Departure>).WithMessage(ErrorType.NotFound);
+            RuleFor(x => x.InvoiceId).Must(validator1.Exist<Invoice>).WithMessage(ErrorType.NotFound);
+            RuleFor(x => x.UserId).Must(validator1.Exist<User>).WithMessage(ErrorType.NotFound);
         }
     }
 }

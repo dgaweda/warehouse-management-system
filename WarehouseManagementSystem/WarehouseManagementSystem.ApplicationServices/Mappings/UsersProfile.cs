@@ -16,7 +16,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
             CreateMap<EditUserRequest, User>();
 
             CreateMap<RemoveUserRequest, User>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.UserId));
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id));
         }
     }
 }

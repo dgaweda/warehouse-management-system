@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DataAccess;
 using DataAccess.Entities.EntityBases;
 using WarehouseManagementSystem.ApplicationServices.API.Enums;
+using WarehouseManagementSystem.ApplicationServices.API.Validation.Validators;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators
 {
@@ -14,16 +16,16 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
             _context = context;
         }
         
-        public bool Exist<TEntity>(int? id)
+        public bool Exist<TEntity>(Guid? id)
             where TEntity : EntityBase
         {
-            return (id != null && id != 0) && _context.Set<TEntity>().Any(x => x.Id == id);
+            return (id != Guid.Empty) && _context.Set<TEntity>().Any(x => x.Id == id);
         }
         
-        public bool Exist<TEntity>(int id) 
+        public bool Exist<TEntity>(Guid id) 
             where TEntity : EntityBase
         {
-            return id != 0 && _context.Set<TEntity>().Any(x => x.Id == id);
+            return id != Guid.Empty && _context.Set<TEntity>().Any(x => x.Id == id);
         }
         
         public bool IsLocationWithThatNameExits(string name)
@@ -31,17 +33,17 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
             return _context.Locations.Any(x => x.Name == name);
         }
         
-        public int GetLocationMaxAmount(int id)
+        public int GetLocationMaxAmount(Guid id)
         {
             return _context.Locations.Where(y => y.Id == id).Select(x => x.MaxAmount).FirstOrDefault();
         }
 
-        public bool IsProductOnPalletForUnfolding(int id)
+        public bool IsProductOnPalletForUnfolding(Guid id)
         {
             return _context.ProductPalletLines.Any(x => x.ProductId == id);
         }
 
-        public bool IsPalletForUnfoldingExist(int palletId)
+        public bool IsPalletForUnfoldingExist(Guid palletId)
         {
             return _context.ProductPalletLines.Any(x => x.PalletId == palletId);
         }
@@ -61,7 +63,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
             return !_context.Roles.Any(x => x.Name == name);
         }
 
-        public bool IsHiredEmployee(int userId)
+        public bool IsHiredEmployee(Guid userId)
         {
             return !_context.Seniorities.Any(x => x.UserId == userId);
         }
@@ -86,7 +88,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
             return !_context.Users.Any(x => x.UserName == username);
         }
         
-        public bool IsLocationStillHaveProducts(int id)
+        public bool IsLocationStillHaveProducts(Guid id)
         {
             var location = _context.Locations.SingleOrDefault(x => x.Id == id);
             return location?.CurrentAmount < 0 || location?.CurrentAmount > location?.MaxAmount;
@@ -97,7 +99,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
             return !_context.Orders.Any(x => x.Barcode.Equals(barcode));
         }
 
-        public bool IsPalletIdExistsInProductPalletLine(int palletId)
+        public bool IsPalletIdExistsInProductPalletLine(Guid palletId)
         {
             return _context.ProductPalletLines.Any((x) => x.PalletId == palletId);
         }

@@ -2,17 +2,15 @@
 using FluentValidation;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
 using WarehouseManagementSystem.ApplicationServices.API.Validation;
+using WarehouseManagementSystem.ApplicationServices.API.Validation.Validators;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.UserValidators
 {
     public class EditUserRequestValidator : AbstractValidator<EditUserRequest>
     {
-        private readonly IValidatorHelper _validator;
-
         public EditUserRequestValidator(IValidatorHelper validator)
         {
-            _validator = validator;
-            RuleFor(x => x.Id).Must(_validator.Exist<User>).WithMessage(ErrorType.NotFound);
+            RuleFor(x => x.Id).Must(validator.Exist<User>).WithMessage(ErrorType.NotFound);
             RuleFor(x => x.UserName).NotEmpty().WithMessage(ErrorType.NotEmpty);
             RuleFor(x => x.Password).NotEmpty().WithMessage(ErrorType.NotEmpty);
             RuleFor(x => x.UserName).MaximumLength(30).WithMessage("Maximum 30 characters.");

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet
@@ -6,9 +7,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pall
     public class AddPalletRequest : RequestBase, IRequest<AddPalletResponse>
     {
         public string Barcode { get; set; }
-        public int? OrderId { get; set; }
-        public int? DepartureId { get; set; }
-        public int? InvoiceId { get; set; }
-        public int? UserId { get; set; }
+        public Guid? OrderId { get; set; }
+        public Guid? DepartureId { get; set; }
+        public Guid? InvoiceId { get; set; }
+        public Guid? UserId { get; set; }
     }
 }

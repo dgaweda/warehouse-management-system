@@ -8,6 +8,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Seni
     {
         public override Guid Id { get; set; }
         public DateTime EmploymentDate { get; set; }
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
     }
 }

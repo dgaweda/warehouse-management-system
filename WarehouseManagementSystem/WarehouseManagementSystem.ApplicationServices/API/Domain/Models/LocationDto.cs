@@ -1,4 +1,6 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
+﻿using System;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
 {
     public class LocationDto
     {
@@ -7,6 +9,6 @@
         public int CurrentAmount { get; set; }
         public int MaxAmount { get; set; }
         public string ProductName { get; set; }
-        public int? PalletId { get; set; }
+        public Guid? PalletId { get; set; }
     }
 }

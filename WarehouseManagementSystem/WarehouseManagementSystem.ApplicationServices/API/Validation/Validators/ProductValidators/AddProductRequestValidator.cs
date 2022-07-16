@@ -2,19 +2,16 @@
 using System;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
 using WarehouseManagementSystem.ApplicationServices.API.Validation;
+using WarehouseManagementSystem.ApplicationServices.API.Validation.Validators;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validators.ProductValidators
 {
     public class AddProductRequestValidator : AbstractValidator<AddProductRequest>
     {
-        private readonly IValidatorHelper _validator;
-
         public AddProductRequestValidator(IValidatorHelper validator)
         {
-            _validator = validator;
-            
             RuleFor(x => x.Barcode)
-                .Must(_validator.IsProductBarcodeUnique)
+                .Must(validator.IsProductBarcodeUnique)
                 .WithMessage(ErrorType.AlreadyExist);
 
             RuleFor(x => x.ExpirationDate)

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.PipelineBehavior
+namespace WarehouseManagementSystem.ApplicationServices.API.Validation.ValidationBehavior
 {
     public class ValidationBehaviour<TRequest, TResponse>: IPipelineBehavior<TRequest, TResponse> 
         where TRequest : IRequest<TResponse>

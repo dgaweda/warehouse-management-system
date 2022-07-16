@@ -22,7 +22,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 
 
             CreateMap<RemovePalletRequest, Pallet>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.PalletId));
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id));
 
             CreateMap<AddPalletRequest, Pallet>()
                 .ForMember(x => x.Barcode, y => y.MapFrom(z => z.Barcode))
