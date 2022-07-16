@@ -5,7 +5,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public abstract class QueryHandler<TQuery, TResponse, TEntity, TEntityDto, TRepository> : IQueryHandler<TQuery, TResponse>
+    public class QueryHandler<TQuery, TResponse, TEntity, TEntityDto, TRepository> : IQueryHandler<TQuery, TResponse>
         where TResponse : ResponseBase<TEntityDto>, new()
         where TQuery : QueryBase<TEntity, TRepository>
     {

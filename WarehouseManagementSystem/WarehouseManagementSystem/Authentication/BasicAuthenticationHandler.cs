@@ -11,26 +11,29 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using DataAccess.CQRS.Query.Queries.UsersQueries;
+using MediatR;
 using warehouse_management_system.Authentication.Privileges;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
 
 namespace warehouse_management_system.Authentication
 {
     public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
-        private readonly IQueryExecutor _queryExecutor;
         private const string AuthorizationHeader = "Authorization";
         private readonly IPrivilegesService _privilegesService;
+        private readonly IMediator _mediator;
 
         public BasicAuthenticationHandler(
             IPrivilegesService privilegesService,
-            IQueryExecutor queryExecutor,
             IOptionsMonitor<AuthenticationSchemeOptions> options,
             ILoggerFactory loggerFactory, UrlEncoder encoder,
-            ISystemClock clock)
+            ISystemClock clock,
+            IMediator mediator)
             : base(options, loggerFactory, encoder, clock)
         {
             _privilegesService = privilegesService;
-            _queryExecutor = queryExecutor;
+            _mediator = mediator;
         }
 
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
@@ -55,13 +58,14 @@ namespace warehouse_management_system.Authentication
                 var username = credentials[0];
                 var password = credentials[1];
 
-                var query = new AuthenticateUserQuery()
+                var request = new AuthenticateUserRequest()
                 {
                     Username = username,
                     Password = password
                 };
 
-                user = await _queryExecutor.Execute(query);
+                var response = await _mediator.Send(request);
+                user = response.Response;
 
                 if (user is null)
                 {
