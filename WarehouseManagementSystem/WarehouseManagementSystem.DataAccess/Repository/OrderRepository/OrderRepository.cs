@@ -13,19 +13,13 @@ namespace DataAccess.Repository.OrderRepository
         {
         }
 
-        public override async Task<List<Order>> GetAllAsync()
-        {
-            return await GetQueryableEntity() 
-                .ToListAsync();
-        }
-
         public override async Task<Order> GetByIdAsync(Guid id)
         {
-            return await GetQueryableEntity()
+            return await GetAll()
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public override IQueryable<Order> GetQueryableEntity()
+        public override IQueryable<Order> GetAll()
         {
             return Entity
                 .Include(x => x.OrderLines)

@@ -1,12 +1,13 @@
 ﻿using System;
-using DataAccess.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataAccess.CQRS.Query.Queries;
+using DataAccess.Entities;
 using DataAccess.Extensions;
 using DataAccess.Repository.UserRepository;
+using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.CQRS.Queries
+namespace DataAccess.CQRS.Query.UserQueries
 {
     public class GetUsersQuery : QueryBase<List<User>, IUserRepository>
     {
@@ -20,15 +21,14 @@ namespace DataAccess.CQRS.Queries
 
         public override async Task<List<User>> Execute(IUserRepository userRepository)
         {
-            var users = await userRepository.GetAllAsync();
-            
-            return users
+            return await userRepository.GetAll()
                 .FilterByUserId(UserId)
                 .FilterByRoleName(RoleName)
                 .FilterByPesel(PESEL)
                 .FilterByAge(Age)
                 .FilterByName(Name)
-                .FilterByLastName(LastName);
+                .FilterByLastName(LastName)
+                .ToListAsync();
 
         }
     }

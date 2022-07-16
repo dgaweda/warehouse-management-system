@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DataAccess.CQRS.Query.Queries;
 using DataAccess.Extensions;
 using DataAccess.Repository.ProductRepository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Queries.DeliveryProductQueries
 {
@@ -16,12 +17,11 @@ namespace DataAccess.CQRS.Queries.DeliveryProductQueries
 
         public override async Task<List<Product>> Execute(IProductRepository productRepository)
         {
-            var products = await productRepository.GetAllAsync();
-            
-            return products
+            return await productRepository.GetAll()
                 .FilterByName(Name)
                 .FilterByBarcode(Barcode)
-                .FilterById(Id);
+                .FilterById(Id)
+                .ToListAsync();
         }
     }
 }

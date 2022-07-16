@@ -15,21 +15,16 @@ namespace DataAccess.Repository.InvoiceRepository
 
         public override async Task<Invoice> GetByIdAsync(Guid id)
         {
-            return await GetQueryableEntity().FirstOrDefaultAsync(x => x.Id == id);
-        }
-
-        public override async Task<List<Invoice>> GetAllAsync()
-        {
-            return await GetQueryableEntity().ToListAsync();
+            return await GetAll().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Invoice> GetInvoiceByInvoiceNumber(string invoiceNumber)
         {
-            return await GetQueryableEntity()
+            return await GetAll()
                 .FirstOrDefaultAsync(x => x.InvoiceNumber == invoiceNumber);
         }
 
-        public override IQueryable<Invoice> GetQueryableEntity()
+        public override IQueryable<Invoice> GetAll()
         {
             return Entity
                 .Include(x => x.Delivery)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataAccess.CQRS.Query.Queries;
 using DataAccess.Repository.InvoiceRepository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Queries.InvoiceQueries
 {
@@ -10,7 +11,7 @@ namespace DataAccess.CQRS.Queries.InvoiceQueries
     {
         public override async Task<List<Invoice>> Execute(IInvoiceRepository invoiceRepository)
         {
-            return await invoiceRepository.GetAllAsync();
+            return await invoiceRepository.GetAll().ToListAsync();
         }
     }
 }

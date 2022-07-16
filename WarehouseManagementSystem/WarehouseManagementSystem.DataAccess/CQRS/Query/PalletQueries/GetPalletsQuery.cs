@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DataAccess.CQRS.Query.Queries;
 using DataAccess.Extensions;
 using DataAccess.Repository.PalletRepository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Queries.PalletQueries
 {
@@ -20,16 +21,15 @@ namespace DataAccess.CQRS.Queries.PalletQueries
 
         public override async Task<List<Pallet>> Execute(IPalletRepository palletRepository)
         {
-            var pallets = await palletRepository.GetAllAsync();
-
-            return pallets
+            return await palletRepository.GetAll()
                 .FilterByPickingEnd(PickingEnd)
                 .FilterByProvider(Provider)
                 .FilterByDeliveryName(DeliveryName)
                 .FilterByUserFirstName(UserFirstName)
                 .FilterByUserLastName(UserLastName)
                 .FilterByDepartureName(DepartureName)
-                .FilterByDepartureCloseTime(DepartureCloseTime);
+                .FilterByDepartureCloseTime(DepartureCloseTime)
+                .ToListAsync();
         }
     }
 }

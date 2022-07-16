@@ -27,7 +27,7 @@ namespace DataAccess.CQRS.Command.ProductPalletLineCommands
             if (productPalletLine.ProductAmount < 0)
                 throw new ArgumentOutOfRangeException("Amount can't be less than 0.");
 
-            if (dbContext.PalletIsEmpty(productPalletLine))
+            if (await productPalletLineRepository.PalletIsEmpty(productPalletLine.PalletId))
             {
                 pallet.SetPalletStatus();
             }

@@ -16,7 +16,6 @@ namespace DataAccess.Repository
         Task AddRangeAsync(List<T> entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(Guid id);
-        Task<List<T>> GetAllAsync();
-        IQueryable<T> GetQueryableEntity();
+        IQueryable<T> GetAll();
     }
 }

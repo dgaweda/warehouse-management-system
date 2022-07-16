@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using DataAccess.Entities;
 using DataAccess.Extensions;
 using DataAccess.Repository.RoleRepository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Query.Queries.RoleQueries
 {
@@ -14,11 +15,10 @@ namespace DataAccess.CQRS.Query.Queries.RoleQueries
 
         public override async Task<List<Role>> Execute(IRoleRepository roleRepository)
         {
-            var roles = await roleRepository.GetAllAsync();
-
-            return roles
+            return await roleRepository.GetAll()
                 .FilterById(RoleId)
-                .FilterByRoleName(RoleName);
+                .FilterByRoleName(RoleName)
+                .ToListAsync();
         }
     }
 }

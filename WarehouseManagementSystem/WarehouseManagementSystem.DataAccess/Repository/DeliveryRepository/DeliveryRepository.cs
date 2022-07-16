@@ -8,10 +8,5 @@ namespace DataAccess.Repository.DeliveryRepository
         public DeliveryRepository(WMSDatabaseContext dbContext) : base(dbContext)
         {
         }
-
-        public override IQueryable<Delivery> GetQueryableEntity()
-        {
-            return Entity.AsQueryable();
-        }
     }
 }

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using DataAccess.Entities;
 using DataAccess.Extensions;
 using DataAccess.Repository.SeniorityRepository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Query.Queries.SeniorityQueries
 {
@@ -15,12 +16,11 @@ namespace DataAccess.CQRS.Query.Queries.SeniorityQueries
 
         public override async Task<List<Seniority>> Execute(ISeniorityRepository seniorityRepository)
         {
-            var seniority = await seniorityRepository.GetAllAsync();
-
-            return seniority
+            return await seniorityRepository.GetAll()
                 .FilterByUserFirstName(UserFirstName)
                 .FilterByUserLastName(UserLastName)
-                .FilterByEmploymentDate(EmploymentDate);
+                .FilterByEmploymentDate(EmploymentDate)
+                .ToListAsync();
         }
     }
 }

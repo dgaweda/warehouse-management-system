@@ -18,12 +18,12 @@ namespace DataAccess.Extensions
              invoice.InvoiceNumber = $"FV/{lp}/{ invoice.Provider}/{  invoice.CreationDate.Day}/{ invoice.CreationDate.Month}/{ invoice.CreationDate.Year}"; ;
         }
 
-        public static List<Invoice> FilterByInvoiceNumber(this List<Invoice> invoices, string invoiceNumber)
+        public static IQueryable<Invoice> FilterByInvoiceNumber(this IQueryable<Invoice> invoices, string invoiceNumber)
         {
             if (string.IsNullOrEmpty(invoiceNumber))
                 return invoices;
 
-            return invoices.Where(invoice => invoice.InvoiceNumber.Contains(invoiceNumber.ToUpper())).ToList();
+            return invoices.Where(invoice => invoice.InvoiceNumber.Contains(invoiceNumber.ToUpper()));
         }
     }
 }

@@ -15,20 +15,20 @@ namespace DataAccess.Extensions
             return departure;
         }
 
-        public static List<Departure> FilterByName(this List<Departure> departures, string name)
+        public static IQueryable<Departure>  FilterByName(this IQueryable<Departure> departures, string name)
         {
             if (string.IsNullOrEmpty(name))
                 return departures;
 
-            return departures.Where(departure => departure.Name.Contains(name)).ToList();
+            return departures.Where(departure => departure.Name.Contains(name));
         }
 
-        public static List<Departure> FilterByOpeningTime(this List<Departure> departures, DateTime openingTime)
+        public static IQueryable<Departure> FilterByOpeningTime(this IQueryable<Departure> departures, DateTime openingTime)
         {
             if (openingTime == default)
                 return departures;
 
-            return departures.Where(departure => departure.OpeningTime == openingTime).ToList();
+            return departures.Where(departure => departure.OpeningTime == openingTime);
         }
     }
 }

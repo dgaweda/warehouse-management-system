@@ -47,9 +47,9 @@ namespace DataAccess.Repository
             return result;
         }
 
-        public virtual async Task<List<TEntity>> GetAllAsync()
+        public virtual IQueryable<TEntity> GetAll()
         {
-            return await Entity.ToListAsync();
+            return Entity.AsQueryable();
         }
 
         public async Task DeleteAsync(Guid id)
@@ -75,7 +75,5 @@ namespace DataAccess.Repository
 
             await _context.SaveChangesAsync();
         }
-
-        public abstract IQueryable<TEntity> GetQueryableEntity();
     }
 }

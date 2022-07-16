@@ -7,28 +7,28 @@ namespace DataAccess.Extensions
 {
     public static class SeniorityExtension
     {
-        public static List<Seniority> FilterByUserFirstName(this List<Seniority> seniorities, string userFirstName)
+        public static IQueryable<Seniority> FilterByUserFirstName(this IQueryable<Seniority> seniorities, string userFirstName)
         {
             if (string.IsNullOrEmpty(userFirstName))
                 return seniorities;
 
-            return seniorities.Where(seniority => seniority.User.Name == userFirstName).ToList();
+            return seniorities.Where(seniority => seniority.User.Name == userFirstName);
         }
 
-        public static List<Seniority> FilterByUserLastName(this List<Seniority> seniorities, string userLastName)
+        public static IQueryable<Seniority> FilterByUserLastName(this IQueryable<Seniority> seniorities, string userLastName)
         {
             if (string.IsNullOrEmpty(userLastName))
                 return seniorities;
 
-            return seniorities.Where(seniority => seniority.User.LastName == userLastName).ToList();
+            return seniorities.Where(seniority => seniority.User.LastName == userLastName);
         }
 
-        public static List<Seniority> FilterByEmploymentDate(this List<Seniority> seniorities, DateTime employmentDate)
+        public static IQueryable<Seniority> FilterByEmploymentDate(this IQueryable<Seniority> seniorities, DateTime employmentDate)
         {
             if (employmentDate == default)
                 return seniorities;
 
-            return seniorities.Where(seniority => seniority.EmploymentDate > employmentDate).ToList();
+            return seniorities.Where(seniority => seniority.EmploymentDate > employmentDate);
         }
     }
 }

@@ -12,14 +12,7 @@ namespace DataAccess.Repository.ProductRepository
         {
         }
 
-        public override async Task<List<Product>> GetAllAsync()
-        {
-            return await GetQueryableEntity()
-                .AsNoTracking()
-                .ToListAsync();
-        }
-
-        public override IQueryable<Product> GetQueryableEntity()
+        public override IQueryable<Product> GetAll()
         {
             return Entity
                 .Include(x => x.PalletLines)

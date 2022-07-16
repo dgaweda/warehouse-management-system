@@ -13,29 +13,24 @@ namespace DataAccess.Repository.PalletRepository
         {
         }
 
-        public override async Task<List<Pallet>> GetAllAsync()
-        {
-            return await GetQueryableEntity().ToListAsync();
-        }
-
         public async Task<List<Pallet>> GetPalletsByStatus(PalletStatus palletStatus)
         {
-            return await GetQueryableEntity()
+            return await GetAll()
                 .Where(x => x.PalletStatus == palletStatus)
                 .ToListAsync();
         }
 
-        public override IQueryable<Pallet> GetQueryableEntity()
+        public override IQueryable<Pallet> GetAll()
         {
             return Entity
                 .Include(x => x.Departure)
                 .Include(x => x.Order)
                 .Include(x => x.Invoice)
-                .ThenInclude(invoice => invoice.Delivery)
+                    .ThenInclude(invoice => invoice.Delivery)
                 .Include(x => x.User)
-                .ThenInclude(user => user.Role)
+                    .ThenInclude(user => user.Role)
                 .Include(x => x.User)
-                .ThenInclude(user => user.Seniority)
+                    .ThenInclude(user => user.Seniority)
                 .AsQueryable();
         }
     }

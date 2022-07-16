@@ -9,7 +9,7 @@ namespace DataAccess.Repository.RoleRepository
         {
         }
 
-        public override IQueryable<Role> GetQueryableEntity()
+        public override IQueryable<Role> GetAll()
         {
             return Entity.AsQueryable();
         }

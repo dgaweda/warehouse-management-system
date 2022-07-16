@@ -7,9 +7,9 @@ namespace DataAccess.Extensions
 {
     public static class OrderExtension
     {
-        public static List<Order> FilterById(this List<Order> orders, Guid? id)
+        public static IQueryable<Order> FilterById(this IQueryable<Order> orders, Guid? id)
         {
-            return id == null ? orders : orders.Where(x => x.Id == id).ToList();
+            return id == null ? orders : orders.Where(x => x.Id == id);
         }
     }
 }

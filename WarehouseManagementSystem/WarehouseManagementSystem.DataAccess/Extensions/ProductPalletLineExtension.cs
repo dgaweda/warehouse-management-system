@@ -10,21 +10,6 @@ namespace DataAccess.Extensions
 {
     public static class ProductPalletLineExtension
     {
-        public static async Task<List<ProductPalletLine>> GetProductPalletLines(this WMSDatabaseContext context)
-        {
-            return await context.ProductPalletLines
-                .Include(x => x.Product)
-                .Include(x => x.Pallet)
-                    .ThenInclude(pallet => pallet.Order)
-                .Include(x => x.Pallet)
-                    .ThenInclude(pallet => pallet.Departure)
-                .Include(x => x.Pallet)
-                    .ThenInclude(pallet => pallet.Invoice)
-                .Include(x => x.Pallet)
-                    .ThenInclude(pallet => pallet.User)
-                .ToListAsync();
-        }
-
         public static void DecreaseProductAmount(this ProductPalletLine productPalletLine, ProductPalletLine requestProductPalletLine)
         {
             productPalletLine.ProductAmount -= requestProductPalletLine.ProductAmount;
@@ -35,17 +20,12 @@ namespace DataAccess.Extensions
             pallet.PalletStatus = PalletStatus.UNFOLDED;
         }
 
-        public static List<ProductPalletLine> FilterByPalletId(this List<ProductPalletLine> palletLines, Guid palletId)
+        public static IQueryable<ProductPalletLine> FilterByPalletId(this IQueryable<ProductPalletLine> palletLines, Guid palletId)
         {
             if (palletId == Guid.Empty)
                 return palletLines;
 
-            return palletLines.Where(x => x.PalletId == palletId).ToList();
+            return palletLines.Where(x => x.PalletId == palletId);
         }
-
-        public static bool PalletIsEmpty(this WMSDatabaseContext context, ProductPalletLine productPalletLine)
-        {
-            return !context.ProductPalletLines.Select(x => x.PalletId).Contains(productPalletLine.PalletId);
-        } 
     }
 }

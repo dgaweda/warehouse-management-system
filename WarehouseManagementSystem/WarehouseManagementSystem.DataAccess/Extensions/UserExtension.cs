@@ -8,34 +8,34 @@ namespace DataAccess.Extensions
 {
     public static class UserExtension
     {
-        public static List<User> FilterByUserId(this List<User> users, Guid userId)
+        public static IQueryable<User> FilterByUserId(this IQueryable<User> users, Guid userId)
         {
-            return userId == default ? users : users.Where(user => user.Id == userId).ToList();
+            return userId == default ? users : users.Where(user => user.Id == userId);
         }
 
-        public static List<User> FilterByRoleName(this List<User> users, string roleName)
+        public static IQueryable<User> FilterByRoleName(this IQueryable<User> users, string roleName)
         {
-            return string.IsNullOrEmpty(roleName) ? users : users.Where(user => user.Role.Name.Contains(roleName)).ToList();
+            return string.IsNullOrEmpty(roleName) ? users : users.Where(user => user.Role.Name.Contains(roleName));
         }
 
-        public static List<User> FilterByPesel(this List<User> users, string pesel)
+        public static IQueryable<User> FilterByPesel(this IQueryable<User> users, string pesel)
         {
-            return string.IsNullOrEmpty(pesel) ? users : users.Where(user => user.PESEL == pesel).ToList();
+            return string.IsNullOrEmpty(pesel) ? users : users.Where(user => user.PESEL == pesel);
         }
 
-        public static List<User> FilterByAge(this List<User> users, int age)
+        public static IQueryable<User> FilterByAge(this IQueryable<User> users, int age)
         {
-            return age == default ? users : users.Where(user => user.Age == age).ToList();
+            return age == default ? users : users.Where(user => user.Age == age);
         }
 
-        public static List<User> FilterByName(this List<User> users, string name)
+        public static IQueryable<User> FilterByName(this IQueryable<User> users, string name)
         {
-            return string.IsNullOrEmpty(name) ? users : users.Where(user => user.Name.Contains(name)).ToList();
+            return string.IsNullOrEmpty(name) ? users : users.Where(user => user.Name.Contains(name));
         }
         
-        public static List<User> FilterByLastName(this List<User> users, string lastName)
+        public static IQueryable<User> FilterByLastName(this IQueryable<User> users, string lastName)
         {
-            return string.IsNullOrEmpty(lastName) ? users : users.Where(user => user.LastName.Contains(lastName)).ToList();
+            return string.IsNullOrEmpty(lastName) ? users : users.Where(user => user.LastName.Contains(lastName));
         }
 
         public static User VerifyPassword(this User user, string password)

@@ -14,14 +14,9 @@ namespace DataAccess.Repository.DepartureRepository
 
         public async Task<List<Departure>> GetDeparturesByState(StateType state)
         {
-            return await GetQueryableEntity()
+            return await GetAll()
                 .Where(x => x.State == state)
                 .ToListAsync();
-        }
-
-        public override IQueryable<Departure> GetQueryableEntity()
-        {
-            return Entity.AsQueryable();
         }
     }
 }

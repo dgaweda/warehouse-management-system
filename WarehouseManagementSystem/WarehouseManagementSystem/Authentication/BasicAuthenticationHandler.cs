@@ -74,7 +74,7 @@ namespace warehouse_management_system.Authentication
             }
             catch
             {
-                return AuthenticateResult.Fail("Authorization failed. Unidentified Error occured."); // Not Authenticated
+                return AuthenticateResult.Fail("Authorization failed. Unidentified Error occured.");
             }
 
             var claims = new[]

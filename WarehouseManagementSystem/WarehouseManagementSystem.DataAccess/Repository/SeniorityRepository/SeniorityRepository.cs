@@ -12,12 +12,7 @@ namespace DataAccess.Repository.SeniorityRepository
         {
         }
 
-        public override async Task<List<Seniority>> GetAllAsync()
-        {
-            return await GetQueryableEntity().ToListAsync();
-        }
-
-        public override IQueryable<Seniority> GetQueryableEntity()
+        public override IQueryable<Seniority> GetAll()
         {
             return Entity
                 .Include(x => x.User)

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -27,11 +28,11 @@ namespace warehouse_management_system.Controllers
 
         [HttpDelete]
         [Route("{palletId}")]
-        public async Task<IActionResult> Remove([FromRoute] int palletId)
+        public async Task<IActionResult> Remove([FromRoute] Guid palletId)
         {
             var request = new RemovePalletRequest()
             {
-                PalletId = palletId
+                Id = palletId
             };
             return await Handle<RemovePalletRequest, RemovePalletResponse>(request);
         }

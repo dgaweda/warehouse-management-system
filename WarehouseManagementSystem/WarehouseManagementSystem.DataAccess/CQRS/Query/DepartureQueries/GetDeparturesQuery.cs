@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DataAccess.CQRS.Query.Queries;
 using DataAccess.Extensions;
 using DataAccess.Repository.DepartureRepository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Queries.DepartureQueries
 {
@@ -15,11 +16,10 @@ namespace DataAccess.CQRS.Queries.DepartureQueries
 
         public override async Task<List<Departure>> Execute(IDepartureRepository departureRepository)
         {
-            var departures = await departureRepository.GetAllAsync();
-
-            return departures
+            return await departureRepository.GetAll()
                 .FilterByName(Name)
-                .FilterByOpeningTime(OpeningTime);
+                .FilterByOpeningTime(OpeningTime)
+                .ToListAsync();
         }
     }
 }

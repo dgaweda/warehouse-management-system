@@ -8,10 +8,5 @@ namespace DataAccess.Repository.OrderLineRepository
         public OrderLineRepository(WMSDatabaseContext dbContext) : base(dbContext)
         {
         }
-
-        public override IQueryable<OrderLine> GetQueryableEntity()
-        {
-            return Entity.AsQueryable();
-        }
     }
 }

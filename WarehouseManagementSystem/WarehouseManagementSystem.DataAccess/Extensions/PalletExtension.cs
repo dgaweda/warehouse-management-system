@@ -10,33 +10,19 @@ namespace DataAccess.Extensions
 {
     public static class PalletExtension
     {
-        public static async Task<List<Pallet>> GetPallets(this WMSDatabaseContext context)
+        public static void SetProperties(this Pallet pallet, Pallet parameter)
         {
-            return await context.Pallets
-                .Include(x => x.Departure)
-                .Include(x => x.Order)
-                .Include(x => x.Invoice)
-                    .ThenInclude(invoice => invoice.Delivery)
-                .Include(x => x.User)
-                    .ThenInclude(user => user.Role)
-                .Include(x => x.User)
-                    .ThenInclude(user => user.Seniority)
-                .ToListAsync();
-        }
+            if (parameter.OrderId != null)
+                pallet.OrderId = parameter.OrderId;
 
-        public static void SetProperties(this Pallet pallet, Pallet Parameter)
-        {
-            if (Parameter.OrderId != null)
-                pallet.OrderId = Parameter.OrderId;
+            if (parameter.DepartureId != null)
+                pallet.DepartureId = parameter.DepartureId;
 
-            if (Parameter.DepartureId != null)
-                pallet.DepartureId = Parameter.DepartureId;
+            if (parameter.InvoiceId != null)
+                pallet.InvoiceId = parameter.InvoiceId;
 
-            if (Parameter.InvoiceId != null)
-                pallet.InvoiceId = Parameter.InvoiceId;
-
-            if (Parameter.UserId != null)
-                pallet.UserId = Parameter.UserId;
+            if (parameter.UserId != null)
+                pallet.UserId = parameter.UserId;
         }
 
         public static void SetStatus(this Pallet pallet)
@@ -72,60 +58,60 @@ namespace DataAccess.Extensions
         }
 
         // FILTERING
-        public static List<Pallet> FilterByPickingEnd(this List<Pallet> pallets, DateTime pickingEnd)
+        public static IQueryable<Pallet> FilterByPickingEnd(this IQueryable<Pallet> pallets, DateTime pickingEnd)
         {
             if (pickingEnd == default)
                 return pallets;
 
-            return pallets.Where(x => x.Order.PickingEnd == pickingEnd).ToList();
+            return pallets.Where(x => x.Order.PickingEnd == pickingEnd);
         }
 
-        public static List<Pallet> FilterByProvider(this List<Pallet> pallets, string provider)
+        public static IQueryable<Pallet> FilterByProvider(this IQueryable<Pallet> pallets, string provider)
         {
             if (string.IsNullOrEmpty(provider))
                 return pallets;
 
-            return pallets.Where(x => x.Invoice.Provider == provider).ToList();
+            return pallets.Where(x => x.Invoice.Provider == provider);
         }
 
-        public static List<Pallet> FilterByDeliveryName(this List<Pallet> pallets, string deliveryName)
+        public static IQueryable<Pallet> FilterByDeliveryName(this IQueryable<Pallet> pallets, string deliveryName)
         {
             if (string.IsNullOrEmpty(deliveryName))
                 return pallets;
 
-            return pallets.Where(x => x.Invoice.Delivery.Name == deliveryName).ToList();
+            return pallets.Where(x => x.Invoice.Delivery.Name == deliveryName);
         }
 
-        public static List<Pallet> FilterByUserFirstName(this List<Pallet> pallets, string userFirstName)
+        public static IQueryable<Pallet> FilterByUserFirstName(this IQueryable<Pallet> pallets, string userFirstName)
         {
             if (string.IsNullOrEmpty(userFirstName))
                 return pallets;
 
-            return pallets.Where(x => x.User.Name == userFirstName).ToList();
+            return pallets.Where(x => x.User.Name == userFirstName);
         }
 
-        public static List<Pallet> FilterByUserLastName(this List<Pallet> pallets, string userLastName)
+        public static IQueryable<Pallet> FilterByUserLastName(this IQueryable<Pallet> pallets, string userLastName)
         {
             if (string.IsNullOrEmpty(userLastName))
                 return pallets;
 
-            return pallets.Where(x => x.User.LastName == userLastName).ToList();
+            return pallets.Where(x => x.User.LastName == userLastName);
         }
 
-        public static List<Pallet> FilterByDepartureName(this List<Pallet> pallets, string departureName)
+        public static IQueryable<Pallet> FilterByDepartureName(this IQueryable<Pallet> pallets, string departureName)
         {
             if (string.IsNullOrEmpty(departureName))
                 return pallets;
 
-            return pallets.Where(x => x.Departure.Name == departureName).ToList();
+            return pallets.Where(x => x.Departure.Name == departureName);
         }
 
-        public static List<Pallet> FilterByDepartureCloseTime(this List<Pallet> pallets, DateTime departureCloseTime)
+        public static IQueryable<Pallet> FilterByDepartureCloseTime(this IQueryable<Pallet> pallets, DateTime departureCloseTime)
         {
             if (departureCloseTime == default)
                 return pallets;
 
-            return pallets.Where(x => x.Departure.CloseTime == departureCloseTime).ToList();
+            return pallets.Where(x => x.Departure.CloseTime == departureCloseTime);
         }
     }
 }

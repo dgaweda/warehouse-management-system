@@ -6,12 +6,12 @@ namespace DataAccess.Extensions
 {
     public static class DeliveryExtension
     {
-        public static int SetDeliveryNumber(this Delivery Parameter, List<Delivery> deliveries)
+        public static int SetDeliveryNumber(this Delivery parameter, List<Delivery> deliveries)
         {
             var deliveriesInSameDay = 1;
             deliveries.ForEach(property =>
             {
-                if (property.Arrival.Date == Parameter.Arrival.Date)
+                if (property.Arrival.Date == parameter.Arrival.Date)
                     deliveriesInSameDay++;
             });
 
@@ -24,12 +24,12 @@ namespace DataAccess.Extensions
             return delivery;
         }
 
-        public static List<Delivery> FilterByName(this List<Delivery> deliveries, string Name)
+        public static IQueryable<Delivery> FilterByName(this IQueryable<Delivery> deliveries, string name)
         {
-            if (string.IsNullOrEmpty(Name))
+            if (string.IsNullOrEmpty(name))
                 return deliveries;
 
-            return deliveries.Where(delivery => delivery.Name.Contains(Name.ToUpper())).ToList();
+            return deliveries.Where(delivery => delivery.Name.Contains(name.ToUpper()));
         }
     }
 }

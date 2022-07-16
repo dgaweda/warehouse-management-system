@@ -8,5 +8,7 @@ namespace DataAccess.Repository.ProductPalletLineRepository
     public interface IProductPalletLineRepository : IRepository<ProductPalletLine>
     {
         Task<List<ProductPalletLine>> GetProductsByPalletId(Guid palletId);
+
+        Task<bool> PalletIsEmpty(Guid id);
     }
 }

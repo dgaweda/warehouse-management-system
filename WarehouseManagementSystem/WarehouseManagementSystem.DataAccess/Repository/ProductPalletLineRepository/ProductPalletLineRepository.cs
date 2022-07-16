@@ -13,31 +13,30 @@ namespace DataAccess.Repository.ProductPalletLineRepository
         {
         }
 
-        public override async Task<List<ProductPalletLine>> GetAllAsync()
-        {
-            return await GetQueryableEntity()
-                .ToListAsync();
-        }
-
         public async Task<List<ProductPalletLine>> GetProductsByPalletId(Guid palletId)
         {
-            return await GetQueryableEntity()
+            return await GetAll()
                 .Where(x => x.PalletId == palletId)
                 .ToListAsync();
         }
 
-        public override IQueryable<ProductPalletLine> GetQueryableEntity()
+        public async Task<bool> PalletIsEmpty(Guid palletId)
+        { 
+            return !await GetAll().AnyAsync(x => x.PalletId == palletId);
+        }
+
+        public override IQueryable<ProductPalletLine> GetAll()
         {
             return Entity
                 .Include(x => x.Product)
                 .Include(x => x.Pallet)
-                .ThenInclude(pallet => pallet.Order)
+                    .ThenInclude(pallet => pallet.Order)
                 .Include(x => x.Pallet)
-                .ThenInclude(pallet => pallet.Departure)
+                    .ThenInclude(pallet => pallet.Departure)
                 .Include(x => x.Pallet)
-                .ThenInclude(pallet => pallet.Invoice)
+                    .ThenInclude(pallet => pallet.Invoice)
                 .Include(x => x.Pallet)
-                .ThenInclude(pallet => pallet.User)
+                    .ThenInclude(pallet => pallet.User)
                 .AsQueryable();
         }
     }

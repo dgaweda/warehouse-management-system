@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using DataAccess.Entities;
 using DataAccess.Repository.OrderRepository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Query.Queries.OrderQueries
 {
@@ -9,7 +10,7 @@ namespace DataAccess.CQRS.Query.Queries.OrderQueries
     {
         public override async Task<List<Order>> Execute(IOrderRepository orderRepository)
         {
-            return await orderRepository.GetAllAsync();
+            return await orderRepository.GetAll().ToListAsync();
         }
     }
 }

@@ -14,28 +14,28 @@ namespace DataAccess.Extensions
             product.ExpirationDate = requestProduct.ExpirationDate;
         }
 
-        public static List<Product> FilterByName(this List<Product> products, string name)
+        public static IQueryable<Product> FilterByName(this IQueryable<Product> products, string name)
         {
             if (string.IsNullOrEmpty(name))
                 return products;
 
-            return products.Where(x => x.Name.Contains(name)).ToList();
+            return products.Where(x => x.Name.Contains(name));
         }
 
-        public static List<Product> FilterByBarcode(this List<Product> products, string barcode)
+        public static IQueryable<Product> FilterByBarcode(this IQueryable<Product> products, string barcode)
         {
             if (string.IsNullOrEmpty(barcode))
                 return products;
 
-            return products.Where(x => x.Barcode == barcode).ToList();
+            return products.Where(x => x.Barcode == barcode);
         }
 
-        public static List<Product> FilterById(this List<Product> products, Guid? id)
+        public static IQueryable<Product> FilterById(this IQueryable<Product> products, Guid? id)
         {
             if (id == Guid.Empty)
                 return products;
 
-            return products.Where(x => x.Id == id).ToList();
+            return products.Where(x => x.Id == id);
         }
     }
 }
