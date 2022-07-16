@@ -1,19 +1,19 @@
 ﻿using System.ComponentModel;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Enums
+namespace DataAccess.Enums
 {
     public enum RoleKey
     {
         [Description("Zbieracz")]
-        COLLECTOR = 5,
+        COLLECTOR = 1,
 
         [Description("Magazynier")]
-        WAREHOUSEMAN = 11,
+        WAREHOUSEMAN = 2,
             
         [Description("Kierownik")]
-        MANAGER = 4,
+        MANAGER = 3,
 
         [Description("Admin")]
-        GENERAL_ADMIN = 9
+        GENERAL_ADMIN = 4
     }
 }

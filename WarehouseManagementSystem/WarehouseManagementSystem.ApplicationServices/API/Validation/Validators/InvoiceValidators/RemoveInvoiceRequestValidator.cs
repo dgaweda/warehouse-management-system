@@ -12,7 +12,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.InvoiceVa
         public RemoveInvoiceRequestValidator(IValidatorHelper validator)
         {
             
-            RuleFor(x => x.InvoiceId)
+            RuleFor(x => x.Id)
                 .Must(validator.Exist<Invoice>)
                 .WithMessage(ErrorType.NotFound);
         }

@@ -20,7 +20,7 @@ namespace DataAccess.Repository.UserRepository
 
         public async Task<User> GetUserByUsernameAsync(string username)
         {
-            return await GetAll().FirstOrDefaultAsync(x => x.UserName.Equals(username));
+            return await GetAll().FirstOrDefaultAsync(x => x.Username.Equals(username));
         }
 
         public override IQueryable<User> GetAll()

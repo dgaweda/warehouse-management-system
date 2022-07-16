@@ -8,11 +8,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.LocationV
 {
     public class EditLocationCurrentAmountValidator : AbstractValidator<EditLocationCurrentAmountRequest>
     {
-        private IValidatorHelper validator;
 
         public EditLocationCurrentAmountValidator(IValidatorHelper validator)
         {
-            
             RuleFor(x => x.Id)
                 .Must(validator.Exist<Location>)
                 .WithMessage(ErrorType.NotFound);

@@ -17,7 +17,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(x => x.DepartureName, y => y.MapFrom(z => z.Departure != null ? z.Departure.Name : string.Empty))
                 .ForMember(x => x.DeliveryName, y => y.MapFrom(z => z.Invoice != null ? z.Invoice.Delivery.Name : string.Empty))
                 .ForMember(x => x.UserFirstName, y => y.MapFrom(src => src.User != null ? src.User.Name : string.Empty))
-                .ForMember(x => x.UserLastName, y => y.MapFrom(src => src.User != null ? src.User.LastName : string.Empty))
+                .ForMember(x => x.UserLastName, y => y.MapFrom(src => src.User != null ? src.User.Lastname : string.Empty))
                 .ForMember(x => x.Products, y => y.MapFrom(z => z.PalletsProducts.Select(x => new { x.Product.Name, x.Product.ExpirationDate, x.Product.Barcode, x.ProductAmount })));
                 
 

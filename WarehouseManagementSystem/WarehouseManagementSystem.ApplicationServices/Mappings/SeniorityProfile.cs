@@ -12,7 +12,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
         {
             CreateMap<Seniority, SeniorityDto>()
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.User.Name))
-                .ForMember(x => x.LastName, y => y.MapFrom(z => z.User.LastName))
+                .ForMember(x => x.LastName, y => y.MapFrom(z => z.User.Lastname))
                 .ForMember(dest => dest.EmploymentDuration, opt => opt.MapFrom(src =>
                     string.Format("{0} Year/s {1} Month/s)", (DateTime.Now - src.EmploymentDate).Days / 365, ((DateTime.Now - src.EmploymentDate).Days % 365) / 30)));
 

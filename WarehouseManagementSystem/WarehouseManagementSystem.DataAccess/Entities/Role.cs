@@ -8,16 +8,16 @@ namespace DataAccess.Entities
     {
         [Required]
         [MaxLength(50)]
-        [Column("Nazwa roli")]
         public string Name { get; set; }
+        
+        [Required]
+        public int Rank { get; set; }
 
         [Required]
         [MaxLength(250)]
-        [Column("Opis roli")]
         public string Description { get; set; }
 
         [Required]
-        [Column("Wynagrodzenie")]
         public decimal Salary { get; set; }
     }
 }

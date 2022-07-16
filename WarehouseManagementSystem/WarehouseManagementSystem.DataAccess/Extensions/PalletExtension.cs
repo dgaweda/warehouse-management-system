@@ -95,7 +95,7 @@ namespace DataAccess.Extensions
             if (string.IsNullOrEmpty(userLastName))
                 return pallets;
 
-            return pallets.Where(x => x.User.LastName == userLastName);
+            return pallets.Where(x => x.User.Lastname == userLastName);
         }
 
         public static IQueryable<Pallet> FilterByDepartureName(this IQueryable<Pallet> pallets, string departureName)

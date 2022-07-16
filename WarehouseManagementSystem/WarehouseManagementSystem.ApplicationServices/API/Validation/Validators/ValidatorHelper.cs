@@ -3,9 +3,8 @@ using System.Linq;
 using DataAccess;
 using DataAccess.Entities.EntityBases;
 using WarehouseManagementSystem.ApplicationServices.API.Enums;
-using WarehouseManagementSystem.ApplicationServices.API.Validation.Validators;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Validators
+namespace WarehouseManagementSystem.ApplicationServices.API.Validation.Validators
 {
     public class ValidatorHelper : IValidatorHelper
     {
@@ -85,7 +84,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators
 
         public bool IsUsernameExist(string username)
         {
-            return !_context.Users.Any(x => x.UserName == username);
+            return !_context.Users.Any(x => x.Username == username);
         }
         
         public bool IsLocationStillHaveProducts(Guid id)

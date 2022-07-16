@@ -16,7 +16,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
             CreateMap<AddRoleRequest, Role>();
 
             CreateMap<RemoveRoleRequest, Role>()
-                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.RoleId));
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.Id));
         }
         
     }

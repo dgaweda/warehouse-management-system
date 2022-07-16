@@ -20,7 +20,7 @@ namespace DataAccess.Extensions
             if (string.IsNullOrEmpty(userLastName))
                 return seniorities;
 
-            return seniorities.Where(seniority => seniority.User.LastName == userLastName);
+            return seniorities.Where(seniority => seniority.User.Lastname == userLastName);
         }
 
         public static IQueryable<Seniority> FilterByEmploymentDate(this IQueryable<Seniority> seniorities, DateTime employmentDate)

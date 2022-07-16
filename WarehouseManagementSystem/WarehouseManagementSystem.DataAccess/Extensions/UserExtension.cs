@@ -35,7 +35,7 @@ namespace DataAccess.Extensions
         
         public static IQueryable<User> FilterByLastName(this IQueryable<User> users, string lastName)
         {
-            return string.IsNullOrEmpty(lastName) ? users : users.Where(user => user.LastName.Contains(lastName));
+            return string.IsNullOrEmpty(lastName) ? users : users.Where(user => user.Lastname.Contains(lastName));
         }
 
         public static User VerifyPassword(this User user, string password)

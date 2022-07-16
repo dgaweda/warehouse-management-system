@@ -11,7 +11,7 @@ namespace DataAccess.Entities
         [MaxLength(100)]
         [Required]
         [Column("Nazwa użytkownika")]
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         [Required]
         [Column("Hasło")]
@@ -29,7 +29,7 @@ namespace DataAccess.Entities
         [Required]
         [MaxLength(50)]
         [Column("Nazwisko")]
-        public string LastName { get; set; }
+        public string Lastname { get; set; }
 
         [Required]
         [MaxLength(11)]

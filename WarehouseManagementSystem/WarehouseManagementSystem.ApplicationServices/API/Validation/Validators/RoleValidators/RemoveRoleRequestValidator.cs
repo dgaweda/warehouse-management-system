@@ -9,7 +9,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validators.RoleValid
     {
         public RemoveRoleRequestValidator(IValidatorHelper validator)
         {
-            RuleFor(x => x.RoleId).Must(validator.Exist<DataAccess.Entities.Role>).WithMessage(ErrorType.NotFound);
+            RuleFor(x => x.Id).Must(validator.Exist<DataAccess.Entities.Role>).WithMessage(ErrorType.NotFound);
         }
     }
 }

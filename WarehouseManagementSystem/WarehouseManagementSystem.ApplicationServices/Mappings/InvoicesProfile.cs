@@ -23,7 +23,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(dest => dest.DeliveryId, opt => opt.MapFrom(src => src.DeliveryId));
 
             CreateMap<RemoveInvoiceRequest, Invoice>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.InvoiceId));
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id));
 
             CreateMap<EditInvoiceRequest, Invoice>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
