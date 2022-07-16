@@ -9,8 +9,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Query.UserQueries
 {
-    public class GetUsersQuery : QueryBase<List<User>, IUserRepository>
+    public class GetUsersQuery : QueryBase<List<User>>
     {
+        private readonly IUserRepository _userRepository;
+
+        public GetUsersQuery(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
         public Guid UserId { get; set; }
         public string RoleName { get; set; }
         public string PESEL { get; set; }
@@ -19,9 +26,9 @@ namespace DataAccess.CQRS.Query.UserQueries
         public string LastName { get; set; }
         
 
-        public override async Task<List<User>> Execute(IUserRepository userRepository)
+        public override async Task<List<User>> Execute()
         {
-            return await userRepository.GetAll()
+            return await _userRepository.GetAll()
                 .FilterByUserId(UserId)
                 .FilterByRoleName(RoleName)
                 .FilterByPesel(PESEL)

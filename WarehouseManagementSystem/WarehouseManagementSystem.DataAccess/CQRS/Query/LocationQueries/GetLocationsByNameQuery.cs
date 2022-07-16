@@ -6,13 +6,19 @@ using DataAccess.Repository.LocationRepository;
 
 namespace DataAccess.CQRS.Query.LocationQueries
 {
-    public class GetLocationsByNameQuery : QueryBase<List<Location>, ILocationRepository>
+    public class GetLocationsByNameQuery : QueryBase<List<Location>>
     {
         public string Name { get; set; }
+        private readonly ILocationRepository _locationRepository;
 
-        public override async Task<List<Location>> Execute(ILocationRepository locationRepository)
+        public GetLocationsByNameQuery(ILocationRepository locationRepository)
         {
-            return await locationRepository.GetLocationsByName(Name);
+            _locationRepository = locationRepository;
+        }
+
+        public override async Task<List<Location>> Execute()
+        {
+            return await _locationRepository.GetLocationsByName(Name);
         }
     }
 }

@@ -1,29 +1,34 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using DataAccess.CQRS.Query.LocationQueries;
 using DataAccess.Entities;
+using DataAccess.Repository.LocationRepository;
 using MediatR;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.LocationHandlers
 {
     public class GetLocationByTypeHandler :
-        QueryHandler<GetLocationsByTypeResponse, GetLocationsByTypeQuery, Location, Domain.Models.LocationDto>,
+        QueryManager<List<Location>, List<LocationDto>>,
         IRequestHandler<GetLocationsByTypeRequest, GetLocationsByTypeResponse>
     {
-        public GetLocationsHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
+        private readonly ILocationRepository _locationRepository;
+        public GetLocationByTypeHandler(IMapper mapper, ILocationRepository locationRepository) : base(mapper)
         {
+            _locationRepository = locationRepository;
         }
 
         public async Task<GetLocationsByTypeResponse> Handle(GetLocationsByTypeRequest byTypeRequest, CancellationToken cancellationToken)
         {
-            var query = new GetLocationsByTypeQuery()
+            var queryResult = await new GetLocationsByTypeQuery(_locationRepository)
             {
                 LocationType = byTypeRequest.LocationType
-            };
-            var response = await HandleQuery(query);
+            }.Execute();
+            var response = await CreateResponse<GetLocationsByTypeResponse>(queryResult);
             return response;
         }
     }

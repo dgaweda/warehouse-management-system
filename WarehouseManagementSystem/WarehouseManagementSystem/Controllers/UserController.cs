@@ -44,7 +44,7 @@ namespace warehouse_management_system.Controllers
 
         [Authorize]
         [HttpDelete]
-        [Route("{UserId}")]
+        [Route("{Id}")]
         public async Task<IActionResult> RemoveUser([FromRoute] RemoveUserRequest request) => await Handle<RemoveUserRequest, RemoveUserResponse>(request);
     }
 }

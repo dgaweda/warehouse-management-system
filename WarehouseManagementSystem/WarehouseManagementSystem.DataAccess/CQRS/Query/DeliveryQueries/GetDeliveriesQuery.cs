@@ -7,13 +7,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Query.Queries.DeliveryQueries
 {
-    public class GetDeliveriesQuery : QueryBase<List<Delivery>, IDeliveryRepository>
+    public class GetDeliveriesQuery : QueryBase<List<Delivery>>
     {
         public string Name { get; set; }
 
-        public override async Task<List<Delivery>> Execute(IDeliveryRepository deliveryRepository)
+        private readonly IDeliveryRepository _deliveryRepository;
+
+        public GetDeliveriesQuery(IDeliveryRepository deliveryRepository)
         {
-            return await deliveryRepository.GetAll()
+            _deliveryRepository = deliveryRepository;
+        }
+
+        public override async Task<List<Delivery>> Execute()
+        {
+            return await _deliveryRepository.GetAll()
                 .FilterByName(Name)
                 .ToListAsync();
         }

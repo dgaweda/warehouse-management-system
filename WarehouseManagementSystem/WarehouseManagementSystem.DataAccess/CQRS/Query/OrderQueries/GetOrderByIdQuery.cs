@@ -5,12 +5,19 @@ using DataAccess.Repository.OrderRepository;
 
 namespace DataAccess.CQRS.Query.Queries.OrderQueries
 {
-    public class GetOrderByIdQuery: QueryBase<Order, IOrderRepository>
+    public class GetOrderByIdQuery: QueryBase<Order>
     {
         public Guid Id { get; set; }
-        public override async Task<Order> Execute(IOrderRepository orderRepository)
+        private readonly IOrderRepository _orderRepository;
+
+        public GetOrderByIdQuery(IOrderRepository orderRepository)
         {
-            return await orderRepository.GetByIdAsync(Id);
+            _orderRepository = orderRepository;
+        }
+
+        public override async Task<Order> Execute()
+        {
+            return await _orderRepository.GetByIdAsync(Id);
         }
     }
 }

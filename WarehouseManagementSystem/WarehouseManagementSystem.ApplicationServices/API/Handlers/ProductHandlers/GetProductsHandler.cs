@@ -1,31 +1,36 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using DataAccess.CQRS.Queries.DeliveryProductQueries;
 using DataAccess.Entities;
+using DataAccess.Repository.ProductRepository;
 using MediatR;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductHandlers
 {
     public class GetProductsHandler :
-        QueryHandler<GetProductsResponse, GetProductsQuery, Product, Domain.Models.ProductDto>,
+        QueryManager<List<Product>, List<ProductDto>>,
         IRequestHandler<GetProductsRequest, GetProductsResponse>
     {
-        public GetProductsHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
+        private readonly IProductRepository _productRepository;
+        public GetProductsHandler(IMapper mapper, IProductRepository productRepository) : base(mapper)
         {
+            _productRepository = productRepository;
         }
 
-        public Task<GetProductsResponse> Handle(GetProductsRequest request, CancellationToken cancellationToken)
+        public async Task<GetProductsResponse> Handle(GetProductsRequest request, CancellationToken cancellationToken)
         {
-            var query = new GetProductsQuery()
+            var queryResult = await new GetProductsQuery(_productRepository)
             {
                 Barcode = request.Barcode,
                 Id = request.Id,
                 Name = request.Name
-            };
-            var response = HandleQuery(query);
+            }.Execute();
+            var response = await CreateResponse<GetProductsResponse>(queryResult);
             return response;
         }
     }

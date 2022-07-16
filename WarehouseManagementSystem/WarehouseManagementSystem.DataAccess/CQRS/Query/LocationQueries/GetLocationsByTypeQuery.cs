@@ -7,13 +7,20 @@ using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace DataAccess.CQRS.Query.LocationQueries
 {
-    public class GetLocationsByTypeQuery : QueryBase<List<Location>, ILocationRepository>
+    public class GetLocationsByTypeQuery : QueryBase<List<Location>>
     {
         public LocationType LocationType { get; set; }
 
-        public override async Task<List<Location>> Execute(ILocationRepository locationRepository)
+        private readonly ILocationRepository _locationRepository;
+
+        public GetLocationsByTypeQuery(ILocationRepository locationRepository)
         {
-            return await locationRepository.GetLocationsByType(LocationType);
+            _locationRepository = locationRepository;
+        }
+
+        public override async Task<List<Location>> Execute()
+        {
+            return await _locationRepository.GetLocationsByType(LocationType);
         }
     }
 }

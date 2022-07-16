@@ -8,15 +8,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Query.Queries.SeniorityQueries
 {
-    public class GetSenioritiesQuery : QueryBase<List<Seniority>, ISeniorityRepository>
+    public class GetSenioritiesQuery : QueryBase<List<Seniority>>
     {
+        private readonly ISeniorityRepository _seniorityRepository;
+
+        public GetSenioritiesQuery(ISeniorityRepository seniorityRepository)
+        {
+            _seniorityRepository = seniorityRepository;
+        }
+
         public DateTime EmploymentDate { get; set; }
         public string UserFirstName { get; set; }
         public string UserLastName { get; set; }
 
-        public override async Task<List<Seniority>> Execute(ISeniorityRepository seniorityRepository)
+        public override async Task<List<Seniority>> Execute()
         {
-            return await seniorityRepository.GetAll()
+            return await _seniorityRepository.GetAll()
                 .FilterByUserFirstName(UserFirstName)
                 .FilterByUserLastName(UserLastName)
                 .FilterByEmploymentDate(EmploymentDate)

@@ -8,14 +8,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Query.Queries.RoleQueries
 {
-    public class GetRolesQuery : QueryBase<List<Role>, IRoleRepository>
+    public class GetRolesQuery : QueryBase<List<Role>>
     {
+        private readonly IRoleRepository _roleRepository;
+
+        public GetRolesQuery(IRoleRepository roleRepository)
+        {
+            _roleRepository = roleRepository;
+        }
+
         public Guid RoleId { get; set; }
         public string RoleName { get; set; }
 
-        public override async Task<List<Role>> Execute(IRoleRepository roleRepository)
+        public override async Task<List<Role>> Execute()
         {
-            return await roleRepository.GetAll()
+            return await _roleRepository.GetAll()
                 .FilterById(RoleId)
                 .FilterByRoleName(RoleName)
                 .ToListAsync();

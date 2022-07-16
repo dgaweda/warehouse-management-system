@@ -1,8 +1,10 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using DataAccess.CQRS.Query.Queries.RoleQueries;
 using DataAccess.Entities;
+using DataAccess.Repository.RoleRepository;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Role;
@@ -11,21 +13,23 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.RoleHandlers
 {
     public class GetRolesHandler : 
-        QueryHandler<GetRolesResponse, GetRolesQuery, Role, RoleDto>,
+        QueryManager<List<Role>, List<RoleDto>>,
         IRequestHandler<GetRolesRequest, GetRolesResponse>
-    { 
-        public GetRolesHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
+    {
+        private readonly IRoleRepository _roleRepository;
+        public GetRolesHandler(IMapper mapper, IRoleRepository roleRepository) : base(mapper)
         {
+            _roleRepository = roleRepository;
         }
 
         public async Task<GetRolesResponse> Handle(GetRolesRequest request, CancellationToken cancellationToken)
         {
-            var query = new GetRolesQuery()
+            var queryResult = await new GetRolesQuery(_roleRepository)
             {
-                RoleId = request.RoleId,
+                RoleId = request.Id,
                 RoleName = request.RoleName
-            };
-            var response = await HandleQuery(query);
+            }.Execute();
+            var response = await CreateResponse<GetRolesResponse>(queryResult);
             return response;
         }
     }

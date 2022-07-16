@@ -29,7 +29,7 @@ namespace warehouse_management_system.Controllers
 
 
         [HttpDelete]
-        [Route("{RoleId}")]
+        [Route("{Id}")]
         public async Task<IActionResult> RemoveRole([FromRoute] RemoveRoleRequest request) => await Handle<RemoveRoleRequest, RemoveRoleResponse>(request);
     }
 }

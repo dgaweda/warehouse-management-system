@@ -6,6 +6,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Invo
 {
     public class RemoveInvoiceRequest : RequestBase, IRequest<RemoveInvoiceResponse>
     {
-        public Guid InvoiceId { get; set; }
+        public override Guid Id { get; set; }
     }
 }

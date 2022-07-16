@@ -7,13 +7,20 @@ using DataAccess.Repository.ProductPalletLineRepository;
 
 namespace DataAccess.CQRS.Query.PalletsProductsQueries
 {
-    public class GetProductsByPalletIdQuery : QueryBase<List<ProductPalletLine>, IProductPalletLineRepository>
+    public class GetProductsByPalletIdQuery : QueryBase<List<ProductPalletLine>>
     {
+        private readonly IProductPalletLineRepository _productPalletLineRepository;
+
+        public GetProductsByPalletIdQuery(IProductPalletLineRepository productPalletLineRepository)
+        {
+            _productPalletLineRepository = productPalletLineRepository;
+        }
+
         public Guid PalletId { get; set; }
 
-        public override async Task<List<ProductPalletLine>> Execute(IProductPalletLineRepository productPalletLineRepository)
+        public override async Task<List<ProductPalletLine>> Execute()
         {
-            return await productPalletLineRepository.GetProductsByPalletId(PalletId);
+            return await _productPalletLineRepository.GetProductsByPalletId(PalletId);
         }
     }
 }

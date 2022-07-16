@@ -13,21 +13,24 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departu
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHandlers
 {
     public class GetDeparturesHandler :
-        QueryHandler<GetDeparturesQuery,GetDeparturesResponse, List<Departure>, List<DepartureDto>, IDepartureRepository>,
+        QueryManager<List<Departure>, List<DepartureDto>>,
         IRequestHandler<GetDeparturesRequest, GetDeparturesResponse>
     {
-        public GetDeparturesHandler(IMapper mapper, IDepartureRepository departureRepository) : base(mapper, departureRepository)
+        private readonly IDepartureRepository _departureRepository;
+        public GetDeparturesHandler(IMapper mapper, IDepartureRepository departureRepository) 
+            : base(mapper)
         {
+            _departureRepository = departureRepository;
         }
 
         public async Task<GetDeparturesResponse> Handle(GetDeparturesRequest request, CancellationToken cancellation)
         {
-            var query = new GetDeparturesQuery()
+            var queryResult = await new GetDeparturesQuery(_departureRepository)
             {
                 Name = request.Name,
                 OpeningTime = request.OpeningTime,
-            };
-            var response = await HandleQuery(query);
+            }.Execute();
+            var response = await CreateResponse<GetDeparturesResponse>(queryResult);
             return response;
         }
     }

@@ -22,7 +22,7 @@ namespace warehouse_management_system.Controllers
         public async Task<IActionResult> AddDelivery([FromBody] AddDeliveryRequest request) => await Handle<AddDeliveryRequest, AddDeliveryResponse>(request);
 
         [HttpDelete]
-        [Route("{DeliveryId}")]
+        [Route("{Id}")]
         public async Task<IActionResult> RemoveDelivery([FromRoute] RemoveDeliveryRequest request) => await Handle<RemoveDeliveryRequest, RemoveDeliveryResponse>(request);
 
         [HttpPut]

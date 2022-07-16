@@ -6,6 +6,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Role
 {
     public class RemoveRoleRequest : RequestBase, IRequest<RemoveRoleResponse>
     {
-        public Guid RoleId { get; set; }
+        public override Guid Id { get; set; }
     }
 }

@@ -1,7 +1,9 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using DataAccess.CQRS.Query.PalletsProductsQueries;
+using DataAccess.Repository.ProductPalletLineRepository;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.ProductsPallets;
@@ -10,20 +12,22 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductPalletLine
 {
     public class GetProductByPalletIdHandler :
-        QueryHandler<GetProductsByPalletIdResponse, GetProductsByPalletIdQuery, DataAccess.Entities.ProductPalletLine, ProductPalletLineDto>,
+        QueryManager<List<DataAccess.Entities.ProductPalletLine>, List<ProductPalletLineDto>>,
         IRequestHandler<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse>
     {
-        public GetProductByPalletIdHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
+        private readonly IProductPalletLineRepository _productPalletLineRepository;
+        public GetProductByPalletIdHandler(IMapper mapper, IProductPalletLineRepository productPalletLineRepository) : base(mapper)
         {
+            _productPalletLineRepository = productPalletLineRepository;
         }
 
         public async Task<GetProductsByPalletIdResponse> Handle(GetProductsByPalletIdRequest request, CancellationToken cancellationToken)
         {
-            var query = new GetProductsByPalletIdQuery()
+            var queryResult = await new GetProductsByPalletIdQuery(_productPalletLineRepository)
             {
                 PalletId = request.PalletId
-            };
-            var response = await HandleQuery(query);
+            }.Execute();
+            var response = await CreateResponse<GetProductsByPalletIdResponse>(queryResult);
             return response;
         }
     }

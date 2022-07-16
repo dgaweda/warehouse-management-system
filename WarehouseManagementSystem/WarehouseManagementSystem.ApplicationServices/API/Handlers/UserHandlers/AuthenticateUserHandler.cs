@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using DataAccess.CQRS.Query.Queries.UsersQueries;
+using DataAccess.Entities;
+using DataAccess.Repository.UserRepository;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
@@ -9,29 +11,24 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandlers
 {
-    public class AuthenticateUserHandler : IRequestHandler<AuthenticateUserRequest, AuthenticateUserResponse>
+    public class AuthenticateUserHandler : QueryManager<User, User>, IRequestHandler<AuthenticateUserRequest, AuthenticateUserResponse>
     {
-        private readonly IQueryExecutor _queryExecutor;
-        private readonly IMapper _mapper;
-        public AuthenticateUserHandler(IMapper mapper, IQueryExecutor queryExecutor)
+        private readonly IUserRepository _userRepository;
+        public AuthenticateUserHandler(IMapper mapper, IUserRepository userRepository) 
+            : base(mapper)
         {
-            _mapper = mapper;
-            _queryExecutor = queryExecutor;
+            _userRepository = userRepository;
         }
         
         public async Task<AuthenticateUserResponse> Handle(AuthenticateUserRequest request, CancellationToken cancellationToken)
         {
-            var query = new AuthenticateUserQuery()
+            var queryResult = await new AuthenticateUserQuery(_userRepository)
             {
                 Username = request.Username,
                 Password = request.Password
-            };
-            var entity = await _queryExecutor.Execute(query);
-            var dto = _mapper.Map<UserDto>(entity);
-            return new AuthenticateUserResponse()
-            {
-                Response = dto
-            };
+            }.Execute();
+            var response = await CreateResponse<AuthenticateUserResponse>(queryResult);
+            return response;
         }
     }
 }

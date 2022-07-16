@@ -1,31 +1,30 @@
 ﻿using AutoMapper;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Query.Queries;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers
 {
-    public class QueryHandler<TQuery, TResponse, TEntity, TEntityDto, TRepository> : IQueryHandler
-        where TResponse : ResponseBase<TEntityDto>, new()
-        where TQuery : QueryBase<TEntity, TRepository>
+    public class QueryManager<TEntity, TEntityDto>
     {
         private readonly IMapper _mapper;
-        private readonly TRepository _repository;
 
-        protected QueryHandler(IMapper mapper, TRepository repository)
+        protected QueryManager(IMapper mapper)
         {
             _mapper = mapper;
-            _repository = repository;
         }
         
-        public async Task<TResponse> HandleQuery(TQuery query)
+        protected async Task<TResponse> CreateResponse<TResponse>(TEntity entity) where TResponse : ResponseBase<TEntityDto>, new()
         {
-            var entity = await query.Execute(_repository);
-            var dto = _mapper.Map<TEntityDto>(entity);
             return new TResponse()
             {
-                Response = dto
+                Response = await ToDto(entity)
             };
+        }
+
+        private Task<TEntityDto> ToDto(TEntity entity)
+        {
+            var dto = _mapper.Map<TEntityDto>(entity);
+            return Task.FromResult(dto);
         }
     }
 }

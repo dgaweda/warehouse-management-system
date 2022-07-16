@@ -6,11 +6,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.CQRS.Query.Queries.OrderQueries
 {
-    public class GetOrdersQuery: QueryBase<List<Order>, IOrderRepository>
+    public class GetOrdersQuery: QueryBase<List<Order>>
     {
-        public override async Task<List<Order>> Execute(IOrderRepository orderRepository)
+        private readonly IOrderRepository _orderRepository;
+
+        public GetOrdersQuery(IOrderRepository orderRepository)
         {
-            return await orderRepository.GetAll().ToListAsync();
+            _orderRepository = orderRepository;
+        }
+
+        public override async Task<List<Order>> Execute()
+        {
+            return await _orderRepository.GetAll().ToListAsync();
         }
     }
 }
