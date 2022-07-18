@@ -5,9 +5,9 @@ using DataAccess.Entities;
 
 namespace DataAccess.Repository.ProductPalletLineRepository
 {
-    public interface IProductPalletLineRepository : IRepository<ProductPalletLine>
+    public interface IProductPalletLineRepository : IRepository<PalletRow>
     {
-        Task<List<ProductPalletLine>> GetProductsByPalletId(Guid palletId);
+        Task<List<PalletRow>> GetProductsByPalletId(Guid palletId);
 
         Task<bool> PalletIsEmpty(Guid id);
     }

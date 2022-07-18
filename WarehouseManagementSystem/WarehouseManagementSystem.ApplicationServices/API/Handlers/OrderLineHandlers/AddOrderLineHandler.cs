@@ -11,7 +11,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.OrderLi
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.OrderLineHandlers
 {
     public class AddOrderLineHandler:
-        CommandHandler<AddOrderLineCommand, OrderLine, IOrderLineRepository>,
+        CommandHandler<AddOrderLineCommand, OrderRow, IOrderLineRepository>,
         IRequestHandler<AddOrderLineRequest, AddOrderLineResponse>
     {
         public AddOrderLineHandler(IMapper mapper, IOrderLineRepository repositoryService)

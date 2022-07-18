@@ -10,9 +10,9 @@ namespace DataAccess.Extensions
 {
     public static class ProductPalletLineExtension
     {
-        public static void DecreaseProductAmount(this ProductPalletLine productPalletLine, ProductPalletLine requestProductPalletLine)
+        public static void DecreaseProductAmount(this PalletRow palletRow, PalletRow requestPalletRow)
         {
-            productPalletLine.ProductAmount -= requestProductPalletLine.ProductAmount;
+            palletRow.ProductAmount -= requestPalletRow.ProductAmount;
         }
 
         public static void SetPalletStatus(this Pallet pallet)
@@ -20,7 +20,7 @@ namespace DataAccess.Extensions
             pallet.PalletStatus = PalletStatus.UNFOLDED;
         }
 
-        public static IQueryable<ProductPalletLine> FilterByPalletId(this IQueryable<ProductPalletLine> palletLines, Guid palletId)
+        public static IQueryable<PalletRow> FilterByPalletId(this IQueryable<PalletRow> palletLines, Guid palletId)
         {
             if (palletId == Guid.Empty)
                 return palletLines;

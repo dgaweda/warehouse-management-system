@@ -10,11 +10,10 @@ namespace DataAccess.Entities
     {
         [Required]
         [MaxLength(50)]
-        [Column("Nazwa dostawcy")]
         public string Name { get; set; }
 
         [Required]
-        [Column("Data i godzina przyjazdu dostawy", TypeName = "smalldatetime")]
+        [Column(TypeName = "smalldatetime")]
         public DateTime Arrival { get; set; }
 
         public List<Invoice> Invoices { get; set; }

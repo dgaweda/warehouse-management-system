@@ -11,14 +11,12 @@ namespace DataAccess.Entities
     {
         [Required]
         [MaxLength(10)]
-        [Column("Kod kreskowy")]
         public string Barcode { get; set; }
         public Guid? OrderId { get; set; }
         public Guid? DepartureId { get; set; }
         public Guid? InvoiceId { get; set; }
         public Guid? UserId { get; set; }
-
-        [Column("Aktualny status palety")]
+        
         public PalletStatus PalletStatus { get; set; }
 
         [ForeignKey("DepartureId")]
@@ -27,7 +25,7 @@ namespace DataAccess.Entities
         [ForeignKey("InvoiceId")]
         public Invoice Invoice{ get; set; }
 
-        public List<ProductPalletLine> PalletsProducts { get; set; }
+        public List<PalletRow> PalletsProducts { get; set; }
 
         [ForeignKey("OrderId")]
         public Order Order { get; set; }

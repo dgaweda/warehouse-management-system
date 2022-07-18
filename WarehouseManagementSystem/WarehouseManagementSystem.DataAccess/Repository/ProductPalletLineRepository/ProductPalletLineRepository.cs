@@ -7,13 +7,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repository.ProductPalletLineRepository
 {
-    public class ProductPalletLineRepository : Repository<ProductPalletLine>, IProductPalletLineRepository
+    public class ProductPalletLineRepository : Repository<PalletRow>, IProductPalletLineRepository
     {
         public ProductPalletLineRepository(WMSDatabaseContext dbContext) : base(dbContext)
         {
         }
 
-        public async Task<List<ProductPalletLine>> GetProductsByPalletId(Guid palletId)
+        public async Task<List<PalletRow>> GetProductsByPalletId(Guid palletId)
         {
             return await GetAll()
                 .Where(x => x.PalletId == palletId)
@@ -25,7 +25,7 @@ namespace DataAccess.Repository.ProductPalletLineRepository
             return !await GetAll().AnyAsync(x => x.PalletId == palletId);
         }
 
-        public override IQueryable<ProductPalletLine> GetAll()
+        public override IQueryable<PalletRow> GetAll()
         {
             return Entity
                 .Include(x => x.Product)

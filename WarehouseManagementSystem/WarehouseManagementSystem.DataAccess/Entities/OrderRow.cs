@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class OrderLine : EntityBase
+    public class OrderRow : EntityBase
     {
         public Guid ProductId { get; set; }
 
@@ -13,11 +13,10 @@ namespace DataAccess.Entities
 
         [Required]
         [Range(1, 999)]
-        [Column("Ilość")]
         public int Amount { get; set; }
 
         [DataType(DataType.Currency)]
-        [Column("Cena", TypeName = "decimal(5,2)")]
+        [Column(TypeName = "decimal(5,2)")]
         public decimal Price { get; set; }
         
         [ForeignKey("OrderId")]

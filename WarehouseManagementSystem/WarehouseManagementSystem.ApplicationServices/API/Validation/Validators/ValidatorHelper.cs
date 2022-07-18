@@ -39,12 +39,12 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validation.Validator
 
         public bool IsProductOnPalletForUnfolding(Guid id)
         {
-            return _context.ProductPalletLines.Any(x => x.ProductId == id);
+            return _context.PalletRow.Any(x => x.ProductId == id);
         }
 
         public bool IsPalletForUnfoldingExist(Guid palletId)
         {
-            return _context.ProductPalletLines.Any(x => x.PalletId == palletId);
+            return _context.PalletRow.Any(x => x.PalletId == palletId);
         }
         
         public bool IsProductBarcodeUnique(string barcode)
@@ -100,7 +100,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Validation.Validator
 
         public bool IsPalletIdExistsInProductPalletLine(Guid palletId)
         {
-            return _context.ProductPalletLines.Any((x) => x.PalletId == palletId);
+            return _context.PalletRow.Any((x) => x.PalletId == palletId);
         }
 
         public bool IsInvoiceNumberNotExist(string invoiceNumber)

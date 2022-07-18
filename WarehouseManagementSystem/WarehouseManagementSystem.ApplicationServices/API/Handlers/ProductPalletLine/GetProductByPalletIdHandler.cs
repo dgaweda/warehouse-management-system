@@ -12,7 +12,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductPalletLine
 {
     public class GetProductByPalletIdHandler :
-        QueryManager<List<DataAccess.Entities.ProductPalletLine>, List<ProductPalletLineDto>>,
+        QueryManager<List<DataAccess.Entities.PalletRow>, List<ProductPalletLineDto>>,
         IRequestHandler<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse>
     {
         private readonly IProductPalletLineRepository _productPalletLineRepository;

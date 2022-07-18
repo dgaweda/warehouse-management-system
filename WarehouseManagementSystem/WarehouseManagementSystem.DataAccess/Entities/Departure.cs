@@ -10,19 +10,17 @@ namespace DataAccess.Entities
     {
         [Required]
         [MaxLength(50)]
-        [Column("Nazwa wyjazdu")]
         public string Name { get; set; }
 
         [Required]
-        [Column("Status wyjazdu")]
         public StateType State { get; set; }
 
         [DataType(DataType.DateTime)]
-        [Column("Czas zamknięcia wyjazdu", TypeName = "smalldatetime")]
+        [Column(TypeName = "smalldatetime")]
         public DateTime? CloseTime { get; set; }
 
         [DataType(DataType.DateTime)]
-        [Column("Czas otworzenia wyjazdu", TypeName = "smalldatetime")]
+        [Column(TypeName = "smalldatetime")]
         public DateTime OpeningTime { get; set; }
 
         public List<Pallet> Pallets { get; set; }

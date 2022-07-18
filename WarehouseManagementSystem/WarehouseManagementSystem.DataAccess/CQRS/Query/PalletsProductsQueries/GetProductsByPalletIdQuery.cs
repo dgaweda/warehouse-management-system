@@ -7,7 +7,7 @@ using DataAccess.Repository.ProductPalletLineRepository;
 
 namespace DataAccess.CQRS.Query.PalletsProductsQueries
 {
-    public class GetProductsByPalletIdQuery : QueryBase<List<ProductPalletLine>>
+    public class GetProductsByPalletIdQuery : QueryBase<List<PalletRow>>
     {
         private readonly IProductPalletLineRepository _productPalletLineRepository;
 
@@ -18,7 +18,7 @@ namespace DataAccess.CQRS.Query.PalletsProductsQueries
 
         public Guid PalletId { get; set; }
 
-        public override async Task<List<ProductPalletLine>> Execute()
+        public override async Task<List<PalletRow>> Execute()
         {
             return await _productPalletLineRepository.GetProductsByPalletId(PalletId);
         }

@@ -10,7 +10,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductPalletLine
 {
     public class DecreaseProductAmountHandler :
-        CommandHandler<DecreaseProductAmountCommand, DataAccess.Entities.ProductPalletLine, IProductPalletLineRepository>,
+        CommandHandler<DecreaseProductAmountCommand, DataAccess.Entities.PalletRow, IProductPalletLineRepository>,
         IRequestHandler<DecreaseProductAmountRequest, DecreaseProductAmountResponse>
     {
         public DecreaseProductAmountHandler(IMapper mapper, IProductPalletLineRepository repositoryService)

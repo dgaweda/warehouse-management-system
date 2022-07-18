@@ -5,7 +5,7 @@ using DataAccess.Repository.OrderLineRepository;
 
 namespace DataAccess.CQRS.Commands.OrderLineCommands
 {
-    public class AddOrderLineCommand: CommandBase<OrderLine, IOrderLineRepository>
+    public class AddOrderLineCommand: CommandBase<OrderRow, IOrderLineRepository>
     {
         public override async Task Execute(IOrderLineRepository orderLineRepository)
         {

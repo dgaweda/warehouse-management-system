@@ -9,7 +9,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
     {
         public PalletLinesProfile()
         {
-            CreateMap<ProductPalletLine, ProductPalletLineDto>()
+            CreateMap<PalletRow, ProductPalletLineDto>()
                 .ForMember(dest => dest.PalletBarcode, opt => opt.MapFrom(src => src.Pallet.Barcode))
                 .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
                 .ForMember(dest => dest.ProductAmount, opt => opt.MapFrom(src => src.ProductAmount))
@@ -20,7 +20,7 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(dest => dest.UserLastName, opt => opt.MapFrom(src => src.Pallet.User != null ? src.Pallet.User.Lastname : string.Empty));
 
 
-            CreateMap<DecreaseProductAmountRequest, ProductPalletLine>()
+            CreateMap<DecreaseProductAmountRequest, PalletRow>()
                 .ForMember(dest => dest.PalletId, opt => opt.MapFrom(src => src.PalletId))
                 .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId))
                 .ForMember(dest => dest.ProductAmount, opt => opt.MapFrom(src => src.ProductAmount));

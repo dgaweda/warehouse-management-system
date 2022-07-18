@@ -2,7 +2,7 @@
 
 namespace DataAccess.Repository.OrderLineRepository
 {
-    public interface IOrderLineRepository : IRepository<OrderLine>
+    public interface IOrderLineRepository : IRepository<OrderRow>
     {
         
     }

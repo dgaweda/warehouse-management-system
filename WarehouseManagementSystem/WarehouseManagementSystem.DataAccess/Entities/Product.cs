@@ -9,21 +9,19 @@ namespace DataAccess.Entities
     public class Product : EntityBase
     {
         [Required]
-        [Column("Data ważności", TypeName = "date")]
+        [Column(TypeName = "date")]
         public DateTime ExpirationDate { get; set; }
 
         [Required]
         [MaxLength(50)]
-        [Column("Nazwa produktu")]
         public string Name { get; set; }
 
         [Required]
         [MaxLength(10)]
-        [Column("Kod kreskowy")]
         public string Barcode { get; set; }
 
         public List<Location> Locations { get; set; }
 
-        public List<ProductPalletLine> PalletLines{ get; set; }
+        public List<PalletRow> PalletLines{ get; set; }
     }
 }

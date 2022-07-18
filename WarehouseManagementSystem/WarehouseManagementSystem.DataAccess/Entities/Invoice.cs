@@ -10,20 +10,18 @@ namespace DataAccess.Entities
     {
         [Required]
         [MaxLength(50)]
-        [Column("Numer faktury")]
         public string InvoiceNumber { get; set; }
 
         [Required]
         [MaxLength(50)]
-        [Column("Nazwa dostawcy")]
         public string Provider { get; set; }
 
         [Required]
-        [Column("Data i godzina stworzenia faktury", TypeName = "date")]
+        [Column(TypeName = "date")]
         public DateTime CreationDate { get; set; }
 
         [Required]
-        [Column("Data i godzina podpisania faktury", TypeName = "smalldatetime")]
+        [Column(TypeName = "smalldatetime")]
         public DateTime ReceiptDateTime { get; set; }
 
         [Required]

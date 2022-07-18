@@ -9,9 +9,9 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
     {
         public OrderLinesProfile()
         {
-            CreateMap<OrderLine, OrderLineDto>();
+            CreateMap<OrderRow, OrderLineDto>();
 
-            CreateMap<AddOrderLineRequest, OrderLine>();
+            CreateMap<AddOrderLineRequest, OrderRow>();
         }
     }
 }

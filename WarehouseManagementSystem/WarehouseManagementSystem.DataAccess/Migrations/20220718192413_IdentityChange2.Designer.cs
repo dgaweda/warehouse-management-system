@@ -4,14 +4,16 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(WMSDatabaseContext))]
-    partial class WMSDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220718192413_IdentityChange2")]
+    partial class IdentityChange2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,12 +28,14 @@ namespace DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Arrival")
-                        .HasColumnType("smalldatetime");
+                        .HasColumnType("smalldatetime")
+                        .HasColumnName("Data i godzina przyjazdu dostawy");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Nazwa dostawcy");
 
                     b.HasKey("Id");
 
@@ -45,18 +49,22 @@ namespace DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("CloseTime")
-                        .HasColumnType("smalldatetime");
+                        .HasColumnType("smalldatetime")
+                        .HasColumnName("Czas zamknięcia wyjazdu");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Nazwa wyjazdu");
 
                     b.Property<DateTime>("OpeningTime")
-                        .HasColumnType("smalldatetime");
+                        .HasColumnType("smalldatetime")
+                        .HasColumnName("Czas otworzenia wyjazdu");
 
                     b.Property<int>("State")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Status wyjazdu");
 
                     b.HasKey("Id");
 
@@ -70,7 +78,8 @@ namespace DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("date");
+                        .HasColumnType("date")
+                        .HasColumnName("Data i godzina stworzenia faktury");
 
                     b.Property<Guid>("DeliveryId")
                         .HasColumnType("uniqueidentifier");
@@ -78,15 +87,18 @@ namespace DataAccess.Migrations
                     b.Property<string>("InvoiceNumber")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Numer faktury");
 
                     b.Property<string>("Provider")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Nazwa dostawcy");
 
                     b.Property<DateTime>("ReceiptDateTime")
-                        .HasColumnType("smalldatetime");
+                        .HasColumnType("smalldatetime")
+                        .HasColumnName("Data i godzina podpisania faktury");
 
                     b.HasKey("Id");
 
@@ -102,18 +114,22 @@ namespace DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("CurrentAmount")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Aktualna ilość");
 
                     b.Property<int>("LocationType")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Typ lokalizacji");
 
                     b.Property<int>("MaxAmount")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Maksymalna ilość");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasColumnName("Nazwa lokalizacji");
 
                     b.Property<Guid?>("ProductId")
                         .HasColumnType("uniqueidentifier");
@@ -134,16 +150,20 @@ namespace DataAccess.Migrations
                     b.Property<string>("Barcode")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasColumnName("Kod kreskowy");
 
                     b.Property<int>("OrderState")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Stan zamówienia");
 
                     b.Property<DateTime?>("PickingEnd")
-                        .HasColumnType("smalldatetime");
+                        .HasColumnType("smalldatetime")
+                        .HasColumnName("Czas zakończenia zamówienia");
 
                     b.Property<DateTime?>("PickingStart")
-                        .HasColumnType("smalldatetime");
+                        .HasColumnType("smalldatetime")
+                        .HasColumnName("Czas rozpoczęcia zamówienia");
 
                     b.HasKey("Id");
 
@@ -157,13 +177,15 @@ namespace DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Amount")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Ilość");
 
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(5,2)")
+                        .HasColumnName("Cena");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
@@ -186,7 +208,8 @@ namespace DataAccess.Migrations
                     b.Property<string>("Barcode")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasColumnName("Kod kreskowy");
 
                     b.Property<Guid?>("DepartureId")
                         .HasColumnType("uniqueidentifier");
@@ -198,7 +221,8 @@ namespace DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("PalletStatus")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Aktualny status palety");
 
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -226,7 +250,8 @@ namespace DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ProductAmount")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Ilość danego produktu na palecie");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
@@ -249,15 +274,18 @@ namespace DataAccess.Migrations
                     b.Property<string>("Barcode")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasColumnName("Kod kreskowy");
 
                     b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("date");
+                        .HasColumnType("date")
+                        .HasColumnName("Data ważności");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Nazwa produktu");
 
                     b.HasKey("Id");
 
@@ -298,7 +326,8 @@ namespace DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("EmploymentDate")
-                        .HasColumnType("date");
+                        .HasColumnType("date")
+                        .HasColumnName("Data zatrudnienia");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -318,7 +347,8 @@ namespace DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Age")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Wiek");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -328,12 +358,14 @@ namespace DataAccess.Migrations
                     b.Property<string>("Lastname")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Nazwisko");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Imię");
 
                     b.Property<string>("PESEL")
                         .IsRequired()
@@ -342,7 +374,8 @@ namespace DataAccess.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Hasło");
 
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
@@ -350,7 +383,8 @@ namespace DataAccess.Migrations
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("Nazwa użytkownika");
 
                     b.HasKey("Id");
 

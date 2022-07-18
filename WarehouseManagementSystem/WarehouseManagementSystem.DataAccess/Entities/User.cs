@@ -10,25 +10,22 @@ namespace DataAccess.Entities
     {
         [MaxLength(100)]
         [Required]
-        [Column("Nazwa użytkownika")]
         public string Username { get; set; }
 
         [Required]
-        [Column("Hasło")]
         public string Password { get; set; }
 
         [MaxLength(100)]
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+        
         [Required]
         [MaxLength(50)]
-        [Column("Imię")]
         public string Name { get; set; }
 
         [Required]
         [MaxLength(50)]
-        [Column("Nazwisko")]
         public string Lastname { get; set; }
 
         [Required]
@@ -37,7 +34,6 @@ namespace DataAccess.Entities
 
         [Required]
         [Range(16, 99)]
-        [Column("Wiek")]
         public int Age { get; set; }
 
         [Required]

@@ -17,9 +17,10 @@ namespace DataAccess
         public DbSet<Departure> Departures { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<OrderLine> OrderLines { get; set; }
+        
+        public DbSet<OrderRow> OrderRow { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<ProductPalletLine> ProductPalletLines { get; set; }
+        public DbSet<PalletRow> PalletRow { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<User> Users { get; set; }
     }
