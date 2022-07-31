@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using DataAccess.Entities;
 
 namespace DataAccess
@@ -23,5 +24,19 @@ namespace DataAccess
         public DbSet<PalletRow> PalletRows { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<User> Users { get; set; }
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Role>().HasData(
+                new Role()
+                {
+                    Id = new Guid(),
+                    Rank = 1,
+                    Name = "collector",
+                    Description = "Collecting orders",
+                    Salary = 3000
+                }
+            );
+        }
     }
 }

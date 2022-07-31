@@ -21,7 +21,7 @@ namespace DataAccess.Entities
         [Column(TypeName = "smalldatetime")]
         public DateTime? PickingEnd { get; set; }
 
-        public List<OrderRow> OrderLines { get; set; }
+        public List<OrderRow> OrderRows { get; set; }
         public List<Pallet> Pallets { get; set; }
     }
 }

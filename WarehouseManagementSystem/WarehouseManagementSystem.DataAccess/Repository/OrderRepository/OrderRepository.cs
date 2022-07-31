@@ -22,7 +22,7 @@ namespace DataAccess.Repository.OrderRepository
         public override IQueryable<Order> GetAll()
         {
             return Entity
-                .Include(x => x.OrderLines)
+                .Include(x => x.OrderRows)
                 .AsQueryable();
         }
     }
