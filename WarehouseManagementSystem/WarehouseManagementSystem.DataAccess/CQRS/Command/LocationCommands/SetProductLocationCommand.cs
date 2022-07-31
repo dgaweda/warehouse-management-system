@@ -1,11 +1,10 @@
-﻿using DataAccess.Entities;
-using System.Threading.Tasks;
-using DataAccess.CQRS.Command;
+﻿using System.Threading.Tasks;
+using DataAccess.Entities;
 using DataAccess.Extensions;
 using DataAccess.Repository.LocationRepository;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.CQRS.Commands.ProductCommands
+namespace DataAccess.CQRS.Command.LocationCommands
 {
     public class SetProductLocationCommand : CommandBase<Location, ILocationRepository>
     {

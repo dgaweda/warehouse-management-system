@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using DataAccess.Entities;
 
-namespace DataAccess.Seed
+namespace DataAccess.Seeders.Data
 {
     public static class DummyOrderRow
     {
@@ -14,10 +13,7 @@ namespace DataAccess.Seed
                 new OrderRow()
                 {
                     Amount = 5,
-                    Id = Guid.Parse("ad4bb54a-f304-49cd-bf6f-bcefb231045c"),
                     Price = Convert.ToDecimal(10.50),
-                    OrderId = Guid.Parse("186630f0-aadc-4ed8-89be-3e73b61328a5"),
-                    ProductId = Guid.Parse("76d175b7-bfa3-4e42-9cae-aa40534eeed2")
                 },
                 new OrderRow()
                 {

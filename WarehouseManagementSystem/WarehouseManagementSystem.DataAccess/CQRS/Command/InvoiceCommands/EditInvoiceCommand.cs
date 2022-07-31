@@ -1,11 +1,10 @@
-﻿using DataAccess.Entities;
-using System.Threading.Tasks;
-using DataAccess.CQRS.Command;
+﻿using System.Threading.Tasks;
+using DataAccess.Entities;
 using DataAccess.Extensions;
 using DataAccess.Repository.InvoiceRepository;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.CQRS.Commands.InvoiceCommands
+namespace DataAccess.CQRS.Command.InvoiceCommands
 {
     public class EditInvoiceCommand : CommandBase<Invoice, IInvoiceRepository>
     {

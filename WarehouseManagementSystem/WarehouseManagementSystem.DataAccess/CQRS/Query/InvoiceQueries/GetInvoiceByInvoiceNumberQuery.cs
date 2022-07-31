@@ -1,10 +1,8 @@
 ﻿using System.Threading.Tasks;
-using DataAccess.CQRS.Query;
-using DataAccess.CQRS.Query.Queries;
 using DataAccess.Entities;
 using DataAccess.Repository.InvoiceRepository;
 
-namespace DataAccess.CQRS.Queries.InvoiceQueries
+namespace DataAccess.CQRS.Query.InvoiceQueries
 {
     public class GetInvoiceByInvoiceNumberQuery : QueryBase<Invoice>
     {

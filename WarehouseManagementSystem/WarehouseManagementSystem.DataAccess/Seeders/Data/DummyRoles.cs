@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DataAccess.Entities;
 
-namespace DataAccess.Seed
+namespace DataAccess.Seeders.Data
 {
     public static class DummyRoles
     {
-        public static IEnumerable<Role> GetDummyRoles()
+        public static List<Role> GetDummyRoles()
         {
-            return new[]
+            return new List<Role>()
             {
                 new Role()
                 {

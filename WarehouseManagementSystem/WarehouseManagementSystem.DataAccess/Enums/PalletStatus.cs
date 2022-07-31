@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace WarehouseManagementSystem.ApplicationServices.API.Enums
+namespace DataAccess.Enums
 {
     public enum PalletStatus
     {

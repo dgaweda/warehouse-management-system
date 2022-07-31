@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace DataAccess.Entities.EntityBases
+namespace DataAccess.Entities.EntityBase
 {
     public abstract class EntityBase
     {

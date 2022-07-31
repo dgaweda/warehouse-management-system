@@ -1,13 +1,12 @@
-﻿using DataAccess.Entities.EntityBases;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
+using DataAccess.Enums;
 
 namespace DataAccess.Entities
 {
-    public class Order : EntityBase
+    public class Order : EntityBase.EntityBase
     {
         public OrderState OrderState { get; set; }
 

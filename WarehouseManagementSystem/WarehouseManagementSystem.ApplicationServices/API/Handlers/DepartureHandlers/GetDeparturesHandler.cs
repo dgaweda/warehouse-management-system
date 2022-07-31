@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS.Queries.DepartureQueries;
+using DataAccess.CQRS.Query.DepartureQueries;
 using DataAccess.Entities;
 using DataAccess.Repository.DepartureRepository;
 using MediatR;

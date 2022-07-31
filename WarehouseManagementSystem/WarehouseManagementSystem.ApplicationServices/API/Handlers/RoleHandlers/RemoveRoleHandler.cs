@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS.Commands.RoleCommands;
+using DataAccess.CQRS.Command.RoleCommands;
 using DataAccess.Entities;
 using DataAccess.Repository.RoleRepository;
 using MediatR;

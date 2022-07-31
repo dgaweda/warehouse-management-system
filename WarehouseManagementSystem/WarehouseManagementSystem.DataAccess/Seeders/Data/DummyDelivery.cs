@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using DataAccess.Entities;
 
-namespace DataAccess.Seed
+namespace DataAccess.Seeders.Data
 {
     public static class DummyDeliveries
     {

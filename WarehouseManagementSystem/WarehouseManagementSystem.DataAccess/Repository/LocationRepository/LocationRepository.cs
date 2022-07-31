@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Entities;
+using DataAccess.Enums;
 using Microsoft.EntityFrameworkCore;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace DataAccess.Repository.LocationRepository
 {

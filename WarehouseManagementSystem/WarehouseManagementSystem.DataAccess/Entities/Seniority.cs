@@ -1,11 +1,10 @@
-﻿using DataAccess.Entities.EntityBases;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class Seniority : EntityBase
+    public class Seniority : EntityBase.EntityBase
     {
         [Required]
         [Column(TypeName = "date")]

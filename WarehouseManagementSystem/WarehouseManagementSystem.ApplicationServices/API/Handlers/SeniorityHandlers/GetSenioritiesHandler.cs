@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS.Query.Queries.SeniorityQueries;
+using DataAccess.CQRS.Query.SeniorityQueries;
 using DataAccess.Entities;
 using DataAccess.Repository.SeniorityRepository;
 using MediatR;

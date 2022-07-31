@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DataAccess.Entities;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
+using DataAccess.Enums;
 
-namespace DataAccess.Seed
+namespace DataAccess.Seeders.Data
 {
     public class DummyPallet
     {

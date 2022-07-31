@@ -10,7 +10,6 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Query.Queries.UsersQueries;
 using MediatR;
 using warehouse_management_system.Authentication.Privileges;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;

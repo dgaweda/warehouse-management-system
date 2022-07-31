@@ -4,7 +4,7 @@ using DataAccess.Entities;
 using DataAccess.Repository.OrderRepository;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.CQRS.Query.Queries.OrderQueries
+namespace DataAccess.CQRS.Query.OrderQueries
 {
     public class GetOrdersQuery: QueryBase<List<Order>>
     {

@@ -1,12 +1,10 @@
-﻿using DataAccess.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Query;
-using DataAccess.CQRS.Query.Queries;
+using DataAccess.Entities;
+using DataAccess.Enums;
 using DataAccess.Repository.PalletRepository;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
-namespace DataAccess.CQRS.Queries.PalletQueries
+namespace DataAccess.CQRS.Query.PalletQueries
 {
     public class GetPalletsByStatusQuery : QueryBase<List<Pallet>>
     {

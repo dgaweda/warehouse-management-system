@@ -1,11 +1,9 @@
-﻿
-using System.Threading.Tasks;
-using DataAccess.CQRS.Command;
+﻿using System.Threading.Tasks;
 using DataAccess.Entities;
+using DataAccess.Enums;
 using DataAccess.Repository.OrderRepository;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
-namespace DataAccess.CQRS.Commands.OrderCommands
+namespace DataAccess.CQRS.Command.OrderCommands
 {
     public class AddOrderCommand: CommandBase<Order, IOrderRepository>
     {

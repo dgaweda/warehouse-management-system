@@ -1,4 +1,4 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Enums
+﻿namespace DataAccess.Enums
 {
     public enum LocationType
     {

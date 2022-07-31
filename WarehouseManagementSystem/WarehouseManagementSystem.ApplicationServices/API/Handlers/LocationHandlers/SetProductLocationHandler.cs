@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using DataAccess.CQRS.Commands.ProductCommands;
 using DataAccess.Entities;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Command.LocationCommands;
 using DataAccess.Repository.LocationRepository;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Location;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location;

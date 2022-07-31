@@ -1,5 +1,8 @@
 using System;
+using DataAccess;
+using DataAccess.Seeders;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog;
@@ -11,23 +14,28 @@ namespace warehouse_management_system
     {
         public static void Main(string[] args)
         {
+            var host = CreateHostBuilder(args).Build();
             var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 
-            try
+            using (var scope = host.Services.CreateScope())
             {
-                logger.Debug("Logger Initialization: " + DateTime.Now.Date + DateTime.Now.TimeOfDay);
-                CreateHostBuilder(args).Build().Run();
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<WMSDatabaseContext>();
+                    DbInitializer.Seed(context);
+                    host.Run();
+                }
+                catch (Exception exception)
+                {
+                    logger.Error(exception, "Stopped app due to exception." + DateTime.Now);
+                    throw;
+                }
+                finally
+                {
+                    LogManager.Shutdown();
+                }
             }
-            catch (Exception exception)
-            {
-                logger.Error(exception, "Stopped app due to exception." + DateTime.Now);
-                throw;
-            }
-            finally
-            {
-                LogManager.Shutdown();
-            }
-            
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

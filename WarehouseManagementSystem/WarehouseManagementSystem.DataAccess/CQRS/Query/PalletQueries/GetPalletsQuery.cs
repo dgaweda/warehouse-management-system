@@ -1,14 +1,12 @@
-﻿using DataAccess.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Query;
-using DataAccess.CQRS.Query.Queries;
+using DataAccess.Entities;
 using DataAccess.Extensions;
 using DataAccess.Repository.PalletRepository;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.CQRS.Queries.PalletQueries
+namespace DataAccess.CQRS.Query.PalletQueries
 {
     public class GetPalletsQuery : QueryBase<List<Pallet>>
     {

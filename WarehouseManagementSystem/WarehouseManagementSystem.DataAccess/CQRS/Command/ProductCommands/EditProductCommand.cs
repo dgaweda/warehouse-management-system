@@ -1,11 +1,10 @@
-﻿using DataAccess.Entities;
-using System.Threading.Tasks;
-using DataAccess.CQRS.Command;
+﻿using System.Threading.Tasks;
+using DataAccess.Entities;
 using DataAccess.Extensions;
 using DataAccess.Repository.ProductRepository;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.CQRS.Commands.DeliveryProductCommands
+namespace DataAccess.CQRS.Command.ProductCommands
 {
     public class EditProductCommand : CommandBase<Product, IProductRepository>
     {

@@ -1,9 +1,8 @@
-﻿using DataAccess.Entities;
-using System.Threading.Tasks;
-using DataAccess.CQRS.Command;
+﻿using System.Threading.Tasks;
+using DataAccess.Entities;
 using DataAccess.Repository.DeliveryRepository;
 
-namespace DataAccess.CQRS.Commands.DeliveryCommands
+namespace DataAccess.CQRS.Command.DeliveryCommands
 {
     public class EditDeliveryCommand : CommandBase<Delivery, IDeliveryRepository>
     {

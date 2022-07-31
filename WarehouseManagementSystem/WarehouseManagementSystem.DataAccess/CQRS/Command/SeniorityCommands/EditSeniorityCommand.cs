@@ -1,9 +1,8 @@
-﻿using DataAccess.Entities;
-using System.Threading.Tasks;
-using DataAccess.CQRS.Command;
+﻿using System.Threading.Tasks;
+using DataAccess.Entities;
 using DataAccess.Repository.SeniorityRepository;
 
-namespace DataAccess.CQRS.Commands.SeniorityCommands
+namespace DataAccess.CQRS.Command.SeniorityCommands
 {
     public class EditSeniorityCommand : CommandBase<Seniority, ISeniorityRepository>
     {

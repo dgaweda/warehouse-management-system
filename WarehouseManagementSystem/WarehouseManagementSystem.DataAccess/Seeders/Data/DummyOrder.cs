@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using DataAccess.Entities;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
+using DataAccess.Enums;
 
-namespace DataAccess.Seed
+namespace DataAccess.Seeders.Data
 {
     public static class DummyOrder
     {

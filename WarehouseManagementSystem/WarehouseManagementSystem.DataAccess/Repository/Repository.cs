@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DataAccess.Entities.EntityBases;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using DataAccess.Entities.EntityBase;
 using DataAccess.Exceptions;
 
 namespace DataAccess.Repository

@@ -1,11 +1,10 @@
 ﻿using System;
-using DataAccess.Entities.EntityBases;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class OrderRow : EntityBase
+    public class OrderRow : EntityBase.EntityBase
     {
         public Guid? ProductId { get; set; }
 

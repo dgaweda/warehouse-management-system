@@ -1,6 +1,22 @@
 
+using System.Linq;
+using System.Reflection;
 using DataAccess;
+using DataAccess.Entities;
 using DataAccess.Repository;
+using DataAccess.Repository.DeliveryRepository;
+using DataAccess.Repository.DepartureRepository;
+using DataAccess.Repository.InvoiceRepository;
+using DataAccess.Repository.LocationRepository;
+using DataAccess.Repository.OrderLineRepository;
+using DataAccess.Repository.OrderRepository;
+using DataAccess.Repository.PalletRepository;
+using DataAccess.Repository.ProductPalletLineRepository;
+using DataAccess.Repository.ProductRepository;
+using DataAccess.Repository.RoleRepository;
+using DataAccess.Repository.SeniorityRepository;
+using DataAccess.Repository.UserRepository;
+using DataAccess.Seeders;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
@@ -43,8 +59,18 @@ namespace warehouse_management_system
 
 
             services.AddTransient<IPrivilegesService, PrivilegesService>();
-
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IDeliveryRepository, DeliveryRepository>();
+            services.AddScoped<IDepartureRepository, DepartureRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<ILocationRepository, LocationRepository>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<ISeniorityRepository, SeniorityRepository>();
+            services.AddScoped<IOrderLineRepository, OrderLineRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductPalletLineRepository, ProductPalletLineRepository>();
+            services.AddScoped<IPalletRepository, PalletRepository>();
 
             services.AddAutoMapper(typeof(UsersProfile).Assembly); // This Line Enables AutoMapper to map all profiles without adding everyone of them.
             // It gets Assembly from one profile to get all the mappings.

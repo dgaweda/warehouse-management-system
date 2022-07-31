@@ -1,14 +1,12 @@
 ﻿using System;
-using DataAccess.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Query;
-using DataAccess.CQRS.Query.Queries;
+using DataAccess.Entities;
 using DataAccess.Extensions;
 using DataAccess.Repository.ProductRepository;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.CQRS.Queries.DeliveryProductQueries
+namespace DataAccess.CQRS.Query.ProductQueries
 {
     public class GetProductsQuery : QueryBase<List<Product>>
     {

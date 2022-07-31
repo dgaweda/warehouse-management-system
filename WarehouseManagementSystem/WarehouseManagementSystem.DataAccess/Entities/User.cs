@@ -1,12 +1,10 @@
-﻿using DataAccess.Entities.EntityBases;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class User : EntityBase
+    public class User : EntityBase.EntityBase
     {
         [MaxLength(100)]
         [Required]

@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Query.Queries;
 using DataAccess.Entities;
+using DataAccess.Enums;
 using DataAccess.Repository.LocationRepository;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace DataAccess.CQRS.Query.LocationQueries
 {

@@ -1,7 +1,7 @@
 ﻿using System;
+using DataAccess.Enums;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Order
 {

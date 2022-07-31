@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using DataAccess.Entities;
 
-namespace DataAccess.Seed
+namespace DataAccess.Seeders.Data
 {
     public class DummyDeparture
     {
