@@ -16,7 +16,7 @@ namespace DataAccess.Entities
         public Guid? DepartureId { get; set; }
         public Guid? InvoiceId { get; set; }
         public Guid? UserId { get; set; }
-        
+
         public PalletStatus PalletStatus { get; set; }
 
         [ForeignKey("DepartureId")]

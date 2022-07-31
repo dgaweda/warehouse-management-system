@@ -20,6 +20,6 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Enums
         READY_TO_BE_UNFOLDED,   // when only InvoiceId is filled
 
         [Description("Rozłożona")]
-        UNFOLDED                // when there is nor product on the pallet
+        UNFOLDED                // when there is no product on the pallet
     }
 }

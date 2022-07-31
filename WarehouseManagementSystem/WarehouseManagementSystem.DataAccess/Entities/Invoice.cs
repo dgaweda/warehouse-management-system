@@ -23,9 +23,8 @@ namespace DataAccess.Entities
         [Required]
         [Column(TypeName = "smalldatetime")]
         public DateTime ReceiptDateTime { get; set; }
-
-        [Required]
-        public Guid DeliveryId { get; set; }
+        
+        public Guid? DeliveryId { get; set; }
 
         public Delivery Delivery { get; set; }
         public List<Pallet> Pallets { get; set; }

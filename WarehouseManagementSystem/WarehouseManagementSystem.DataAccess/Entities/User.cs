@@ -35,9 +35,8 @@ namespace DataAccess.Entities
         [Required]
         [Range(16, 99)]
         public int Age { get; set; }
-
-        [Required]
-        public Guid RoleId { get; set; }
+        
+        public Guid? RoleId { get; set; }
 
         public Seniority Seniority { get; set; }
         public Role Role { get; set; }

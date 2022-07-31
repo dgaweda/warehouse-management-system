@@ -8,9 +8,9 @@ namespace DataAccess.Seed
 {
     public static class DummyLocation
     {
-        public static IEnumerable<Location> GetDummyLocations()
+        public static List<Location> GetDummyLocations()
         {
-            return new[]
+            return new List<Location>()
             {
                 new Location()
                 {
@@ -25,7 +25,7 @@ namespace DataAccess.Seed
                     CurrentAmount = 50,
                     Name = "Z-02-05",
                     MaxAmount = 100,
-                    ProductId = new Guid("")
+                    ProductId = Guid.Parse("d77b3a62-c4d4-4b12-a703-9bdd88b027ba")
                 },
                 new Location()
                 {
@@ -33,7 +33,7 @@ namespace DataAccess.Seed
                     CurrentAmount = 2,
                     Name = "X-01-03",
                     MaxAmount = 25,
-                    ProductId = new Guid("")
+                    ProductId = Guid.Parse("2e9d5cea-618f-4da1-9247-23e4ad731940")
                 }
             };
         }
