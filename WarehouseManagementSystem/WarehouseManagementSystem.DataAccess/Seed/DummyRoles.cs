@@ -6,13 +6,13 @@ namespace DataAccess.Seed
 {
     public static class DummyRoles
     {
-        public static IEnumerable<Role> CreateDummyRoles()
+        public static IEnumerable<Role> GetDummyRoles()
         {
             return new[]
             {
                 new Role()
                 {
-                    Id = new Guid(),
+                    Id = Guid.NewGuid(),
                     Description = "Collect orders",
                     Name = "collector",
                     Rank = 1,
@@ -20,7 +20,7 @@ namespace DataAccess.Seed
                 },
                 new Role()
                 {
-                    Id = new Guid(),
+                    Id = Guid.NewGuid(),
                     Description = "sending pallets, getting departures, placing pallets, delivery service",
                     Name = "warehouseman",
                     Rank = 2,
@@ -28,7 +28,7 @@ namespace DataAccess.Seed
                 },
                 new Role()
                 {
-                    Id = new Guid(),
+                    Id = Guid.NewGuid(),
                     Description = "Manage other workers",
                     Name = "manager",
                     Rank = 3,
@@ -36,7 +36,7 @@ namespace DataAccess.Seed
                 },
                 new Role()
                 {
-                    Id = new Guid(),
+                    Id = Guid.NewGuid(),
                     Description = "System administrator",
                     Name = "admin",
                     Rank = 4,

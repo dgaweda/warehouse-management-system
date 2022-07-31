@@ -20,7 +20,7 @@ namespace DataAccess.Extensions
 
         public static Delivery SetDeliveryName(this int deliveryNumber, Delivery delivery)
         {
-            delivery.Name = $"DOSTAWA/{deliveryNumber}/DATA/{delivery.Arrival.Date.Day}/{delivery.Arrival.Date.Month}/{delivery.Arrival.Date.Year}";
+            delivery.Name = $"{deliveryNumber}/{delivery.Arrival.Date.Day}/{delivery.Arrival.Date.Month}/{delivery.Arrival.Date.Year}";
             return delivery;
         }
 

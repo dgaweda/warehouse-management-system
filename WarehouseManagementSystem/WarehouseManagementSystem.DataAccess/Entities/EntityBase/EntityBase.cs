@@ -5,7 +5,6 @@ namespace DataAccess.Entities.EntityBases
 {
     public abstract class EntityBase
     {
-        [Key] 
-        public Guid Id { get; set; }
+        [Key] public Guid Id { get; set; } = Guid.NewGuid();
     }
 }
