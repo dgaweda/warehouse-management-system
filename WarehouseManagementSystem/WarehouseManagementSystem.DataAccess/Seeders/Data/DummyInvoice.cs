@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using DataAccess.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Seeders.Data
 {
-    public static class DummyInvoice
+    public class DummyInvoice
     {
         public static List<Invoice> GetDummyInvoices()
         {
@@ -33,6 +36,17 @@ namespace DataAccess.Seeders.Data
                     ReceiptDateTime = sampleReceiptDate2,
                 }
             };
+        }
+
+        public static void SetDummyInvoices(WMSDatabaseContext context)
+        {
+            var delivery1 = context.Deliveries.First();
+            var delivery2 = context.Deliveries.Skip(1).First();
+            var invoice1 = GetDummyInvoices().First();
+            var invoice2 = GetDummyInvoices().Skip(1).First();
+
+            invoice1.DeliveryId = delivery1.Id;
+            invoice2.DeliveryId = delivery2.Id;
         }
     }
 }

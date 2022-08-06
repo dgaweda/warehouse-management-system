@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using DataAccess;
+using DataAccess.DependencyInjection;
 using DataAccess.Entities;
 using DataAccess.Repository;
 using DataAccess.Repository.DeliveryRepository;
@@ -56,35 +57,19 @@ namespace warehouse_management_system
 
             services.AddCors();
             services.AddMvcCore();
-
-
-            services.AddTransient<IPrivilegesService, PrivilegesService>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IDeliveryRepository, DeliveryRepository>();
-            services.AddScoped<IDepartureRepository, DepartureRepository>();
-            services.AddScoped<IRoleRepository, RoleRepository>();
-            services.AddScoped<ILocationRepository, LocationRepository>();
-            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
-            services.AddScoped<IOrderRepository, OrderRepository>();
-            services.AddScoped<ISeniorityRepository, SeniorityRepository>();
-            services.AddScoped<IOrderLineRepository, OrderLineRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IProductPalletLineRepository, ProductPalletLineRepository>();
-            services.AddScoped<IPalletRepository, PalletRepository>();
-
-            services.AddAutoMapper(typeof(UsersProfile).Assembly); // This Line Enables AutoMapper to map all profiles without adding everyone of them.
-            // It gets Assembly from one profile to get all the mappings.
-            services.AddMediatR(typeof(ResponseBase<>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-
-            services.AddHttpContextAccessor();
-
+            services
+                .AddRepositoryServiceCollection()
+                .AddTransient<IPrivilegesService, PrivilegesService>()
+                .AddAutoMapper(typeof(UsersProfile).Assembly)
+                .AddMediatR(typeof(ResponseBase<>))
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>))
+                .AddHttpContextAccessor()
+                .AddScoped(typeof(IValidatorHelper), typeof(ValidatorHelper))
+                .AddValidatorsFromAssembly(typeof(AddSeniorityRequestValidator).Assembly);
+            
             services.AddDbContext<WMSDatabaseContext>(
                 option =>
                     option.UseSqlServer(Configuration.GetConnectionString("WMSDatabaseContext")));
-
-            services.AddScoped(typeof(IValidatorHelper), typeof(ValidatorHelper));
-            services.AddValidatorsFromAssembly(typeof(AddSeniorityRequestValidator).Assembly);
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>

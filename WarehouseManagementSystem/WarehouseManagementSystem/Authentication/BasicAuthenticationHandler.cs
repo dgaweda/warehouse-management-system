@@ -45,7 +45,7 @@ namespace warehouse_management_system.Authentication
 
             if (!Request.Headers.ContainsKey(AuthorizationHeader)) // sprawdza czy request posiada header "Authorization" - PostMan
             {
-                return AuthenticateResult.Fail("Missing authorization header."); // // Not Authenticated
+                return AuthenticateResult.Fail("Missing authorization header."); // Not Authenticated
             }
 
             User user = null;

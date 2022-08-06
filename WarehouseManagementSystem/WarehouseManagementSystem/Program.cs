@@ -17,24 +17,22 @@ namespace warehouse_management_system
             var host = CreateHostBuilder(args).Build();
             var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 
-            using (var scope = host.Services.CreateScope())
+            var scope = host.Services.CreateScope();
+            var services = scope.ServiceProvider;
+            try
             {
-                var services = scope.ServiceProvider;
-                try
-                {
-                    var context = services.GetRequiredService<WMSDatabaseContext>();
-                    DbInitializer.Seed(context);
-                    host.Run();
-                }
-                catch (Exception exception)
-                {
-                    logger.Error(exception, "Stopped app due to exception." + DateTime.Now);
-                    throw;
-                }
-                finally
-                {
-                    LogManager.Shutdown();
-                }
+                var context = services.GetRequiredService<WMSDatabaseContext>();
+                DbInitializer.Seed(context);
+                host.Run();
+            }
+            catch (Exception exception)
+            {
+                logger.Error(exception, "Stopped app due to exception." + DateTime.Now);
+                throw;
+            }
+            finally
+            {
+                LogManager.Shutdown();
             }
         }
 
