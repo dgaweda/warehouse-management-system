@@ -49,7 +49,7 @@ namespace DataAccess.Seeders.Data
             };
         }
 
-        public static void SetOrderRows(WMSDatabaseContext context)
+        public static void SetDummyOrderRows(WMSDatabaseContext context)
         {
             var product1 = context.Products.First();
             var product2 = context.Products.Skip(1).First();

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Entities.EntityBase;
@@ -12,7 +13,6 @@ namespace DataAccess.Seeders
         public static void Seed(WMSDatabaseContext context)
         {
             context.Database.Migrate();
-            
             AddEntity(DummyDeliveries.GetDummyDeliveries(), context);
             AddEntity(DummyOrder.GetDummyOrders(), context);
             AddEntity(DummyDeparture.GetDummyDepartures(), context);
@@ -25,6 +25,15 @@ namespace DataAccess.Seeders
             AddEntity(DummyOrderRow.GetDummyOrderRows(), context);
             AddEntity(DummyPalletRow.GetDummyPalletRows(), context);
             AddEntity(DummyUser.GetDummyUsers(), context);
+            context.SaveChanges();
+            
+            DummyInvoice.SetDummyInvoices(context);
+            DummyLocation.SetDummyLocations(context);
+            DummyPallet.SetDummyPallets(context);
+            DummySeniority.SetDummySeniority(context);
+            DummyOrderRow.SetDummyOrderRows(context);
+            DummyPalletRow.SetDummyPalletRows(context);
+            DummyUser.SetDummyUsers(context);
             context.SaveChanges();
         }
 
