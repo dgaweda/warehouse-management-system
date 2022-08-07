@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using DataAccess;
-using DataAccess.Entities.EntityBases;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
+using DataAccess.Entities.EntityBase;
+using DataAccess.Enums;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Validation.Validators
 {

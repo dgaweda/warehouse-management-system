@@ -1,12 +1,14 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using warehouse_management_system.Controllers.BaseController;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Delivery;
 
 namespace warehouse_management_system.Controllers
 {
+    [Authorize]
     [Route("/api/delivery/")]
     [ApiController]
     public class DeliveryController : ApiControllerBase

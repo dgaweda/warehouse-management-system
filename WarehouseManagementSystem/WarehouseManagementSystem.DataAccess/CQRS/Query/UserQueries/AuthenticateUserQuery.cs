@@ -3,7 +3,7 @@ using DataAccess.Entities;
 using DataAccess.Extensions;
 using DataAccess.Repository.UserRepository;
 
-namespace DataAccess.CQRS.Query.Queries.UsersQueries
+namespace DataAccess.CQRS.Query.UserQueries
 {
     public class AuthenticateUserQuery : QueryBase<User>
     {

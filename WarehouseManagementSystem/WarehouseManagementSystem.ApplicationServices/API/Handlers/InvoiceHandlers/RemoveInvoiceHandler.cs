@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS.Commands.InvoiceCommands;
+using DataAccess.CQRS.Command.InvoiceCommands;
 using DataAccess.Entities;
 using DataAccess.Repository.InvoiceRepository;
 using MediatR;

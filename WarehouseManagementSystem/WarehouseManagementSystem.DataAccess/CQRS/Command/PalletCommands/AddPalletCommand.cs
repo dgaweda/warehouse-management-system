@@ -1,9 +1,8 @@
-﻿using DataAccess.Entities;
-using System.Threading.Tasks;
-using DataAccess.CQRS.Command;
+﻿using System.Threading.Tasks;
+using DataAccess.Entities;
 using DataAccess.Repository.PalletRepository;
 
-namespace DataAccess.CQRS.Commands.PalletCommands
+namespace DataAccess.CQRS.Command.PalletCommands
 {
     public class AddPalletCommand : CommandBase<Pallet, IPalletRepository>
     {

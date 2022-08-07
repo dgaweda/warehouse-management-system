@@ -3,7 +3,7 @@ using DataAccess.Entities;
 using DataAccess.Extensions;
 using DataAccess.Repository.DepartureRepository;
 
-namespace DataAccess.CQRS.Command.Commands.DepartureCommands
+namespace DataAccess.CQRS.Command.DepartureCommands
 {
     public class EditDepartureStateCommand : CommandBase<Departure, IDepartureRepository>
     {

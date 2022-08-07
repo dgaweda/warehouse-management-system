@@ -1,9 +1,8 @@
-﻿using DataAccess.Entities;
-using System.Threading.Tasks;
-using DataAccess.CQRS.Command;
+﻿using System.Threading.Tasks;
+using DataAccess.Entities;
 using DataAccess.Repository.LocationRepository;
 
-namespace DataAccess.CQRS.Commands.LocationCommands
+namespace DataAccess.CQRS.Command.LocationCommands
 {
     public class RemoveLocationCommand : CommandBase<Location, ILocationRepository>
     {

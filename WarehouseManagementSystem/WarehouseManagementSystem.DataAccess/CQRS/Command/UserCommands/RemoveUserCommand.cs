@@ -1,9 +1,8 @@
-﻿using DataAccess.Entities;
-using System.Threading.Tasks;
-using DataAccess.CQRS.Command;
+﻿using System.Threading.Tasks;
+using DataAccess.Entities;
 using DataAccess.Repository.UserRepository;
 
-namespace DataAccess.CQRS.Commands
+namespace DataAccess.CQRS.Command.UserCommands
 {
     public class RemoveUserCommand : CommandBase<User, IUserRepository>
     {

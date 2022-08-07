@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Query.Queries;
 using DataAccess.Entities;
 using DataAccess.Extensions;
 using DataAccess.Repository.UserRepository;

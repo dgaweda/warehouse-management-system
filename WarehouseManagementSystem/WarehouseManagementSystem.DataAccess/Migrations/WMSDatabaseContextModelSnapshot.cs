@@ -72,7 +72,7 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("date");
 
-                    b.Property<Guid>("DeliveryId")
+                    b.Property<Guid?>("DeliveryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("InvoiceNumber")
@@ -159,13 +159,13 @@ namespace DataAccess.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("OrderId")
+                    b.Property<Guid?>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(5,2)");
 
-                    b.Property<Guid>("ProductId")
+                    b.Property<Guid?>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -222,13 +222,13 @@ namespace DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("PalletId")
+                    b.Property<Guid?>("PalletId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ProductAmount")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("ProductId")
+                    b.Property<Guid?>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -300,13 +300,14 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("EmploymentDate")
                         .HasColumnType("date");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Seniorities");
                 });
@@ -344,7 +345,7 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("RoleId")
+                    b.Property<Guid?>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Username")
@@ -363,9 +364,7 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("DataAccess.Entities.Delivery", "Delivery")
                         .WithMany("Invoices")
-                        .HasForeignKey("DeliveryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DeliveryId");
 
                     b.Navigation("Delivery");
                 });
@@ -382,16 +381,12 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Entities.OrderRow", b =>
                 {
                     b.HasOne("DataAccess.Entities.Order", "Order")
-                        .WithMany("OrderLines")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("OrderRows")
+                        .HasForeignKey("OrderId");
 
                     b.HasOne("DataAccess.Entities.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductId");
 
                     b.Navigation("Order");
 
@@ -429,15 +424,11 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("DataAccess.Entities.Pallet", "Pallet")
                         .WithMany("PalletsProducts")
-                        .HasForeignKey("PalletId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PalletId");
 
                     b.HasOne("DataAccess.Entities.Product", "Product")
                         .WithMany("PalletLines")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductId");
 
                     b.Navigation("Pallet");
 
@@ -448,9 +439,7 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("DataAccess.Entities.User", "User")
                         .WithOne("Seniority")
-                        .HasForeignKey("DataAccess.Entities.Seniority", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DataAccess.Entities.Seniority", "UserId");
 
                     b.Navigation("User");
                 });
@@ -459,9 +448,7 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("DataAccess.Entities.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoleId");
 
                     b.Navigation("Role");
                 });
@@ -483,7 +470,7 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.Order", b =>
                 {
-                    b.Navigation("OrderLines");
+                    b.Navigation("OrderRows");
 
                     b.Navigation("Pallets");
                 });

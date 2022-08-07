@@ -1,6 +1,23 @@
 
+using System.Linq;
+using System.Reflection;
 using DataAccess;
+using DataAccess.DependencyInjection;
+using DataAccess.Entities;
 using DataAccess.Repository;
+using DataAccess.Repository.DeliveryRepository;
+using DataAccess.Repository.DepartureRepository;
+using DataAccess.Repository.InvoiceRepository;
+using DataAccess.Repository.LocationRepository;
+using DataAccess.Repository.OrderLineRepository;
+using DataAccess.Repository.OrderRepository;
+using DataAccess.Repository.PalletRepository;
+using DataAccess.Repository.ProductPalletLineRepository;
+using DataAccess.Repository.ProductRepository;
+using DataAccess.Repository.RoleRepository;
+using DataAccess.Repository.SeniorityRepository;
+using DataAccess.Repository.UserRepository;
+using DataAccess.Seeders;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
@@ -40,25 +57,19 @@ namespace warehouse_management_system
 
             services.AddCors();
             services.AddMvcCore();
-
-
-            services.AddTransient<IPrivilegesService, PrivilegesService>();
-
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
-            services.AddAutoMapper(typeof(UsersProfile).Assembly); // This Line Enables AutoMapper to map all profiles without adding everyone of them.
-            // It gets Assembly from one profile to get all the mappings.
-            services.AddMediatR(typeof(ResponseBase<>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-
-            services.AddHttpContextAccessor();
-
+            services
+                .AddRepositoryServiceCollection()
+                .AddTransient<IPrivilegesService, PrivilegesService>()
+                .AddAutoMapper(typeof(UsersProfile).Assembly)
+                .AddMediatR(typeof(ResponseBase<>))
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>))
+                .AddHttpContextAccessor()
+                .AddScoped(typeof(IValidatorHelper), typeof(ValidatorHelper))
+                .AddValidatorsFromAssembly(typeof(AddSeniorityRequestValidator).Assembly);
+            
             services.AddDbContext<WMSDatabaseContext>(
                 option =>
                     option.UseSqlServer(Configuration.GetConnectionString("WMSDatabaseContext")));
-
-            services.AddScoped(typeof(IValidatorHelper), typeof(ValidatorHelper));
-            services.AddValidatorsFromAssembly(typeof(AddSeniorityRequestValidator).Assembly);
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>

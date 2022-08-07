@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS.Commands.DeliveryProductCommands;
+using DataAccess.CQRS.Command.ProductCommands;
 using DataAccess.Entities;
 using DataAccess.Repository.ProductRepository;
 using MediatR;

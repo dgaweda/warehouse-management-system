@@ -10,7 +10,6 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Query.Queries.UsersQueries;
 using MediatR;
 using warehouse_management_system.Authentication.Privileges;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
@@ -46,7 +45,7 @@ namespace warehouse_management_system.Authentication
 
             if (!Request.Headers.ContainsKey(AuthorizationHeader)) // sprawdza czy request posiada header "Authorization" - PostMan
             {
-                return AuthenticateResult.Fail("Missing authorization header."); // // Not Authenticated
+                return AuthenticateResult.Fail("Missing authorization header."); // Not Authenticated
             }
 
             User user = null;

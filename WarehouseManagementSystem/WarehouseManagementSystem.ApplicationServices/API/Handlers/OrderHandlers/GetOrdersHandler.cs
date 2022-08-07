@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS.Query.Queries.OrderQueries;
+using DataAccess.CQRS.Query.OrderQueries;
 using DataAccess.Entities;
 using DataAccess.Repository.OrderRepository;
 using MediatR;

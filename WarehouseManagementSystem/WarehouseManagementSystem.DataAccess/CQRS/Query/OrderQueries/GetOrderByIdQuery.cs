@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using DataAccess.Entities;
 using DataAccess.Repository.OrderRepository;
 
-namespace DataAccess.CQRS.Query.Queries.OrderQueries
+namespace DataAccess.CQRS.Query.OrderQueries
 {
     public class GetOrderByIdQuery: QueryBase<Order>
     {

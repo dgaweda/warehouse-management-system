@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Query;
-using DataAccess.CQRS.Query.Queries;
 using DataAccess.Entities;
 using DataAccess.Repository.DepartureRepository;
 
-namespace DataAccess.CQRS.Queries.DepartureQueries
+namespace DataAccess.CQRS.Query.DepartureQueries
 {
     public class GetDeparturesByStateQuery : QueryBase<List<Departure>>
     {

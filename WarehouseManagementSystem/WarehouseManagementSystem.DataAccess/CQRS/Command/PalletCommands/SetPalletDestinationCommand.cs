@@ -1,10 +1,9 @@
-﻿using DataAccess.Entities;
-using System.Threading.Tasks;
-using DataAccess.CQRS.Command;
+﻿using System.Threading.Tasks;
+using DataAccess.Entities;
 using DataAccess.Extensions;
 using DataAccess.Repository.PalletRepository;
 
-namespace DataAccess.CQRS.Commands.PalletCommands
+namespace DataAccess.CQRS.Command.PalletCommands
 {
     public class SetPalletDestinationCommand : CommandBase<Pallet, IPalletRepository>
     {

@@ -1,12 +1,10 @@
-﻿using DataAccess.Entities.EntityBases;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class User : EntityBase
+    public class User : EntityBase.EntityBase
     {
         [MaxLength(100)]
         [Required]
@@ -35,9 +33,8 @@ namespace DataAccess.Entities
         [Required]
         [Range(16, 99)]
         public int Age { get; set; }
-
-        [Required]
-        public Guid RoleId { get; set; }
+        
+        public Guid? RoleId { get; set; }
 
         public Seniority Seniority { get; set; }
         public Role Role { get; set; }

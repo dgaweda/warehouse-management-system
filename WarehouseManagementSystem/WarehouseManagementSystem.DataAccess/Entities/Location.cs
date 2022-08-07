@@ -1,12 +1,11 @@
 ﻿using System;
-using DataAccess.Entities.EntityBases;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
+using DataAccess.Enums;
 
 namespace DataAccess.Entities
 {
-    public class Location : EntityBase
+    public class Location : EntityBase.EntityBase
     {
         public Guid? ProductId { get; set; }
 

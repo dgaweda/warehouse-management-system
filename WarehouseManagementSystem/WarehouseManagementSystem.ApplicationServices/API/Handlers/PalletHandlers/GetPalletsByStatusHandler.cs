@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using DataAccess.CQRS.Queries.PalletQueries;
 using DataAccess.Entities;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Query.PalletQueries;
 using DataAccess.Repository.PalletRepository;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;

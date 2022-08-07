@@ -6,7 +6,7 @@ using DataAccess.Extensions;
 using DataAccess.Repository.SeniorityRepository;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.CQRS.Query.Queries.SeniorityQueries
+namespace DataAccess.CQRS.Query.SeniorityQueries
 {
     public class GetSenioritiesQuery : QueryBase<List<Seniority>>
     {

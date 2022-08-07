@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS.Commands.OrderLineCommands;
+using DataAccess.CQRS.Command.OrderLineCommands;
 using DataAccess.Entities;
 using DataAccess.Repository.OrderLineRepository;
 using MediatR;

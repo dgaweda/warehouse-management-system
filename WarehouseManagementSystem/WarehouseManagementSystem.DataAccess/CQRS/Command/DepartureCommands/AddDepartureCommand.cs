@@ -1,10 +1,9 @@
-﻿using DataAccess.Entities;
-using System;
+﻿using System;
 using System.Threading.Tasks;
-using DataAccess.CQRS.Command;
+using DataAccess.Entities;
 using DataAccess.Repository.DepartureRepository;
 
-namespace DataAccess.CQRS.Commands.DepartureCommands
+namespace DataAccess.CQRS.Command.DepartureCommands
 {
     public class AddDepartureCommand : CommandBase<Departure, IDepartureRepository>
     {

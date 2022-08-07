@@ -38,28 +38,29 @@ namespace warehouse_management_system.Middleware
             }
             catch (NotFoundException exception)
             {
-                await SetHttpContextResponse((int)HttpStatusCode.NotFound, exception.Message, context);
+                await SetHttpContextResponse((int)HttpStatusCode.NotFound, exception, context);
             }
             catch (AuthenticationException exception)
             {
-                await SetHttpContextResponse((int)HttpStatusCode.Unauthorized, exception.Message, context);
+                await SetHttpContextResponse((int)HttpStatusCode.Unauthorized, exception, context);
             }
             catch (ForbidException exception)
             {
-                await SetHttpContextResponse((int)HttpStatusCode.Forbidden, exception.Message, context);
+                await SetHttpContextResponse((int)HttpStatusCode.Forbidden, exception, context);
             }
             catch (Exception exception)
             {
-                await SetHttpContextResponse(500, exception.Message, context);
+                await SetHttpContextResponse(500, exception, context);
             }
         }
 
-        private async Task SetHttpContextResponse(int statusCode, string message, HttpContext context)
+        private async Task SetHttpContextResponse(int statusCode, Exception exception, HttpContext context)
         {
-            _logger.LogError("-- {Message} --", message);
+            _logger.LogError("-- {msg} --", exception.Message);
+            _logger.LogError(exception.StackTrace);
             context.Response.StatusCode = statusCode;
             context.Response.ContentType = "application/json; charset=UTF-8";
-            await context.Response.WriteAsJsonAsync(new { errorMessage = message});
+            await context.Response.WriteAsJsonAsync(new { errorMessage = exception.Message});
         }
 
         private async Task HandleValidationException(ValidationException exception, HttpContext context)

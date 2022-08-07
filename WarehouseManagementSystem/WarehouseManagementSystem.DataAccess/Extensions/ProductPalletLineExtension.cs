@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using DataAccess.Entities;
-using Microsoft.EntityFrameworkCore;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
+using DataAccess.Enums;
 
 namespace DataAccess.Extensions
 {

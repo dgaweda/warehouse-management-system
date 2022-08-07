@@ -5,7 +5,7 @@ using DataAccess.Extensions;
 using DataAccess.Repository.DeliveryRepository;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.CQRS.Query.Queries.DeliveryQueries
+namespace DataAccess.CQRS.Query.DeliveryQueries
 {
     public class GetDeliveriesQuery : QueryBase<List<Delivery>>
     {

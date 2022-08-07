@@ -9,6 +9,6 @@ namespace DataAccess.Repository.ProductPalletLineRepository
     {
         Task<List<PalletRow>> GetProductsByPalletId(Guid palletId);
 
-        Task<bool> PalletIsEmpty(Guid id);
+        Task<bool> PalletIsEmpty(Guid? id);
     }
 }

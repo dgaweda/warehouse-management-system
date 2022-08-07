@@ -6,7 +6,7 @@ using DataAccess.Extensions;
 using DataAccess.Repository.RoleRepository;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.CQRS.Query.Queries.RoleQueries
+namespace DataAccess.CQRS.Query.RoleQueries
 {
     public class GetRolesQuery : QueryBase<List<Role>>
     {

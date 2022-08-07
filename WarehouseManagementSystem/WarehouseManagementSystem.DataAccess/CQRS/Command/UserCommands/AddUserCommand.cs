@@ -2,7 +2,7 @@
 using DataAccess.Entities;
 using DataAccess.Repository.UserRepository;
 
-namespace DataAccess.CQRS.Command.Commands.UserCommands
+namespace DataAccess.CQRS.Command.UserCommands
 {
     public class AddUserCommand : CommandBase<User, IUserRepository>
     {

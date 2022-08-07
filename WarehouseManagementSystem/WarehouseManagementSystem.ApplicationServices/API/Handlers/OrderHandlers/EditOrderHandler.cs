@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS.Commands.OrderCommands;
+using DataAccess.CQRS.Command.OrderCommands;
 using DataAccess.Entities;
 using DataAccess.Repository.OrderRepository;
 using FluentValidation;

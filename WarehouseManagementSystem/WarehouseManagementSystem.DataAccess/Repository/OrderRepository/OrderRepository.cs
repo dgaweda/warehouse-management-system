@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Entities;
@@ -22,7 +21,7 @@ namespace DataAccess.Repository.OrderRepository
         public override IQueryable<Order> GetAll()
         {
             return Entity
-                .Include(x => x.OrderLines)
+                .Include(x => x.OrderRows)
                 .AsQueryable();
         }
     }

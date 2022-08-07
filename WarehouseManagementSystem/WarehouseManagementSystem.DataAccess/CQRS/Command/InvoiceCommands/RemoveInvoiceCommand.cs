@@ -1,9 +1,8 @@
-﻿using DataAccess.Entities;
-using System.Threading.Tasks;
-using DataAccess.CQRS.Command;
+﻿using System.Threading.Tasks;
+using DataAccess.Entities;
 using DataAccess.Repository.InvoiceRepository;
 
-namespace DataAccess.CQRS.Commands.InvoiceCommands
+namespace DataAccess.CQRS.Command.InvoiceCommands
 {
     public class RemoveInvoiceCommand : CommandBase<Invoice, IInvoiceRepository>
     {

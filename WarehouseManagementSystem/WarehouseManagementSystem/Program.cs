@@ -1,5 +1,8 @@
 using System;
+using DataAccess;
+using DataAccess.Seeders;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog;
@@ -11,12 +14,16 @@ namespace warehouse_management_system
     {
         public static void Main(string[] args)
         {
+            var host = CreateHostBuilder(args).Build();
             var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 
+            var scope = host.Services.CreateScope();
+            var services = scope.ServiceProvider;
             try
             {
-                logger.Debug("Logger Initialization: " + DateTime.Now.Date + DateTime.Now.TimeOfDay);
-                CreateHostBuilder(args).Build().Run();
+                var context = services.GetRequiredService<WMSDatabaseContext>();
+                DbInitializer.Seed(context);
+                host.Run();
             }
             catch (Exception exception)
             {
@@ -27,7 +34,6 @@ namespace warehouse_management_system
             {
                 LogManager.Shutdown();
             }
-            
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

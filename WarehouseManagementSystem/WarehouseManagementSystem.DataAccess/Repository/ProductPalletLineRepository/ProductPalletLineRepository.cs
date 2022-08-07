@@ -20,7 +20,7 @@ namespace DataAccess.Repository.ProductPalletLineRepository
                 .ToListAsync();
         }
 
-        public async Task<bool> PalletIsEmpty(Guid palletId)
+        public async Task<bool> PalletIsEmpty(Guid? palletId)
         { 
             return !await GetAll().AnyAsync(x => x.PalletId == palletId);
         }

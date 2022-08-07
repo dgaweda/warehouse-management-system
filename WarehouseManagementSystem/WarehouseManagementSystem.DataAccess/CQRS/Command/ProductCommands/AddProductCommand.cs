@@ -1,9 +1,8 @@
-﻿using DataAccess.Entities;
-using System.Threading.Tasks;
-using DataAccess.CQRS.Command;
+﻿using System.Threading.Tasks;
+using DataAccess.Entities;
 using DataAccess.Repository.ProductRepository;
 
-namespace DataAccess.CQRS.Commands.DeliveryProductCommands
+namespace DataAccess.CQRS.Command.ProductCommands
 {
     public class AddProductCommand : CommandBase<Product, IProductRepository>
     {

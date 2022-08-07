@@ -1,9 +1,8 @@
-﻿using DataAccess.Entities;
-using System.Threading.Tasks;
-using DataAccess.CQRS.Command;
+﻿using System.Threading.Tasks;
+using DataAccess.Entities;
 using DataAccess.Repository.RoleRepository;
 
-namespace DataAccess.CQRS.Commands.RoleCommands
+namespace DataAccess.CQRS.Command.RoleCommands
 {
     public class RemoveRoleCommand : CommandBase<Role, IRoleRepository>
     {

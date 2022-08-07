@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS.Queries.PalletQueries;
+using DataAccess.CQRS.Query.PalletQueries;
 using DataAccess.Entities;
 using DataAccess.Repository.PalletRepository;
 using MediatR;

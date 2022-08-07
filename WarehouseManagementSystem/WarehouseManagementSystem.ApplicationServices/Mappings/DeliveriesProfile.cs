@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using DataAccess.CQRS.Query.Queries.DeliveryQueries;
 using DataAccess.Entities;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery;

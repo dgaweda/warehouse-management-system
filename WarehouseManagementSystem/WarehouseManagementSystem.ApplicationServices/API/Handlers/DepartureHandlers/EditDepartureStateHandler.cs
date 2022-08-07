@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS.Command.Commands.DepartureCommands;
+using DataAccess.CQRS.Command.DepartureCommands;
 using DataAccess.Entities;
 using DataAccess.Repository.DepartureRepository;
 using MediatR;

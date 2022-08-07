@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
-using DataAccess.CQRS.Command;
 using DataAccess.Entities;
 using DataAccess.Repository.OrderLineRepository;
 
-namespace DataAccess.CQRS.Commands.OrderLineCommands
+namespace DataAccess.CQRS.Command.OrderLineCommands
 {
     public class AddOrderLineCommand: CommandBase<OrderRow, IOrderLineRepository>
     {

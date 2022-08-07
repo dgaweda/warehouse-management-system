@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS.Command.Commands.UserCommands;
+using DataAccess.CQRS.Command.UserCommands;
 using DataAccess.Entities;
 using DataAccess.Repository.UserRepository;
 using MediatR;

@@ -1,13 +1,12 @@
 ﻿using System;
-using DataAccess.Entities.EntityBases;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
+using DataAccess.Enums;
 
 namespace DataAccess.Entities
 {
-    public class Pallet : EntityBase
+    public class Pallet : EntityBase.EntityBase
     {
         [Required]
         [MaxLength(10)]
@@ -16,7 +15,7 @@ namespace DataAccess.Entities
         public Guid? DepartureId { get; set; }
         public Guid? InvoiceId { get; set; }
         public Guid? UserId { get; set; }
-        
+
         public PalletStatus PalletStatus { get; set; }
 
         [ForeignKey("DepartureId")]

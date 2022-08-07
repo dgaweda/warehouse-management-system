@@ -1,5 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
+using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using DataAccess.Entities;
+using DataAccess.Seeders;
 
 namespace DataAccess
 {
@@ -7,7 +10,6 @@ namespace DataAccess
     {
         public WMSDatabaseContext(DbContextOptions<WMSDatabaseContext> options) : base(options)
         {
-
         }
 
         public DbSet<Role> Roles { get; set; }
@@ -24,4 +26,5 @@ namespace DataAccess
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<User> Users { get; set; }
     }
+    
 }

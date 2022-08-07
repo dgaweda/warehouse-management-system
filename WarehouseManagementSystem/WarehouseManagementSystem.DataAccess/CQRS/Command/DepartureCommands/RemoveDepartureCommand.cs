@@ -1,9 +1,8 @@
-﻿using DataAccess.Entities;
-using System.Threading.Tasks;
-using DataAccess.CQRS.Command;
+﻿using System.Threading.Tasks;
+using DataAccess.Entities;
 using DataAccess.Repository.DepartureRepository;
 
-namespace DataAccess.CQRS.Commands.DepartureCommands
+namespace DataAccess.CQRS.Command.DepartureCommands
 {
     public class RemoveDepartureCommand : CommandBase<Departure, IDepartureRepository>
     {

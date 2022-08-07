@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS.Commands.LocationCommands;
+using DataAccess.CQRS.Command.LocationCommands;
 using DataAccess.Entities;
 using DataAccess.Repository.LocationRepository;
 using MediatR;
