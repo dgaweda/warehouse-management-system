@@ -35,17 +35,5 @@ namespace DataAccess.Seeders.Data
                 }
             };
         }
-
-        public static void SetDummyLocations(WMSDatabaseContext context)
-        {
-            var location1 = context.Locations.Skip(1).First();
-            var location2 = context.Locations.Skip(2).First();
-
-            var product1 = context.Products.First();
-            var product2 = context.Products.Skip(1).First();
-
-            location1.ProductId = product1.Id;
-            location2.ProductId = product2.Id;
-        }
     }
 }

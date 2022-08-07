@@ -48,47 +48,5 @@ namespace DataAccess.Seeders.Data
                 },
             };
         }
-
-        public static void SetDummyOrderRows(WMSDatabaseContext context)
-        {
-            var product1 = context.Products.First();
-            var product2 = context.Products.Skip(1).First();
-            var product3 = context.Products.Skip(2).First();
-            var product4 = context.Products.Skip(3).First();
-            var product5 = context.Products.Skip(4).First();
-
-            var order1 = context.Orders.Skip(2).First();
-            var order2 = context.Orders.Skip(3).First();
-            var order3 = context.Orders.Skip(4).First();
-
-            var orderRow1 = context.OrderRows.First();
-            var orderRow2 = context.OrderRows.Skip(1).First();
-            var orderRow3 = context.OrderRows.Skip(2).First();
-            var orderRow4 = context.OrderRows.Skip(3).First();
-            var orderRow5 = context.OrderRows.Skip(4).First();
-            var orderRow6 = context.OrderRows.Skip(5).First();
-            var orderRow7 = context.OrderRows.Skip(6).First();
-
-            orderRow1.ProductId = product1.Id;
-            orderRow1.OrderId = order1.Id;
-
-            orderRow2.ProductId = product2.Id;
-            orderRow2.OrderId = order1.Id;
-
-            orderRow3.ProductId = product2.Id;
-            orderRow3.OrderId = order2.Id;
-            
-            orderRow4.ProductId = product3.Id;
-            orderRow4.OrderId = order2.Id;
-            
-            orderRow5.ProductId = product4.Id;
-            orderRow5.OrderId = order3.Id;
-            
-            orderRow6.ProductId = product5.Id;
-            orderRow6.OrderId = order3.Id;
-            
-            orderRow7.ProductId = product1.Id;
-            orderRow7.OrderId = order3.Id;
-        }
     }
 }

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccess.Entities;
 using DataAccess.Entities.EntityBase;
+using DataAccess.Extensions;
 using DataAccess.Seeders.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,38 +14,38 @@ namespace DataAccess.Seeders
     {
         public static void Seed(WMSDatabaseContext context)
         {
-            context.Database.Migrate();
-            AddEntity(DummyDeliveries.GetDummyDeliveries(), context);
-            AddEntity(DummyOrder.GetDummyOrders(), context);
-            AddEntity(DummyDeparture.GetDummyDepartures(), context);
-            AddEntity(DummyInvoice.GetDummyInvoices(), context);
-            AddEntity(DummyLocation.GetDummyLocations(), context);
-            AddEntity(DummyPallet.GetDummyPallets(), context);
-            AddEntity(DummyProduct.GetDummyProducts(), context);
-            AddEntity(DummyRoles.GetDummyRoles(), context);
-            AddEntity(DummySeniority.GetDummySeniority(), context);
-            AddEntity(DummyOrderRow.GetDummyOrderRows(), context);
-            AddEntity(DummyPalletRow.GetDummyPalletRows(), context);
-            AddEntity(DummyUser.GetDummyUsers(), context);
-            context.SaveChanges();
-            
-            DummyInvoice.SetDummyInvoices(context);
-            DummyLocation.SetDummyLocations(context);
-            DummyPallet.SetDummyPallets(context);
-            DummySeniority.SetDummySeniority(context);
-            DummyOrderRow.SetDummyOrderRows(context);
-            DummyPalletRow.SetDummyPalletRows(context);
-            DummyUser.SetDummyUsers(context);
-            context.SaveChanges();
-        }
-
-        private static void AddEntity<T>(List<T> entities, WMSDatabaseContext context) where T : EntityBase
-        {
-            var entity = context.Set<T>();
-            if (!entity.Any())
+            if (context.Database.EnsureCreated())
             {
-                context.AddRangeAsync(entities);
+                context.Database.Migrate();
             }
+            
+            if (context.EntitesHasData())
+                return;
+            
+            context
+                .AddEntities(DummyDeliveries.GetDummyDeliveries())
+                .AddEntities(DummyOrder.GetDummyOrders())
+                .AddEntities(DummyDeparture.GetDummyDepartures())
+                .AddEntities(DummyInvoice.GetDummyInvoices())
+                .AddEntities(DummyLocation.GetDummyLocations())
+                .AddEntities(DummyPallet.GetDummyPallets())
+                .AddEntities(DummyProduct.GetDummyProducts())
+                .AddEntities(DummyRoles.GetDummyRoles())
+                .AddEntities(DummySeniority.GetDummySeniority())
+                .AddEntities(DummyOrderRow.GetDummyOrderRows())
+                .AddEntities(DummyPalletRow.GetDummyPalletRows())
+                .AddEntities(DummyUser.GetDummyUsers())
+                .SaveChanges();
+            
+            context
+                .SetDummyInvoices()
+                .SetDummyLocations()
+                .SetDummyPallets()
+                .SetDummySeniority()
+                .SetDummyOrderRows()
+                .SetDummyPalletRows()
+                .SetDummyUsers()
+                .SaveChanges();
         }
     }
 }

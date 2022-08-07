@@ -37,17 +37,5 @@ namespace DataAccess.Seeders.Data
                 }
             };
         }
-
-        public static void SetDummyInvoices(WMSDatabaseContext context)
-        {
-            var invoice1 = GetDummyInvoices().First();
-            var invoice2 = GetDummyInvoices().Skip(1).First();
-
-            var delivery1 = context.Deliveries.First();
-            var delivery2 = context.Deliveries.Skip(1).First();
-
-            invoice1.DeliveryId = delivery1.Id;
-            invoice2.DeliveryId = delivery2.Id;
-        }
     }
 }
