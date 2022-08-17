@@ -58,7 +58,7 @@ namespace warehouse_management_system
             services.AddCors();
             services.AddMvcCore();
             services
-                .AddRepositoryServiceCollection()
+                .AddDataAccessDI(Configuration)
                 .AddTransient<IPrivilegesService, PrivilegesService>()
                 .AddAutoMapper(typeof(UsersProfile).Assembly)
                 .AddMediatR(typeof(ResponseBase<>))
@@ -66,10 +66,6 @@ namespace warehouse_management_system
                 .AddHttpContextAccessor()
                 .AddScoped(typeof(IValidatorHelper), typeof(ValidatorHelper))
                 .AddValidatorsFromAssembly(typeof(AddSeniorityRequestValidator).Assembly);
-            
-            services.AddDbContext<WMSDatabaseContext>(
-                option =>
-                    option.UseSqlServer(Configuration.GetConnectionString("WMSDatabaseContext")));
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>

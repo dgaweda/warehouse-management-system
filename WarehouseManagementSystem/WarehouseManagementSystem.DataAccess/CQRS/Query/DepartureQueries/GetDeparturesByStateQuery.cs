@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataAccess.Entities;
+using DataAccess.Enums;
 using DataAccess.Repository.DepartureRepository;
 
 namespace DataAccess.CQRS.Query.DepartureQueries

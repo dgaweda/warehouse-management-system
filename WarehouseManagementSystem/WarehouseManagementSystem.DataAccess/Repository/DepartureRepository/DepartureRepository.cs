@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Entities;
+using DataAccess.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repository.DepartureRepository

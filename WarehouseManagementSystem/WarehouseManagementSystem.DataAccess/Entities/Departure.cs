@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DataAccess.Enums;
 
 namespace DataAccess.Entities
 {
@@ -23,10 +24,5 @@ namespace DataAccess.Entities
         public DateTime OpeningTime { get; set; }
 
         public List<Pallet> Pallets { get; set; }
-    }
-    public enum StateType
-    {
-        OPEN,
-        CLOSED
     }
 }

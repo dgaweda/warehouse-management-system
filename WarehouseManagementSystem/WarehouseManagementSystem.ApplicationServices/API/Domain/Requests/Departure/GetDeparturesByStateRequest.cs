@@ -1,4 +1,5 @@
 ﻿using DataAccess.Entities;
+using DataAccess.Enums;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departure;
 

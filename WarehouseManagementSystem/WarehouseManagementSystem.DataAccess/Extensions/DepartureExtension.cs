@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using DataAccess.Entities;
+using DataAccess.Enums;
 
 namespace DataAccess.Extensions
 {
@@ -14,7 +15,7 @@ namespace DataAccess.Extensions
             return departure;
         }
 
-        public static IQueryable<Departure>  FilterByName(this IQueryable<Departure> departures, string name)
+        public static IQueryable<Departure> FilterByName(this IQueryable<Departure> departures, string name)
         {
             if (string.IsNullOrEmpty(name))
                 return departures;
