@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DataAccess.Entities;
+using DataAccess.Enums;
 
 namespace DataAccess.Seeders.Data
 {
