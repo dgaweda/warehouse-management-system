@@ -48,6 +48,12 @@ namespace WMS.DataAccess.Test.Extensions
                         Id = new Guid("782FC047-E679-43BB-BF49-45C76E6543A9"),
                         Arrival = new DateTime(2021, 3, 1, 0, 0, 0),
                         Name = "1/1/3/2021"
+                    },
+                    new Delivery()
+                    {
+                        Id = new Guid("BE7BEC06-4E1B-48D6-9534-1C68E9EF2A6C"),
+                        Arrival = new DateTime(2021, 3, 1, 0, 0, 0),
+                        Name = "1/1/3/2021"
                     }
                 },
                 "1/1/3"
@@ -60,6 +66,12 @@ namespace WMS.DataAccess.Test.Extensions
                     new Delivery()
                     {
                         Id = new Guid("782FC047-E679-43BB-BF49-45C76E6543A9"),
+                        Arrival = new DateTime(2021, 3, 1, 0, 0, 0),
+                        Name = "1/1/3/2021"
+                    },
+                    new Delivery()
+                    {
+                        Id = new Guid("BE7BEC06-4E1B-48D6-9534-1C68E9EF2A6C"),
                         Arrival = new DateTime(2021, 3, 1, 0, 0, 0),
                         Name = "1/1/3/2021"
                     }
@@ -80,6 +92,12 @@ namespace WMS.DataAccess.Test.Extensions
                     new Delivery()
                     {
                         Id = new Guid("782FC047-E679-43BB-BF49-45C76E6543A9"),
+                        Arrival = new DateTime(2021, 3, 1, 0, 0, 0),
+                        Name = "1/1/3/2021"
+                    },
+                    new Delivery()
+                    {
+                        Id = new Guid("BE7BEC06-4E1B-48D6-9534-1C68E9EF2A6C"),
                         Arrival = new DateTime(2021, 3, 1, 0, 0, 0),
                         Name = "1/1/3/2021"
                     }

@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using DataAccess.Entities;
+using DataAccess.Exceptions;
 
 namespace DataAccess.Extensions
 {
@@ -20,6 +23,9 @@ namespace DataAccess.Extensions
 
         public static Delivery SetDeliveryName(this int deliveryNumber, Delivery delivery)
         {
+            if (delivery.Arrival == DateTime.MinValue)
+                throw new InvalidDateTimeException();
+            
             delivery.Name = $"{deliveryNumber}/{delivery.Arrival.Date.Day}/{delivery.Arrival.Date.Month}/{delivery.Arrival.Date.Year}";
             return delivery;
         }

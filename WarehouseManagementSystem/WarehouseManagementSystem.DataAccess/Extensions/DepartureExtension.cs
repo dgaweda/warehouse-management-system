@@ -7,9 +7,8 @@ namespace DataAccess.Extensions
 {
     public static class DepartureExtension
     {
-        public static Departure SetState(this Departure departure)
+        public static Departure SetCloseTime(this Departure departure)
         {
-            departure.State = departure.State;
             departure.CloseTime = departure.State == StateType.CLOSED ? DateTime.Now : null;
 
             return departure;

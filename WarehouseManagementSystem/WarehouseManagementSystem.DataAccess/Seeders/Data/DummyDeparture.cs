@@ -28,7 +28,7 @@ namespace DataAccess.Seeders.Data
                     State = StateType.CLOSED,
                     OpeningTime = sampleOpeningData2,
                     CloseTime = sampleClosingData
-                },
+                }
             };
         }
     }

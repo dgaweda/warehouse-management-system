@@ -19,7 +19,7 @@ namespace WMS.DataAccess.Test.Extensions
                     Arrival = new DateTime(2022, 9, 15, 0, 0, 0),
                     Name = "1/15/9/2022"
                 },
-                1
+                2
             };
             yield return new object[]
             {
@@ -30,7 +30,7 @@ namespace WMS.DataAccess.Test.Extensions
                     Arrival = new DateTime(2021, 3, 1, 0, 0, 0),
                     Name = "1/1/3/2021"
                 },
-                2
+                3
             };
             yield return new object[]
             {
@@ -41,7 +41,18 @@ namespace WMS.DataAccess.Test.Extensions
                     Arrival = new DateTime(2021, 3, 1, 0, 0, 0),
                     Name = "1/1/3/2021"
                 },
-                2
+                3
+            };
+            yield return new object[]
+            {
+                DummyDeliveries.GetDummyDeliveries(),
+                new Delivery()
+                {
+                    Id = Guid.NewGuid(),
+                    Arrival = new DateTime(2050, 3, 1, 0, 0, 0),
+                    Name = "1/1/3/2050"
+                },
+                1
             };
         }
 
