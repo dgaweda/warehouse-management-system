@@ -27,4 +27,8 @@
       <ProjectReference Include="..\WMSTest\WMSTest.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Extensions\PalletExtensionTests\TestData" />
+    </ItemGroup>
+
 </Project>

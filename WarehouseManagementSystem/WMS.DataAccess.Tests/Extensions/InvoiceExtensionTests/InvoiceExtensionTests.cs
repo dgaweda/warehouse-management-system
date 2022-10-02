@@ -5,58 +5,15 @@ using DataAccess.Entities;
 using DataAccess.Extensions;
 using DataAccess.Seeders.Data;
 using FluentAssertions;
+using WMS.DataAccess.Test.Extensions.InvoiceExtensionTests.TestData;
 using Xunit;
 
 namespace WMS.DataAccess.Test.Extensions.InvoiceExtensionTests
 {
     public class InvoiceExtensionTests
     {
-        public static IEnumerable<object[]> SetInvoiceNumberTestData()
-        {
-            yield return new object[]
-            {
-                new Invoice()
-                {
-                    Provider = "TEST 2",
-                    CreationDate = new DateTime(2021, 3, 1)
-                },
-                DummyInvoice.GetDummyInvoices(),
-                "FV/2/TEST 2/1/3/2021"
-            };
-            yield return new object[]
-            {
-                new Invoice()
-                {
-                    Provider = "TEST",
-                    CreationDate = new DateTime(2022, 5, 3)
-                },
-                DummyInvoice.GetDummyInvoices(),
-                "FV/2/TEST/3/5/2022"
-            };
-            yield return new object[]
-            {
-                new Invoice()
-                {
-                    Provider = "TEST 3",
-                    CreationDate = new DateTime(2022, 5, 3)
-                },
-                DummyInvoice.GetDummyInvoices(),
-                "FV/1/TEST 3/3/5/2022"
-            };
-            yield return new object[]
-            {
-                new Invoice()
-                {
-                    Provider = "",
-                    CreationDate = new DateTime(2022, 5, 3)
-                },
-                DummyInvoice.GetDummyInvoices(),
-                "FV/1//3/5/2022"
-            };
-        }
-
         [Theory]
-        [MemberData(nameof(SetInvoiceNumberTestData))]
+        [ClassData(typeof(SetInvoiceNumberTestData))]
         public void SetInvoiceNumber_ForSampleInvoices_CorrectInvoiceNumber(Invoice source, List<Invoice> invoices, string expected)
         {
             source.SetInvoiceNumber(invoices);

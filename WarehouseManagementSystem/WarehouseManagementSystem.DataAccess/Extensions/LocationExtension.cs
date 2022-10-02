@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using DataAccess.Entities;
+using DataAccess.Exceptions;
 
 namespace DataAccess.Extensions
 {
@@ -19,13 +20,13 @@ namespace DataAccess.Extensions
                 locationToEdit.Name = locationFromRequest.Name;
         }
 
-        public static void SetProductAmount(this Location locationToEdit, Location locationFromRequest)
+        public static void AddProductAmount(this Location locationToEdit, Location locationFromRequest)
         {
             locationToEdit.ProductId = locationFromRequest.ProductId;
             locationToEdit.CurrentAmount += locationFromRequest.CurrentAmount;
 
             if (locationToEdit.CurrentAmount > locationToEdit.MaxAmount)
-                throw new Exception("Amount can't be higher than Max Amount of the location.");
+                throw new OutOfRangeException("Amount can't be higher than Max Amount of the location.");
         }
 
         public static IQueryable<Location> FilterByName(this IQueryable<Location> locations, string name)
