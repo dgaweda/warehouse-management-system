@@ -1,6 +1,8 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order
+﻿using System;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order
 {
-    public class AddOrderResponse: ResponseBase<Domain.Models.OrderDto>
+    public class AddOrderResponse: ResponseBase<Guid>
     {
     }
 }

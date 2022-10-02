@@ -1,14 +1,15 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet
 {
-    public class SetPalletDestinationRequest : IRequest<SetPalletDestinationResponse>
+    public class SetPalletDestinationRequest : RequestBase, IRequest<SetPalletDestinationResponse>
     {
-        public int Id { get; set; }
-        public int? OrderId { get; set; }
-        public int? DepartureId { get; set; }
-        public int? UserId { get; set; }
-        public int? InvoiceId { get; set; }
+        public override Guid Id { get; set; }
+        public Guid? OrderId { get; set; }
+        public Guid? DepartureId { get; set; }
+        public Guid? UserId { get; set; }
+        public Guid? InvoiceId { get; set; }
     }
 }

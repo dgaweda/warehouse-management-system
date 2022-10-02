@@ -1,37 +1,35 @@
-﻿using AutoMapper;
-using DataAccess;
-using DataAccess.CQRS.Queries.PalletQueries;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using DataAccess.Entities;
 using MediatR;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using DataAccess.CQRS.Query.PalletQueries;
+using DataAccess.Repository.PalletRepository;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandlers
 {
     public class GetPalletsByStatusHandler : 
-        QueryHandler<GetPalletsByStatusRequest, GetPalletsByStatusResponse, GetPalletsByStatusQuery, List<Pallet>, List<Domain.Models.PalletDto>>,
+        QueryManager<List<Pallet>, List<PalletDto>>,
         IRequestHandler<GetPalletsByStatusRequest, GetPalletsByStatusResponse>
     {
-        public GetPalletsByStatusHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
+        private IPalletRepository _palletRepository;
+        public GetPalletsByStatusHandler(IMapper mapper, IPalletRepository palletRepository) : base(mapper)
         {
+            _palletRepository = palletRepository;
         }
 
         public async Task<GetPalletsByStatusResponse> Handle(GetPalletsByStatusRequest request, CancellationToken cancellationToken)
         {
-            var query = CreateQuery(request);
-            var response = await GetResponse(query);
-            return response;
-        }
-
-        public override GetPalletsByStatusQuery CreateQuery(GetPalletsByStatusRequest request)
-        {
-            return new GetPalletsByStatusQuery()
+            var queryResult = await new GetPalletsByStatusQuery(_palletRepository)
             {
                 PalletStatus = request.PalletStatus
-            };
+            }.Execute();
+            var response = await CreateResponse<GetPalletsByStatusResponse>(queryResult);
+            return response;
         }
     }
 }

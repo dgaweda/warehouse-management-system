@@ -1,26 +1,31 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS;
-using DataAccess.CQRS.Commands.OrderLineCommands;
-using DataAccess.Repository;
+using DataAccess.CQRS.Command.OrderLineCommands;
+using DataAccess.Entities;
+using DataAccess.Repository.OrderLineRepository;
 using MediatR;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.OrderLine;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.OrderLine;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.OrderLineHandlers
 {
     public class AddOrderLineHandler:
-        CommandHandler<AddOrderLineRequest, AddOrderLineResponse, DataAccess.Entities.OrderLine,OrderLineDto, AddOrderLineCommand>,
+        CommandHandler<AddOrderLineCommand, OrderRow, IOrderLineRepository>,
         IRequestHandler<AddOrderLineRequest, AddOrderLineResponse>
     {
-        public AddOrderLineHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<DataAccess.Entities.OrderLine> repositoryService)
-            : base(mapper, commandExecutor, repositoryService)
+        public AddOrderLineHandler(IMapper mapper, IOrderLineRepository repositoryService)
+            : base(mapper, repositoryService)
         {
         }
 
-        public async Task<AddOrderLineResponse> Handle(AddOrderLineRequest request, CancellationToken cancellationToken) =>
-            await GetResponse(request);
+        public async Task<AddOrderLineResponse> Handle(AddOrderLineRequest request, CancellationToken cancellationToken)
+        {
+            await HandleRequest(request);
+            return new AddOrderLineResponse()
+            {
+                Response = request.Id
+            };
+        }
     }
 }

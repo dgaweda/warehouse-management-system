@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS;
-using DataAccess.CQRS.Commands.OrderCommands;
+using DataAccess.CQRS.Command.OrderCommands;
 using DataAccess.Entities;
-using DataAccess.Repository;
+using DataAccess.Repository.OrderRepository;
+using FluentValidation;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Order;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;
@@ -12,15 +12,22 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.OrderHandlers
 {
     public class EditOrderHandler:
-        CommandHandler<EditOrderRequest, EditOrderResponse, Order, Domain.Models.OrderDto, EditOrderCommand>,
+        CommandHandler<EditOrderCommand, Order, IOrderRepository>,
         IRequestHandler<EditOrderRequest, EditOrderResponse>
     {
-        public EditOrderHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Order> repositoryService)
-            : base(mapper, commandExecutor, repositoryService)
+        public EditOrderHandler(IMapper mapper, IOrderRepository repositoryService,
+            IValidator<EditOrderRequest> validator)
+            : base(mapper, repositoryService)
         {
         }
 
-        public async Task<EditOrderResponse> Handle(EditOrderRequest request, CancellationToken cancellationToken) =>
-            await GetResponse(request);
+        public async Task<EditOrderResponse> Handle(EditOrderRequest request, CancellationToken cancellationToken)
+        {
+            await HandleRequest(request);
+            return new EditOrderResponse()
+            {
+                Response = request.Id
+            };
+        }
     }
 }

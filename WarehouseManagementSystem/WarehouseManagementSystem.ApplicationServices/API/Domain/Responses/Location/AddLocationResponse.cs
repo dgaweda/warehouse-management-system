@@ -1,6 +1,8 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location
+﻿using System;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location
 {
-    public class AddLocationResponse : ResponseBase<Domain.Models.LocationDto>
+    public class AddLocationResponse : ResponseBase<Guid>
     {
     }
 }

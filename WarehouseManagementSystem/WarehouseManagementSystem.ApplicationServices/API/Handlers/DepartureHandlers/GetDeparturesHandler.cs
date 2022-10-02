@@ -2,9 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess;
-using DataAccess.CQRS.Queries.DepartureQueries;
+using DataAccess.CQRS.Query.DepartureQueries;
 using DataAccess.Entities;
+using DataAccess.Repository.DepartureRepository;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Departure;
@@ -13,28 +13,25 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departu
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.DepartureHandlers
 {
     public class GetDeparturesHandler :
-        QueryHandler<GetDeparturesRequest, GetDeparturesResponse, GetDeparturesQuery, List<Departure>, List<DepartureDto>>,
+        QueryManager<List<Departure>, List<DepartureDto>>,
         IRequestHandler<GetDeparturesRequest, GetDeparturesResponse>
     {
-        public GetDeparturesHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
+        private readonly IDepartureRepository _departureRepository;
+        public GetDeparturesHandler(IMapper mapper, IDepartureRepository departureRepository) 
+            : base(mapper)
         {
+            _departureRepository = departureRepository;
         }
 
         public async Task<GetDeparturesResponse> Handle(GetDeparturesRequest request, CancellationToken cancellation)
         {
-            var query = CreateQuery(request);
-            var response = await GetResponse(query);
-            return response;
-        }
-
-        public override GetDeparturesQuery CreateQuery(GetDeparturesRequest request)
-        {
-            return new GetDeparturesQuery()
+            var queryResult = await new GetDeparturesQuery(_departureRepository)
             {
                 Name = request.Name,
                 OpeningTime = request.OpeningTime,
-                State = request.State
-            };
+            }.Execute();
+            var response = await CreateResponse<GetDeparturesResponse>(queryResult);
+            return response;
         }
     }
 }

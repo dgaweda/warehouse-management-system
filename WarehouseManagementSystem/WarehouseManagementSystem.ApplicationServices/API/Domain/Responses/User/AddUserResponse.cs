@@ -1,6 +1,8 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User
+﻿using System;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User
 {
-    public class AddUserResponse : ResponseBase<Models.UserDto>
+    public class AddUserResponse : ResponseBase<Guid>
     {
     }
 }

@@ -1,33 +1,28 @@
-﻿using DataAccess.Entities.EntityBases;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
+using DataAccess.Enums;
 
 namespace DataAccess.Entities
 {
-    public class Location : IEntityBase
+    public class Location : EntityBase.EntityBase
     {
-        public int Id { get; set; }
-        public int? ProductId { get; set; }
+        public Guid? ProductId { get; set; }
 
         [Required]
-        [Column("Typ lokalizacji")]
         public LocationType LocationType { get; set; }
 
         [Required]
         [MaxLength(10)]
         [MinLength(7)]
-        [Column("Nazwa lokalizacji")]
         public string Name { get; set; }
 
         [Required]
         [Range(1, 999)]
-        [Column("Aktualna ilość")]
         public int CurrentAmount { get; set; }
 
         [Required]
         [Range(1, 999)]
-        [Column("Maksymalna ilość")]
         public int MaxAmount { get; set; }
 
         [ForeignKey("ProductId")]

@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using warehouse_management_system.Controllers.BaseController;
@@ -20,18 +19,20 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetOrders([FromQuery] GetOrdersRequest request) => await Handle<GetOrdersRequest, GetOrdersResponse>(request);
+        public async Task<IActionResult> GetOrders(GetOrdersRequest request) => await Handle<GetOrdersRequest, GetOrdersResponse>(request);
         
-        [HttpPost]   
-        [Route("add")]
+        [HttpGet]
+        [Route("{Id}")]
+        public async Task<IActionResult> GetOrderById([FromRoute] GetOrderByIdRequest request) => await Handle<GetOrderByIdRequest, GetOrderByIdResponse>(request);
+        
+        [HttpPost]
         public async Task<IActionResult> AddOrder([FromBody] AddOrderRequest request) => await Handle<AddOrderRequest, AddOrderResponse>(request);
         
-        [HttpPut]   
-        [Route("edit")]
+        [HttpPut]
         public async Task<IActionResult> EditOrder([FromBody] EditOrderRequest request) => await Handle<EditOrderRequest, EditOrderResponse>(request);
         
         [HttpDelete]   
-        [Route("remove/{Id}")]
+        [Route("{Id}")]
         public async Task<IActionResult> RemoveOrder([FromRoute] RemoveOrderRequest request) => await Handle<RemoveOrderRequest, RemoveOrderResponse>(request);
     }
 }

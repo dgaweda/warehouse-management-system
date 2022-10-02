@@ -1,10 +1,8 @@
-﻿using System.Linq;
+﻿using System.Security.Authentication;
 using System.Threading.Tasks;
+using DataAccess.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses;
-using WarehouseManagementSystem.ApplicationServices.API.ErrorHandling;
 
 namespace warehouse_management_system.Controllers.BaseController
 {
@@ -18,28 +16,15 @@ namespace warehouse_management_system.Controllers.BaseController
 
         protected async Task<IActionResult> Handle<TRequest, TResponse>(TRequest request)
             where TRequest : IRequest<TResponse>
-            where TResponse : ErrorResponseBase
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(
-                    ModelState.Where(x => x.Value.Errors.Any())
-                        .Select(x => new { property = x.Key, errors = x.Value.Errors }));
-            }
-            
-            if (User.IsPermitted(request) || request.IsAuthenticateUserRequest())
-            {
-                var response = await _mediator.Send(request);
-                return response.Error is null ? Ok(response) : ErrorResponse(response.Error);
-            }
+            if (User.Identity is { IsAuthenticated: false })
+                throw new AuthenticationException("Not authenticated.");
 
-            return ErrorResponse(new ErrorModel(ErrorType.Unauthorized));
-        }
+            if (!User.IsPermitted(request)) 
+                throw new ForbidException();
 
-        private IActionResult ErrorResponse(ErrorModel errorModel)
-        {
-            var httpCode = errorModel.Error.GetHttpStatusCode();
-            return StatusCode((int)httpCode, errorModel);
+            var response = await _mediator.Send(request);
+            return Ok(response);
         }
     }
 }

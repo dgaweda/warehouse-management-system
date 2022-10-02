@@ -1,10 +1,11 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Delivery;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery
 {
-    public class RemoveDeliveryRequest : IRequest<RemoveDeliveryResponse>
+    public class RemoveDeliveryRequest : RequestBase, IRequest<RemoveDeliveryResponse>
     {
-        public int DeliveryId { get; set; }
+        public override Guid Id { get; set; }
     }
 }

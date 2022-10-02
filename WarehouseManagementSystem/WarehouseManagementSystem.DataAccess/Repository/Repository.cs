@@ -1,58 +1,79 @@
 ﻿#nullable enable
-using DataAccess.Entities.EntityBases;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using DataAccess.Entities.EntityBase;
+using DataAccess.Exceptions;
 
 namespace DataAccess.Repository
 {
-    public class Repository<TEntity>: IRepository<TEntity> where TEntity : class, IEntityBase
+    public abstract class Repository<TEntity> : IRepository<TEntity> 
+        where TEntity : EntityBase
     {
-        private readonly WMSDatabaseContext _dbContext;
-        public DbSet<TEntity> Entity => _dbContext.Set<TEntity>();
+        private readonly WMSDatabaseContext _context;
+        public DbSet<TEntity> Entity { get; }
 
-        public Repository(WMSDatabaseContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
-        public async Task<TEntity> AddAsync(TEntity entity)
-        {
-            await Entity.AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
-            return entity;
+        protected Repository(WMSDatabaseContext dbContext)
+{
+            _context = dbContext;
+            Entity = _context.Set<TEntity>();
         }
 
         public WMSDatabaseContext GetDbContext()
         {
-            return _dbContext;
+            return _context;
         }
 
-        public async Task<TEntity> GetByIdAsync(int id)
+        public async Task AddAsync(TEntity entity)
+        {
+            await Entity.AddAsync(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddRangeAsync(List<TEntity> entities)
+        {
+            await Entity.AddRangeAsync(entities);
+            await _context.SaveChangesAsync();
+        }
+
+        public virtual async Task<TEntity> GetByIdAsync(Guid id)
         {
             var result = await Entity.FirstOrDefaultAsync(i => i.Id == id);
+            if (result is null)
+                throw new NotFoundException($"{nameof(TEntity)} with id: {id} doesn't exist.");
+            
             return result;
         }
 
-        public async Task DeleteAsync(int id)
+        public virtual IQueryable<TEntity> GetAll()
+        {
+            return Entity.AsQueryable();
+        }
+
+        public async Task DeleteAsync(Guid id)
         {
             var entityToDelete = await Entity.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (entityToDelete != null)
-            {
-                _dbContext.Set<TEntity>().Remove(entityToDelete);
-                await _dbContext.SaveChangesAsync();
-            }
+            if (entityToDelete == null)
+                throw new NotFoundException($"{nameof(TEntity)} with id: {id} doesn't exist.");
+
+            Entity.Remove(entityToDelete);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<TEntity> UpdateAsync(TEntity entity)
+        public async Task UpdateAsync(TEntity entity)
         {
             var entityToDetach = await Entity.FirstOrDefaultAsync(x => x.Id == entity.Id);
+            
+            if (entityToDetach == null)
+                throw new NotFoundException($"{nameof(TEntity)} with id: {entity.Id} doesn't exist.");
+            
+            _context.Entry(entityToDetach).State = EntityState.Detached;
+            _context.Entry(entity).State = EntityState.Modified;
 
-            // _dbContext.Update(entity);
-            _dbContext.Entry(entityToDetach).State = EntityState.Detached;
-            _dbContext.Entry(entity).State = EntityState.Modified;
-
-            await _dbContext.SaveChangesAsync();
-            return entity;
+            await _context.SaveChangesAsync();
         }
     }
 }

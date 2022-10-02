@@ -1,10 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS;
-using DataAccess.CQRS.Commands;
+using DataAccess.CQRS.Command.UserCommands;
 using DataAccess.Entities;
-using DataAccess.Repository;
+using DataAccess.Repository.UserRepository;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
@@ -12,16 +11,21 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.UserHandlers
 {
     public class EditUserHandler : 
-        CommandHandler<EditUserRequest, EditUserResponse, User, Domain.Models.UserDto, EditUserCommand>,
+        CommandHandler<EditUserCommand, User, IUserRepository>,
         IRequestHandler<EditUserRequest, EditUserResponse>
     {
-        public EditUserHandler(ICommandExecutor commandExecutor, IMapper mapper, IRepository<User> repositoryService) : base(mapper, commandExecutor, repositoryService)
+        public EditUserHandler(IMapper mapper, IUserRepository repositoryService) 
+            : base(mapper, repositoryService)
         {
         }
 
         public async Task<EditUserResponse> Handle(EditUserRequest request, CancellationToken cancellationToken)
         {
-            return await GetResponse(request);
+            await HandleRequest(request);
+            return new EditUserResponse()
+            {
+                Response = request.Id
+            };
         }
     }
 }

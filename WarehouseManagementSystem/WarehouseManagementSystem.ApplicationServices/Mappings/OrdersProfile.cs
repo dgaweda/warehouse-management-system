@@ -14,12 +14,12 @@ namespace WarehouseManagementSystem.ApplicationServices.Mappings
                 .ForMember(x => x.Barcode, y => y.MapFrom(z => z.Barcode))
                 .ForMember(x => x.PickingStart, y => y.MapFrom(z => z.PickingStart))
                 .ForMember(x => x.PickingEnd, y => y.MapFrom(z => z.PickingEnd))
-                .ForMember(x => x.OrderLines, y => y.MapFrom(z => z.OrderLines))
-                .ForMember(x => x.LinesCount, y => y.MapFrom(z => z.OrderLines.Count));
+                .ForMember(x => x.OrderRowsDto, y => y.MapFrom(z => z.OrderRows))
+                .ForMember(x => x.LinesCount, y => y.MapFrom(z => z.OrderRows.Count));
 
             CreateMap<AddOrderRequest, Order>()
                 .ForMember(x => x.Barcode, y => y.MapFrom(z => z.Barcode))
-                .ForMember(x => x.OrderLines, y => y.MapFrom(z => z.OrderLines));
+                .ForMember(x => x.OrderRows, y => y.MapFrom(z => z.OrderLines));
 
             CreateMap<EditOrderRequest, Order>()
                 .ForMember(x => x.Barcode, y => y.MapFrom(z => z.Barcode))

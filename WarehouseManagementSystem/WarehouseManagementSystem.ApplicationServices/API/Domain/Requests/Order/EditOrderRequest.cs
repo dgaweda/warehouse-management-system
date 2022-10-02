@@ -1,12 +1,13 @@
-﻿using MediatR;
+﻿using System;
+using DataAccess.Enums;
+using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Order;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Order
 {
-    public class EditOrderRequest: IRequest<EditOrderResponse>
+    public class EditOrderRequest: RequestBase, IRequest<EditOrderResponse>
     {
-        public int Id { get; set; }
+        public override Guid Id { get; set; }
         public string Barcode { get; set; }
         public OrderState OrderState { get; set; }
     }

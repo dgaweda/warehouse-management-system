@@ -4,11 +4,11 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Invoice
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Invoice
 {
-    public class AddInvoiceRequest : IRequest<AddInvoiceResponse>
+    public class AddInvoiceRequest : RequestBase, IRequest<AddInvoiceResponse>
     {
         public string Provider { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime ReceiptDateTime { get; set; }
-        public int DeliveryId { get; set; }
+        public Guid DeliveryId { get; set; }
     }
 }

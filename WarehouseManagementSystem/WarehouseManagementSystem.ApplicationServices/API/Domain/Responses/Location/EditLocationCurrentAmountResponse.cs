@@ -1,6 +1,8 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location
+﻿using System;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Location
 {
-    public class EditLocationCurrentAmountResponse : ResponseBase<Domain.Models.LocationDto>
+    public class EditLocationCurrentAmountResponse : ResponseBase<Guid>
     {
     }
 }

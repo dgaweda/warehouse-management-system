@@ -1,10 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS;
-using DataAccess.CQRS.Commands.PalletCommands;
+using DataAccess.CQRS.Command.PalletCommands;
 using DataAccess.Entities;
-using DataAccess.Repository;
+using DataAccess.Repository.PalletRepository;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
@@ -12,14 +11,21 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandlers
 {
     public class SetPalletDestinationHandler : 
-        CommandHandler<SetPalletDestinationRequest, SetPalletDestinationResponse, Pallet, Domain.Models.PalletDto, SetPalletDestinationCommand>,
+        CommandHandler<SetPalletDestinationCommand, Pallet, IPalletRepository>,
         IRequestHandler<SetPalletDestinationRequest, SetPalletDestinationResponse>
     {
-        public SetPalletDestinationHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Pallet> repositoryService)
-            : base(mapper, commandExecutor, repositoryService)
+        public SetPalletDestinationHandler(IMapper mapper, IPalletRepository repositoryService)
+            : base(mapper, repositoryService)
         {
         }
 
-        public async Task<SetPalletDestinationResponse> Handle(SetPalletDestinationRequest request, CancellationToken cancellationToken) => await GetResponse(request);
+        public async Task<SetPalletDestinationResponse> Handle(SetPalletDestinationRequest request, CancellationToken cancellationToken)
+        {
+            await HandleRequest(request);
+            return new SetPalletDestinationResponse()
+            {
+                Response = request.Id
+            };
+        }
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
+﻿using System;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 {
-    public class EditProductResponse : ResponseBase<Domain.Models.ProductDto>
+    public class EditProductResponse : ResponseBase<Guid>
     {
     }
 }

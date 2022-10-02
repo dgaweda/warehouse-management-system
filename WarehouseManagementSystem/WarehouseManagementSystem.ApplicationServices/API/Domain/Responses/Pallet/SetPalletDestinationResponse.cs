@@ -1,6 +1,8 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet
+﻿using System;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet
 {
-    public class SetPalletDestinationResponse : ResponseBase<Domain.Models.PalletDto>
+    public class SetPalletDestinationResponse : ResponseBase<Guid>
     {
     }
 }

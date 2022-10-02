@@ -2,37 +2,36 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess;
-using DataAccess.CQRS.Queries.DeliveryProductQueries;
+using DataAccess.CQRS.Query.ProductQueries;
 using DataAccess.Entities;
+using DataAccess.Repository.ProductRepository;
 using MediatR;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductHandlers
 {
     public class GetProductsHandler :
-        QueryHandler<GetProductsRequest, GetProductsResponse, GetProductsQuery, List<Product>, List<Domain.Models.ProductDto>>,
+        QueryManager<List<Product>, List<ProductDto>>,
         IRequestHandler<GetProductsRequest, GetProductsResponse>
     {
-        public GetProductsHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
+        private readonly IProductRepository _productRepository;
+        public GetProductsHandler(IMapper mapper, IProductRepository productRepository) : base(mapper)
         {
+            _productRepository = productRepository;
         }
 
-        public Task<GetProductsResponse> Handle(GetProductsRequest request, CancellationToken cancellationToken)
+        public async Task<GetProductsResponse> Handle(GetProductsRequest request, CancellationToken cancellationToken)
         {
-            var query = CreateQuery(request);
-            var response = GetResponse(query);
-            return response;
-        }
-        public override GetProductsQuery CreateQuery(GetProductsRequest request)
-        {
-            return new GetProductsQuery()
+            var queryResult = await new GetProductsQuery(_productRepository)
             {
                 Barcode = request.Barcode,
                 Id = request.Id,
                 Name = request.Name
-            };
+            }.Execute();
+            var response = await CreateResponse<GetProductsResponse>(queryResult);
+            return response;
         }
     }
 }

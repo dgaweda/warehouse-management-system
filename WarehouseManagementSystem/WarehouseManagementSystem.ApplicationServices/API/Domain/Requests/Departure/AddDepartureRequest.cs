@@ -3,7 +3,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departu
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Departure
 {
-    public class AddDepartureRequest : IRequest<AddDepartureResponse>
+    public class AddDepartureRequest : RequestBase, IRequest<AddDepartureResponse>
     {
         public string Name { get; set; }
     }

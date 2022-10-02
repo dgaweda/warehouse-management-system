@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using warehouse_management_system.Controllers.BaseController;
@@ -20,7 +19,7 @@ namespace warehouse_management_system.Controllers
         }
 
         [HttpGet]
-        [Route("{palletId}/products")]
+        [Route("{PalletId}/products")]
         public async Task<IActionResult> GetProductsByPalletId([FromRoute] GetProductsByPalletIdRequest request) => await Handle<GetProductsByPalletIdRequest, GetProductsByPalletIdResponse>(request);
 
         [HttpPatch]

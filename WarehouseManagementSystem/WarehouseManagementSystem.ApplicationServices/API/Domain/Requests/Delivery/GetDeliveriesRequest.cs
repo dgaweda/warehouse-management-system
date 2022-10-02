@@ -3,7 +3,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Deliver
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Delivery
 {
-    public class GetDeliveriesRequest : IRequest<GetDeliveriesResponse>
+    public class GetDeliveriesRequest : RequestBase, IRequest<GetDeliveriesResponse>
     {
         public string Name { get; set; }
     }

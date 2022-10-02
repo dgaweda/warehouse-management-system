@@ -1,25 +1,21 @@
-﻿using DataAccess.Entities.EntityBases;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
+using DataAccess.Enums;
 
 namespace DataAccess.Entities
 {
-    public class Pallet : IEntityBase
+    public class Pallet : EntityBase.EntityBase
     {
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(10)]
-        [Column("Kod kreskowy")]
         public string Barcode { get; set; }
-        public int? OrderId { get; set; }
-        public int? DepartureId { get; set; }
-        public int? InvoiceId { get; set; }
-        public int? UserId { get; set; }
+        public Guid? OrderId { get; set; }
+        public Guid? DepartureId { get; set; }
+        public Guid? InvoiceId { get; set; }
+        public Guid? UserId { get; set; }
 
-        [Column("Aktualny status palety")]
         public PalletStatus PalletStatus { get; set; }
 
         [ForeignKey("DepartureId")]
@@ -28,7 +24,7 @@ namespace DataAccess.Entities
         [ForeignKey("InvoiceId")]
         public Invoice Invoice{ get; set; }
 
-        public List<ProductPalletLine> PalletsProducts { get; set; }
+        public List<PalletRow> PalletsProducts { get; set; }
 
         [ForeignKey("OrderId")]
         public Order Order { get; set; }

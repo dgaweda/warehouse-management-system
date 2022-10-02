@@ -1,36 +1,30 @@
-﻿using DataAccess.Entities.EntityBases;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class User : IEntityBase
+    public class User : EntityBase.EntityBase
     {
-        public int Id { get; set; }
-        
         [MaxLength(100)]
         [Required]
-        [Column("Nazwa użytkownika")]
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         [Required]
-        [Column("Hasło")]
         public string Password { get; set; }
 
         [MaxLength(100)]
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+        
         [Required]
         [MaxLength(50)]
-        [Column("Imię")]
         public string Name { get; set; }
 
         [Required]
         [MaxLength(50)]
-        [Column("Nazwisko")]
-        public string LastName { get; set; }
+        public string Lastname { get; set; }
 
         [Required]
         [MaxLength(11)]
@@ -38,11 +32,9 @@ namespace DataAccess.Entities
 
         [Required]
         [Range(16, 99)]
-        [Column("Wiek")]
         public int Age { get; set; }
-
-        [Required]
-        public int RoleId { get; set; }
+        
+        public Guid? RoleId { get; set; }
 
         public Seniority Seniority { get; set; }
         public Role Role { get; set; }

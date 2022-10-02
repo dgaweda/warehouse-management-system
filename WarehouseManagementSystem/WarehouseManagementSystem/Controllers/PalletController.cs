@@ -1,9 +1,8 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using warehouse_management_system.Authentication;
 using warehouse_management_system.Controllers.BaseController;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
@@ -15,7 +14,7 @@ namespace warehouse_management_system.Controllers
     [ApiController]
     public class PalletController : ApiControllerBase
     {
-        public PalletController(IMediator mediator, IPrivilegesService privileges) 
+        public PalletController(IMediator mediator) 
             : base(mediator)
         {
         }
@@ -28,15 +27,8 @@ namespace warehouse_management_system.Controllers
         public async Task<IActionResult> GetByStatus([FromQuery] GetPalletsByStatusRequest request) => await Handle<GetPalletsByStatusRequest, GetPalletsByStatusResponse>(request);
 
         [HttpDelete]
-        [Route("remove/{palletId}")]
-        public async Task<IActionResult> Remove([FromRoute] int palletId)
-        {
-            var request = new RemovePalletRequest()
-            {
-                PalletId = palletId
-            };
-            return await Handle<RemovePalletRequest, RemovePalletResponse>(request);
-        }
+        [Route("{Id}")]
+        public async Task<IActionResult> Remove([FromRoute] RemovePalletRequest request) => await Handle<RemovePalletRequest, RemovePalletResponse>(request);
 
         [HttpPost]
         [Route("add")]

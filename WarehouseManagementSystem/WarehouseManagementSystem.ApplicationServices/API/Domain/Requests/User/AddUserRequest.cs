@@ -1,10 +1,10 @@
-﻿using MediatR;
+﻿using DataAccess.Enums;
+using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User;
-using WarehouseManagementSystem.ApplicationServices.API.Enums;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.User
 {
-    public class AddUserRequest : IRequest<AddUserResponse>
+    public class AddUserRequest : RequestBase, IRequest<AddUserResponse>
     {
         public string UserName { get; set; }
         public string Password { get; set; }

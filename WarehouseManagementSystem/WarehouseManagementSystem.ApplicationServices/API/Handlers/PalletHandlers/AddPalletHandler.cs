@@ -1,10 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS;
-using DataAccess.CQRS.Commands.PalletCommands;
+using DataAccess.CQRS.Command.PalletCommands;
 using DataAccess.Entities;
-using DataAccess.Repository;
+using DataAccess.Repository.PalletRepository;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
@@ -12,14 +11,21 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandlers
 {
     public class AddPalletHandler :
-        CommandHandler<AddPalletRequest, AddPalletResponse, Pallet, Domain.Models.PalletDto, AddPalletCommand>,
+        CommandHandler<AddPalletCommand, Pallet, IPalletRepository>,
         IRequestHandler<AddPalletRequest, AddPalletResponse>
     {
-        public AddPalletHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Pallet> repositoryService) 
-            : base(mapper, commandExecutor, repositoryService)
+        public AddPalletHandler(IMapper mapper, IPalletRepository repositoryService) 
+            : base(mapper, repositoryService)
         {
 
         }
-        public async Task<AddPalletResponse> Handle(AddPalletRequest request, CancellationToken cancellationToken) => await GetResponse(request);
+        public async Task<AddPalletResponse> Handle(AddPalletRequest request, CancellationToken cancellationToken)
+        {
+            await HandleRequest(request);
+            return new AddPalletResponse()
+            {
+                Response = request.Id
+            };
+        }
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Seniority
+﻿using System;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Seniority
 {
-    public class EditSeniorityResponse : ResponseBase<Domain.Models.SeniorityDto>
+    public class EditSeniorityResponse : ResponseBase<Guid>
     {
     }
 }

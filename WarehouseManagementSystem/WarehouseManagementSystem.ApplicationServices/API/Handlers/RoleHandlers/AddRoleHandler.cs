@@ -1,10 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS;
-using DataAccess.CQRS.Commands.RoleCommands;
+using DataAccess.CQRS.Command.RoleCommands;
 using DataAccess.Entities;
-using DataAccess.Repository;
+using DataAccess.Repository.RoleRepository;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Role;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role;
@@ -12,14 +11,21 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Role;
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.RoleHandlers
 {
     public class AddRoleHandler : 
-        CommandHandler<AddRoleRequest, AddRoleResponse, Role, Domain.Models.RoleDto, AddRoleCommand>,
+        CommandHandler<AddRoleCommand, Role, IRoleRepository>,
         IRequestHandler<AddRoleRequest, AddRoleResponse> 
     {
-        public AddRoleHandler(ICommandExecutor commandExecutor, IMapper mapper, IRepository<Role> repositoryService) 
-            : base(mapper, commandExecutor, repositoryService)
+        public AddRoleHandler(IMapper mapper, IRoleRepository repositoryService) 
+            : base(mapper, repositoryService)
         {
         }
 
-        public async Task<AddRoleResponse> Handle(AddRoleRequest request, CancellationToken cancellationToken) => await GetResponse(request);
+        public async Task<AddRoleResponse> Handle(AddRoleRequest request, CancellationToken cancellationToken)
+        {
+            await HandleRequest(request);
+            return new AddRoleResponse()
+            {
+                Response = request.Id
+            };
+        }
     }
 }

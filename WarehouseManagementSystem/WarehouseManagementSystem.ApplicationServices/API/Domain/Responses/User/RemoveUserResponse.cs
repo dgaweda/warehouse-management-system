@@ -1,6 +1,12 @@
-﻿namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User
+﻿using MediatR;
+
+namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.User
 {
-    public class RemoveUserResponse : ResponseBase<API.Domain.Models.UserDto>
+    public class RemoveUserResponse : ResponseBase<Unit>
     {
+        public RemoveUserResponse()
+        {
+            Response = Unit.Value;
+        }
     }
 }

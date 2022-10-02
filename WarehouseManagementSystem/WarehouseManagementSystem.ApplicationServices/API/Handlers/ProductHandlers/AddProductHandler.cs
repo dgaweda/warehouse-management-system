@@ -1,10 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess.CQRS;
-using DataAccess.CQRS.Commands.DeliveryProductCommands;
+using DataAccess.CQRS.Command.ProductCommands;
 using DataAccess.Entities;
-using DataAccess.Repository;
+using DataAccess.Repository.ProductRepository;
 using MediatR;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Product;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product;
@@ -12,14 +11,21 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Product
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.ProductHandlers
 {
     public class AddProductHandler :
-        CommandHandler<AddProductRequest, AddProductResponse, Product, Domain.Models.ProductDto, AddProductCommand>,
+        CommandHandler<AddProductCommand, Product, IProductRepository>,
         IRequestHandler<AddProductRequest, AddProductResponse>
     {
-        public AddProductHandler(IMapper mapper, ICommandExecutor commandExecutor, IRepository<Product> repositoryService) 
-            : base(mapper, commandExecutor, repositoryService)
+        public AddProductHandler(IMapper mapper, IProductRepository repositoryService) 
+            : base(mapper, repositoryService)
         {
         }
 
-        public async Task<AddProductResponse> Handle(AddProductRequest request, CancellationToken cancellationToken) => await GetResponse(request);
+        public async Task<AddProductResponse> Handle(AddProductRequest request, CancellationToken cancellationToken)
+        {
+            await HandleRequest(request);
+            return new AddProductResponse()
+            {
+                Response = request.Id
+            };
+        }
     }
 }

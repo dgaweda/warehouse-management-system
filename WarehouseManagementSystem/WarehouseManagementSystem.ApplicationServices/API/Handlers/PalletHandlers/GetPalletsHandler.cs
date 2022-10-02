@@ -2,31 +2,29 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataAccess;
-using DataAccess.CQRS.Queries.PalletQueries;
+using DataAccess.CQRS.Query.PalletQueries;
 using DataAccess.Entities;
+using DataAccess.Repository.PalletRepository;
 using MediatR;
+using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet;
 using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandlers
 {
     public class GetPalletsHandler : 
-        QueryHandler<GetPalletsRequest, GetPalletsResponse, GetPalletsQuery, List<Pallet>, List<Domain.Models.PalletDto>>,
+        QueryManager<List<Pallet>, List<PalletDto>>,
         IRequestHandler<GetPalletsRequest, GetPalletsResponse>
     {
-        public GetPalletsHandler(IMapper mapper, IQueryExecutor queryExecutor) : base(mapper, queryExecutor)
+        private readonly IPalletRepository _palletRepository;
+        public GetPalletsHandler(IMapper mapper, IPalletRepository palletRepository) : base(mapper)
         {
+            _palletRepository = palletRepository;
         }
+
         public async Task<GetPalletsResponse> Handle(GetPalletsRequest request, CancellationToken cancellationToken)
         {
-            var query = CreateQuery(request);
-            var response = await GetResponse(query);
-            return response;
-        }
-        public override GetPalletsQuery CreateQuery(GetPalletsRequest request)
-        {
-            return new GetPalletsQuery()
+            var queryResult = await new GetPalletsQuery(_palletRepository)
             {
                 DeliveryName = request.DeliveryName,
                 DepartureCloseTime = request.DepartureCloseTime,
@@ -35,8 +33,9 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Handlers.PalletHandl
                 UserFirstName = request.UserFirstName,
                 PickingEnd = request.PickingEnd,
                 Provider = request.Provider
-            };
+            }.Execute();
+            var response = await CreateResponse<GetPalletsResponse>(queryResult);
+            return response;
         }
-
     }
 }

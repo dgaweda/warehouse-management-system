@@ -1,8 +1,12 @@
-﻿using WarehouseManagementSystem.ApplicationServices.API.Domain.Models;
+﻿using MediatR;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Departure
 {
-    public class RemoveDepartureResponse : ResponseBase<DepartureDto>
+    public class RemoveDepartureResponse : ResponseBase<Unit>
     {
+        public RemoveDepartureResponse()
+        {
+            Response = Unit.Value;
+        }
     }
 }

@@ -4,7 +4,7 @@ using WarehouseManagementSystem.ApplicationServices.API.Domain.Responses.Pallet;
 
 namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Requests.Pallet
 {
-    public class GetPalletsRequest : IRequest<GetPalletsResponse>
+    public class GetPalletsRequest : RequestBase, IRequest<GetPalletsResponse>
     {
         public DateTime PickingEnd { get; set; }
         public string Provider { get; set; }

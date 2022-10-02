@@ -1,8 +1,24 @@
 
+using System.Linq;
+using System.Reflection;
 using DataAccess;
-using DataAccess.CQRS;
+using DataAccess.DependencyInjection;
+using DataAccess.Entities;
 using DataAccess.Repository;
-using FluentValidation.AspNetCore;
+using DataAccess.Repository.DeliveryRepository;
+using DataAccess.Repository.DepartureRepository;
+using DataAccess.Repository.InvoiceRepository;
+using DataAccess.Repository.LocationRepository;
+using DataAccess.Repository.OrderLineRepository;
+using DataAccess.Repository.OrderRepository;
+using DataAccess.Repository.PalletRepository;
+using DataAccess.Repository.ProductPalletLineRepository;
+using DataAccess.Repository.ProductRepository;
+using DataAccess.Repository.RoleRepository;
+using DataAccess.Repository.SeniorityRepository;
+using DataAccess.Repository.UserRepository;
+using DataAccess.Seeders;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -13,9 +29,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using warehouse_management_system.Authentication;
+using warehouse_management_system.Authentication.Privileges;
 using warehouse_management_system.Middleware;
 using WarehouseManagementSystem.ApplicationServices.API.Domain;
-using WarehouseManagementSystem.ApplicationServices.API.Validators.Helpers;
+using WarehouseManagementSystem.ApplicationServices.API.Validation.ValidationBehavior;
+using WarehouseManagementSystem.ApplicationServices.API.Validation.Validators;
+using WarehouseManagementSystem.ApplicationServices.API.Validators;
 using WarehouseManagementSystem.ApplicationServices.API.Validators.SeniorityValidators;
 using WarehouseManagementSystem.ApplicationServices.Mappings;
 
@@ -37,28 +56,16 @@ namespace warehouse_management_system
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
             services.AddCors();
-            services.AddMvcCore()
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddSeniorityRequestValidator>());
-
-            services.AddTransient<IQueryExecutor, QueryExecutor>();
-
-            services.AddTransient<ICommandExecutor, CommandExecutor>();
-
-            services.AddTransient<IPrivilegesService, PrivilegesService>();
-
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
-            services.AddAutoMapper(typeof(UsersProfile).Assembly); // This Line Enables AutoMapper to map all profiles without adding everyone of them.
-            // It gets Assembly from one profile to get all the mappings.
-            services.AddMediatR(typeof(ResponseBase<>));
-
-            services.AddHttpContextAccessor();
-
-            services.AddDbContext<WMSDatabaseContext>(
-                option =>
-                    option.UseSqlServer(Configuration.GetConnectionString("WMSDatabaseContext")));
-
-            services.AddScoped(typeof(IValidatorHelper), typeof(ValidatorHelper));
+            services.AddMvcCore();
+            services
+                .AddDataAccessDI(Configuration)
+                .AddTransient<IPrivilegesService, PrivilegesService>()
+                .AddAutoMapper(typeof(UsersProfile).Assembly)
+                .AddMediatR(typeof(ResponseBase<>))
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>))
+                .AddHttpContextAccessor()
+                .AddScoped(typeof(IValidatorHelper), typeof(ValidatorHelper))
+                .AddValidatorsFromAssembly(typeof(AddSeniorityRequestValidator).Assembly);
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
@@ -69,15 +76,7 @@ namespace warehouse_management_system
                     };
                     options.SerializerSettings.Converters.Add(dateConverter);
                 });
-            // services.AddAuthorization(options =>
-            // {
-            //     options.AddPolicy(Enum.GetName(RoleKey.WAREHOUSEMAN),
-            //         policy => policy.RequireClaim("Privileges", PrivilegesService.GetWarehouseManPrivileges()));
-            //     options.AddPolicy(Enum.GetName(RoleKey.GENERAL_ADMIN),
-            //         policy => policy.RequireClaim("Privileges", PrivilegesService.GetGeneralAdminPrivileges()));
-            //     options.AddPolicy(Enum.GetName(RoleKey.GENERAL_ADMIN),
-            //         policy => policy.RequireClaim("Privileges", PrivilegesService.GetManagerPrivileges()));
-            // });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "warehouse_management_system", Version = "v1" });
@@ -104,7 +103,7 @@ namespace warehouse_management_system
             app.UseHttpsRedirection();
             app.UseRouting();
             
-            app.UseMiddleware<LogMiddleware>();
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseAuthentication();
             app.UseAuthorization();
 

@@ -5,7 +5,7 @@ namespace WarehouseManagementSystem.ApplicationServices.API.Domain.Models
 {
     public class OrderDto
     {
-        public List<OrderLineDto> OrderLines { get; set; }
+        public List<OrderLineDto> OrderRowsDto { get; set; }
         public string OrderState { get; set; }
         public string Barcode { get; set; }
         public DateTime? PickingStart { get; set; }

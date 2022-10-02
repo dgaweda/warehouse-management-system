@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using warehouse_management_system.Controllers.BaseController;
@@ -22,17 +21,18 @@ namespace warehouse_management_system.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetInvoices([FromQuery] GetInvoicesRequest request) => await Handle<GetInvoicesRequest, GetInvoicesResponse>(request);
+        
+        [HttpGet]
+        public async Task<IActionResult> GetInvoiceByInvoiceNumber([FromQuery] GetInvoiceByInvoiceNumberRequest request) => await Handle<GetInvoiceByInvoiceNumberRequest, GetInvoiceByInvoiceNumberResponse>(request);
 
         [HttpPost]
-        [Route("add")]
         public async Task<IActionResult> AddInvoice([FromBody] AddInvoiceRequest request) => await Handle<AddInvoiceRequest, AddInvoiceResponse>(request);
 
         [HttpDelete]
-        [Route("remove/{InvoiceId}")]
+        [Route("{Id}")]
         public async Task<IActionResult> RemoveInvoice([FromRoute] RemoveInvoiceRequest request) => await Handle<RemoveInvoiceRequest, RemoveInvoiceResponse>(request);
 
         [HttpPut]
-        [Route("edit")]
         public async Task<IActionResult> EditInvoice([FromBody] EditInvoiceRequest request) => await Handle<EditInvoiceRequest, EditInvoiceResponse>(request);
     }
 }
