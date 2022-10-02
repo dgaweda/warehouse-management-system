@@ -31,7 +31,7 @@ namespace DataAccess.Extensions
 
         public static IQueryable<Product> FilterById(this IQueryable<Product> products, Guid? id)
         {
-            if (id == Guid.Empty)
+            if (id == Guid.Empty || id == null)
                 return products;
 
             return products.Where(x => x.Id == id);

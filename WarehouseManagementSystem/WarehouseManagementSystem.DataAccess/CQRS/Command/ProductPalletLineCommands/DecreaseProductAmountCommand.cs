@@ -18,14 +18,10 @@ namespace DataAccess.CQRS.Command.ProductPalletLineCommands
             var pallet = await dbContext.Set<Pallet>()
                 .FirstOrDefaultAsync(@pallet => @pallet.Id == productPalletLine.PalletId);
             
-
             productPalletLine.DecreaseProductAmount(Parameter);
 
             if (productPalletLine.ProductAmount == default)
                 await productPalletLineRepository.DeleteAsync(productPalletLine.Id);
-
-            if (productPalletLine.ProductAmount < 0)
-                throw new ArgumentOutOfRangeException("Amount can't be less than 0.");
 
             if (await productPalletLineRepository.PalletIsEmpty(productPalletLine.PalletId))
             {
