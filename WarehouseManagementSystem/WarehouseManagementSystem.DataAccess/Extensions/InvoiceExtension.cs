@@ -11,11 +11,12 @@ namespace DataAccess.Extensions
             var lp = 1;
             invoices.ForEach(inv =>
             {
-                if (inv.CreationDate.Date ==  invoice.CreationDate.Date && inv.Provider ==  invoice.Provider)
+                if (inv.CreationDate.Date == invoice.CreationDate.Date && inv.Provider == invoice.Provider)
                     lp++;
             });
             
-             invoice.InvoiceNumber = $"FV/{lp}/{ invoice.Provider}/{  invoice.CreationDate.Day}/{ invoice.CreationDate.Month}/{ invoice.CreationDate.Year}"; ;
+            invoice.InvoiceNumber = 
+                $"FV/{lp}/{invoice.Provider}/{invoice.CreationDate.Day}/{invoice.CreationDate.Month}/{invoice.CreationDate.Year}";
         }
 
         public static IQueryable<Invoice> FilterByInvoiceNumber(this IQueryable<Invoice> invoices, string invoiceNumber)
