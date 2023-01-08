@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormControl} from '@angular/forms';
+import {UntypedFormGroup, UntypedFormControl} from '@angular/forms';
 import { Validators } from '@angular/forms';
 import {ActivatedRoute, Router} from "@angular/router";
 import { filter } from 'rxjs';
@@ -13,7 +13,7 @@ import {BaseComponent} from "../../common/components/base.component";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent extends BaseComponent {
-  loginForm : FormGroup;
+  loginForm : UntypedFormGroup;
   submitted: boolean;
   error: string;
 
@@ -30,9 +30,9 @@ export class LoginComponent extends BaseComponent {
     this.router.navigate(['/home']);
     // }
 
-    this.loginForm = new FormGroup({
-      username: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
+    this.loginForm = new UntypedFormGroup({
+      username: new UntypedFormControl('', Validators.required),
+      password: new UntypedFormControl('', Validators.required),
     });
   }
 
