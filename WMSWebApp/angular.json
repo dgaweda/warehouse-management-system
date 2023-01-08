@@ -31,7 +31,6 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/devextreme/dist/css/dx.material.lime.dark.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
@@ -115,5 +114,8 @@
       }
     }
   },
-  "defaultProject": "WMSWebApp"
+  "defaultProject": "WMSWebApp",
+  "cli": {
+    "analytics": "c36637c2-7a7d-4c22-bc93-7e6abf4b63eb"
+  }
 }
